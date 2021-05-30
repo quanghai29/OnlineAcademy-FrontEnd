@@ -5,10 +5,9 @@
 package-lock.json
 
 # production
-/dist
 
 # misc
-.env
+#.env
 .vscode
 
 
