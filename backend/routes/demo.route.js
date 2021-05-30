@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const demoService = require('../services/demo.service');
 
+//#region QuangHai
+
 /**
  * @openapi
  * 
@@ -14,9 +16,10 @@ const demoService = require('../services/demo.service');
  */
 router.get('/',function (req, res) {
     //Handle input
+    const id = req.params.id;
 
     //Handle services
-    const ret = demoService.load();
+    const ret = demoService.load(id);
 
     //Handle output
     res.status(ret.code).json(ret.data);
@@ -42,5 +45,7 @@ router.get('/',function (req, res) {
     //Handle output
     res.status(ret.code).json(ret.data);
 })
+
+//#endregion
 
 module.exports = router;
