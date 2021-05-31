@@ -1,46 +1,33 @@
 const router = require('express').Router();
-const demoService = require('../services/demo.service');
+const courseService = require('../services/course.service');
+
+//#region QuangHai
 
 /**
  * @openapi
  * 
- * /demo:
+ * /course/{id}:
  *   get:
- *     description: demo swagger js
- *     tags: [Demo]
+ *     description: get detail course
+ *     tags: [Course]
+ *     parameters:
+ *       - in: path
+ *         name: id   # Note the name is the same as in the path
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
  *     responses:
  *       200:
- *         description: GET DATA
- */
-router.get('/',function (req, res) {
-    //Handle input
-
-    //Handle services
-    const ret = demoService.load();
-
-    //Handle output
+ *         description: json data if sucess
+ */ 
+router.get('/:id',async function (req, res) {
+    const id = req.params.id || 0;
+    const ret = await courseService.getCourseDetail(id);
     res.status(ret.code).json(ret.data);
 })
 
-/**
- * @openapi
- * 
- * /demo:
- *   post:
- *     description: demo swagger js
- *     tags: [Demo]
- *     responses:
- *       200:
- *         description: Created
- */
- router.post('/',function (req, res) {
-    //Handle input
-
-    //Handle services
-    const ret = demoService.load();
-
-    //Handle output
-    res.status(ret.code).json(ret.data);
-})
+//#endregion
 
 module.exports = router;

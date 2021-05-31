@@ -7,7 +7,7 @@ package-lock.json
 # production
 
 # misc
-.env
+#.env
 .vscode
 
 

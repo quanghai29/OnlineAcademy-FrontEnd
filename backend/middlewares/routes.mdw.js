@@ -18,4 +18,5 @@ module.exports = function (app) {
   
   //routers path here
   app.use('/demo', require('../routes/demo.route'));
+  app.use('/course', require('../routes/course.route'));
 };
