@@ -17,6 +17,20 @@ async function getCourseDetail(id) {
 
 //#endregion
 
+//#region TienDung
+
+async function insertCourse(course) {
+    let returnModel = {};
+    const ret = await courseModel.add(course);
+    course.id = ret[0];
+    returnModel.code = Code.Created_Success;
+    returnModel.message = Message.Created_Success;
+    returnModel.data = course;
+    return returnModel;
+}
+
+//#endregion
+
 module.exports = {
-    getDetailSerive
+    getCourseDetail, insertCourse
 };

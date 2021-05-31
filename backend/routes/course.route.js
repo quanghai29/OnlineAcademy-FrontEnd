@@ -30,4 +30,29 @@ router.get('/:id',async function (req, res) {
 
 //#endregion
 
+//#region TienDung
+
+/**
+ * @openapi
+ * 
+ * /course/{id}:
+ *   post:
+ *     description: add a course
+ *     tags: [Course]
+ *     parameters:
+ *       - in: path
+ *     responses:
+ *       201:
+ *         description: successfully created course
+ */ 
+const schema = require('../schema/course.json');
+
+router.post('/', require('../middlewares/validate.mdw')(schema), async (req, res) => {
+    const newCourse = req.body;
+    const ret = await courseService.insertCourse(newCourse);
+    res.status(ret.code).json(ret.data);
+})
+
+//#endregion
+
 module.exports = router;
