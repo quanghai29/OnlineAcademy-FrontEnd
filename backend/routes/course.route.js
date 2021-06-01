@@ -55,4 +55,31 @@ router.post('/', require('../middlewares/validate.mdw')(schema), async (req, res
 
 //#endregion
 
+//#region Linh Đồng
+
+/**
+ * @openapi
+ * 
+ * /course?category_id=number:
+  get:
+    description: get all of courses which has category_id = number
+    tags: [Course]
+    parameters:
+      - in: path
+    responses:
+      200:
+        description: json data
+      400:
+        description: bad request
+ */
+router.get('/', async (req, res)=>{
+    const category_id = +req.query.category_id;
+    const ret = await courseService.getCourseByCategory(category_id);
+    if(ret.code===400){
+        res.status(ret.code);
+    }
+    res.status(ret.code).json(ret.data);
+})
+//#endregion
+
 module.exports = router;

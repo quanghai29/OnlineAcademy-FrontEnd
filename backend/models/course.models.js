@@ -17,5 +17,15 @@ module.exports = {
 
   add(course) {
     return db(table_name).insert(course);
+  },
+
+  async allByCategory(category_id){
+    const courses = await db(table_name).where('category_id',category_id);
+    if(courses.length === 0){
+      return null;
+    }
+
+    ///console.log('course model', courses);
+    return courses;
   }
 };

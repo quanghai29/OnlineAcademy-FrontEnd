@@ -31,6 +31,23 @@ async function insertCourse(course) {
 
 //#endregion
 
+//#region Linh Đồng
+async function getCourseByCategory(category_id){
+    let returnModel = {};
+    const courses = await courseModel.allByCategory(category_id);
+    if(!courses){
+        returnModel.code=Code.Bad_Request;
+        returnModel.message=Message.Bad_Request;
+    }else{
+        returnModel.code=Code.Success;
+        returnModel.message=Message.Success;
+        returnModel.data=courses;
+    }
+    return returnModel;
+}
+//#endregion
+
+
 module.exports = {
-    getCourseDetail, insertCourse
+    getCourseDetail, insertCourse, getCourseByCategory
 };
