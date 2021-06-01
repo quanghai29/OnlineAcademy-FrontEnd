@@ -1,0 +1,16 @@
+{
+    "type": "object",
+    "required":[
+      "course_id",
+      "title"
+    ],
+    "properties":{
+      "course_id":{
+        "type":"integer"
+      },
+      "title":{
+        "type":"string"
+      }
+    },
+    "additionalProperties":true
+  }
