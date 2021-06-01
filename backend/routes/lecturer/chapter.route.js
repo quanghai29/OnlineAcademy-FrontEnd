@@ -1,26 +1,26 @@
 const router = require('express').Router();
-const courseService = require('../../services/course.service');
+const chapterService = require('../../services/chapter.service');
 
 //#region TienDung
 
 /**
  * @openapi
  * 
- * /course/lecturer:
+ * /chapter/lecturer:
  *   post:
- *     description: add a course
- *     tags: [Course]
+ *     description: add a chapter
+ *     tags: [chapter]
  *     parameters:
  *       - in: path
  *     responses:
  *       201:
- *         description: successfully created course
+ *         description: successfully created chapter
  */ 
- const schema = require('../../schema/course.json');
+ const schema = require('../../schema/chapter.json');
 
  router.post('/', require('../../middlewares/validate.mdw')(schema), async (req, res) => {
-     const newCourse = req.body;
-     const ret = await courseService.insertCourse(newCourse);
+     const newChapter = req.body;
+     const ret = await chapterService.insertChapter(newChapter);
      res.status(ret.code).json(ret.data);
  })
  
