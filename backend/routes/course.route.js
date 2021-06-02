@@ -36,8 +36,8 @@ const courseService = require('../services/course.service');
 /**
  * @openapi
  * 
- * /course?category_id=number:
- * get:
+ * /course?category_id:
+ *  get:
  *      description: get all of courses which has category_id = number
  *      tags: [Course]
  *      parameters:
@@ -63,11 +63,11 @@ const courseService = require('../services/course.service');
  * @openapi
  * 
  * /course:
- *  get:
- *      description: find courses which concerning key word "text-search""
+ *  post:
+ *      description: find courses which concerning key words
  *      tags: [Course]
  *      parameters:
- *          - in: body
+ *              name: text_search #example: {"text_search":"abc"}
  *      responses:
  *          200:
  *              description: json data
