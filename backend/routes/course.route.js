@@ -62,8 +62,8 @@ const courseService = require('../services/course.service');
 /**
  * @openapi
  * 
- * /course
- * get:
+ * /course:
+ *  get:
  *      description: find courses which concerning key word "text-search""
  *      tags: [Course]
  *      parameters:
