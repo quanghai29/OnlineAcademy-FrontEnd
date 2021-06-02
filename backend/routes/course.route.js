@@ -41,7 +41,7 @@ const courseService = require('../services/course.service');
  *      description: get all of courses which has category_id = number
  *      tags: [Course]
  *      parameters:
- *          - in: path
+ *          - in: query
  *            name: category_id
  *            schema:
  *              type: integer
@@ -70,7 +70,8 @@ const courseService = require('../services/course.service');
  *  post:
  *      description: find courses which concerning key words
  *      tags: [Course]
- *      body:
+ *      parameters:
+ *           -in: body
  *           name: text_search #example: {"text_search":"abc"}
  *           schema:
  *           type: string
@@ -80,8 +81,10 @@ const courseService = require('../services/course.service');
  */
  router.post('/', async (req, res) => {
     const text = req.body.text_search;
-    const ret = await courseService.findCourse(text);
-    res.status(ret.code).json(ret.data);
+    if(text){
+        const ret = await courseService.findCourse(text);
+        res.status(ret.code).json(ret.data);
+    }
 });
 
 //#endregion
