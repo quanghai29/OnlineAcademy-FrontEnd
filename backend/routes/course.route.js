@@ -53,20 +53,15 @@ const courseService = require('../services/course.service');
  *              description: bad request
  */
  router.get('/', async (req, res) => {
-    const category_id = +req.query.category_id;
-    if (category_id) {
-        const ret = await courseService.getCourseByCategory(category_id);
-        if (ret.code === 400) {
-            res.status(ret.code);
-        }
-        res.status(ret.code).json(ret.data);
-    }
+    const category_id = +req.query.category_id || 0;
+    const ret = await courseService.getCourseByCategory(category_id);
+    res.status(ret.code).json(ret.data);
 });
 
 /**
  * @openapi
  * 
- * /course:
+ * /course/search:
  *  post:
  *      description: find courses which concerning key words
  *      tags: [Course]
@@ -79,12 +74,10 @@ const courseService = require('../services/course.service');
  *          200:
  *              description: json data
  */
- router.post('/', async (req, res) => {
+ router.post('/search', async (req, res) => {
     const text = req.body.text_search;
-    if(text){
-        const ret = await courseService.findCourse(text);
-        res.status(ret.code).json(ret.data);
-    }
+    const ret = await courseService.findCourse(text);
+    res.status(ret.code).json(ret.data);
 });
 
 //#endregion
