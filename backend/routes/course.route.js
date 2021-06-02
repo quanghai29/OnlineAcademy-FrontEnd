@@ -42,6 +42,10 @@ const courseService = require('../services/course.service');
  *      tags: [Course]
  *      parameters:
  *          - in: path
+ *            name: category_id
+ *            schema:
+ *              type: integer
+ *              minimum: 1
  *      responses:
  *          200:
  *              description: json data
@@ -66,8 +70,10 @@ const courseService = require('../services/course.service');
  *  post:
  *      description: find courses which concerning key words
  *      tags: [Course]
- *      parameters:
- *              name: text_search #example: {"text_search":"abc"}
+ *      body:
+ *           name: text_search #example: {"text_search":"abc"}
+ *           schema:
+ *           type: string
  *      responses:
  *          200:
  *              description: json data
