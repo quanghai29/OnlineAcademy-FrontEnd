@@ -19,13 +19,25 @@ module.exports = {
     return db(table_name).insert(course);
   },
 
-  async allByCategory(category_id){
-    const courses = await db(table_name).where('category_id',category_id);
-    if(courses.length === 0){
+  async allByCategory(category_id) {
+    const courses = await db(table_name).where('category_id', category_id);
+    if (courses.length === 0) {
       return null;
     }
 
-    ///console.log('course model', courses);
     return courses;
+  },
+
+  async fullTextSearch(text) {
+    const courses = await db.raw(`
+    SELECT *, MATCH (title, short_description, full_description) AGAINST ('${text}') as score
+    FROM course WHERE MATCH (title, short_description, full_description) AGAINST ('${text}') > 0 ORDER BY score DESC;
+    `)
+
+    if (courses.length === 0) {
+      return null;
+    }
+    
+    return courses[0];
   }
 };

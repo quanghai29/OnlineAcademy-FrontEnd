@@ -1,4 +1,4 @@
-const {Code, Message} = require('../helper/statusCode.helper');
+const { Code, Message } = require('../helper/statusCode.helper');
 const courseModel = require('../models/course.models');
 
 
@@ -6,9 +6,9 @@ const courseModel = require('../models/course.models');
 async function getCourseDetail(id) {
     let returnModel = {}; // code; message; data
     const course = await courseModel.single(id);
-    if(course == null){
+    if (course == null) {
         returnModel.code = Code.Not_Found;
-    }else{
+    } else {
         returnModel.code = Code.Success;
         returnModel.data = course;
     }
@@ -32,22 +32,33 @@ async function insertCourse(course) {
 //#endregion
 
 //#region Linh Đồng
-async function getCourseByCategory(category_id){
+async function getCourseByCategory(category_id) {
     let returnModel = {};
     const courses = await courseModel.allByCategory(category_id);
-    if(!courses){
-        returnModel.code=Code.Bad_Request;
-        returnModel.message=Message.Bad_Request;
-    }else{
-        returnModel.code=Code.Success;
-        returnModel.message=Message.Success;
-        returnModel.data=courses;
+    if (!courses) {
+        returnModel.code = Code.Bad_Request;
+        returnModel.message = Message.Bad_Request;
+    } else {
+        returnModel.code = Code.Success;
+        returnModel.message = Message.Success;
+        returnModel.data = courses;
     }
     return returnModel;
+}
+
+async function findCourse(text) {
+    let retData = {};
+    const courses = await courseModel.fullTextSearch(text);
+    retData.code = Code.Success;
+    retData.message = Message.Success;
+    retData.data = courses ;
+
+    return retData;
 }
 //#endregion
 
 
 module.exports = {
-    getCourseDetail, insertCourse, getCourseByCategory
+    getCourseDetail, insertCourse, getCourseByCategory,
+    findCourse
 };
