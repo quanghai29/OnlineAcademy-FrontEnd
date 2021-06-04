@@ -23,6 +23,7 @@ const courseService = require('../services/course.service');
  *         description: json data if sucess
  */ 
 router.get('/:id',async function (req, res) {
+    console.log(req.params.id);
     const id = req.params.id || 0;
     const ret = await courseService.getCourseDetail(id);
     res.status(ret.code).json(ret.data);
