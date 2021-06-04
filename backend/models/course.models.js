@@ -39,5 +39,14 @@ module.exports = {
     }
     
     return courses[0];
+  },
+
+  async getLatestCourse(amount) {
+    const courses = await db(table_name).orderBy('create_date', 'desc').limit(amount);
+    if(courses.length === 0) {
+      return null;
+    }
+
+    return courses;
   }
 };

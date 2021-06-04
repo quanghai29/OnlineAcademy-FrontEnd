@@ -31,11 +31,24 @@ async function insertCourse(course) {
     return returnModel;
 }
 
+async function getLatestCourse(amount) {
+    let returnModel = {};
+    const ret = await courseModel.getLatestCourse(amount);
+    if(ret == null) {
+        returnModel.code = Code.Not_Found;
+    } else {
+        returnModel.code = Code.Success;
+        returnModel.data = ret;
+    }
+    return returnModel;
+}
+
 //#endregion
 
 //#region Linh Đồng
 async function getCourseByCategory(category_id) {
     let returnModel = {};
+
     const courses = await courseModel.allByCategory(category_id);
     if (!courses) {
         returnModel.code = Code.Bad_Request;
@@ -43,17 +56,23 @@ async function getCourseByCategory(category_id) {
     } else {
         returnModel.code = Code.Success;
         returnModel.message = Message.Success;
-        returnModel.data = courses;
     }
+    returnModel.data = courses;
+
     return returnModel;
 }
 
 async function findCourse(text) {
     let retData = {};
-    const courses = await courseModel.fullTextSearch(text);
-    retData.code = Code.Success;
-    retData.message = Message.Success;
-    retData.data = courses ;
+    if (text) {
+        const courses = await courseModel.fullTextSearch(text);
+        retData.code = Code.Success;
+        retData.message = Message.Success;
+        retData.data = courses;
+    }else{
+        retData.code = Code.Bad_Request;
+        retData.message = Message.Bad_Request;
+    }
 
     return retData;
 }
@@ -62,5 +81,5 @@ async function findCourse(text) {
 
 module.exports = {
     getCourseDetail, insertCourse, getCourseByCategory,
-    findCourse
+    findCourse, getLatestCourse
 };
