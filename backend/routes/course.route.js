@@ -21,11 +21,85 @@ const courseService = require('../services/course.service');
  *     responses:
  *       200:
  *         description: json data if sucess
- */ 
-router.get('/:id',async function (req, res) {
-    console.log(req.params.id);
+ */
+ router.get('/detail/:id', async function (req, res) {
     const id = req.params.id || 0;
     const ret = await courseService.getCourseDetail(id);
+    res.status(ret.code).json(ret.data);
+})
+
+//#endregion
+
+
+//#region Linh Đồng
+
+/**
+ * @openapi
+ * 
+ * /course?category_id:
+ *  get:
+ *      description: get all of courses which has category_id = number
+ *      tags: [Course]
+ *      parameters:
+ *          - in: query
+ *            name: category_id
+ *            schema:
+ *              type: integer
+ *              minimum: 1
+ *      responses:
+ *          200:
+ *              description: json data
+ *          400:
+ *              description: bad request
+ */
+ router.get('/', async (req, res) => {
+    const category_id = +req.query.category_id || 0;
+    const ret = await courseService.getCourseByCategory(category_id);
+    res.status(ret.code).json(ret.data);
+});
+
+/**
+ * @openapi
+ * 
+ * /course/search:
+ *  post:
+ *      description: find courses which concerning key words
+ *      tags: [Course]
+ *      parameters:
+ *           -in: body
+ *           name: text_search #example: {"text_search":"abc"}
+ *           schema:
+ *           type: string
+ *      responses:
+ *          200:
+ *              description: json data
+ */
+ router.post('/search', async (req, res) => {
+    const text = req.body.text_search;
+    const ret = await courseService.findCourse(text);
+    res.status(ret.code).json(ret.data);
+});
+
+//#endregion
+
+//#region TienDung
+
+/**
+ * @openapi
+ * 
+ * /course/10-latest:
+ *  get:
+ *      description: get 10 latest courses
+ *      tags: [Course]
+ *      parameters:
+ *          
+ *      responses:
+ *          200:
+ *              description: json data
+ */
+
+router.get('/10-latest', async (req, res) => {
+    const ret = await courseService.getLatestCourse(10);
     res.status(ret.code).json(ret.data);
 })
 
