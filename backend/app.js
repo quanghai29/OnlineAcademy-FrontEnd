@@ -17,7 +17,9 @@ require('./middlewares/routes.mdw')(app);
 // middleware error
 require('./middlewares/error.mdw')(app);
 
+require('./chatbot');
+
 const { PORT } = process.env;
 app.listen(PORT, () => {
-  console.log(`OnlineAcademy-chatbot backend is runing at ${process.env.HOST_NAME}:${PORT}`);
+  console.log(`Online Academy backend is runing at ${process.env.HOST_NAME}:${PORT}`);
 });
