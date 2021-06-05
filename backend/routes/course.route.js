@@ -99,7 +99,26 @@ const courseService = require('../services/course.service');
  */
 
 router.get('/10-latest', async (req, res) => {
-    const ret = await courseService.getLatestCourse(10);
+    const ret = await courseService.getLatestCourses(10);
+    res.status(ret.code).json(ret.data);
+})
+
+/**
+ * @openapi
+ * 
+ * /course/10-latest:
+ *  get:
+ *      description: get 10 latest courses
+ *      tags: [Course]
+ *      parameters:
+ *          
+ *      responses:
+ *          200:
+ *              description: json data
+ */
+
+ router.get('/10-mostview', async (req, res) => {
+    const ret = await courseService.getMostViewCourses(2);
     res.status(ret.code).json(ret.data);
 })
 

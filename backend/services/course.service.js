@@ -29,14 +29,38 @@ async function insertCourse(course) {
     return returnModel;
 }
 
-async function getLatestCourse(amount) {
+async function getLatestCourses(amount) {
     let returnModel = {};
-    const ret = await courseModel.getLatestCourse(amount);
+    const ret = await courseModel.getLatestCourses(amount);
     if(ret == null) {
         returnModel.code = Code.Not_Found;
     } else {
         returnModel.code = Code.Success;
         returnModel.data = ret;
+    }
+    return returnModel;
+}
+
+async function getMostViewVideos(amount) {
+    const ret = await courseModel.getMostViewCourses(amount);
+    return ret;
+}
+
+async function getMostViewCourses(amount) {
+    let returnModel = {};
+    const ret = await getMostViewVideos(amount);
+
+    const ret2 = await Promise.all(ret.map(async (item) => {
+        let course = await courseModel.single(item.course_id);
+        course.view_sum = item.sum_view;
+        return course;
+    }));
+
+    if(ret2 == null) {
+        returnModel.code = Code.Not_Found;
+    } else {
+        returnModel.code = Code.Success;
+        returnModel.data = ret2;
     }
     return returnModel;
 }
@@ -79,5 +103,5 @@ async function findCourse(text) {
 
 module.exports = {
     getCourseDetail, insertCourse, getCourseByCategory,
-    findCourse, getLatestCourse
+    findCourse, getLatestCourses, getMostViewCourses
 };
