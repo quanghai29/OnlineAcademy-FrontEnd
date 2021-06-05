@@ -22,7 +22,7 @@ const courseService = require('../services/course.service');
  *       200:
  *         description: json data if sucess
  */
- router.get('/:id', async function (req, res) {
+ router.get('/detail/:id', async function (req, res) {
     const id = req.params.id || 0;
     const ret = await courseService.getCourseDetail(id);
     res.status(ret.code).json(ret.data);
@@ -95,6 +95,48 @@ router.post('/outstanding', async (req, res)=>{
     const ret = await courseService.getOutstandingCourses();
     res.status(ret.code).json(ret.data);
 })
+//#endregion
+
+//#region TienDung
+
+/**
+ * @openapi
+ * 
+ * /course/10-latest:
+ *  get:
+ *      description: get 10 latest courses
+ *      tags: [Course]
+ *      parameters:
+ *          
+ *      responses:
+ *          200:
+ *              description: json data
+ */
+
+router.get('/10-latest', async (req, res) => {
+    const ret = await courseService.getLatestCourses(10);
+    res.status(ret.code).json(ret.data);
+})
+
+/**
+ * @openapi
+ * 
+ * /course/10-latest:
+ *  get:
+ *      description: get 10 latest courses
+ *      tags: [Course]
+ *      parameters:
+ *          
+ *      responses:
+ *          200:
+ *              description: json data
+ */
+
+ router.get('/10-mostview', async (req, res) => {
+    const ret = await courseService.getMostViewCourses(2);
+    res.status(ret.code).json(ret.data);
+})
+
 //#endregion
 
 module.exports = router;

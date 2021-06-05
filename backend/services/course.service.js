@@ -1,5 +1,6 @@
 const { Code, Message } = require('../helper/statusCode.helper');
 const courseModel = require('../models/course.models');
+const moment = require('moment');
 
 
 //#region Quang Hai MTP
@@ -9,6 +10,7 @@ async function getCourseDetail(id) {
     if (course == null) {
         returnModel.code = Code.Not_Found;
     } else {
+        course.last_update = moment(course.last_update).format('DD/MM/YYYY HH:mm:ss');
         returnModel.code = Code.Success;
         returnModel.data = course;
     }
@@ -26,6 +28,42 @@ async function insertCourse(course) {
     returnModel.code = Code.Created_Success;
     returnModel.message = Message.Created_Success;
     returnModel.data = course;
+    return returnModel;
+}
+
+async function getLatestCourses(amount) {
+    let returnModel = {};
+    const ret = await courseModel.getLatestCourses(amount);
+    if(ret == null) {
+        returnModel.code = Code.Not_Found;
+    } else {
+        returnModel.code = Code.Success;
+        returnModel.data = ret;
+    }
+    return returnModel;
+}
+
+async function getMostViewVideos(amount) {
+    const ret = await courseModel.getMostViewCourses(amount);
+    return ret;
+}
+
+async function getMostViewCourses(amount) {
+    let returnModel = {};
+    const ret = await getMostViewVideos(amount);
+
+    const ret2 = await Promise.all(ret.map(async (item) => {
+        let course = await courseModel.single(item.course_id);
+        course.view_sum = item.sum_view;
+        return course;
+    }));
+
+    if(ret2 == null) {
+        returnModel.code = Code.Not_Found;
+    } else {
+        returnModel.code = Code.Success;
+        returnModel.data = ret2;
+    }
     return returnModel;
 }
 
@@ -77,5 +115,6 @@ async function getOutstandingCourses() {
 
 module.exports = {
     getCourseDetail, insertCourse, getCourseByCategory,
-    findCourse, getOutstandingCourses
+    findCourse, getOutstandingCourses, getLatestCourses,
+    getMostViewCourses
 };

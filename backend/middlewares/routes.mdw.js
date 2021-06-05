@@ -19,6 +19,6 @@ module.exports = function (app) {
   //routers path here
   app.use('/demo', require('../routes/demo.route'));
   app.use('/course', require('../routes/course.route'));
-  app.use('/course/lecturer', require('../routes/lecturer/course.route'));
-  app.use('/chapter/lecturer', require('../routes/lecturer/chapter.route'));
+  app.use('/lecturer/course', require('../routes/lecturer/course.route'));
+  app.use('/lecturer/chapter', require('../routes/lecturer/chapter.route'));
 };
