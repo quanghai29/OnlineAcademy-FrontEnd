@@ -1,5 +1,6 @@
 const { Code, Message } = require('../helper/statusCode.helper');
 const courseModel = require('../models/course.models');
+const moment = require('moment');
 
 
 //#region Quang Hai MTP
@@ -9,6 +10,7 @@ async function getCourseDetail(id) {
     if (course == null) {
         returnModel.code = Code.Not_Found;
     } else {
+        course.last_update = moment(course.last_update).format('DD/MM/YYYY HH:mm:ss');
         returnModel.code = Code.Success;
         returnModel.data = course;
     }
