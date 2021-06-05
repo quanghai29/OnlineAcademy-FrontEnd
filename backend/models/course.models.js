@@ -37,7 +37,17 @@ module.exports = {
     if (courses.length === 0) {
       return null;
     }
-    
+
     return courses[0];
+  },
+
+  async outstandingCourses() {
+    const courses = await db('course').innerJoin(function() {
+      this.select('course_id').sum('vote').from('student_course')
+        .groupBy('course_id').orderBy('vote', 'desc').as('sum_vote')
+    }, 'course.id', '=', 'sum_vote.course_id').limit(2);
+
+    return courses;
   }
+
 };

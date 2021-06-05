@@ -55,11 +55,21 @@ async function findCourse(text) {
         retData.code = Code.Success;
         retData.message = Message.Success;
         retData.data = courses;
-    }else{
+    } else {
         retData.code = Code.Bad_Request;
         retData.message = Message.Bad_Request;
     }
 
+    return retData;
+}
+
+async function getOutstandingCourses() {
+    let retData = {};
+    const courses = await courseModel.outstandingCourses();
+    retData.code = Code.Success;
+    retData.message = Message.Success;
+    retData.data = courses;
+    
     return retData;
 }
 //#endregion
@@ -67,5 +77,5 @@ async function findCourse(text) {
 
 module.exports = {
     getCourseDetail, insertCourse, getCourseByCategory,
-    findCourse
+    findCourse, getOutstandingCourses
 };

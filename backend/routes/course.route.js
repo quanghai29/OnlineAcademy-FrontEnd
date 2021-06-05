@@ -80,6 +80,21 @@ const courseService = require('../services/course.service');
     res.status(ret.code).json(ret.data);
 });
 
+/**
+ * @openapi
+ * 
+ * /course/outstanding:
+ *  post:
+ *      description: find outstanding courses(by vote)
+ *      tags: [Course]
+ *      responses:
+ *          200:
+ *              description: json data
+ */
+router.post('/outstanding', async (req, res)=>{
+    const ret = await courseService.getOutstandingCourses();
+    res.status(ret.code).json(ret.data);
+})
 //#endregion
 
 module.exports = router;
