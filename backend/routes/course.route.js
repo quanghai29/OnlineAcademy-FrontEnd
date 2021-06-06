@@ -6,7 +6,7 @@ const courseService = require('../services/course.service');
 /**
  * @openapi
  * 
- * /course/{id}:
+ * /course/detail/{id}:
  *   get:
  *     description: get detail course
  *     tags: [Course]
@@ -80,6 +80,21 @@ const courseService = require('../services/course.service');
     res.status(ret.code).json(ret.data);
 });
 
+/**
+ * @openapi
+ * 
+ * /course/outstanding:
+ *  post:
+ *      description: find outstanding courses(by vote)
+ *      tags: [Course]
+ *      responses:
+ *          200:
+ *              description: json data
+ */
+router.post('/outstanding', async (req, res)=>{
+    const ret = await courseService.getOutstandingCourses();
+    res.status(ret.code).json(ret.data);
+})
 //#endregion
 
 //#region TienDung
@@ -99,7 +114,26 @@ const courseService = require('../services/course.service');
  */
 
 router.get('/10-latest', async (req, res) => {
-    const ret = await courseService.getLatestCourse(10);
+    const ret = await courseService.getLatestCourses(10);
+    res.status(ret.code).json(ret.data);
+})
+
+/**
+ * @openapi
+ * 
+ * /course/10-latest:
+ *  get:
+ *      description: get 10 latest courses
+ *      tags: [Course]
+ *      parameters:
+ *          
+ *      responses:
+ *          200:
+ *              description: json data
+ */
+
+ router.get('/10-mostview', async (req, res) => {
+    const ret = await courseService.getMostViewCourses(2);
     res.status(ret.code).json(ret.data);
 })
 
