@@ -1,7 +1,7 @@
 const swaggerJsdoc = require('swagger-jsdoc'); 
 
 const options = {
-  definition: {
+  definition: { 
     openapi: "3.0.0",
     info: {
       title: "LogRocket Express API with Swagger",
@@ -20,7 +20,7 @@ const options = {
     },
     servers: [
       {
-        url: process.env.URL,
+        url: `${process.env.HOST_NAME}:${process.env.PORT}`,
       },
     ],
   },

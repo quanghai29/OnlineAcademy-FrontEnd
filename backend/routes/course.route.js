@@ -6,7 +6,7 @@ const courseService = require('../services/course.service');
 /**
  * @openapi
  * 
- * /course/{id}:
+ * /course/detail/{id}:
  *   get:
  *     description: get detail course
  *     tags: [Course]
