@@ -6,7 +6,7 @@ const moment = require('moment');
 //#region Quang Hai MTP
 async function getAllCategory() {
     let returnModel = {}; // code; message; data
-    const categories = await categoryModel.all();
+    const categories = await categoryModel.getAllCategroy();
     if (categories == null) {
         returnModel.code = Code.Not_Found;
     } else {
