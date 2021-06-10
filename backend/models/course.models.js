@@ -71,10 +71,10 @@ module.exports = {
   },
 
   async outstandingCourses() {
-    const courses = await db('course').innerJoin(function() {
-      this.select('course_id').sum('vote').from('student_course')
-        .groupBy('course_id').orderBy('vote', 'desc').as('sum_vote')
-    }, 'course.id', '=', 'sum_vote.course_id').limit(2);
+    const courses = await db('course').rightJoin(function() {
+      this.select('course_id').sum({sum_vote:'vote'}).from('student_course').whereRaw('datediff(curdate(), register_date) <= 7')
+        .groupBy('course_id').orderBy('sum_vote', 'desc').as('sum_vote')
+    }, 'course.id', '=', 'sum_vote.course_id').limit(4);
 
     return courses;
   }
