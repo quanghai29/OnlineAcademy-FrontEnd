@@ -77,6 +77,13 @@ module.exports = {
     }, 'course.id', '=', 'sum_vote.course_id').limit(4);
 
     return courses;
-  }
+  },
 
+  async comments(course_id){
+    const comments = await db('student_course').rightJoin(
+      function(){
+        
+      }
+    )
+  }
 };

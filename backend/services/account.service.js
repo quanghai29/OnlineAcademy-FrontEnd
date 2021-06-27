@@ -2,6 +2,7 @@ const accountModel = require('../models/account.model');
 const { Code, Message } = require('../helper/statusCode.helper');
 
 async function createAcc(newAcc){
+  // hash password
   const result = {};
   const acc = await accountModel.addAccount(newAcc);
   newAcc.id = acc[0];
