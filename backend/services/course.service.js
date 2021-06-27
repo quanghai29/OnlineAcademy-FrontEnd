@@ -116,18 +116,28 @@ async function getCourseByCategory(category_id) {
 }
 
 async function findCourse(text) {
-  let retData = {};
-  if (text) {
-    const courses = await courseModel.fullTextSearch(text);
+    let retData = {};
+    if (text) {
+        const courses = await courseModel.fullTextSearch(text);
+        retData.code = Code.Success;
+        retData.message = Message.Success;
+        retData.data = courses;
+    } else {
+        retData.code = Code.Bad_Request;
+        retData.message = Message.Bad_Request;
+    }
+
+    return retData;
+}
+
+async function getOutstandingCourses() {
+    let retData = {};
+    const courses = await courseModel.outstandingCourses();
     retData.code = Code.Success;
     retData.message = Message.Success;
     retData.data = courses;
-  } else {
-    retData.code = Code.Bad_Request;
-    retData.message = Message.Bad_Request;
-  }
-
-  return retData;
+    
+    return retData;
 }
 //#endregion
 
@@ -137,6 +147,7 @@ module.exports = {
   getCourseByCategory,
   findCourse,
   getLatestCourses,
+  getOutstandingCourses,
   getMostViewCourses,
   getBestSellerCoursesByCategory,
 };

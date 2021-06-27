@@ -1,7 +1,7 @@
 const swaggerJsdoc = require('swagger-jsdoc'); 
 
 const options = {
-  definition: {
+  definition: { 
     openapi: "3.0.0",
     info: {
       title: "LogRocket Express API with Swagger",
@@ -20,12 +20,18 @@ const options = {
     },
     servers: [
       {
-        url: process.env.URL,
+        url: `${process.env.HOST_NAME}:${process.env.PORT}`,
+        description: 'Local host'
       },
+      {
+        url: 'https://udemall.herokuapp.com/',
+        description: 'host'
+      }
     ],
   },
   apis: ["./routes/*.route.js", "./routes/lecturer/*.route.js",
-        "./routes/admin/*.route.js","./routes/common/*.route.js"],
+        "./routes/admin/*.route.js","./routes/common/*.route.js",
+      "./routes/course.route.js"],
 };
 const openapiSpecification = swaggerJsdoc(options);
 
