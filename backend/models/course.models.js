@@ -68,5 +68,23 @@ module.exports = {
     }
 
     return courses[0];
+  },
+
+  async getBestSellerCourseByCategory(catId, amount) {
+    const courses = await db.raw(`
+    SELECT course_id, COUNT(*) AS total_course, DATE_FORMAT(register_date, '%m/%d/%Y') 
+    FROM student_course 
+    INNER JOIN course 
+    ON course_id = course.id 
+    WHERE (register_date BETWEEN NOW() - INTERVAL 30 DAY AND NOW()) AND category_id=${catId} 
+    GROUP BY course_id
+    ORDER BY total_course DESC LIMIT ${amount};
+    `);
+
+    if(courses.length === 0) {
+      return null;
+    }
+
+    return courses[0];
   }
 };
