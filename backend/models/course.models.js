@@ -1,3 +1,4 @@
+const { getCourseDetail } = require("../services/course.service");
 const db = require("../utils/db");
 
 const table_name = "course";
@@ -77,6 +78,37 @@ module.exports = {
     }, 'course.id', '=', 'sum_vote.course_id').limit(4);
 
     return courses;
+  },
+
+  async detail(course_id){
+    const courses = await db
+      .select(
+        'course.*',
+        'lecturer.fullname as lecturer_name',
+        'lecturer.email as lecturer_email',
+        'lecturer.address as lecturer_address',
+        'lecturer.shool as lecturer_school',
+        'lecturer.experience_year as lecturer_experience_year',
+        'lecturer.programming_language as lecturer_programing_language')
+      .from('course')
+      .where('course.id',course_id)
+      .innerJoin('lecturer','lecturer.id','course.lecturer_id');
+    
+    if(courses.length > 0){
+      let course = courses[0];
+      const chapters = await this.chapter(course_id);
+      course.chapters = chapters;
+      return course;
+    }
+
+    return null;
+  },
+
+  async chapter(course_id){
+    const chapters = await db
+      .from('chapter')
+      .where('course_id',course_id);
+    return chapters;
   }
 
 };

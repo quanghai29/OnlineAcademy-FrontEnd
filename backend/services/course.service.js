@@ -6,11 +6,12 @@ const moment = require('moment');
 //#region Quang Hai MTP
 async function getCourseDetail(id) {
     let returnModel = {}; // code; message; data
-    const course = await courseModel.single(id);
+    const course = await courseModel.detail(id);
     if (course == null) {
         returnModel.code = Code.Not_Found;
     } else {
-        course.last_update = moment(course.last_update).format('DD/MM/YYYY HH:mm:ss');
+        course.last_update = moment(course.last_update).format('MM/YYYY');
+        course.create_date = moment(course.create_date).format('DD/MM/YYYY');
         returnModel.code = Code.Success;
         returnModel.data = course;
     }
