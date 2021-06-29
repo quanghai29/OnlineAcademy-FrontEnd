@@ -138,6 +138,10 @@ async function getOutstandingCourses() {
     
     return retData;
 }
+
+async function getCommentsOfCourse(course_id){
+
+}
 //#endregion
 
 module.exports = {

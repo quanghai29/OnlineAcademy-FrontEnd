@@ -116,6 +116,10 @@ module.exports = {
     return courses;
   },
 
+  async comments(course_id){
+   
+  },
+  
   async detail(course_id){
     const courses = await db
       .select(
