@@ -147,11 +147,7 @@ module.exports = {
     return null;
   },
 
-  async chapter(course_id){
-    const chapters = await db
-      .from('chapter')
-      .where('course_id',course_id);
-    return chapters;
+  chapter(course_id){
+    return db.from('chapter').where('course_id',course_id);
   }
-
 };

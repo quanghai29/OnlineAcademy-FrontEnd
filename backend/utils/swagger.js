@@ -26,6 +26,7 @@ const options = {
   },
   apis: ["./routes/*.route.js", "./routes/lecturer/*.route.js",
         "./routes/admin/*.route.js","./routes/common/*.route.js",
+        ,"./routes/student/*.route.js",
       "./routes/course.route.js"],
 };
 const openapiSpecification = swaggerJsdoc(options);
