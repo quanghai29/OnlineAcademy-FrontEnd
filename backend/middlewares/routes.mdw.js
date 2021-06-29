@@ -19,6 +19,7 @@ module.exports = function (app) {
   //routers path here
   app.use('/auth', require('../routes/auth.route'));
   app.use('/course', require('../routes/course.route'));
+  app.use('/common/media', require('../routes/common/media.route'));
   app.use('/lecturer/course', require('../routes/lecturer/course.route'));
   app.use('/lecturer/chapter', require('../routes/lecturer/chapter.route'));
   app.use('/lecturer', require('../routes/lecturer.route'));

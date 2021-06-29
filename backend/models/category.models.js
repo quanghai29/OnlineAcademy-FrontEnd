@@ -17,10 +17,5 @@ module.exports = {
 
   add(category) {
     return db(table_name).insert(category);
-  },
-
-  getAllCategroy(){
-    knex.raw(`call GetALLCategory(${param}, @outmsg); select @outmsg as outmsg;`);
-    return db.raw(`call GetALLCategory`)
   }
 };
