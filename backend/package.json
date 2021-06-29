@@ -13,11 +13,7 @@
   "dependencies": {
     "ajv": "^8.5.0",
     "app-root-path": "^3.0.0",
-<<<<<<< HEAD
-    "bcrypt": "^5.0.1",
-=======
     "bcryptjs": "^2.4.3",
->>>>>>> 425871b3eb606f186a38ac51c6456b9ea7b46802
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

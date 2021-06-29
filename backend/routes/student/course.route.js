@@ -8,3 +8,5 @@ router.get('/favorite', async (req, res)=>{
 
   res.status(result.code).json(result.data);
 })
+
+module.exports = router;
