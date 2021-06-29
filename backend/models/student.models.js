@@ -12,5 +12,13 @@ module.exports = {
     )
 
     return favoriteList;
+  }, 
+
+  async deleteOneFavoriteCourse(student_id, course_id){
+    const result = await db('list_favorite')
+    .where({student_id: student_id, course_id: course_id})
+    .del();
+
+    return result;
   }
 }
