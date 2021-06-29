@@ -2,7 +2,6 @@ const accountModel = require('../models/account.model');
 const { Code, Message } = require('../helper/statusCode.helper');
 
 async function createAcc(newAcc){
-  // hash password
   const result = {};
   const acc = await accountModel.addAccount(newAcc);
   newAcc.id = acc[0];
@@ -16,6 +15,45 @@ async function createAcc(newAcc){
 async function loginAcc(data){
 }
 
+//#region TienDung
+
+async function getAccountByEmail(email) {
+  const returnModel = {};
+  const account = await accountModel.getSingleAccountByEmail(email);
+  if(account === null) {
+    returnModel.code = Code.Not_Found;
+  } else {
+    returnModel.code = Code.Success;
+    returnModel.data = account;
+  }
+  return returnModel;
+}
+
+async function updateRefreshToken(id, refreshToken) {
+  const returnModel = {};
+  const ret = await accountModel.updateRefreshToken(id, refreshToken);
+  if(ret) {
+    returnModel.code = Code.Success;
+    returnModel.data = ret;
+  }
+  return returnModel;
+}
+
+async function isValidRefreshToken(id, refreshToken) {
+  const returnModel = {};
+  const ret = await accountModel.isValidRefreshToken(id, refreshToken);
+  if(ret) {
+    returnModel.code = Code.Success;
+    returnModel.data = ret;
+  } else {
+    returnModel.code = Code.Not_Found;
+    returnModel.data = ret;
+  }
+  return returnModel;
+}
+
+//#endregion
+
 module.exports = {
-  createAcc, loginAcc
+  createAcc, loginAcc, getAccountByEmail, updateRefreshToken, isValidRefreshToken
 }
