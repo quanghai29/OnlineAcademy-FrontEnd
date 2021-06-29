@@ -86,12 +86,13 @@ async function handleMessage(senderPsid, receivedMessage) {
   if (receivedMessage.text) {
     // Create the payload for a basic text message, which
     // will be added to the body of your request to the Send API
-    const msg = receivedMessage.text;
+    const msg = receivedMessage.text.trim();
     switch (msg) {
       case 'start':
         response = chatbotService.startBot();
         break;
       default:
+        response = await chatbotService.searchCourse(msg);
         break;
     }
   } else if (receivedMessage.attachments) {
@@ -141,10 +142,9 @@ async function handlePostback(senderPsid, receivedPostback) {
   switch (data.type) {
     case type.categories:
       response = await chatbotService.getAllCategory();
-      //console.log(response);
       break;
     case type.search:
-      //response = chatbotService.getAllCategory();
+      response = chatbotService.guideSearch();
       break;
     case type.course_by_category:
         response = await chatbotService.getCourseByCategory(data.msg);

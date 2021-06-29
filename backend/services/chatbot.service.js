@@ -10,7 +10,8 @@ function startBot() {
       'payload': {
         'template_type': 'generic',
         'elements': [{
-          'title': 'Xem danh sách các khóa học bằng?',
+          'title': 'Chào mừng bạn đến với Academy Chat Bot <3 ',
+          'subtitle': 'Bạn muốn xem thông tin các khóa học bằng?',
           'buttons': [
             {
               'type': 'postback',
@@ -39,24 +40,24 @@ async function getCourseDetail(id = 1) {
     })
 
     //
-    const msg = `### ${course.title} ###\n`
-      + `- Học phí: ${course.price} VND\n`
-      + `- *Khuyến mãi: ${course.discount}%\n`
-      + `- Mô tả sơ lược: ${course.short_description}\n`
-      + `- Thông tin giảng viên: \n`
-      + `\t+ Họ tên: ${course.lecturer_name}\n`
-      + `\t+ Kinh nghiệm: ${course.lecturer_experience_year} year\n`
-      + `\t+ Ngôn ngữ: ${course.lecturer_programing_language}\n`
-      + `- Đánh giá: 5 sao\n`
-      + `- Rating: 54,1445\n`
-      + `- Số học viên đăng ký: 497,213 students\n`
-      + `- Last updated: ${course.last_update}\n`
-      + `- <Đề cương khóa học> \n`
+    const msg = `8-) B-) 8-) ${course.title}\n`
+      + `^_^ Học phí: ${course.price} VND\n`
+      + `:O Khuyến mãi: ${course.discount}%  \n`
+      + `<(") Mô tả sơ lược: ${course.short_description}\n`
+      + `(^^^) Thông tin giảng viên: \n`
+      + `\t :) Họ tên: ${course.lecturer_name}\n`
+      + `\t ;) Kinh nghiệm: ${course.lecturer_experience_year} year\n`
+      + `\t ^_^ Ngôn ngữ: ${course.lecturer_programing_language}\n`
+      + `(y) Đánh giá: 5 sao\n`
+      + `O:) Rating: 54,1445\n`
+      + `:* Số học viên đăng ký: 497,213 \n`
+      + `<(") Last updated: ${course.last_update}\n`
+      + `:|] Đề cương khóa học \n`
       + msg_chapters
 
     return {'text': msg };
   }
-  return { 'text': 'Not Found' }
+  return { 'text': "Oh! Bot xin lỗi bạn :'(  ,Thông tin này chưa được cập nhật, bạn có thể thử lại sau nhé" }
 }
 
 async function getAllCategory() {
@@ -100,7 +101,7 @@ async function getAllCategory() {
       }
     };
   }
-  return { 'text': 'Not Found' }
+  return { 'text': "Oh! Bot xin lỗi bạn :'( ,Thông tin này chưa được cập nhật, bạn có thể thử lại sau nhé" }
 }
 
 async function getCourseByCategory(category_id) {
@@ -112,7 +113,7 @@ async function getCourseByCategory(category_id) {
       const object = {
         'title': course.title,
         'subtitle': course.price + ' VND',
-        'image_url':'https://9727f34875c2.ngrok.io/common/media/image/?path=' + '/img/course/1/Trieu-Lo-Tu-Co-Trang.png',
+        'image_url': process.env.URL + '/common/media/image/?path=' + course.img_source,
         'buttons': [{
           'type': 'postback',
           'title': 'Chi tiết',
@@ -135,11 +136,56 @@ async function getCourseByCategory(category_id) {
       }
     };
   }
-  return { 'text': 'Not Found' }
+  return { 'text': "Oh! Bot xin lỗi bạn :'( , Thông tin này chưa được cập nhật, bạn có thể thử lại sau nhé" }
 }
 
+async function searchCourse(msg){
+  const regex = /^search\//g;
+  if(msg.match(regex)){
+    const res = await courseService.findCourse(msg.substr(7));
 
+    if(res.data && res.data.length > 0){
+      let elements = [];
+
+      res.data.forEach(course => {
+        const object = {
+          'title': course.title,
+          'subtitle': course.price + ' VND',
+          'image_url': process.env.URL + '/common/media/image/?path=' + course.img_source,
+          'buttons': [{
+            'type': 'postback',
+            'title': 'Chi tiết',
+            'payload': JSON.stringify({
+              type: type.course_detail,
+              msg: course.id
+            })
+          }]
+        }
+        elements.push(object);
+      });
+  
+      return {
+        'attachment': {
+          'type': 'template',
+          'payload': {
+            'template_type': 'generic',
+            'elements': elements
+          }
+        }
+      };
+    }
+    return {'text': "Oh! Xin lỗi bạn :'( , Bot không tìm thấy thông tin bạn cần\n Bạn vui lòng thử lại sau nhé <3"};
+  }
+  return {'text': 'Oh! Mình chưa hiểu lắm ^_^ , bạn có thể thử hỏi câu khác hoặc gõ "start" để bot hướng dẫn thêm nè :*'};
+}
+
+function guideSearch(){
+  const msg = `Bot hướng dẫn bạn tìm kiếm theo cú pháp sau nè ^_^ ^_^ \n`
+    + `\tsearch/{từ khóa cần tìm kiếm} \n`
+    + `\tví dụ: search/javascript\n`
+  return {'text': msg}
+}
 
 module.exports = {
-  getCourseDetail, getAllCategory, startBot, getCourseByCategory
+  getCourseDetail, getAllCategory, startBot, getCourseByCategory, searchCourse, guideSearch
 };
