@@ -36,11 +36,14 @@ module.exports = {
     return courses;
   },
 
-  async fullTextSearch(text) {
-    const courses = await db.raw(`
-    SELECT *, MATCH (title, short_description, full_description) AGAINST ('${text}') as score
-    FROM course WHERE MATCH (title, short_description, full_description) AGAINST ('${text}') > 0 ORDER BY score DESC;
-    `);
+  async fullTextSearchCourse(text) {
+    const sql = `
+    SELECT *, MATCH (title, short_description, full_description) 
+    AGAINST ('${text}') as score
+    FROM course WHERE MATCH (title, short_description, full_description) 
+    AGAINST ('${text}') > 0 ORDER BY score DESC;
+    `
+    const courses = await db.raw(sql);
 
     if (courses.length === 0) {
       return null;

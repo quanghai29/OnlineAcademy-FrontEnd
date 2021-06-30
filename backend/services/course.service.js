@@ -117,10 +117,10 @@ async function getCourseByCategory(category_id) {
 async function findCourse(text) {
     let retData = {};
     if (text) {
-        const courses = await courseModel.fullTextSearch(text);
+        const courses = await courseModel.fullTextSearchCourse(text);
         retData.code = Code.Success;
         retData.message = Message.Success;
-        retData.data = courses;
+        retData.data = courses? course : [];
     } else {
         retData.code = Code.Bad_Request;
         retData.message = Message.Bad_Request;

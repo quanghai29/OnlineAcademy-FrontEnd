@@ -5,9 +5,9 @@ const courseService = require('../services/course.service');
 
 /**
  * @openapi
- *
- * /course?category_id:
- *  get:
+ * paths:
+ *  /course?category_id={category_id}:
+ *    get:
  *      description: get all of courses which has category_id = number
  *      tags: [Course]
  *      parameters:
@@ -16,6 +16,7 @@ const courseService = require('../services/course.service');
  *            schema:
  *              type: integer
  *              minimum: 1
+ *            required: true
  *      responses:
  *          200:
  *              description: json data
@@ -30,22 +31,27 @@ router.get('/', async (req, res) => {
 
 /**
  * @openapi
- *
+ *  
  * /course/search:
  *  post:
  *      description: find courses which concerning key words
  *      tags: [Course]
- *      parameters:
- *           -in: body
- *           name: text_search #example: {"text_search":"abc"}
- *           schema:
- *           type: string
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema: {}
+ *                  example:
+ *                      text_search: value
+ *                      
  *      responses:
  *          200:
  *              description: json data
+ *          400: 
+ *              description: bad request in case have not any text is sent to server
  */
 router.post('/search', async (req, res) => {
-  const text = req.body.text_search;
+  const text = req.body.text_search || "";
   const ret = await courseService.findCourse(text);
   res.status(ret.code).json(ret.data);
 });

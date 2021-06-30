@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { json } = require('express');
 const categoryService = require('../services/category.service');
 
 //#region QuangHai
@@ -37,4 +38,33 @@ const categoryService = require('../services/category.service');
   
 //#endregion
 
+//#region Mai Linh Đồng
+/**
+ * @openapi
+ * 
+ *  /category/search:
+ *    post:
+ *       description: full text search on category table
+ *       tags: [Category]
+ *       requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema: {}
+ *                  example: 
+ *                      text_search: value
+ *       
+ *       responses:
+ *          200:
+ *              description: json data
+ *          400: 
+ *              description: bad request in case have not any text is sent to server
+ */
+router.post('/search', async (req, res)=>{
+  const text = req.body.text_search || '';
+  const ret = await categoryService.findCategory(text);
+
+  res.status(ret.code).json(ret.data);
+})
+//#endregion
 module.exports = router;

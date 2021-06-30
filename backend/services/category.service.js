@@ -5,35 +5,54 @@ const moment = require('moment');
 
 //#region Quang Hai MTP
 async function getAllCategory() {
-    let returnModel = {}; // code; message; data
-    const categories = await categoryModel.all();
-    if (categories == null) {
-        returnModel.code = Code.Not_Found;
-    } else {
-        categories.forEach(category => {
-            category.last_update = moment(category.last_update).format('DD/MM/YYYY HH:mm:ss');
-        });
-        returnModel.code = Code.Success;
-        returnModel.data = categories;
-    }
-    return returnModel;
+  let returnModel = {}; // code; message; data
+  const categories = await categoryModel.all();
+  if (categories == null) {
+    returnModel.code = Code.Not_Found;
+  } else {
+    categories.forEach(category => {
+      category.last_update = moment(category.last_update).format('DD/MM/YYYY HH:mm:ss');
+    });
+    returnModel.code = Code.Success;
+    returnModel.data = categories;
+  }
+  return returnModel;
 }
 
-async function getMostRegister({duration, amount}) {
-    let returnModel = {}; // code; message; data
-    const categories = await categoryModel.getMostRegister({duration, amount});
-    if (categories == null) {
-        returnModel.code = Code.Not_Found;
-    } else {
-        returnModel.code = Code.Success;
-        returnModel.data = categories;
-    }
-    return returnModel;
+async function getMostRegister({ duration, amount }) {
+  let returnModel = {}; // code; message; data
+  const categories = await categoryModel.getMostRegister({ duration, amount });
+  if (categories == null) {
+    returnModel.code = Code.Not_Found;
+  } else {
+    returnModel.code = Code.Success;
+    returnModel.data = categories;
+  }
+  return returnModel;
 }
 
 //#endregion
 
+//#region Mai Linh Đồng
+async function findCategory(text) {
+  const retData = {};
+  if (text) {
+    const result = await categoryModel.fullTextSearchCategory(text);
+    retData.data = result ? result : [];
+    retData.code = Code.Success;
+    retData.message = Message.Success;
+  }else{
+    retData.code = Code.Bad_Request;
+    retData.message = Message.Bad_Request;
+  }
+
+  return retData;
+}
+//#endregion
+
+
 module.exports = {
-    getAllCategory, 
-    getMostRegister
+  getAllCategory,
+  getMostRegister,
+  findCategory
 };
