@@ -20,7 +20,15 @@ module.exports = {
   },
 
   async allByCategory(category_id) {
-    const courses = await db(table_name).where('category_id', category_id);
+    const courses = await db
+      .select(
+        'course.*',
+        'image.img_source',
+        'image.img_title')
+      .from('course')
+      .where('course.category_id',category_id)
+      .leftJoin('image','image.id','course.img_id');
+    //const courses = await db(table_name).where('category_id', category_id);
     if (courses.length === 0) {
       return null;
     }
@@ -121,10 +129,13 @@ module.exports = {
         'lecturer.address as lecturer_address',
         'lecturer.shool as lecturer_school',
         'lecturer.experience_year as lecturer_experience_year',
-        'lecturer.programming_language as lecturer_programing_language')
+        'lecturer.programming_language as lecturer_programing_language',
+        'image.img_source',
+        'image.img_title')
       .from('course')
       .where('course.id',course_id)
-      .innerJoin('lecturer','lecturer.id','course.lecturer_id');
+      .leftJoin('lecturer','lecturer.id','course.lecturer_id')
+      .leftJoin('image','image.id','course.img_id');
     
     if(courses.length > 0){
       let course = courses[0];
@@ -136,11 +147,7 @@ module.exports = {
     return null;
   },
 
-  async chapter(course_id){
-    const chapters = await db
-      .from('chapter')
-      .where('course_id',course_id);
-    return chapters;
+  chapter(course_id){
+    return db.from('chapter').where('course_id',course_id);
   }
-
 };
