@@ -65,6 +65,13 @@ router.post('/outstanding', async (req, res)=>{
     const ret = await courseService.getOutstandingCourses();
     res.status(ret.code).json(ret.data);
 })
+
+// ================= get coments of a course =============
+router.post('/detail/:id', async function(req, res){
+  const id = req.params.id || 0;
+ 
+})
+
 //#endregion
 
 //#region TienDung

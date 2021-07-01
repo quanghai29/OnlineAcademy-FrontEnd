@@ -5,6 +5,7 @@ const request = require('request');
 const chatbotService =  require('./services/chatbot.service');
 require('express-async-errors');
 require('dotenv').config();
+const { type } = require('./helper/type.chatbot.helper'); 
 
 const bot = express();
 
@@ -85,19 +86,13 @@ async function handleMessage(senderPsid, receivedMessage) {
   if (receivedMessage.text) {
     // Create the payload for a basic text message, which
     // will be added to the body of your request to the Send API
-    const msg = receivedMessage.text;
+    const msg = receivedMessage.text.trim();
     switch (msg) {
-      case 'hi cậu':
-        response = {
-          'text': 'hihi\nmình thích cậu á'
-        }
-        break;
-      case '/categories':
-        break;
-      case 'detail':
-        response = await chatbotService.getCourseDetail();
+      case 'start':
+        response = chatbotService.startBot();
         break;
       default:
+        response = await chatbotService.searchCourse(msg);
         break;
     }
   } else if (receivedMessage.attachments) {
@@ -136,17 +131,29 @@ async function handleMessage(senderPsid, receivedMessage) {
 }
 
 // Handles messaging_postbacks events
-function handlePostback(senderPsid, receivedPostback) {
+async function handlePostback(senderPsid, receivedPostback) {
   let response;
 
   // Get the payload for the postback
   let payload = receivedPostback.payload;
+  data = JSON.parse(payload);
 
   // Set the response based on the postback payload
-  if (payload === 'yes') {
-    response = { 'text': 'Thanks!' };
-  } else if (payload === 'no') {
-    response = { 'text': 'Oops, try sending another image.' };
+  switch (data.type) {
+    case type.categories:
+      response = await chatbotService.getAllCategory();
+      break;
+    case type.search:
+      response = chatbotService.guideSearch();
+      break;
+    case type.course_by_category:
+        response = await chatbotService.getCourseByCategory(data.msg);
+        break;
+    case type.course_detail:
+        response = await chatbotService.getCourseDetail(data.msg);
+        break;
+    default:
+      break;
   }
   // Send the message to acknowledge the postback
   callSendAPI(senderPsid, response);
