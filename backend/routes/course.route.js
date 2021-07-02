@@ -26,7 +26,7 @@ const courseService = require('../services/course.service');
 router.get('/', async (req, res) => {
   const category_id = +req.query.category_id || 0;
   const ret = await courseService.getCourseByCategory(category_id);
-  res.status(ret.code).json(ret.data);
+  res.status(ret.code).json(ret);
 });
 
 /**
@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
 router.post('/search', async (req, res) => {
   const text = req.body.text_search || "";
   const ret = await courseService.findCourse(text);
-  res.status(ret.code).json(ret.data);
+  res.status(ret.code).json(ret);
 });
 
 /**
@@ -69,13 +69,32 @@ router.post('/search', async (req, res) => {
  */
 router.post('/outstanding', async (req, res)=>{
     const ret = await courseService.getOutstandingCourses();
-    res.status(ret.code).json(ret.data);
+    res.status(ret.code).json(ret);
 })
 
 // ================= get coments of a course =============
-router.post('/detail/:id', async function(req, res){
-  const id = req.params.id || 0;
- 
+/**
+ * @openapi
+ * /course/comments/{id}:
+ *  get:
+ *    description:
+ *    tags: [Course]
+ *    parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *             type: integer
+ * 
+ *    responses:
+ *       200: 
+ *          description: json data
+ */
+router.get('/comments/:id', async function(req, res){
+  const id = +req.params.id || 0;
+  const ret = await courseService.getCommentsOfCourse(id);
+  
+  res.status(ret.code).json(ret);
 })
 
 //#endregion

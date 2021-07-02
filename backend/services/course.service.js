@@ -140,7 +140,13 @@ async function getOutstandingCourses() {
 }
 
 async function getCommentsOfCourse(course_id){
+  let retData = {};
+  const comments = await courseModel.comments(course_id);
+  retData.code = Code.Success;
+  retData.message = Message.Success;
+  retData.data = comments;
 
+  return retData;
 }
 //#endregion
 
@@ -153,4 +159,5 @@ module.exports = {
   getOutstandingCourses,
   getMostViewCourses,
   getBestSellerCoursesByCategory,
+  getCommentsOfCourse
 };
