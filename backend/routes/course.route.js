@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const courseService = require('../services/course.service');
 
-//#region Linh Đồng
+//#region Mai Linh Đồng
 
 /**
  * @openapi
@@ -77,11 +77,11 @@ router.post('/outstanding', async (req, res)=>{
  * @openapi
  * /course/comments/{id}:
  *  get:
- *    description:
+ *    description: get all of comments of a course
  *    tags: [Course]
  *    parameters:
  *        - in: path
- *          name: id
+ *          name: id (course_id)
  *          required: true
  *          schema:
  *             type: integer
@@ -95,6 +95,40 @@ router.get('/comments/:id', async function(req, res){
   const ret = await courseService.getCommentsOfCourse(id);
   
   res.status(ret.code).json(ret);
+})
+
+/**
+ * @openapi
+ * 
+ * /course/comment:
+ *  post:
+ *    description: insert a course's comment
+ *    tags: [Course]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *          application/json:
+ *              schema:
+ *                  {}
+ *                 
+ *              example:
+ *                  {content: 'content of comment',
+ *                   student_id: 1,
+ *                    course_id: 1
+ *                  }
+ *    responses:
+ *      201:
+ *        description: Create comment successfully
+ *      401: 
+ *        description: Create comment unsuccessfully
+ */
+const commentSchema = require('../schema/comment.json');
+router.post('/comment', require('../middlewares/validate.mdw')(commentSchema) 
+,async function(req,res){
+  const comment = req.body;
+  const result = await courseService.addComment(comment);
+
+  res.status(result.code).json(result);
 })
 
 //#endregion

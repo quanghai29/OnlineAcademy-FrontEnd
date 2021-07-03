@@ -120,7 +120,7 @@ module.exports = {
     return courses;
   },
 
-  async comments(course_id) {
+  async getComments(course_id) {
     const sql = `
       SELECT comment.content, comment.student_id,
       comment.course_id, comment.last_update, 
@@ -131,6 +131,17 @@ module.exports = {
     const comments = await db.raw(sql);
 
     return comments[0];
+  },
+
+  async addComment(comment){
+    const result = await db('comment').insert({
+      content: comment.content, 
+      student_id: comment.student_id, 
+      course_id: comment.course_id
+    });
+
+    console.log('add comment', result);
+    return result;
   },
 
   async detail(course_id) {
