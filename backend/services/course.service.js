@@ -97,7 +97,7 @@ async function getBestSellerCoursesByCategory(catId, amount) {
 
 //#endregion
 
-//#region Linh Đồng
+//#region Mai Linh Đồng
 async function getCourseByCategory(category_id) {
   let returnModel = {};
 
@@ -117,10 +117,10 @@ async function getCourseByCategory(category_id) {
 async function findCourse(text) {
     let retData = {};
     if (text) {
-        const courses = await courseModel.fullTextSearch(text);
+        const courses = await courseModel.fullTextSearchCourse(text);
         retData.code = Code.Success;
         retData.message = Message.Success;
-        retData.data = courses;
+        retData.data = courses? course : [];
     } else {
         retData.code = Code.Bad_Request;
         retData.message = Message.Bad_Request;
@@ -140,7 +140,24 @@ async function getOutstandingCourses() {
 }
 
 async function getCommentsOfCourse(course_id){
+  let retData = {};
+  const comments = await courseModel.getComments(course_id);
+  retData.code = Code.Success;
+  retData.message = Message.Success;
+  retData.data = comments;
 
+  return retData;
+}
+
+async function addComment(comment){
+  let retData = {};
+  const result = await courseModel.addComment(comment);
+  retData.code = Code.Created_Success;
+  retData.message = Message.Created_Success;
+  comment.comment_id = result[0];
+  retData.data = {...comment};
+
+  return retData;
 }
 //#endregion
 
@@ -153,4 +170,6 @@ module.exports = {
   getOutstandingCourses,
   getMostViewCourses,
   getBestSellerCoursesByCategory,
+  getCommentsOfCourse, 
+  addComment
 };

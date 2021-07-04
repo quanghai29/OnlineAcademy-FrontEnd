@@ -1,4 +1,5 @@
 const db = require("../utils/db");
+const { fullTextSearch } = require("./course.models");
 
 const table_name = "category";
 module.exports = {
@@ -33,5 +34,20 @@ module.exports = {
     if(categories.length > 0)
       return categories[0];
     return null;
+  }, 
+
+  async fullTextSearchCategory(text){
+    const sql = `SELECT *, MATCH (category_name) 
+    AGAINST ('${text}') as score
+    FROM category WHERE MATCH (category_name) 
+    AGAINST ('${text}') > 0 
+    ORDER BY score DESC`;
+    const categories = await db.raw(sql);
+
+    if(categories.length === 0){
+      return null;
+    }
+
+    return categories[0];
   }
 };
