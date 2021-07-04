@@ -4,6 +4,6 @@ import './style.scss'
 export default function ActionButton(props){
 
   return(
-    <button>{props.action}</button>
+    <button style={props.style}>{props.action}</button>
   )
 }

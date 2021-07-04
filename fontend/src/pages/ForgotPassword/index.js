@@ -6,17 +6,17 @@ import bottomImg from '../../assets/images/account/bottom_img.png'
 import topImg from '../../assets/images/account/top_img.png'
 import { Link } from "react-router-dom"
 
-export default function VerifyCode() {
+export default function ForgotPassword(){
 
-  return (
+  return(
     <div className="account__container">
       <div className="container__left-side">
         <img className="top-img" src={topImg} alt=""></img>
         <div className="container-form">
           <form>
             <HeaderForm class="form-header"
-              spanValue="" />
-            <InputValue type="text" placeholder="OTP-Code"
+              spanValue="Please enter your email to receive OTP-code" />
+            <InputValue type="text" placeholder="Email address"
               style={{ marginBottom: "15px" }} />
             <div className="small-text">
               <span>Don’t have an account?</span>
