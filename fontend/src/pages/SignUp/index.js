@@ -2,12 +2,12 @@ import ActionButton from "../../components/Account/ActionButton"
 import InputValue from "../../components/Account/InputValue"
 import HeaderForm from "../../components/Account/HeaderForm"
 import '../../styles/account.scss'
-import bottomImg from '../../assets/images/account/bottom_img.png'
-import topImg from '../../assets/images/account/top_img.png'
 import { Link } from "react-router-dom"
 
 export default function SignUp() {
 
+  const bottomImg = 'assets/images/account/bottom_img.png';
+  const topImg = 'assets/images/account/top_img.png';
   return (
     <div className="account__container">
       <div className="container__left-side">
