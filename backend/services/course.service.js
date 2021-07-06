@@ -2,15 +2,15 @@ const { Code, Message } = require('../helper/statusCode.helper');
 const courseModel = require('../models/course.models');
 const moment = require('moment');
 
-
 //#region Quang Hai MTP
 async function getCourseDetail(id) {
     let returnModel = {}; // code; message; data
-    const course = await courseModel.single(id);
+    const course = await courseModel.detail(id);
     if (course == null) {
         returnModel.code = Code.Not_Found;
     } else {
-        course.last_update = moment(course.last_update).format('DD/MM/YYYY HH:mm:ss');
+        course.last_update = moment(course.last_update).format('MM/YYYY');
+        course.create_date = moment(course.create_date).format('DD/MM/YYYY');
         returnModel.code = Code.Success;
         returnModel.data = course;
     }
@@ -22,77 +22,105 @@ async function getCourseDetail(id) {
 //#region TienDung
 
 async function insertCourse(course) {
-    let returnModel = {};
-    const ret = await courseModel.add(course);
-    course.id = ret[0];
-    returnModel.code = Code.Created_Success;
-    returnModel.message = Message.Created_Success;
-    returnModel.data = course;
-    return returnModel;
+  let returnModel = {};
+  const ret = await courseModel.add(course);
+  course.id = ret[0];
+  returnModel.code = Code.Created_Success;
+  returnModel.message = Message.Created_Success;
+  returnModel.data = course;
+  return returnModel;
 }
 
 async function getLatestCourses(amount) {
-    let returnModel = {};
-    const ret = await courseModel.getLatestCourses(amount);
-    if(ret == null) {
-        returnModel.code = Code.Not_Found;
-    } else {
-        returnModel.code = Code.Success;
-        returnModel.data = ret;
-    }
-    return returnModel;
+  let returnModel = {};
+  const ret = await courseModel.getLatestCourses(amount);
+  if (ret == null) {
+    returnModel.code = Code.Not_Found;
+  } else {
+    returnModel.code = Code.Success;
+    returnModel.data = ret;
+  }
+  return returnModel;
 }
 
 async function getMostViewVideos(amount) {
-    const ret = await courseModel.getMostViewCourses(amount);
-    return ret;
+  const ret = await courseModel.getMostViewCourses(amount);
+  return ret;
 }
 
 async function getMostViewCourses(amount) {
-    let returnModel = {};
-    const ret = await getMostViewVideos(amount);
+  let returnModel = {};
+  const ret = await getMostViewVideos(amount);
 
-    const ret2 = await Promise.all(ret.map(async (item) => {
-        let course = await courseModel.single(item.course_id);
-        course.view_sum = item.sum_view;
-        return course;
-    }));
+  const ret2 = await Promise.all(
+    ret.map(async (item) => {
+      let course = await courseModel.single(item.course_id);
+      course.view_sum = item.sum_view;
+      return course;
+    })
+  );
 
-    if(ret2 == null) {
-        returnModel.code = Code.Not_Found;
-    } else {
-        returnModel.code = Code.Success;
-        returnModel.data = ret2;
-    }
-    return returnModel;
+  if (ret2 == null) {
+    returnModel.code = Code.Not_Found;
+  } else {
+    returnModel.code = Code.Success;
+    returnModel.data = ret2;
+  }
+  return returnModel;
+}
+
+async function getBestSellerStudent_CoursesByCategory(catId, amount) {
+  const ret = await courseModel.getBestSellerCourseByCategory(catId, amount);
+  return ret;
+}
+
+async function getBestSellerCoursesByCategory(catId, amount) {
+  let returnModel = {};
+  const ret = await getBestSellerStudent_CoursesByCategory(catId, amount);
+
+  const ret2 = await Promise.all(
+    ret.map(async (item) => {
+      let course = await courseModel.single(item.course_id);
+      course.view_sum = item.sum_view;
+      return course;
+    })
+  );
+
+  if (ret2 == null) {
+    returnModel.code = Code.Not_Found;
+  } else {
+    returnModel.code = Code.Success;
+    returnModel.data = ret2;
+  }
+  return returnModel;
 }
 
 //#endregion
 
-//#region Linh Đồng
+//#region Mai Linh Đồng
 async function getCourseByCategory(category_id) {
-    let returnModel = {};
+  let returnModel = {};
 
-    const courses = await courseModel.allByCategory(category_id);
-    if (!courses) {
-        returnModel.code = Code.Bad_Request;
-        returnModel.message = Message.Bad_Request;
-    } else {
-        returnModel.code = Code.Success;
-        returnModel.message = Message.Success;
-    }
-    returnModel.data = courses;
+  const courses = await courseModel.allByCategory(category_id);
+  if (!courses) {
+    returnModel.code = Code.Bad_Request;
+    returnModel.message = Message.Bad_Request;
+  } else {
+    returnModel.code = Code.Success;
+    returnModel.message = Message.Success;
+  }
+  returnModel.data = courses;
 
-    return returnModel;
+  return returnModel;
 }
 
 async function findCourse(text) {
     let retData = {};
     if (text) {
-        const courses = await courseModel.fullTextSearch(text);
+        const courses = await courseModel.fullTextSearchCourse(text);
         retData.code = Code.Success;
         retData.message = Message.Success;
-        retData.data = courses;
+        retData.data = courses? course : [];
     } else {
         retData.code = Code.Bad_Request;
         retData.message = Message.Bad_Request;
@@ -110,11 +138,38 @@ async function getOutstandingCourses() {
     
     return retData;
 }
+
+async function getCommentsOfCourse(course_id){
+  let retData = {};
+  const comments = await courseModel.getComments(course_id);
+  retData.code = Code.Success;
+  retData.message = Message.Success;
+  retData.data = comments;
+
+  return retData;
+}
+
+async function addComment(comment){
+  let retData = {};
+  const result = await courseModel.addComment(comment);
+  retData.code = Code.Created_Success;
+  retData.message = Message.Created_Success;
+  comment.comment_id = result[0];
+  retData.data = {...comment};
+
+  return retData;
+}
 //#endregion
 
-
 module.exports = {
-    getCourseDetail, insertCourse, getCourseByCategory,
-    findCourse, getOutstandingCourses, getLatestCourses,
-    getMostViewCourses
+  getCourseDetail,
+  insertCourse,
+  getCourseByCategory,
+  findCourse,
+  getLatestCourses,
+  getOutstandingCourses,
+  getMostViewCourses,
+  getBestSellerCoursesByCategory,
+  getCommentsOfCourse, 
+  addComment
 };

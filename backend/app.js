@@ -8,7 +8,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 
 // middleware api
@@ -21,5 +21,5 @@ require('./chatbot');
 
 const { PORT } = process.env;
 app.listen(PORT, () => {
-  console.log(`Online Academy backend is runing at ${process.env.HOST_NAME}:${PORT}`);
+  console.log(`Online Academy backend is runing at ${process.env.HOST_NAME}:${process.env.PORT}`);
 });

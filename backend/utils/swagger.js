@@ -20,12 +20,14 @@ const options = {
     },
     servers: [
       {
-        url: `${process.env.HOST_NAME}:${process.env.PORT}`,
-      },
+        url: `${process.env.URL}`
+      }
     ],
   },
   apis: ["./routes/*.route.js", "./routes/lecturer/*.route.js",
-        "./routes/admin/*.route.js","./routes/common/*.route.js"],
+        "./routes/admin/*.route.js","./routes/common/*.route.js",
+        ,"./routes/student/*.route.js",
+      "./routes/course.route.js"],
 };
 const openapiSpecification = swaggerJsdoc(options);
 
