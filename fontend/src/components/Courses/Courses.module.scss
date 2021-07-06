@@ -1,0 +1,15 @@
+@import '../../styles/config';
+
+.title {
+    font-size: 40;
+    color: $primaryColor;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.listCourse {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 56px;
+}
