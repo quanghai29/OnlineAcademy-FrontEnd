@@ -17,9 +17,9 @@ async function loginAcc(data){
 
 //#region TienDung
 
-async function getAccountByEmail(email) {
+async function getAccountByUsername(username) {
   const returnModel = {};
-  const account = await accountModel.getSingleAccountByEmail(email);
+  const account = await accountModel.getSingleAccountByUsername(username);
   if(account === null) {
     returnModel.code = Code.Not_Found;
   } else {
@@ -55,5 +55,5 @@ async function isValidRefreshToken(id, refreshToken) {
 //#endregion
 
 module.exports = {
-  createAcc, loginAcc, getAccountByEmail, updateRefreshToken, isValidRefreshToken
+  createAcc, loginAcc, getAccountByUsername, updateRefreshToken, isValidRefreshToken
 }

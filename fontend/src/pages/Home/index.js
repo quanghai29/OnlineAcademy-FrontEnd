@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCourse } from '../../redux/actions/course';
+import { fetchHotCourse } from '../../redux/actions/hotCourses';
 import Layout from '../../layout/Layout';
 import classes from './Home.module.scss';
 import Courses from '../../components/Courses';
@@ -94,12 +95,14 @@ import Hero from '../../components/Hero';
 const Home = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.courses);
+  const { data1 } = useSelector(state => state.hotCourses);
 
   useEffect(() => {
     dispatch(fetchCourse());
+    dispatch(fetchHotCourse());
   }, [dispatch]);
 
-  console.log(data);
+  console.log(data1);
 
   return (
     <Layout>
@@ -114,7 +117,7 @@ const Home = () => {
             <Courses courses={data} title='Hot Trong Tuần' />
           </section>
           <section>
-            <Courses courses={data} title='Lượt xem nhiều nhất' />
+            <Courses courses={data1} title='Lượt xem nhiều nhất' />
           </section>
         </main>
       </div>
