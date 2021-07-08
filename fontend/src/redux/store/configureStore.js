@@ -1,15 +1,20 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
-import api from '../middleware/api';
+import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
-import DevTools from '../containers/DevTools';
+import DevTools from '../../containers/DevTools';
+import rootSaga from '../sagas';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = (initialState) => {
   const store = createStore(
     rootReducer,
     initialState,
-    compose(applyMiddleware(logger, api), DevTools.instrument())
+    compose(applyMiddleware(sagaMiddleware, logger), DevTools.instrument())
   );
+
+  sagaMiddleware.run(rootSaga);
 
   // help to see the changes faster
   if (module.hot) {
