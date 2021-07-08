@@ -5,7 +5,6 @@ import Layout from '../../layout/Layout';
 import classes from './Home.module.scss';
 import Courses from '../../components/Courses';
 import Hero from '../../components/Hero';
-// import DevTools from '../../containers/DevTools';
 
 // const courses = [
 //   {
