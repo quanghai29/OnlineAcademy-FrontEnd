@@ -6,6 +6,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import VerifyCode from './pages/VerifyCode';
 import ForgotPassword from './pages/ForgotPassword';
+import CourseOverview from './pages/CourseOverview';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         <Route path="/sign-up" component={SignUp}/>
         <Route path="/verify-code" component={VerifyCode}/>
         <Route path="/forgot-password" component={ForgotPassword}/>
+        <Route path="/course-overview">
+          <CourseOverview />
+        </Route>
       </Switch>
     </Router>
   );
