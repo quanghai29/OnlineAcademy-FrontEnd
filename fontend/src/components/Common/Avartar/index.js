@@ -1,18 +1,13 @@
-import React, {useEffect} from "react";
+import React from "react";
 import classes from './Avartar.module.scss';
 
+//imgSrc = path image/ source base code
+//nickname = fullname user
 export default function Overview({imgSrc, nickName}) {
-  useEffect(function () {
-    
-  });
-
   return (
     <div className="container center-align">
-      {imgSrc && <img src="assets\images\home\girlBg.png" alt="avartar" className={`circle responsive-img ${classes.avartar}`}/> }
-
-      <div className={`container ${classes.avartar} circle blue-grey center-align text-white`}>
-        <h5>T</h5>
-      </div>
+      {imgSrc && <img src={imgSrc} alt="avartar" className={`circle responsive-img ${classes.avartar}`}/> }
+      {!imgSrc && <div className={`container ${classes.avartar} circle blue-grey white-text`}><h5>{nickName[0]}</h5></div>}
     </div>
   )
 };
