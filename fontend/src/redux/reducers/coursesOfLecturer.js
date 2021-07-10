@@ -6,20 +6,20 @@ const initialState = {
     error: null
   };
 
-  const hotCourses = (state = initialState, action) => {
+  const coursesOfLecturer = (state = initialState, action) => {
     switch (action.type) {
-      case type.SET_HOT_COURSES:
+      case type.SET_LECTURER_COURSES:
         return {
           ...state,
           data: action.payload,
           isLoading: false
         };
-      case type.FETCH_HOT_COURSES:
+      case type.FETCH_LECTURER_COURSES:
         return {
           ...state,
           isLoading: true
         };
-      case type.FETCH_HOT_COURSES_FAILURE:
+      case type.FETCH_LECTURER_COURSES_FAILURE:
         return {
           ...state,
           isLoading: false,
@@ -30,4 +30,4 @@ const initialState = {
     }
   };
   
-  export default hotCourses;
+  export default coursesOfLecturer;
