@@ -115,7 +115,7 @@ async function isValidRefreshToken(id, refreshToken) {
 //#endregion
 
 module.exports = {
-  createAcc, loginAcc, getAccountByEmail, updateRefreshToken, isValidRefreshToken,
+  createAcc, loginAcc, updateRefreshToken, isValidRefreshToken,
   checkExistingAccount, sendOtpCodeByEmail, generateCode, activeEmail,
   getAccountByUsername, 
 }
