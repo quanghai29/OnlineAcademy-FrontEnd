@@ -9,7 +9,7 @@ body {
 }
 
 *{
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
 $primaryBg: linear-gradient(to right,#FF8A00, #FFC000 );
