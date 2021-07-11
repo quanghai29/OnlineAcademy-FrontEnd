@@ -1,18 +1,78 @@
 const accountModel = require('../models/account.model');
 const { Code, Message } = require('../helper/statusCode.helper');
+const nodemailer = require('nodemailer');
+const rn = require('random-number');
 
-async function createAcc(newAcc){
+async function createAcc(newAcc) {
   const result = {};
   const acc = await accountModel.addAccount(newAcc);
   newAcc.id = acc[0];
   newAcc.password = null;
   result.code = Code.Success;
   result.message = Message.Success;
+  result.isExist = false;
   result.data = newAcc;
   return result;
 }
 
-async function loginAcc(data){
+async function checkExistingAccount(username) {
+  let result = {};
+  const account = await accountModel.getSingleAccountByUsername(username);
+  result.isExist = account ? true : false;
+  result.code = Code.Success;
+
+  return result;
+}
+
+function sendOtpCodeByEmail(destinationEmail, content) {
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+      user: 'gel1999academy@gmail.com',
+      pass: 'hoaroicuaphat2468'
+    }
+  });
+
+  const mailOptions = {
+    from: 'gel1999academy@gmail.com',
+    to: destinationEmail,
+    subject: 'OTP-code',
+    text: `${content}`
+  }
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+      return info.response
+    }
+  });
+}
+
+function generateCode(){
+  const gen = rn.generator({
+    min:  100000
+  , max:  1000000
+  , integer: true
+  });
+  return gen();
+}
+
+async function activeEmail(accountId){
+  const resData ={};
+  const result = await accountModel.activeEmail(accountId);
+  resData.result = result;
+  resData.code = Code.Success;
+  resData.message = Message.Success
+
+  return resData;
+}
+
+async function loginAcc(data) {
 }
 
 //#region TienDung
@@ -20,7 +80,7 @@ async function loginAcc(data){
 async function getAccountByEmail(email) {
   const returnModel = {};
   const account = await accountModel.getSingleAccountByEmail(email);
-  if(account === null) {
+  if (account === null) {
     returnModel.code = Code.Not_Found;
   } else {
     returnModel.code = Code.Success;
@@ -32,7 +92,7 @@ async function getAccountByEmail(email) {
 async function updateRefreshToken(id, refreshToken) {
   const returnModel = {};
   const ret = await accountModel.updateRefreshToken(id, refreshToken);
-  if(ret) {
+  if (ret) {
     returnModel.code = Code.Success;
     returnModel.data = ret;
   }
@@ -42,7 +102,7 @@ async function updateRefreshToken(id, refreshToken) {
 async function isValidRefreshToken(id, refreshToken) {
   const returnModel = {};
   const ret = await accountModel.isValidRefreshToken(id, refreshToken);
-  if(ret) {
+  if (ret) {
     returnModel.code = Code.Success;
     returnModel.data = ret;
   } else {
@@ -55,5 +115,6 @@ async function isValidRefreshToken(id, refreshToken) {
 //#endregion
 
 module.exports = {
-  createAcc, loginAcc, getAccountByEmail, updateRefreshToken, isValidRefreshToken
+  createAcc, loginAcc, getAccountByEmail, updateRefreshToken, isValidRefreshToken,
+  checkExistingAccount, sendOtpCodeByEmail, generateCode, activeEmail
 }
