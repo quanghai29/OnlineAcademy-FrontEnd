@@ -1,0 +1,34 @@
+
+.fontstyle{
+  font-family: Roboto !important;
+  font-style: normal !important;
+  text-transform: none;
+}
+
+.lightfontheader{
+  @extend .fontstyle;
+  font-weight: bold !important;
+  font-size: 18px !important;
+  color: #ffffff !important;
+}
+
+.darkfontheader{
+  @extend .fontstyle;
+  font-weight: bold !important;
+  font-size: 18px !important;
+  color: #5C5C5C !important;
+}
+
+.lightfonttext{
+  @extend .fontstyle;
+  font-weight: normal !important;
+  font-size: 15px !important;
+  color: #ffffff !important;
+}
+
+.darkfonttext{
+  @extend .fontstyle;
+  font-weight: normal !important;
+  font-size: 15px !important;
+  color: #5C5C5C !important;
+}

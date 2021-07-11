@@ -20,7 +20,7 @@ const Courses = ({ title, courses }) => (
       <Swiper
         slidesPerView={4}
         spaceBetween={30}
-        slidesPerGroup={4}
+        slidesPerGroup={2}
         loop={true}
         loopFillGroupWithBlank={true}
         pagination={{

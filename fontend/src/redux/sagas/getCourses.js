@@ -6,7 +6,7 @@ import { setCourse, fetchCourseFail } from '../actions/course';
 function* fetchCourse() {
     try {
         const response = yield call(axios.get, 'http://localhost:5050/courses');
-        console.log(response.data);
+        // console.log(response.data);
         yield put(setCourse(response.data));
     } catch (error) {
         yield put(fetchCourseFail(error.message));
