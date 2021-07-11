@@ -49,7 +49,7 @@ function* watchSetConfirmPassword() {
 
 function* requestSubmitSignUpForm(action) {
   //validate entire form
-  //action.payload = signUpState
+  //action.payload = sign up form state
   const validateResult = yield call(
     validateAccount.validateEntireSignUpForm, action.payload);
 

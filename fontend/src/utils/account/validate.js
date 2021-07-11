@@ -38,8 +38,22 @@ export const confirmPassword = (data) => {
 
 export const validatePassword = (password) => {
   let result = {};
-  result = password ? { warningMessage: '', data: password }
-    : { warningMessage: 'Please enter a password!' }
+  if (!password) {
+    result = { warningMessage: 'Please enter a password!' };
+  } else {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    let isValidPassword = regex.test(String(password).toLowerCase());
+    console.log('valid pass', isValidPassword);
+
+    result = isValidPassword ? { warningMessage: '', data: password }
+      : {
+        warningMessage: `Minimum eight characters,
+       at least one uppercase letter, 
+       one lowercase letter and one number`,
+       data: password
+      };
+  }
+
   return result;
 }
 
@@ -108,4 +122,40 @@ export const validateVerifyCode = (code) => {
     : { warningMessage: 'Please enter the code!' }
 
   return result;
+}
+
+export const validateEntireVerifyCodeForm = (verifyCodeFormState) => {
+
+  let isSubmit = true;
+  let newFormState = { ...verifyCodeFormState };
+
+  if (newFormState.code === 0 &&
+    newFormState.warningMessage === '') {
+    console.log('hahaha');
+    isSubmit = false;
+    newFormState.warningMessage = 'Please enter a verify code';
+  }
+
+  if (isSubmit) {
+    if (newFormState.code !== 0 &&
+      newFormState.warningMessage === '') {
+      return {
+        isSubmit,
+        dataToSubmit: {
+          code: newFormState.code
+        }
+      }
+    } else {
+      isSubmit = false;
+      return {
+        isSubmit,
+        newFormState
+      }
+    }
+  } else {
+    return {
+      isSubmit,
+      newFormState
+    }
+  }
 }

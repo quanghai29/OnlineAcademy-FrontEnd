@@ -24,7 +24,12 @@ export default function InputValue(props) {
         value={inputReducer.form[props.name]}
         onChange={(e) => handleOnchange(e)}
         className={styles['input-ele']}
-        style={{ border: props.warningMess ? 'solid 1px red' : '' }}
+        ref={element => { 
+          if (element && props.warningMess){
+            element.style.setProperty('border', 'solid 1px red', 'important');
+            element.style.setProperty('box-shadow', 'none', 'important');
+          }
+        }}
       />
     </div>
   )

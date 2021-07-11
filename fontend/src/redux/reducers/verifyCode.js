@@ -31,6 +31,7 @@ const verifyCodeReducer = (state = initialState, action)=>{
       return newState;
     }
     case SET_ENTIRE_VERIFY_CODE_FORM_STATE:{
+      console.log('verify reducer form', action.payload);
       let newState = {...state};
       newState.form = {...action.payload};
 

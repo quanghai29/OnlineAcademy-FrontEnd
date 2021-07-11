@@ -55,14 +55,14 @@ export default function SignUp() {
     }
   ]
 
-  useEffect(()=>{
-    if(!signUpState.isExist){
+  useEffect(() => {
+    if (!signUpState.isExist) {
       history.push('/verify-code');
     }
   }, [signUpState.isExist, history]);
-  
+
   function submitSignupForm() {
-    dispatch({type: SUBMIT_SIGNUP_FORM, payload: signUpState.form});
+    dispatch({ type: SUBMIT_SIGNUP_FORM, payload: signUpState.form });
   }
 
   return (
@@ -89,7 +89,8 @@ export default function SignUp() {
             }
             <div className="small-text">
               <span>Already have an account?</span>
-              <Link to='/sign-in'> Sign In</Link>
+              <Link to='/log-in'>
+                Log In</Link>
             </div>
             <ActionButton style={{ marginTop: "50px" }}
               action="Sign Up"
@@ -97,7 +98,7 @@ export default function SignUp() {
             />
           </form>
         </div>
-        <img className="bottom-img"src={bottomImg} alt=""></img>
+        <img className="bottom-img" src={bottomImg} alt=""></img>
       </div>
       <div className="container__right-side"></div>
     </div>

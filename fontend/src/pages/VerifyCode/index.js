@@ -14,7 +14,7 @@ export default function VerifyCode() {
   const dispatch = useDispatch();
   const history = useHistory();
   const verifyCodeState = { ...state.verifyCodeReducer };
-  console.log('verify code', verifyCodeState);
+  //console.log('verify code', verifyCodeState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
@@ -24,7 +24,7 @@ export default function VerifyCode() {
   function submitVerifyCodeForm() {
     dispatch({
       type: SUBMIT_VERIFY_CODE_FORM,
-      payload: {code: verifyCodeState.code}
+      payload: {...verifyCodeState.form}
     })
   }
 
@@ -41,7 +41,7 @@ export default function VerifyCode() {
               style={{ marginBottom: "15px" }}
               name="verifyCode"
               actionType={VALIDATE_CODE}
-              warningMess={verifyCodeState.warningMessage}
+              warningMess={verifyCodeState.form.warningMessage}
               reducer='verifyCodeReducer'
             />
             <div className="small-text">
