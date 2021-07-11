@@ -1,6 +1,6 @@
 import React from "react";
-import classes from './CourseDetail.module.scss';
-import Avartar from '../../Common/Avartar';
+import classes from './style.module.scss';
+import Avartar from '../../../Common/Avartar';
 
 export default function Overview() {
 
@@ -10,7 +10,7 @@ export default function Overview() {
         <div className={`card ${classes.mycard}`}>
           <div className="card-content dark-text">
             <span className={`card-title center-align ${classes.headText}`}>Giảng viên</span>
-            <div className= "section">
+            <div className= "section center-align">
               <Avartar nickName="Tuyết Trinh"/>
               <h6 className={`center-align ${classes.darkfontheader}`}>Tuyết trinh</h6>
             </div>

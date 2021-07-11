@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import classes from './CourseDetail.module.scss';
+import classes from './style.module.scss';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import Overview from './Overview';
-import Content from './Content';
+import Overview from './Overview/index';
+import Content from './Content/index';
+import Feedback from './Feedback/index';
 
 export default function VideoPlayer() {
 
@@ -21,7 +22,7 @@ export default function VideoPlayer() {
         <ul id="tabs-swipe-video" className={`tabs ${classes.containnercommon}`}>
           <li className="tab col s4"><a href="#overview">Tổng Quan</a></li>
           <li className="tab col s4"><a href="#content">Nội dung</a></li>
-          <li className="tab col s4"><a href="#test-swipe-3">Đánh giá</a></li>
+          <li className="tab col s4"><a href="#feedback">Đánh giá</a></li>
         </ul>
       </div>
       <div id="overview" className="col s12">
@@ -34,7 +35,11 @@ export default function VideoPlayer() {
           <Content />
         </div>
       </div>
-      <div id="test-swipe-3" className="col s12 green">Test 3</div>
+      <div id="feedback" className="col s12">
+        <div className="section">
+          <Feedback/>
+        </div>
+      </div>
     </div>
   )
 };

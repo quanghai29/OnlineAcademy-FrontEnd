@@ -14,3 +14,10 @@ body {
 
 $primaryBg: linear-gradient(to right,#FF8A00, #FFC000 );
 $primaryColor: #FF8A00;
+
+//define media queries screen
+$small-and-down : 600px; // max-width
+$medium-and-up: 992px; // min-width
+$medium-and-down: 992px; //max-width
+$large-and-up: 993px ; // min-witdth
+$extra-large-and-up: 1200px ; //min-width

@@ -28,9 +28,51 @@
   background: -webkit-linear-gradient(253.58deg, #FFC000 1.55%, #FF8A00 95.8%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
+  margin: 0;
 }
 
 /*Specalize*/
 .mycard {
   border-radius: 10px !important;
 }
+
+.navnostyle{
+  background-color: transparent;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+li{
+  h6{
+    @extend .headText;
+  }
+}
+
+li{
+  p{
+    @extend .darkfonttext;
+  }
+
+  i{
+    color: #5C5C5C;
+    margin: 0 2px;
+  }
+
+  a{
+    color:#5C5C5C !important;
+    background-color: transparent !important;
+  }
+
+  a:hover{
+    color:#007791 !important;
+    background-color: transparent !important;
+  }
+
+  a.actived{
+    color:#007791 !important;
+    background-color: transparent !important;
+  }
+
+}
+
