@@ -3,8 +3,6 @@ import ActionButton from "../../components/Account/ActionButton"
 import InputValue from "../../components/Account/InputValue"
 import HeaderForm from "../../components/Account/HeaderForm"
 import '../../styles/account.scss'
-// import bottomImg from '../../../public/assets/images/account/bottom_img.png'
-// import topImg from '../../../public/assets/images/account/top_img.png'
 import { Link } from "react-router-dom"
 
 export default function SignIn() {
