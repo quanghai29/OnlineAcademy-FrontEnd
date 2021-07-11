@@ -1,9 +1,16 @@
+import styles from './ActionButton.module.scss'
 
-import './style.scss'
+export default function ActionButton(props) {
+  function handleOnClick(e){
+    e.preventDefault();
+    props.onClickActionButton();
+  }
 
-export default function ActionButton(props){
-
-  return(
-    <button style={props.style}>{props.action}</button>
+  return (
+    <button style={props.style} 
+     onClick={handleOnClick}
+     className = {styles['button-ele']}>
+      {props.action}
+    </button>
   )
 }

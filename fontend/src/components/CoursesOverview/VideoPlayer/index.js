@@ -1,17 +1,17 @@
 import React from "react";
 import classes from './VideoPlayer.module.scss';
+import ReactPlayer from 'react-player';
 
 export default function VideoPlayer() {
-
+  const configReactPlayer = {
+    className : 'react-player',
+    url :'https://www.youtube.com/watch?v=ysz5S6PUM-U',
+    width : '100%',
+    height: '100%'
+  };
   return (
-    <div className={`row ${classes.noplacearound}`}>
-      <div className={`card ${classes.layoutvideo}`}>
-        <div className="card-content white-text">
-          <div className="row">
-            <h6>Phát triển ứng dụng web</h6>
-          </div>
-        </div>
-      </div>
+    <div className={classes.playerwrapper}>
+      <ReactPlayer {... configReactPlayer} />
     </div>
   )
 };

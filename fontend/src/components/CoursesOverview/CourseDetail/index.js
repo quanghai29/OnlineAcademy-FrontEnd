@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import classes from './CourseDetail.module.scss';
+import classes from './style.module.scss';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import Overview from './Overview';
+import Overview from './Overview/index';
+import Content from './Content/index';
+import Feedback from './Feedback/index';
 
 export default function VideoPlayer() {
 
@@ -11,23 +13,33 @@ export default function VideoPlayer() {
 
   const initTabs = () => {
     const el = document.getElementById('tabs-swipe-video')
-    M.Tabs.init(el, { duration: 2000 });
+    M.Tabs.init(el, {});
   }
 
   return (
     <div className="row">
-      <div classname="col s12">
+      <div className="col s12" style={{padding:0}}>
         <ul id="tabs-swipe-video" className={`tabs ${classes.containnercommon}`}>
           <li className="tab col s4"><a href="#overview">Tổng Quan</a></li>
-          <li className="tab col s4"><a href="#test-swipe-2">Nội dung</a></li>
-          <li className="tab col s4"><a href="#test-swipe-3">Đánh giá</a></li>
+          <li className="tab col s4"><a href="#content">Nội dung</a></li>
+          <li className="tab col s4"><a href="#feedback">Đánh giá</a></li>
         </ul>
       </div>
       <div id="overview" className="col s12">
-        <Overview/>
+        <div className="section">
+          <Overview />
+        </div>
       </div>
-      <div id="test-swipe-2" className="col s12 red">Test 2</div>
-      <div id="test-swipe-3" className="col s12 green">Test 3</div>
+      <div id="content" className="col s12">
+        <div className="section">
+          <Content />
+        </div>
+      </div>
+      <div id="feedback" className="col s12">
+        <div className="section">
+          <Feedback/>
+        </div>
+      </div>
     </div>
   )
 };

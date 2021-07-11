@@ -169,7 +169,7 @@ router.get('/10-latest', async (req, res) => {
  */
 
 router.get('/10-mostview', async (req, res) => {
-  const ret = await courseService.getMostViewCourses(2);
+  const ret = await courseService.getMostViewCourses(10);
   res.status(ret.code).json(ret.data);
 });
 
@@ -188,7 +188,7 @@ router.get('/10-mostview', async (req, res) => {
  */
 
 router.get('/5-bestseller', async (req, res) => {
-  const ret = await courseService.getBestSellerCoursesByCategory(1, 2);
+  const ret = await courseService.getBestSellerCoursesByCategory(1, 10);
   res.status(ret.code).json(ret.data);
 });
 

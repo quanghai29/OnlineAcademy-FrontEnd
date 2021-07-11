@@ -12,7 +12,7 @@ const rfTokenSchema = require('../schema/rfToken.json');
 const router = express.Router();
 
 router.post('/', validate(loginSchema), async function (req, res) {
-  const ret = await accountService.getAccountByEmail(req.body.email);
+  const ret = await accountService.getAccountByUsername(req.body.username);
   const account = ret.data;
   if (account === null) {
     return res.json({

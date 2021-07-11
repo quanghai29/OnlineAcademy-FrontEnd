@@ -1,41 +1,38 @@
 @import '../../../styles/config';
 
-/*Common css*/
-.noplacearound{
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.nobackground{
-  background-color: transparent;
-}
-
-.containnertext{
-  font-family: Roboto !important;
-  font-style: normal !important;
-  font-weight: bold !important;
-  font-size: 15px !important;
-  color: #FFFFFF !important;
-  text-transform: none;
-}
-
-.containnercommon{
-  background: linear-gradient(253.58deg, #FFC000 1.55%, #FF8A00 95.8%);
-  box-shadow: 0px 12px 35px rgba(160, 121, 0, 0.2);
-  text-align: center;
-  li a{
-    @extend .containnertext;
-  }
-}
-
-/*special css*/
-
 .layoutvideo{
   background: rgba(0, 0, 0, 0.6) !important;
-  padding: 0 !important;
   margin: 0 !important;
 }
 
-.row {
-  @extend .noplacearound; 
+.playerwrapper{
+  @extend .layoutvideo;
+  position: relative;
+  width: 100%;
+
+  @media (max-width: $small-and-down) {
+    // styles for small screens and down
+
+  }
+  @media (min-width: $medium-and-up) {
+    // styles for medium screens and larger
+
+  }
+  @media (max-width: $medium-and-down) {
+    // styles for medium screens and down
+
+  }
+  @media (min-width: $large-and-up) {
+    // styles for large screens and up
+
+  }
+  @media (min-width: $extra-large-and-up) {
+    // styles for extra large screens and up
+    height: 540px;
+  }
+
 }
+
+
+
+
