@@ -15,6 +15,7 @@ export const validateEmail = (email) => {
   } else {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let isValidEmail = re.test(String(email).toLowerCase());
+  
     return isValidEmail ? { warningMessage: '', data: email }
       : { warningMessage: 'Email is invalid!', data: email }
   }
@@ -41,15 +42,14 @@ export const validatePassword = (password) => {
   if (!password) {
     result = { warningMessage: 'Please enter a password!' };
   } else {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    let isValidPassword = regex.test(String(password).toLowerCase());
-    console.log('valid pass', isValidPassword);
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    let isValidPassword = regex.test(password);
 
     result = isValidPassword ? { warningMessage: '', data: password }
       : {
-        warningMessage: `Minimum eight characters,
-       at least one uppercase letter, 
-       one lowercase letter and one number`,
+        warningMessage: `Minimum 8 characters,
+       at least 1 uppercase letter, 
+       1 lowercase letter and 1 number`,
        data: password
       };
   }
@@ -131,7 +131,6 @@ export const validateEntireVerifyCodeForm = (verifyCodeFormState) => {
 
   if (newFormState.code === 0 &&
     newFormState.warningMessage === '') {
-    console.log('hahaha');
     isSubmit = false;
     newFormState.warningMessage = 'Please enter a verify code';
   }

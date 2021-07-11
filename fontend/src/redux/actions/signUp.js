@@ -4,7 +4,8 @@ import {
   SET_PASSWORD,
   SET_CONFIRM_PASSWORD, 
   SET_SIGN_UP_RESPONSE, 
-  SET_ENTIRE_SIGN_UP_FORM_STATE
+  SET_ENTIRE_SIGN_UP_FORM_STATE,
+  RESET_SIGN_UP_FORM
 } from '../constants/actionTypes'
 
 export const setUsernameAction = (data)=>{
@@ -46,5 +47,11 @@ export const setEntireSignUpFormStateAction = (data)=>{
   return{
     type: SET_ENTIRE_SIGN_UP_FORM_STATE,
     payload: {...data}
+  }
+}
+
+export const resetSignUpForm = ()=>{
+  return {
+    type: RESET_SIGN_UP_FORM
   }
 }

@@ -10,8 +10,10 @@ import {
   VALIDATE_EMAIL,
   VALIDATE_PASSWORD,
   VALIDATE_CONFIRM_PASSWORD,
-  SUBMIT_SIGNUP_FORM
+  SUBMIT_SIGNUP_FORM,
+  REQUEST_RESET_SIGN_UP_FORM
 } from '../../redux/constants/actionTypes'
+import Swal from 'sweetalert2';
 
 
 export default function SignUp() {
@@ -19,7 +21,7 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const history = useHistory();
   const signUpState = { ...state.signUpReducer };
-  //console.log(signUpState);
+  console.log(signUpState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
@@ -56,10 +58,22 @@ export default function SignUp() {
   ]
 
   useEffect(() => {
-    if (!signUpState.isExist) {
-      history.push('/verify-code');
+    if (signUpState.response.code === 201) {
+      // dispatch({type: REQUEST_RESET_SIGN_UP_FORM});
+      // history.push('/verify-code');
+      Swal.fire({
+        icon: 'success',
+        title: 'Sign up successfully',
+        showConfirmButton: true,
+        allowOutsideClick: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch({ type: REQUEST_RESET_SIGN_UP_FORM });
+          history.push('/verify-code');
+        }
+      })
     }
-  }, [signUpState.isExist, history]);
+  }, [signUpState.response.code, history, dispatch]);
 
   function submitSignupForm() {
     dispatch({ type: SUBMIT_SIGNUP_FORM, payload: signUpState.form });

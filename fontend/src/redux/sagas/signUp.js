@@ -7,7 +7,8 @@ import {
   VALIDATE_EMAIL,
   VALIDATE_PASSWORD,
   VALIDATE_CONFIRM_PASSWORD,
-  SUBMIT_SIGNUP_FORM
+  SUBMIT_SIGNUP_FORM,
+  REQUEST_RESET_SIGN_UP_FORM
 } from '../constants/actionTypes'
 
 function* requestSetUsername(action) {
@@ -68,6 +69,14 @@ function* watchSubmitForm() {
   yield takeLatest(SUBMIT_SIGNUP_FORM, requestSubmitSignUpForm);
 }
 
+function* requestResetSignUpForm(){
+  yield put(signUpActions.resetSignUpForm());
+}
+function* watchResetSignUpForm(){
+  yield takeLatest(REQUEST_RESET_SIGN_UP_FORM, requestResetSignUpForm);
+}
+
+
 export default function* signUpSaga() {
   yield all([
     watchSetUsername(),
@@ -75,5 +84,6 @@ export default function* signUpSaga() {
     watchSetPassword(),
     watchSetConfirmPassword(),
     watchSubmitForm(),
+    watchResetSignUpForm()
   ])
 }

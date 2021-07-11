@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux'
-import styles from './InputValue.module.scss'
+import styles from './inputValue.module.scss'
+// import classNames from 'classnames';
+import classNames from 'classnames/bind';
 
 export default function InputValue(props) {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
   const inputReducer = { ...state[props.reducer] };
-  // console.log('input', accountState);
 
   function handleOnchange(e) {
     const data = props.name === 'confirmPassword' ? {
@@ -15,6 +16,16 @@ export default function InputValue(props) {
     dispatch({ type: props.actionType, payload: { data } })
   }
 
+  let cx = classNames.bind(styles);
+  let classes = cx({
+    'input-ele': true,
+    'border--warning': props.warningMess
+  })
+  // const classes = classNames({
+  //   'input-ele': true,
+  //   'border--warning': props.warningMess
+  // });
+ 
   return (
     <div className={props.class} style={props.style}>
       {props.warningMess && <span className={styles['span--warning']}>
@@ -23,13 +34,7 @@ export default function InputValue(props) {
         placeholder={props.placeholder}
         value={inputReducer.form[props.name]}
         onChange={(e) => handleOnchange(e)}
-        className={styles['input-ele']}
-        ref={element => { 
-          if (element && props.warningMess){
-            element.style.setProperty('border', 'solid 1px red', 'important');
-            element.style.setProperty('box-shadow', 'none', 'important');
-          }
-        }}
+        className={classes}
       />
     </div>
   )
