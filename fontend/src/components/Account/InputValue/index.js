@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import styles from './inputValue.module.scss'
+import styles from './InputValue.module.scss'
 // import classNames from 'classnames';
 import classNames from 'classnames/bind';
 
