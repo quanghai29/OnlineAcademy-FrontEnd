@@ -7,6 +7,7 @@ import VerifyCode from './pages/VerifyCode';
 import ForgotPassword from './pages/ForgotPassword';
 import CourseOverview from './pages/CourseOverview';
 import HomeLecturer from './pages/Lecturer/Home';
+import UpdateCourse from './pages/Lecturer/UpdateCourse';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/verify-code" component={VerifyCode}/>
         <Route path="/forgot-password" component={ForgotPassword}/>
         <Route path="/lecturer" component={HomeLecturer} />
+        <Route path="/update-course" component={UpdateCourse} />
         <Route path="/course-overview">
           <CourseOverview />
         </Route>
