@@ -57,6 +57,7 @@ export default function LogIn() {
                     actionType={item.actionType}
                     warningMess={item.warningMess}
                     reducer="loginReducer"
+                    style={{marginBottom: index=== 0 ? '15px':''}}
                     key={index} />
                 )
               })
