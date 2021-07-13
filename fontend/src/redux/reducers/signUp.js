@@ -31,7 +31,7 @@ const signUpReducer = (state = initialState, action) => {
       let newState = { ...state };
       newState.form.username = action.payload.data || '';
       newState.form.usernameWarningMess
-        = action.payload.warningMessage || '';
+        = action.payload.warningMess || '';
 
       return newState;
     }
@@ -39,7 +39,7 @@ const signUpReducer = (state = initialState, action) => {
       let newState = { ...state };
       newState.form.email = action.payload.data || '';
       newState.form.emailWarningMess =
-        action.payload.warningMessage || '';
+        action.payload.warningMess || '';
 
       return newState;
     }
@@ -47,7 +47,7 @@ const signUpReducer = (state = initialState, action) => {
       let newState = { ...state };
       newState.form.password = action.payload.data || '';
       newState.form.passwordWarningMess =
-        action.payload.warningMessage || '';
+        action.payload.warningMess || '';
 
       return newState;
     }
@@ -55,7 +55,7 @@ const signUpReducer = (state = initialState, action) => {
       let newState = { ...state };
       newState.form.confirmPassword = action.payload.data || '';
       newState.form.confirmPasswordWarningMess =
-        action.payload.warningMessage || '';
+        action.payload.warningMess || '';
 
       return newState
     }

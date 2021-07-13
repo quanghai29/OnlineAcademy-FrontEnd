@@ -4,11 +4,42 @@ import InputValue from "../../components/Account/InputValue"
 import HeaderForm from "../../components/Account/HeaderForm"
 import '../../styles/account.scss'
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  VALIDATE_USERNAME,
+  VALIDATE_PASSWORD,
+  SUBMIT_LOG_IN_FORM
+} from "../../redux/constants/actionTypes"
 
-export default function SignIn() {
+export default function LogIn() {
+  const loginState = useSelector(state => state.loginReducer)
+  const dispatch = useDispatch();
+  console.log(loginState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
+
+  const inputValueData = [
+    {
+      type: 'text',
+      placeholder: 'Username',
+      name: 'username',
+      actionType: VALIDATE_USERNAME,
+      warningMess: loginState.form.usernameWarningMess
+    },
+    {
+      type: 'password',
+      placeholder: 'Password',
+      name: 'password',
+      actionType: VALIDATE_PASSWORD,
+      warningMess: loginState.form.passwordWarningMess
+    }
+  ]
+
+  function submitLoginForm(){
+    dispatch({type: SUBMIT_LOG_IN_FORM, payload:{...loginState.form}})
+  }
+
   return (
     <div className="account__container">
       <div className="container__left-side">
@@ -17,17 +48,28 @@ export default function SignIn() {
           <form>
             <HeaderForm class="form-header"
               spanValue="Sign in to your account to continue" />
-            <InputValue type="text" placeholder="Username"
-              style={{ marginBottom: "15px" }} />
-            <InputValue type="password" placeholder="Password"
-              style={{ marginBottom: "10px" }} />
+
+            {
+              inputValueData.map((item, index) => {
+                return (
+                  <InputValue placeholder={item.placeholder}
+                    name={item.name} type={item.type}
+                    actionType={item.actionType}
+                    warningMess={item.warningMess}
+                    reducer="loginReducer"
+                    key={index} />
+                )
+              })
+            }
             <div className="small-text">
               <Link to='/forgot-password'>Forgot password?</Link>
             </div>
-            <ActionButton style={{marginTop: "50px"}} action="Sign in" />
-            <div className="small-text" style={{marginTop: "10px"}}>
+            <ActionButton style={{ marginTop: "50px" }} action="Log in"
+            onClickActionButton={submitLoginForm}
+            />
+            <div className="small-text" style={{ marginTop: "10px" }}>
               <span>Don't have an account?</span>
-              <Link to='/sign-up'> Sign Up</Link>
+              <Link to='/signup'> Sign Up</Link>
             </div>
           </form>
         </div>

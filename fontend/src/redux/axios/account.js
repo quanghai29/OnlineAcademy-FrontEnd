@@ -8,7 +8,7 @@ export async function submitSignUpForm(data) {
 
   return await instance.post('/account/signup', data).then(res => {
     localStorage.setItem('otpToken', res.data.otpToken);
-    console.log('res sign up', res.data);
+    //console.log('res sign up', res.data);
     return res.data;
   });
 }

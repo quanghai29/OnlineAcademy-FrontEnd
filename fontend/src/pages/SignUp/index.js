@@ -21,7 +21,7 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const history = useHistory();
   const signUpState = { ...state.signUpReducer };
-  console.log(signUpState);
+  //console.log(signUpState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
@@ -59,8 +59,6 @@ export default function SignUp() {
 
   useEffect(() => {
     if (signUpState.response.code === 201) {
-      // dispatch({type: REQUEST_RESET_SIGN_UP_FORM});
-      // history.push('/verify-code');
       Swal.fire({
         icon: 'success',
         title: 'Sign up successfully',
@@ -103,7 +101,7 @@ export default function SignUp() {
             }
             <div className="small-text">
               <span>Already have an account?</span>
-              <Link to='/log-in'>
+              <Link to='/login'>
                 Log In</Link>
             </div>
             <ActionButton style={{ marginTop: "50px" }}

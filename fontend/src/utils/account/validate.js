@@ -1,35 +1,35 @@
 
 export const validateUsername = (username) => {
   let result = {};
-  result = username ? { warningMessage: '', data: username }
-    : { warningMessage: 'Please enter a valid full name!' }
+  result = username ? { warningMess: '', data: username }
+    : { warningMess: 'Please enter a valid full name!' }
   return result;
 }
 
 export const validateEmail = (email) => {
   if (email === "") {
     return {
-      warningMessage: 'Please enter a valid email!',
+      warningMess: 'Please enter a valid email!',
       data: ''
     }
   } else {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let isValidEmail = re.test(String(email).toLowerCase());
-  
-    return isValidEmail ? { warningMessage: '', data: email }
-      : { warningMessage: 'Email is invalid!', data: email }
+
+    return isValidEmail ? { warningMess: '', data: email }
+      : { warningMess: 'Email is invalid!', data: email }
   }
 }
 
 export const confirmPassword = (data) => {
   let result = {};
   if (data.confirmPassword === '') {
-    result.warningMessage = 'Please enter the password again!';
+    result.warningMess = 'Please enter the password again!';
   } else {
     if (data.password !== data.confirmPassword) {
-      result.warningMessage = 'The password is not corresponding';
+      result.warningMess = 'The password is not corresponding';
     } else {
-      result.warningMessage = '';
+      result.warningMess = '';
     }
   }
 
@@ -40,17 +40,17 @@ export const confirmPassword = (data) => {
 export const validatePassword = (password) => {
   let result = {};
   if (!password) {
-    result = { warningMessage: 'Please enter a password!' };
+    result = { warningMess: 'Please enter a password!' };
   } else {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     let isValidPassword = regex.test(password);
 
-    result = isValidPassword ? { warningMessage: '', data: password }
+    result = isValidPassword ? { warningMess: '', data: password }
       : {
-        warningMessage: `Minimum 8 characters,
+        warningMess: `Minimum 8 characters,
        at least 1 uppercase letter, 
        1 lowercase letter and 1 number`,
-       data: password
+        data: password
       };
   }
 
@@ -118,8 +118,8 @@ export const validateEntireSignUpForm = (signUpFormState) => {
 
 export const validateVerifyCode = (code) => {
   let result = {};
-  result = code ? { warningMessage: '', data: code }
-    : { warningMessage: 'Please enter the code!' }
+  result = code ? { warningMess: '', data: code }
+    : { warningMess: 'Please enter the code!' }
 
   return result;
 }
@@ -130,20 +130,57 @@ export const validateEntireVerifyCodeForm = (verifyCodeFormState) => {
   let newFormState = { ...verifyCodeFormState };
 
   if (newFormState.code === 0 &&
-    newFormState.warningMessage === '') {
+    newFormState.warningMess === '') {
     isSubmit = false;
-    newFormState.warningMessage = 'Please enter a verify code';
+    newFormState.warningMess = 'Please enter a verify code';
   }
 
   if (isSubmit) {
     if (newFormState.code !== 0 &&
-      newFormState.warningMessage === '') {
+      newFormState.warningMess === '') {
       return {
         isSubmit,
         dataToSubmit: {
           code: newFormState.code
         }
       }
+    } else {
+      isSubmit = false;
+      return {
+        isSubmit,
+        newFormState
+      }
+    }
+  } else {
+    return {
+      isSubmit,
+      newFormState
+    }
+  }
+}
+
+export const validateEntireLoginForm = (loginForm) => {
+  let isSubmit = true;
+  let newFormState = { ...loginForm };
+
+  if (newFormState.username === '' && newFormState.usernameWarningMess === '') {
+    isSubmit = false;
+    newFormState.usernameWarningMess = 'Please enter your username';
+  }
+  if (newFormState.password === '' && newFormState.passwordWarningMess === '') {
+    isSubmit = false;
+    newFormState.passwordWarningMess = 'Please enter your password';
+  }
+
+  if (isSubmit) {
+    if ((newFormState.username !== '' && newFormState.password !== '') &&
+      (newFormState.usernameWarningMess === '' && newFormState.passwordWarningMess === '')) {
+        return{
+          dataToSubmit:{
+            username: newFormState.username,
+            password: newFormState.password
+          }
+        }
     } else {
       isSubmit = false;
       return {

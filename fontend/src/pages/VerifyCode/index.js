@@ -6,20 +6,39 @@ import '../../styles/account.scss'
 import { Link, useHistory } from "react-router-dom"
 import {
   VALIDATE_CODE,
-  SUBMIT_VERIFY_CODE_FORM
+  SUBMIT_VERIFY_CODE_FORM,
+  REQUEST_RESET_VERIFY_CODE_FORM
 } from '../../redux/constants/actionTypes'
+import Swal from 'sweetalert2';
+import { useEffect } from "react"
 
 export default function VerifyCode() {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
   const history = useHistory();
   const verifyCodeState = { ...state.verifyCodeReducer };
-  //console.log('verify code', verifyCodeState);
+  console.log('verify code', verifyCodeState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
   const spanValue = `Please check your email and then 
   enter OTP-code to active your account!`;
+
+  useEffect(()=>{
+    if(verifyCodeState.response.code === 200){
+      Swal.fire({
+        icon: 'success',
+        title: 'Your account is activated. Go to Log-in',
+        showConfirmButton: true,
+        allowOutsideClick: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch({ type: REQUEST_RESET_VERIFY_CODE_FORM });
+          history.push('/log-in');
+        }
+      })
+    }
+  }, [verifyCodeState.response.code, dispatch, history]);
 
   function submitVerifyCodeForm() {
     dispatch({
@@ -41,7 +60,7 @@ export default function VerifyCode() {
               style={{ marginBottom: "15px" }}
               name="verifyCode"
               actionType={VALIDATE_CODE}
-              warningMess={verifyCodeState.form.warningMessage}
+              warningMess={verifyCodeState.form.warningMess}
               reducer='verifyCodeReducer'
             />
             <div className="small-text">
