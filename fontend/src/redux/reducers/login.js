@@ -1,6 +1,6 @@
 import {
-  SET_USERNAME,
-  SET_PASSWORD,
+  SET_LOG_IN_USERNAME,
+  SET_LOG_IN_PASSWORD,
   RESET_LOG_IN_FORM,
   SET_ENTIRE_LOG_IN_FORM_STATE
 } from "../constants/actionTypes"
@@ -17,15 +17,15 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_USERNAME: {
-      console.log('login reducer', action.payload);
+    case SET_LOG_IN_USERNAME: {
+      //console.log('login reducer', action.payload);
       let newState = { ...state };
       newState.form.username = action.payload.data || '';
       newState.form.usernameWarningMess = action.payload.warningMess || '';
 
       return newState;
     }
-    case SET_PASSWORD: {
+    case SET_LOG_IN_PASSWORD: {
       let newState = { ...state };
       newState.form.password = action.payload.data || '';
       newState.form.passwordWarningMess = action.payload.warningMess || '';

@@ -6,28 +6,28 @@ import {
   validateEntireLoginForm
 } from '../../utils/account/validate'
 import {
-  VALIDATE_USERNAME,
-  VALIDATE_PASSWORD,
+  VALIDATE_LOG_IN_USERNAME,
+  VALIDATE_LOG_IN_PASSWORD,
   SUBMIT_LOG_IN_FORM
 } from "../constants/actionTypes"
 
 function* requestSetUsername(action) {
   const validateResult = yield call(validateUsername,
     action.payload.data);
-  yield put(loginActions.setUsername(validateResult));
+  yield put(loginActions.setLoginUsername(validateResult));
 }
 
 function* watchSetUsername() {
-  yield takeLatest(VALIDATE_USERNAME, requestSetUsername);
+  yield takeLatest(VALIDATE_LOG_IN_USERNAME, requestSetUsername);
 }
 
 function* requestSetPassword(action) {
   const validateResult = yield call(validatePassword,
     action.payload.data);
-  yield put(loginActions.setPassword(validateResult));
+  yield put(loginActions.setLoginPassword(validateResult));
 }
 function* watchSetPassword() {
-  yield takeLatest(VALIDATE_PASSWORD, requestSetPassword);
+  yield takeLatest(VALIDATE_LOG_IN_PASSWORD, requestSetPassword);
 }
 
 function* requestSetEntireLoginForm(action) {

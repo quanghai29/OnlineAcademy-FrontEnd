@@ -6,8 +6,8 @@ import '../../styles/account.scss'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import {
-  VALIDATE_USERNAME,
-  VALIDATE_PASSWORD,
+  VALIDATE_LOG_IN_USERNAME,
+  VALIDATE_LOG_IN_PASSWORD,
   SUBMIT_LOG_IN_FORM
 } from "../../redux/constants/actionTypes"
 
@@ -24,14 +24,14 @@ export default function LogIn() {
       type: 'text',
       placeholder: 'Username',
       name: 'username',
-      actionType: VALIDATE_USERNAME,
+      actionType: VALIDATE_LOG_IN_USERNAME,
       warningMess: loginState.form.usernameWarningMess
     },
     {
       type: 'password',
       placeholder: 'Password',
       name: 'password',
-      actionType: VALIDATE_PASSWORD,
+      actionType: VALIDATE_LOG_IN_PASSWORD,
       warningMess: loginState.form.passwordWarningMess
     }
   ]
@@ -47,7 +47,7 @@ export default function LogIn() {
         <div className="container-form">
           <form>
             <HeaderForm class="form-header"
-              spanValue="Sign in to your account to continue" />
+              spanValue="Log in to your account to continue" />
 
             {
               inputValueData.map((item, index) => {

@@ -24,17 +24,17 @@ export default function VerifyCode() {
   const spanValue = `Please check your email and then 
   enter OTP-code to active your account!`;
 
-  useEffect(()=>{
-    if(verifyCodeState.response.code === 200){
+  useEffect(() => {
+    if (verifyCodeState.response.code === 200) {
       Swal.fire({
         icon: 'success',
-        title: 'Your account is activated. Go to Log-in',
+        title: 'Your account is activated!',
         showConfirmButton: true,
         allowOutsideClick: false
       }).then((result) => {
         if (result.isConfirmed) {
           dispatch({ type: REQUEST_RESET_VERIFY_CODE_FORM });
-          history.push('/log-in');
+          history.push('/login');
         }
       })
     }
@@ -43,7 +43,7 @@ export default function VerifyCode() {
   function submitVerifyCodeForm() {
     dispatch({
       type: SUBMIT_VERIFY_CODE_FORM,
-      payload: {...verifyCodeState.form}
+      payload: { ...verifyCodeState.form }
     })
   }
 
@@ -65,7 +65,7 @@ export default function VerifyCode() {
             />
             <div className="small-text">
               <span>Don’t have an account?</span>
-              <Link to='/sign-up'> Sign Up</Link>
+              <Link to='/signup'> Sign Up</Link>
             </div>
             <ActionButton style={{ marginTop: "50px" }} action="Send"
               onClickActionButton={submitVerifyCodeForm} />

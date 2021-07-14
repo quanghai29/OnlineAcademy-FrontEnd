@@ -6,9 +6,9 @@ import '../../styles/account.scss'
 import { Link, useHistory } from "react-router-dom"
 import { useEffect } from "react"
 import {
-  VALIDATE_USERNAME,
+  VALIDATE_SIGN_UP_USERNAME,
   VALIDATE_EMAIL,
-  VALIDATE_PASSWORD,
+  VALIDATE_SIGN_UP_PASSWORD,
   VALIDATE_CONFIRM_PASSWORD,
   SUBMIT_SIGNUP_FORM,
   REQUEST_RESET_SIGN_UP_FORM
@@ -31,7 +31,7 @@ export default function SignUp() {
       type: 'text',
       placeholder: 'Username',
       name: 'username',
-      actionType: VALIDATE_USERNAME,
+      actionType: VALIDATE_SIGN_UP_USERNAME,
       warningMess: signUpState.form.usernameWarningMess
     },
     {
@@ -45,7 +45,7 @@ export default function SignUp() {
       type: 'password',
       placeholder: 'Password',
       name: 'password',
-      actionType: VALIDATE_PASSWORD,
+      actionType: VALIDATE_SIGN_UP_PASSWORD,
       warningMess: signUpState.form.passwordWarningMess
     },
     {

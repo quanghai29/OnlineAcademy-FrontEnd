@@ -3,9 +3,9 @@ import * as signUpActions from '../actions/signUp.js'
 import * as validateAccount from '../../utils/account/validate'
 import * as accountCallApi from '../axios/account'
 import {
-  VALIDATE_USERNAME,
+  VALIDATE_SIGN_UP_USERNAME,
   VALIDATE_EMAIL,
-  VALIDATE_PASSWORD,
+  VALIDATE_SIGN_UP_PASSWORD,
   VALIDATE_CONFIRM_PASSWORD,
   SUBMIT_SIGNUP_FORM,
   REQUEST_RESET_SIGN_UP_FORM
@@ -14,10 +14,10 @@ import {
 function* requestSetUsername(action) {
   const data = yield call(validateAccount.validateUsername,
     action.payload.data);
-  yield put(signUpActions.setUsernameAction(data));
+  yield put(signUpActions.setSignUpUsernameAction(data));
 }
 function* watchSetUsername() {
-  yield takeLatest(VALIDATE_USERNAME, requestSetUsername);
+  yield takeLatest(VALIDATE_SIGN_UP_USERNAME, requestSetUsername);
 }
 
 function* requestSetEmail(action) {
@@ -32,10 +32,10 @@ function* watchSetEmail() {
 function* requestSetPassword(action) {
   const data = yield call(validateAccount.validatePassword,
     action.payload.data)
-  yield put(signUpActions.setPasswordAction(data));
+  yield put(signUpActions.setSignUpPasswordAction(data));
 }
 function* watchSetPassword() {
-  yield takeLatest(VALIDATE_PASSWORD, requestSetPassword);
+  yield takeLatest(VALIDATE_SIGN_UP_PASSWORD, requestSetPassword);
 }
 
 function* requestSetConfirmPassword(action) {
@@ -58,7 +58,7 @@ function* requestSubmitSignUpForm(action) {
     //call Api
     const res = yield call(accountCallApi.submitSignUpForm,
       validateResult.dataToSubmit);
-    yield put(signUpActions.setResponseAction(res));
+    yield put(signUpActions.setSignUpResponseAction(res));
   } else {
     yield put(signUpActions.setEntireSignUpFormStateAction(
       validateResult.newSignUpFormState));
