@@ -28,7 +28,6 @@ const initialState = {
 const signUpReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SIGN_UP_USERNAME: {
-      //console.log('sign up reducer', action.payload);
       let newState = { ...state };
       newState.form.username = action.payload.data || '';
       newState.form.usernameWarningMess
