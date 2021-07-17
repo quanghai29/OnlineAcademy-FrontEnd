@@ -24,6 +24,7 @@ export default function InputValue(props) {
         onChange={(e) => handleOnchange(e)}
         className={`${styles['input-ele']}
         ${props.warningMess? styles['border--warning']: ''}`}
+        autoComplete={props.type === "password"? "current-password":"none"}
       />
     </div>
   )

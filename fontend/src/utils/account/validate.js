@@ -176,6 +176,7 @@ export const validateEntireLoginForm = (loginForm) => {
     if ((newFormState.username !== '' && newFormState.password !== '') &&
       (newFormState.usernameWarningMess === '' && newFormState.passwordWarningMess === '')) {
         return{
+          isSubmit,
           dataToSubmit:{
             username: newFormState.username,
             password: newFormState.password

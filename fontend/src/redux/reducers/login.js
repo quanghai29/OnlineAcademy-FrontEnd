@@ -2,7 +2,9 @@ import {
   SET_LOG_IN_USERNAME,
   SET_LOG_IN_PASSWORD,
   RESET_LOG_IN_FORM,
-  SET_ENTIRE_LOG_IN_FORM_STATE
+  SET_ENTIRE_LOG_IN_FORM_STATE,
+  SET_LOG_IN_RESPONSE, 
+  RESET_RESPONSE_DATA
 } from "../constants/actionTypes"
 
 const initialState = {
@@ -12,13 +14,19 @@ const initialState = {
 
     usernameWarningMess: '',
     passwordWarningMess: ''
+  },
+
+  responseData:{
+    isAuth: false,
+    username: '',
+    email: '',
+    shouldConfirmEmail: false
   }
 }
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_LOG_IN_USERNAME: {
-      //console.log('login reducer', action.payload);
       let newState = { ...state };
       newState.form.username = action.payload.data || '';
       newState.form.usernameWarningMess = action.payload.warningMess || '';
@@ -38,11 +46,25 @@ const loginReducer = (state = initialState, action) => {
 
       return newState;
     }
+    case SET_LOG_IN_RESPONSE: {
+      let newState = {...state};
+      newState.responseData={...action.payload};
+
+      return newState;
+    }
     case RESET_LOG_IN_FORM: {
       let newState = { ...state };
       newState.form.username = newState.form.password =
         newState.form.usernameWarningMess =
         newState.form.passwordWarningMess = '';
+
+      return newState;
+    }
+    case RESET_RESPONSE_DATA:{
+      let newState = {...state};
+      newState.responseData.isAuth= 
+      newState.responseData.shouldConfirmEmail=false;
+      newState.responseData.email=newState.responseData.username = '';
 
       return newState;
     }

@@ -8,8 +8,13 @@ import {
 import {
   VALIDATE_LOG_IN_USERNAME,
   VALIDATE_LOG_IN_PASSWORD,
-  SUBMIT_LOG_IN_FORM
+  SUBMIT_LOG_IN_FORM,
+  REQUEST_ACTIVE_ACCOUNT,
 } from "../constants/actionTypes"
+import{
+  submitLoginForm,
+  activeAccount
+} from "../axios/account"
 
 function* requestSetUsername(action) {
   const validateResult = yield call(validateUsername,
@@ -34,10 +39,13 @@ function* requestSetEntireLoginForm(action) {
   //validate entire form before submit
   const validateResult = yield call(validateEntireLoginForm,
     action.payload);
-    console.log('login saga', validateResult);
   if (validateResult.isSubmit) {
     //call Api submit form
-
+    const resData = yield call(submitLoginForm, validateResult.dataToSubmit);
+    yield put(loginActions.setLoginResponse(resData));
+    if(resData.isAuth){
+      yield put(loginActions.resetLoginForm());
+    }
   } else {
     yield put(loginActions.setEntireLoginForm(validateResult.newFormState));
   }
@@ -46,11 +54,20 @@ function* watchSetEntireLoginForm(){
   yield takeLatest(SUBMIT_LOG_IN_FORM, requestSetEntireLoginForm);
 }
 
+function* requestActiveAccount(action){
+  yield call(activeAccount, action.payload.email);
+  yield put(loginActions.resetResponseData());
+  yield put(loginActions.resetLoginForm());
+}
+function* watchRequestActiveAccount(){
+  yield takeLatest(REQUEST_ACTIVE_ACCOUNT, requestActiveAccount);
+}
 
 export default function* loginSaga() {
   yield all([
     watchSetUsername(),
     watchSetPassword(),
     watchSetEntireLoginForm(),
+    watchRequestActiveAccount(),
   ])
 }

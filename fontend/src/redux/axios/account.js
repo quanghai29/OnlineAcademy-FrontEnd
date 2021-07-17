@@ -31,18 +31,18 @@ export async function submitVerifyCodeForm(data) {
           inputPlaceholder: 'Enter your email address'
         })
         if (email) {
-          try{
+          try {
             await instance.post('/account/resend-code', { email }).then(
               res => {
-                console.log('res', res);
+                //console.log('res', res);
                 res.data.otpToken && localStorage.setItem(
                   'otpToken', res.data.otpToken);
               }
             )
             Swal.fire(`We sent code to address: ${email}`);
-            
-          }catch(err){
-            if(err.response.status===404){
+
+          } catch (err) {
+            if (err.response.status === 404) {
               Swal.fire(`Not found: ${email}`);
             }
           }
@@ -57,4 +57,39 @@ export async function submitVerifyCodeForm(data) {
     }
   }
 
+}
+
+export async function submitLoginForm(data) {
+  try {
+    const response = await instance.post('/auth', data);
+    //console.log(response.data);
+    if (!response.data.shouldConfirmEmail) {
+      if (response.data.authenticated) {
+        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('refreshToken', response.data.refreshToken);
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Username or password is not correct!',
+        })
+      }
+    }
+    return {
+      isAuth: response.data.authenticated,
+      username: response.data.username || '',
+      email: response.data.email || '',
+      shouldConfirmEmail: response.data.shouldConfirmEmail
+    };
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function activeAccount(email) {
+  const responseData = await instance.post(
+    '/account/resend-code', { email })
+  //console.log(responseData);
+  responseData.data.otpToken && localStorage.setItem(
+    'otpToken', responseData.data.otpToken);
 }
