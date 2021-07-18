@@ -17,11 +17,9 @@ import Swal from 'sweetalert2';
 
 
 export default function SignUp() {
-  const state = useSelector(state => state);
+  const signUpState = useSelector(state => state.signUpReducer);
   const dispatch = useDispatch();
   const history = useHistory();
-  const signUpState = { ...state.signUpReducer };
-  //console.log(signUpState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
