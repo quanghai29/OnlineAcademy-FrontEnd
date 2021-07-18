@@ -52,3 +52,10 @@ export const FETCH_HOT_COURSES_FAILURE = 'FETCH_HOT_COURSES_FAILURE';
 export const FETCH_LECTURER_COURSES = 'FETCH_LECTURER_COURSES';
 export const SET_LECTURER_COURSES = 'SET_LECTURER_COURSES';
 export const FETCH_LECTURER_COURSES_FAILURE = 'FETCH_LECTURER_COURSES_FAILURE';
+
+
+// =================== Type Action Videos ==========================
+export const GET_INFO_VIDEOS ='GET_INFO_VIDEOS';
+export const LOAD_VIDEO ='LOAD_VIDEO';
+
+//===================================================================
