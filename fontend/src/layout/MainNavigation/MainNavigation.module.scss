@@ -65,9 +65,13 @@
       margin: 10px;
       font-weight: bold;
       transition: all 0.5s ease-in-out;
+      border-radius: 100px;
+      background: $primaryBg;
+      color: #fff;
+      border: none;
     }
     button:hover {
-      background: #fff;
+      background: rgb(218, 151, 27);
       color: black;
     }
   }

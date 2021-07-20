@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import Layout from '../../../layout/Layout';
 import CommonDescription from '../../../components/Lecturer/CommonDescription';
+import CourseImage from '../../../components/Lecturer/CourseImage';
 
 const UpdateCourse = () => {
   useEffect(function () {
@@ -33,12 +34,14 @@ const UpdateCourse = () => {
             </ul>
           </div>
           <div id="common-description" className="col s10 offset-s1">
-            <div className="section" style={{paddingTop: 50}}>
+            <div className="section" style={{ paddingTop: 50 }}>
               <CommonDescription />
             </div>
           </div>
           <div id="course-image" className="col s10 offset-s1">
-            Test 2
+            <div className="section" style={{ paddingTop: 50 }}>
+              <CourseImage />
+            </div>
           </div>
           <div id="detail-content" className="col s10 offset-s1">
             Test 4

@@ -3,7 +3,7 @@ import InputValue from "../../components/Account/InputValue"
 import HeaderForm from "../../components/Account/HeaderForm"
 import { useDispatch, useSelector } from "react-redux"
 import '../../styles/account.scss'
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import {
   VALIDATE_CODE,
   SUBMIT_VERIFY_CODE_FORM
@@ -12,7 +12,7 @@ import {
 export default function VerifyCode() {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const verifyCodeState = { ...state.verifyCodeReducer };
   //console.log('verify code', verifyCodeState);
 

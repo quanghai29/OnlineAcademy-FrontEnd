@@ -8,7 +8,7 @@ import {
   VALIDATE_CODE,
   SUBMIT_VERIFY_CODE_FORM
 } from '../constants/actionTypes';
-import { submitVerifyCodeForm } from '../axios/account'
+// import { submitVerifyCodeForm } from '../axios/account'
 
 function* requestSetCode(action) {
   const data = yield call(validateVerifyCode, +action.payload.data);
