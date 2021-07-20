@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom"
 export default function LogIn() {
   const loginState = useSelector(state => state.loginReducer)
   const dispatch = useDispatch();
-  //console.log('login page', loginState);
+  console.log('login page', loginState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';

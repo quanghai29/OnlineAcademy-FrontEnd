@@ -14,14 +14,7 @@ export default function ForgotPassword(){
         <img className="top-img" src={topImg} alt=""></img>
         <div className="container-form">
           <form>
-            <HeaderForm class="form-header"
-              spanValue="Please enter your email to receive OTP-code" />
-            <InputValue type="text" placeholder="Email address"
-              style={{ marginBottom: "15px" }} />
-            <div className="small-text">
-              <span>Don’t have an account?</span>
-              <Link to='/sign-up'> Sign Up</Link>
-            </div>
+            This is forgot password 
             <ActionButton style={{ marginTop: "50px" }} action="Send" />
           </form>
         </div>
