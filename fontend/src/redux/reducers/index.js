@@ -5,12 +5,13 @@ import verifyCodeReducer from './verifyCode';
 import hotCourses from './hotCourses';
 import coursesOfLecturer from './coursesOfLecturer';
 import loginReducer from './login';
-import videoReducer from './video';
+import videoLoader from './videoloader';
+import courseOverview from './courseOverview';
 
 export default combineReducers({
     courses,
     hotCourses,
     coursesOfLecturer,
     signUpReducer, verifyCodeReducer, loginReducer,
-    videoReducer
+    videoLoader, courseOverview
 });

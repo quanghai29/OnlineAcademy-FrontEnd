@@ -6,19 +6,12 @@ import Layout from '../../layout/Layout';
 import classes from './Home.module.scss';
 import Courses from '../../components/Courses';
 import Hero from '../../components/Hero';
-import { setVideoInfo } from '../../redux/actions/video';
 
 const Home = () => {
   const dispatch = useDispatch();
   const { courses, hotCourses } = useSelector((state) => state);
-  const videoReducer = useSelector((state)=>state.videoReducer);
-  
-  console.log('video state', videoReducer);
 
   useEffect(() => {
-    dispatch({
-      type: 'REQUEST_SET_VIDEO_INFO', 
-    })
     dispatch(fetchCourse());
     dispatch(fetchHotCourse());
     

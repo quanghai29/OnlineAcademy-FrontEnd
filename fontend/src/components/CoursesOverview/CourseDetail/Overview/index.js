@@ -2,7 +2,7 @@ import React from "react";
 import classes from './style.module.scss';
 import Avartar from '../../../Common/Avartar';
 
-export default function Overview() {
+export default function Overview(props) {
 
   return (
     <div className="row">
@@ -11,15 +11,12 @@ export default function Overview() {
           <div className="card-content dark-text">
             <span className={`card-title center-align ${classes.headText}`}>Giảng viên</span>
             <div className= "section center-align">
-              <Avartar nickName="Tuyết Trinh"/>
-              <h6 className={`center-align ${classes.darkfontheader}`}>Tuyết trinh</h6>
+              <Avartar imgSrc={props.lecturer_imgprofile} nickName={props.lecturer_name}/>
+              <h6 className={`center-align ${classes.darkfontheader}`}>{props.lecturer_name}</h6>
             </div>
-            <div className="section">
-              <p className={`center-align ${classes.darkfonttext}`}>
-                Drew Bridewell is a senior design specialist at InVision. 
-                He also teaches user experience design on a weekly basis 
-                to the community and also has piloted UX design programs for middle schools.
-              </p>
+            <div className="section center-align">
+              <p className={`center-align ${classes.darkfontheader}`}>{props.lecturer_headline}</p>
+              <p className={`center-align ${classes.darkfonttext}`}>{props.lecturer_description}</p>
             </div>
           </div>
         </div>
@@ -29,11 +26,7 @@ export default function Overview() {
           <div className="card-content dark-text">
             <span className={`card-title center-align ${classes.headText}`}>Mô tả chi tiết</span>
             <div className= "section">
-              <p className={`center-align ${classes.darkfonttext}`}>
-                Drew Bridewell is a senior design specialist at InVision. 
-                He also teaches user experience design on a weekly basis 
-                to the community and also has piloted UX design programs for middle schools.
-              </p>
+              <p className={`center-align ${classes.darkfonttext}`}>{props.full_description}</p>
             </div>
           </div>
         </div>

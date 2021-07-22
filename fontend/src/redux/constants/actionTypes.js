@@ -57,5 +57,8 @@ export const FETCH_LECTURER_COURSES_FAILURE = 'FETCH_LECTURER_COURSES_FAILURE';
 // =================== Type Action Videos ==========================
 export const GET_INFO_VIDEOS ='GET_INFO_VIDEOS';
 export const LOAD_VIDEO ='LOAD_VIDEO';
+export const FETCH_LOAD_VIDEO = 'FETCH_LOAD_VIDEO';
+export const FETCH_COURSE_OVERVIEW = 'FETCH_COURSE_OVERVIEW';
+export const SET_COURSE_OVERVIEW = 'SET_COURSE_OVERVIEW';
 
 //===================================================================

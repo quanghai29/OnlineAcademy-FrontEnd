@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import classes from './VideoPlayer.module.scss';
 import ReactPlayer from 'react-player';
+//import { useDispatch, useSelector } from 'react-redux';
+//import * as actionVideoLoader from '../../../redux/actions/videoloader';
 
 export default function VideoPlayer() {
+  // const dispatch = useDispatch();
+  // const videoLoader = useSelector((state)=>state.videoLoader);
+  
+  // useEffect(() => {
+  //   dispatch(actionVideoLoader.fetchloadvideo());
+  // }, [dispatch, videoLoader]);
 
   const configReactPlayer = {
     className: 'react-player',
-    url: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
+    url: '',
     width: "100%",
-    height: '100%',
+    height: "100%",
     controls: true,
     pip: true,
     config: {
