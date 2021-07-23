@@ -1,5 +1,8 @@
 import React from 'react';
 import { Select } from 'react-materialize';
+import { useDispatch } from 'react-redux';
+import { uploadCourse } from '../../../redux/actions/coursesOfLecturer';
+import { useForm } from 'react-hook-form';
 // import { EditorState, convertToRaw } from 'draft-js';
 // import { Editor } from 'react-draft-wysiwyg';
 // import draftToHtml from 'draftjs-to-html';
@@ -11,19 +14,54 @@ const CommonDescription = () => {
   // const onEditorStateChange = (editorState) => {
   //   setEditorState(editorState);
   // }
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    data.lecturer_id = 1;
+    console.log(data.category_id);
+    data.category_id = +data.category_id;
+    dispatch(uploadCourse(data));
+  };
+
+  const requiredStyle = {
+    color: 'red',
+    fontSize: '10px',
+  };
+
   return (
     <div className="row">
-      <form className="col s12">
+      <form className="col s12" onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
           <div className="input-field col s12">
-            <input id="course-title" type="text" className="validate" />
-            <label for="course-title">Tiêu đề khóa học</label>
+            <input
+              id="course-title"
+              type="text"
+              className="validate"
+              {...register('title', { required: true })}
+            />
+            {errors.title && (
+              <span style={requiredStyle}>This field is required</span>
+            )}
+            <label htmlFor="course-title">Tiêu đề khóa học</label>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s12">
-            <input id="brief-desc" type="text" className="validate" />
-            <label for="brief-desc">Mô tả ngắn gọn</label>
+            <input
+              id="brief-desc"
+              type="text"
+              className="validate"
+              {...register('short_description', { required: true })}
+            />
+            {errors.short_description && (
+              <span style={requiredStyle}>This field is required</span>
+            )}
+            <label htmlFor="brief-desc">Mô tả ngắn gọn</label>
           </div>
         </div>
         <div className="row">
@@ -36,14 +74,20 @@ const CommonDescription = () => {
               onEditorStateChange={() => onEditorStateChange}
             />
             <textarea value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}></textarea> */}
-            <textarea id="textarea1" class="materialize-textarea"></textarea>
-            <label for="textarea1">Textarea</label>
+            <textarea
+              id="textarea1"
+              className="materialize-textarea"
+              {...register('full_description', { required: true })}
+            ></textarea>
+            {errors.full_description && (
+              <span style={requiredStyle}>This field is required</span>
+            )}
+            <label htmlFor="textarea1">Textarea</label>
           </div>
         </div>
         <div className="row">
           <Select
             id="Select-9"
-            label="Danh mục"
             multiple={false}
             options={{
               classes: 'col s12',
@@ -62,26 +106,48 @@ const CommonDescription = () => {
                 outDuration: 250,
               },
             }}
-            value="1"
+            value=""
+            {...register('category_id', { required: true })}
           >
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+            <option disabled value="">
+              Chọn danh mục
+            </option>
+            <option value="1">Lập trình Web</option>
+            <option value="2">Lập trình di động</option>
+            <option value="3">Lập trình game</option>
+            <option value="4">Khoa học dữ liệu</option>
+            <option value="5">Kiểm thử phần mềm</option>
           </Select>
         </div>
         <div className="row">
           <div className="input-field col s6">
-            <input id="price" type="text" className="validate" />
-            <label for="price">Giá</label>
+            <input
+              id="price"
+              type="text"
+              className="validate"
+              {...register('price', { required: true })}
+            />
+            {errors.price && (
+              <span style={requiredStyle}>This field is required</span>
+            )}
+            <label htmlFor="price">Giá</label>
           </div>
           <div className="input-field col s6">
-            <input id="discount" type="text" className="validate" />
-            <label for="discount">Khuyến mãi</label>
+            <input
+              id="discount"
+              type="text"
+              className="validate"
+              {...register('discount', { required: true })}
+            />
+            {errors.discount && (
+              <span style={requiredStyle}>This field is required</span>
+            )}
+            <label htmlFor="discount">Khuyến mãi</label>
           </div>
         </div>
         <button class="btn waves-effect" type="submit">
           Submit
-          <i class="material-icons right">send</i>
+          <i className="material-icons right">send</i>
         </button>
       </form>
     </div>

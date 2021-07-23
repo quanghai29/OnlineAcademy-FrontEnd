@@ -4,6 +4,7 @@ import watchFetchHotCourse from './getHotCourses';
 import watchFetchLecturerCourse from './getCoursesOfLecturer';
 import signUpSaga from './signUp';
 import verifyCodeSaga from './verifyCode';
+import uploadCourseSaga from './uploadCourse';
 
 export default function* rootSaga() {
     yield all([
@@ -13,5 +14,6 @@ export default function* rootSaga() {
         watchFetchCourse(),
         signUpSaga(),
         verifyCodeSaga(),
+        uploadCourseSaga()
     ])
 }

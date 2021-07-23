@@ -25,6 +25,11 @@ const initialState = {
           isLoading: false,
           error: action.payload.message
         };
+      case type.SET_LECTURER_COURSE:
+        return {
+          ...state,
+          data: [...state.data, action.payload]
+        }
       default:
         return state;
     }
