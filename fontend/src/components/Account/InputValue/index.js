@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './InputValue.module.scss'
-// import classNames from 'classnames';
-import classNames from 'classnames/bind';
 
 export default function InputValue(props) {
   const state = useSelector(state => state);
@@ -16,16 +14,6 @@ export default function InputValue(props) {
     dispatch({ type: props.actionType, payload: { data } })
   }
 
-  let cx = classNames.bind(styles);
-  let classes = cx({
-    'input-ele': true,
-    'border--warning': props.warningMess
-  })
-  // const classes = classNames({
-  //   'input-ele': true,
-  //   'border--warning': props.warningMess
-  // });
- 
   return (
     <div className={props.class} style={props.style}>
       {props.warningMess && <span className={styles['span--warning']}>
@@ -34,7 +22,9 @@ export default function InputValue(props) {
         placeholder={props.placeholder}
         value={inputReducer.form[props.name]}
         onChange={(e) => handleOnchange(e)}
-        className={classes}
+        className={`${styles['input-ele']}
+        ${props.warningMess? styles['border--warning']: ''}`}
+        autoComplete={props.type === "password"? "current-password":"none"}
       />
     </div>
   )

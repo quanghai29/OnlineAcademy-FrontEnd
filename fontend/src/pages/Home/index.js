@@ -14,6 +14,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchCourses());
     dispatch(fetchHotCourse());
+    
   }, [dispatch]);
 
   return (

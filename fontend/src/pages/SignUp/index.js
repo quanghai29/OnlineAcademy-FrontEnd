@@ -6,9 +6,9 @@ import '../../styles/account.scss'
 import { Link, useHistory } from "react-router-dom"
 import { useEffect } from "react"
 import {
-  VALIDATE_USERNAME,
+  VALIDATE_SIGN_UP_USERNAME,
   VALIDATE_EMAIL,
-  VALIDATE_PASSWORD,
+  VALIDATE_SIGN_UP_PASSWORD,
   VALIDATE_CONFIRM_PASSWORD,
   SUBMIT_SIGNUP_FORM,
   REQUEST_RESET_SIGN_UP_FORM
@@ -17,11 +17,9 @@ import Swal from 'sweetalert2';
 
 
 export default function SignUp() {
-  const state = useSelector(state => state);
+  const signUpState = useSelector(state => state.signUpReducer);
   const dispatch = useDispatch();
   const history = useHistory();
-  const signUpState = { ...state.signUpReducer };
-  console.log(signUpState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
@@ -31,7 +29,7 @@ export default function SignUp() {
       type: 'text',
       placeholder: 'Username',
       name: 'username',
-      actionType: VALIDATE_USERNAME,
+      actionType: VALIDATE_SIGN_UP_USERNAME,
       warningMess: signUpState.form.usernameWarningMess
     },
     {
@@ -45,7 +43,7 @@ export default function SignUp() {
       type: 'password',
       placeholder: 'Password',
       name: 'password',
-      actionType: VALIDATE_PASSWORD,
+      actionType: VALIDATE_SIGN_UP_PASSWORD,
       warningMess: signUpState.form.passwordWarningMess
     },
     {
@@ -59,8 +57,6 @@ export default function SignUp() {
 
   useEffect(() => {
     if (signUpState.response.code === 201) {
-      // dispatch({type: REQUEST_RESET_SIGN_UP_FORM});
-      // history.push('/verify-code');
       Swal.fire({
         icon: 'success',
         title: 'Sign up successfully',
@@ -103,7 +99,7 @@ export default function SignUp() {
             }
             <div className="small-text">
               <span>Already have an account?</span>
-              <Link to='/log-in'>
+              <Link to='/login'>
                 Log In</Link>
             </div>
             <ActionButton style={{ marginTop: "50px" }}

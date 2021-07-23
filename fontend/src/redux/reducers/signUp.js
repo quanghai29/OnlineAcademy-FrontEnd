@@ -1,7 +1,7 @@
 import {
-  SET_USERNAME,
+  SET_SIGN_UP_USERNAME,
   SET_EMAIL,
-  SET_PASSWORD,
+  SET_SIGN_UP_PASSWORD,
   SET_CONFIRM_PASSWORD,
   SET_SIGN_UP_RESPONSE,
   SET_ENTIRE_SIGN_UP_FORM_STATE,
@@ -27,11 +27,11 @@ const initialState = {
 
 const signUpReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_USERNAME: {
+    case SET_SIGN_UP_USERNAME: {
       let newState = { ...state };
       newState.form.username = action.payload.data || '';
       newState.form.usernameWarningMess
-        = action.payload.warningMessage || '';
+        = action.payload.warningMess || '';
 
       return newState;
     }
@@ -39,15 +39,15 @@ const signUpReducer = (state = initialState, action) => {
       let newState = { ...state };
       newState.form.email = action.payload.data || '';
       newState.form.emailWarningMess =
-        action.payload.warningMessage || '';
+        action.payload.warningMess || '';
 
       return newState;
     }
-    case SET_PASSWORD: {
+    case SET_SIGN_UP_PASSWORD: {
       let newState = { ...state };
       newState.form.password = action.payload.data || '';
       newState.form.passwordWarningMess =
-        action.payload.warningMessage || '';
+        action.payload.warningMess || '';
 
       return newState;
     }
@@ -55,7 +55,7 @@ const signUpReducer = (state = initialState, action) => {
       let newState = { ...state };
       newState.form.confirmPassword = action.payload.data || '';
       newState.form.confirmPasswordWarningMess =
-        action.payload.warningMessage || '';
+        action.payload.warningMess || '';
 
       return newState
     }

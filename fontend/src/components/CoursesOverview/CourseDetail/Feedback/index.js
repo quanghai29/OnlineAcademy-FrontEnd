@@ -3,7 +3,8 @@ import classes from './style.module.scss';
 import ReactStars from "react-rating-stars-component";
 import Comment from './Comment';
 
-export default function Feedback() {
+export default function Feedback({course_id}) {
+  //console.log(course_id);
   const configBigReactStars ={
     isHalf: true,
     activeColor: "#EC0101",

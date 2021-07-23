@@ -1,37 +1,62 @@
 @import '../../../styles/config';
 
-.layoutvideo{
+.playerwrapper{
   background: rgba(0, 0, 0, 0.6) !important;
   margin: 0 !important;
-}
-
-.playerwrapper{
-  @extend .layoutvideo;
-  position: relative;
   width: 100%;
+  height: 50%;
+  padding: 0px 0px !important;
 
-  @media (max-width: $small-and-down) {
-    // styles for small screens and down
+  // @media (max-width: $small-and-down) {
+  //   // styles for small screens and down
 
-  }
-  @media (min-width: $medium-and-up) {
-    // styles for medium screens and larger
+  // }
+  // @media (min-width: $medium-and-up) {
+  //   // styles for medium screens and larger
 
-  }
-  @media (max-width: $medium-and-down) {
-    // styles for medium screens and down
+  // }
+  // @media (max-width: $medium-and-down) {
+  //   // styles for medium screens and down
 
-  }
-  @media (min-width: $large-and-up) {
-    // styles for large screens and up
+  // }
+  // @media (min-width: $large-and-up) {
+  //   // styles for large screens and up
 
-  }
-  @media (min-width: $extra-large-and-up) {
-    // styles for extra large screens and up
-    height: 540px;
-  }
+  // }
+  // @media (min-width: $extra-large-and-up) {
+  //   // styles for extra large screens and up
+    
+  // }   
 
 }
+
+.controlheader{
+  color: white !important;
+  padding: 14px 10px;
+  font-weight: bold;
+  //position: absolute;
+  height: auto;
+}
+
+.backcouse{
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+
+  i{
+    color: #FFC000  !important;
+  }
+}
+
+.namecourse{
+  color: white;
+  font-weight: bold;
+  float: right !important;
+  font-size: 16px;
+}
+
+
+
 
 
 
