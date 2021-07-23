@@ -9,7 +9,7 @@ import {
   SUBMIT_VERIFY_CODE_FORM,
   REQUEST_RESET_VERIFY_CODE_FORM
 } from '../constants/actionTypes';
-// import { submitVerifyCodeForm } from '../axios/account'
+import { submitVerifyCodeForm } from '../axios/account'
 
 
 function* requestSetCode(action) {

@@ -10,12 +10,12 @@ import {
   REQUEST_RESET_VERIFY_CODE_FORM
 } from '../../redux/constants/actionTypes'
 import Swal from 'sweetalert2';
-import { useEffect } from "react"
+import { useEffect, useHistory } from "react"
 
 export default function VerifyCode() {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const history = useHistory();
   const verifyCodeState = { ...state.verifyCodeReducer };
   console.log('verify code', verifyCodeState);
 
