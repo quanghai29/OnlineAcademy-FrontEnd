@@ -4,13 +4,16 @@ import styles from './ListRowCourse.module.scss'
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 export default function ListRowCourse(props) {
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, styles['task-sort']);
   });
 
   return (
-    <div className={styles['container']}>
+    <div className={styles['container']} id="search_result">
+      <div className={styles['result-title']}>
+        {props.data.courses.length} Kết quả tìm kiếm cho {`"${props.data.keyWord}"`}
+      </div>
       <div className={styles['task-bar']}>
         <div className={styles['task-show']}>
           <span>Show 1-8 of 10 results</span>
@@ -31,23 +34,23 @@ export default function ListRowCourse(props) {
           </select>
         </div>
       </div>
-      
+
       {
-        props.arrData.map((item, index)=>{
-          return(
-            <RowCourse data={item} key={index}/>
+        props.data.courses.map((item, index) => {
+          return (
+            <RowCourse data={item} key={index} />
           )
         })
       }
 
       <ReactPaginate pageCount={5} pageRangeDisplayed={3}
-      marginPagesDisplayed={3}
-      containerClassName={styles['container-pagination']}
-      pageClassName={styles['li-pagination']}
-      previousClassName={styles['li-pre-next']}
-      nextClassName={styles['li-pre-next']}
-      activeClassName={styles['page--active']}
-      activeLinkClassName={styles['a--active']}
+        marginPagesDisplayed={3}
+        containerClassName={styles['container-pagination']}
+        pageClassName={styles['li-pagination']}
+        previousClassName={styles['li-pre-next']}
+        nextClassName={styles['li-pre-next']}
+        activeClassName={styles['page--active']}
+        activeLinkClassName={styles['a--active']}
       />
     </div>
   )

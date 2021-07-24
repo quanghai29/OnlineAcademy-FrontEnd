@@ -10,7 +10,7 @@ import ListRowCourse from '../../components/ListRowCourses';
 import {
   useLocation
 } from "react-router-dom";
-import {resetSearchCourseState} from "../../redux/actions/searchCourse"
+import { resetSearchCourseState } from "../../redux/actions/searchCourse"
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,9 +19,15 @@ const Home = () => {
   const videoReducer = useSelector((state) => state.videoReducer);
 
   let location = useLocation();
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(resetSearchCourseState());
   }, [location, dispatch]);
+
+  useEffect(() => {
+    let elmnt = document.getElementById("search_result");
+    if(elmnt)
+      elmnt.scrollIntoView();
+  }, [searchCourseState.result])
 
   console.log('video state', videoReducer);
   useEffect(() => {
@@ -34,7 +40,7 @@ const Home = () => {
   let mainContent = null;
   if (searchCourseState.isSearchedCourse) {
     mainContent = <section>
-      <ListRowCourse arrData={searchCourseState.result} />
+      <ListRowCourse data={searchCourseState.result} />
     </section>
   } else {
     mainContent = <div>

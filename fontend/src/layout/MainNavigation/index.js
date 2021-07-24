@@ -14,7 +14,7 @@ function MainNavigation() {
   function handleClickSearchCourse(e) {
     e.preventDefault();
     dispatch({
-      type: FETCH_SEARCH_COURSE, 
+      type: FETCH_SEARCH_COURSE,
       payload: searchCourseState.text
     })
   }
@@ -53,7 +53,9 @@ function MainNavigation() {
             }
           />
           <button className={classes['search-btn']}
-          onClick={(e) => handleClickSearchCourse(e) }>Search</button>
+            onClick={(e) => handleClickSearchCourse(e)}>
+            Search
+          </button>
         </form>
       </div>
       <div className={classes.login}>
