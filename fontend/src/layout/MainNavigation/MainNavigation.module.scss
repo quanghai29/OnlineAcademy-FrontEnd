@@ -53,6 +53,22 @@
       color: #fff;
       padding-left: 40px;
     }
+
+    .search-btn{
+      border:  none;
+      outline: none;
+      background-image: $primaryBg;
+      color: #fff;
+      border-radius: 10px;
+      margin:0px 5px;
+      height: 48px;
+      font-weight: 500;
+      &:hover{
+        cursor: pointer;
+        background-color: #FFC000;
+        background-image: none;
+      }
+    }
   }
 
   .login {

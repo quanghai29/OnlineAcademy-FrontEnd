@@ -1,0 +1,84 @@
+
+.container{
+  margin: 0px 100px;
+}
+
+.task-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .task-show{
+    font-size: 14px;
+    display: flex;
+    .show-option{
+      margin-left: 100px;
+      display: flex;
+      ul{
+        display: flex;
+        margin: 0;
+        list-style-type: none;
+        li{
+          margin: 0 10px;
+          &:hover{
+            cursor: pointer;
+            color: #18a0fb;
+          }
+        }
+      }
+    }
+  }
+  .task-sort{
+    font-size: 14px;
+  }
+}
+
+.custom-input-field{
+  display: flex;
+  align-items: center;
+  span{
+    margin-right: 10px;
+  }
+  div{
+    input,ul,select{
+      font-size: 14px !important;
+      margin: 0 !important;
+    }
+  }
+}
+
+.container-pagination{
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+}
+
+.li-pagination{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #E0E0E0;
+  margin: 0 5px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.li-pre-next{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.page--active{
+  background-image: linear-gradient(45deg,#FFC000, #FF8A00);
+  border: none;
+  .a--active{
+    color: #FFFFFF !important;
+  }
+}

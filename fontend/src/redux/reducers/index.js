@@ -6,11 +6,15 @@ import hotCourses from './hotCourses';
 import coursesOfLecturer from './coursesOfLecturer';
 import loginReducer from './login';
 import videoReducer from './video';
+import searchCourseReducer from './searchCourse';
 
 export default combineReducers({
     courses,
     hotCourses,
     coursesOfLecturer,
-    signUpReducer, verifyCodeReducer, loginReducer,
-    videoReducer
+    signUpReducer,
+    verifyCodeReducer,
+    loginReducer,
+    videoReducer,
+    searchCourseReducer
 });

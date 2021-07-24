@@ -7,10 +7,12 @@ import classes from './Home.module.scss';
 import Courses from '../../components/Courses';
 import Hero from '../../components/Hero';
 import { setVideoInfo } from '../../redux/actions/video';
+import ListRowCourse from '../../components/ListRowCourses';
 
 const Home = () => {
   const dispatch = useDispatch();
   const { courses, hotCourses } = useSelector((state) => state);
+  const searchCourseState = useSelector(state=>state.searchCourseReducer)
   const videoReducer = useSelector((state)=>state.videoReducer);
   
   console.log('video state', videoReducer);
@@ -38,6 +40,9 @@ const Home = () => {
           </section>
           <section>
             <Courses courses={hotCourses.data} title='Lượt xem nhiều nhất' />
+          </section>
+          <section>
+            <ListRowCourse arrData={searchCourseState.result}/>
           </section>
         </main>
       </div>
