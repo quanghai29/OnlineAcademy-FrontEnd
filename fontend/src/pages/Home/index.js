@@ -7,39 +7,56 @@ import classes from './Home.module.scss';
 import Courses from '../../components/Courses';
 import Hero from '../../components/Hero';
 import ListRowCourse from '../../components/ListRowCourses';
+import {
+  useLocation
+} from "react-router-dom";
+import {resetSearchCourseState} from "../../redux/actions/searchCourse"
 
 const Home = () => {
   const dispatch = useDispatch();
   const { courses, hotCourses } = useSelector((state) => state);
-  const searchCourseState = useSelector(state=>state.searchCourseReducer)
-  const videoReducer = useSelector((state)=>state.videoReducer);
-  
-  console.log('video state', videoReducer);
+  const searchCourseState = useSelector(state => state.searchCourseReducer)
+  const videoReducer = useSelector((state) => state.videoReducer);
 
+  let location = useLocation();
+  useEffect(()=>{
+    dispatch(resetSearchCourseState());
+  }, [location, dispatch]);
+
+  console.log('video state', videoReducer);
   useEffect(() => {
     dispatch(fetchCourses());
     dispatch(fetchHotCourse());
-    
+
   }, [dispatch]);
+
+
+  let mainContent = null;
+  if (searchCourseState.isSearchedCourse) {
+    mainContent = <section>
+      <ListRowCourse arrData={searchCourseState.result} />
+    </section>
+  } else {
+    mainContent = <div>
+      <div className={classes.welcome}>
+        <p>Tất cả các khóa học đặc sắc nhất</p>
+        <p>được cập nhật hàng tuần, hàng tháng</p>
+      </div>
+      <section>
+        <Courses courses={courses.data} title='Hot Trong Tuần' />
+      </section>
+      <section>
+        <Courses courses={hotCourses.data} title='Lượt xem nhiều nhất' />
+      </section>
+    </div>
+  }
 
   return (
     <Layout>
       <div className={classes.container}>
         <Hero />
         <main className={classes.main}>
-          <div className={classes.welcome}>
-            <p>Tất cả các khóa học đặc sắc nhất</p>
-            <p>được cập nhật hàng tuần, hàng tháng</p>
-          </div>
-          <section>
-            <Courses courses={courses.data} title='Hot Trong Tuần' />
-          </section>
-          <section>
-            <Courses courses={hotCourses.data} title='Lượt xem nhiều nhất' />
-          </section>
-          <section>
-            <ListRowCourse arrData={searchCourseState.result}/>
-          </section>
+          {mainContent}
         </main>
       </div>
       {/* <DevTools /> */}

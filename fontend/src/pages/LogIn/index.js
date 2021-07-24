@@ -19,7 +19,6 @@ import { useHistory } from "react-router-dom"
 export default function LogIn() {
   const loginState = useSelector(state => state.loginReducer)
   const dispatch = useDispatch();
-  console.log('login page', loginState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
@@ -49,6 +48,13 @@ export default function LogIn() {
     dispatch,
     loginState.responseData.email
   ])
+
+  useEffect(()=>{
+    if(loginState.responseData.isAuth){
+      history.push('/')
+    }
+  }, [loginState.responseData.isAuth, history]);
+
   const inputValueData = [
     {
       type: 'text',

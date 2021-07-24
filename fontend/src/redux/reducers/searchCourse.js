@@ -1,12 +1,14 @@
 import {
   SET_SEARCH_TEXT,
   SET_SEARCH_COURSE_RESULT,
-  RESET_SEARCH_FORM
+  RESET_SEARCH_FORM,
+  RESET_SEARCH_COURSE_STATE
 } from "../constants/actionTypes"
 
 const initialState = {
   result: [],
-  text: ''
+  text: '',
+  isSearchedCourse: false
 }
 
 const searchCourseReducer = (state = initialState, action) => {
@@ -22,6 +24,7 @@ const searchCourseReducer = (state = initialState, action) => {
       let newState = {
         ...state,
         result: action.data,
+        isSearchedCourse: true,
       }
       return newState;
     }
@@ -30,6 +33,16 @@ const searchCourseReducer = (state = initialState, action) => {
         ...state,
         text: ''
       }
+      return newState;
+    }
+    case RESET_SEARCH_COURSE_STATE: {
+      let newState = {
+        ...state,
+        result: [],
+        text: '',
+        isSearchedCourse: false
+      }
+
       return newState;
     }
     default: {
