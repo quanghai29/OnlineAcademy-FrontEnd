@@ -5,12 +5,17 @@ export const setCourse = (data) => ({
   payload: data,
 });
 
-export const fetchCourse = () => ({
-  type: type.FETCH_COURSE,
+export const setCourses = (data) => ({
+  type: type.SET_COURSES,
+  payload: data,
 });
 
-export const fetchCourseFail = (message) => ({
-  type: type.FETCH_FAILURE,
+export const fetchCourses = () => ({
+  type: type.FETCH_COURSES,
+});
+
+export const fetchCourseFails = (message) => ({
+  type: type.FETCH_COURSES_FAILURE,
   payload: {
     message,
   },

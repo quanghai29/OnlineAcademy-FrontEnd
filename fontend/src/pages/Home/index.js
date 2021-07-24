@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCourse } from '../../redux/actions/course';
+import { fetchCourses } from '../../redux/actions/course';
 import { fetchHotCourse } from '../../redux/actions/hotCourses';
 import Layout from '../../layout/Layout';
 import classes from './Home.module.scss';
@@ -18,10 +18,7 @@ const Home = () => {
   console.log('video state', videoReducer);
 
   useEffect(() => {
-    dispatch({
-      type: 'REQUEST_SET_VIDEO_INFO', 
-    })
-    dispatch(fetchCourse());
+    dispatch(fetchCourses());
     dispatch(fetchHotCourse());
     
   }, [dispatch]);

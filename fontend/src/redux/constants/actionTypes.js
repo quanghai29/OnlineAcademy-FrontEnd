@@ -2,9 +2,11 @@
 export const GET_COURSES = 'GET_COURSES';
 export const SELECT_COURSE = "SELECT_COURSE";
 
-export const FETCH_COURSE = 'FETCH_COURSE';
 export const SET_COURSE = 'SET_COURSE';
-export const FETCH_FAILURE = 'FETCH_FAILURE';
+
+export const FETCH_COURSES = 'FETCH_COURSES';
+export const SET_COURSES = 'SET_COURSES';
+export const FETCH_COURSES_FAILURE = 'FETCH_COURSES_FAILURE';
 
 //=====================CONSTANTS FOR SIGN UP/LOG IN FORM ACTIONS ==========================
 export const SET_SIGN_UP_USERNAME = 'SET_SIGN_UP_USERNAME';
@@ -59,3 +61,19 @@ export const FETCH_HOT_COURSES_FAILURE = 'FETCH_HOT_COURSES_FAILURE';
 export const FETCH_LECTURER_COURSES = 'FETCH_LECTURER_COURSES';
 export const SET_LECTURER_COURSES = 'SET_LECTURER_COURSES';
 export const FETCH_LECTURER_COURSES_FAILURE = 'FETCH_LECTURER_COURSES_FAILURE';
+export const UPLOAD_COURSE = 'UPLOAD_COURSE';
+export const SET_LECTURER_COURSE = 'SET_LECTURER_COURSE';
+
+// selected course
+export const SET_SELECTED_COURSE = 'SET_SELECTED_COURSE';
+export const UPLOAD_COURSE_IMAGE = 'UPLOAD_COURSE_IMAGE';
+
+
+// =================== Type Action Videos ==========================
+export const GET_INFO_VIDEOS ='GET_INFO_VIDEOS';
+export const LOAD_VIDEO ='LOAD_VIDEO';
+export const FETCH_LOAD_VIDEO = 'FETCH_LOAD_VIDEO';
+export const FETCH_COURSE_OVERVIEW = 'FETCH_COURSE_OVERVIEW';
+export const SET_COURSE_OVERVIEW = 'SET_COURSE_OVERVIEW';
+
+//===================================================================

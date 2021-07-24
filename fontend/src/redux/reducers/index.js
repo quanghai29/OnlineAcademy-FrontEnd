@@ -5,16 +5,20 @@ import verifyCodeReducer from './verifyCode';
 import hotCourses from './hotCourses';
 import coursesOfLecturer from './coursesOfLecturer';
 import loginReducer from './login';
-import videoReducer from './video';
 import searchCourseReducer from './searchCourse';
+import videoLoader from './videoloader';
+import courseOverview from './courseOverview';
+import selectedCourse from './selectedCourse';
 
 export default combineReducers({
-    courses,
-    hotCourses,
-    coursesOfLecturer,
-    signUpReducer,
-    verifyCodeReducer,
-    loginReducer,
-    videoReducer,
-    searchCourseReducer
+  courses,
+  hotCourses,
+  coursesOfLecturer,
+  signUpReducer,
+  verifyCodeReducer,
+  loginReducer,
+  searchCourseReducer,
+  videoLoader,
+  courseOverview,
+  selectedCourse
 });

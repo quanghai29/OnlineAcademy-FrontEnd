@@ -3,14 +3,14 @@ import InputValue from "../../components/Account/InputValue"
 import HeaderForm from "../../components/Account/HeaderForm"
 import { useDispatch, useSelector } from "react-redux"
 import '../../styles/account.scss'
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import {
   VALIDATE_CODE,
   SUBMIT_VERIFY_CODE_FORM,
   REQUEST_RESET_VERIFY_CODE_FORM
 } from '../../redux/constants/actionTypes'
 import Swal from 'sweetalert2';
-import { useEffect } from "react"
+import { useEffect, useHistory } from "react"
 
 export default function VerifyCode() {
   const state = useSelector(state => state);

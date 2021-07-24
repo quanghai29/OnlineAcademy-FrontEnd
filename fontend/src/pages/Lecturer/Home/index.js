@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLecturerCourse } from '../../../redux/actions/coursesOfLecturer';
+import { fetchLecturerCourses } from '../../../redux/actions/coursesOfLecturer';
 import Layout from '../../../layout/Layout';
 import CourseTable from '../../../components/Lecturer/CourseTable';
 import Pagination from '../../../components/Pagination';
@@ -13,7 +13,7 @@ const HomeLecturer = () => {
   const { data, isLoading } = useSelector((state) => state.coursesOfLecturer);
 
   useEffect(() => {
-    dispatch(fetchLecturerCourse());
+    dispatch(fetchLecturerCourses());
   }, [dispatch]);
 
   // Get current posts

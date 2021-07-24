@@ -1,13 +1,13 @@
 import React from "react";
 import classes from './style.module.scss';
 
-export default function Chapter() {
+export default function Chapter(props) {
   return (
     <nav className={classes.navnostyle}>
       <div className="nav-wrapper center-align">
         <ul className="left">
           <li><i className="material-icons ex">expand_more</i></li>
-          <li><h6>Welcome</h6></li>
+          <li><h6>{props.title}</h6></li>
         </ul>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li><p>5 bài học</p></li>
