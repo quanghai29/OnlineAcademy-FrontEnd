@@ -6,7 +6,6 @@ import Layout from '../../layout/Layout';
 import classes from './Home.module.scss';
 import Courses from '../../components/Courses';
 import Hero from '../../components/Hero';
-import { setVideoInfo } from '../../redux/actions/video';
 import ListRowCourse from '../../components/ListRowCourses';
 
 const Home = () => {
