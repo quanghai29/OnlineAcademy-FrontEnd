@@ -28,7 +28,9 @@ export default function ListRowCourse(props) {
       <div className={styles['task-bar']}>
         <div className={styles['task-show']}>
           <span>
-            Hiển thị {`${offset + 1}-${offset + amountItemPerPage} `}
+            Hiển thị {props.data.courses.length >= amountItemPerPage ?
+             `${offset + 1}-${offset + amountItemPerPage} ` 
+             : `${offset + 1}-${offset + props.data.courses.length} `}
             của {props.data.courses.length} kết quả
           </span>
           <div className={styles['show-option']}>Show:
