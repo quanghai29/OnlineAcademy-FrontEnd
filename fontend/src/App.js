@@ -9,9 +9,6 @@ import CourseOverview from './pages/CourseOverview';
 import HomeLecturer from './pages/Lecturer/Home';
 import UpdateCourse from './pages/Lecturer/UpdateCourse';
 
-import RowCourse from './components/RowCourse';
-import ListRowCourse from './components/ListRowCourses';
-
 function App() {
   return (
     <Router>
@@ -19,8 +16,6 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/row-course" component={RowCourse}/>
-        <Route path="/list-row-course" component={ListRowCourse}/>
         <Route path="/login" component={LogIn}/>
         <Route path="/signup" component={SignUp}/>
         <Route path="/verify-code" component={VerifyCode}/>
