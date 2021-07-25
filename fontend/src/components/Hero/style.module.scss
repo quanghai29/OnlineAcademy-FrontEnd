@@ -2,21 +2,24 @@
 
 .hero {
     width: 100%;
+    height: 50%;
     background: $primaryBg;
     position: relative;
 
+    img{
+      z-index: 0 !important;
+    }
     .heroTitle {
-      position: absolute;
-      top: 5%;
-      left: 4%;
       color: #fff;
-      z-index: 10;
+      position: relative;
+      z-index: 1 !important;
 
       .title {
-        z-index: 11;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 5%;
+        left: 0%;
+        
+        margin-bottom: 25px;
 
         h2 {
           font-size: 44px;
@@ -28,7 +31,7 @@
           color: $primaryColor;
           width: 160px;
           height: 56px;
-          margin-top: 80px;
+          margin-top: 15px;
           margin-left: 30px;
           border: none;
           border-radius: 100px;
@@ -37,9 +40,16 @@
     }
 
     .girlBg {
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 10;
+      //position: absolute;
+      //top: 0;
+      //right: 0;
+      // z-index: 10;
+      // width: 60px;
+      //height: auto;
+      margin-bottom: 25px;
+      img {
+        height: auto;
+        width: 600px;
+      }
     }
   }
