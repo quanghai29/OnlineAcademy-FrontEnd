@@ -13,7 +13,6 @@ export default function RowCourse(props) {
         </div>
         <div className={styles['row-course__info']}>
           <div className={styles['text-info']}>
-            <span>{props.data.id}</span>
             <span className={styles['text-info__title']}>{props.data.title}</span>
             <span className={styles['text-info__short-description']}>{props.data.short_description}</span>
             <span className={styles['text-info__author']}>{props.data.author.fullname}</span>
