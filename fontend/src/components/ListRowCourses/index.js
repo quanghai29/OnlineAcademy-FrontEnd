@@ -27,7 +27,10 @@ export default function ListRowCourse(props) {
       </div>
       <div className={styles['task-bar']}>
         <div className={styles['task-show']}>
-          <span>Show 1-8 of 10 results</span>
+          <span>
+            Hiển thị {`${offset + 1}-${offset + amountItemPerPage} `}
+            của {props.data.courses.length} kết quả
+          </span>
           <div className={styles['show-option']}>Show:
             <ul>
               <li onClick={() => {
