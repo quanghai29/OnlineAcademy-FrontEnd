@@ -31,8 +31,11 @@ export default function RowCourse(props) {
         </div>
       </div>
       <div className={styles['row-course__price']}>
-        <span>{props.data.discount === 0 ? props.data.price :
-          props.data.price * props.data.discount} VND</span>
+        {/* <span>{props.data.discount === 0 ? props.data.price :
+          props.data.price * props.data.discount} VND</span> */}
+        <NumberFormat value={props.data.discount === 0 ? props.data.price :
+          props.data.price * props.data.discount} displayType={'text'}
+          thousandSeparator={true} thousandsGroupStyle='thousand' suffix="VND"/>
       </div>
     </div>
   )

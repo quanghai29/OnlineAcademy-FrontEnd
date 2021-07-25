@@ -5,8 +5,8 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 
 export default function ListRowCourse(props) {
   document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, styles['task-sort']);
+    let elems = document.querySelectorAll('select');
+    let instances = M.FormSelect.init(elems, styles['task-sort']);
   });
 
   return (
