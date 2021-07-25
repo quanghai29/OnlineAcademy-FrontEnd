@@ -76,30 +76,15 @@
       background-color: white !important;
       box-shadow: none;
       position: absolute;
-      left: 82%;
+      left: 85%;
       top: 15%;
       border-radius: 5px;
       i{
-        color:black
+        color:black;
+        position: relative;
+        top: -34%;
+        left: 9%;
       }
-    }
-  }
-
-  .login {
-    button {
-      width: 160px;
-      height: 56px;
-      margin: 10px;
-      font-weight: bold;
-      transition: all 0.5s ease-in-out;
-      border-radius: 100px;
-      background: $primaryBg;
-      color: #fff;
-      border: none;
-    }
-    button:hover {
-      background: rgb(218, 151, 27);
-      color: black;
     }
   }
 

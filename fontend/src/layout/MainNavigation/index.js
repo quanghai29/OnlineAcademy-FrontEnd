@@ -86,17 +86,16 @@ function MainNavigation() {
         <ul id="nav-mobile" className="left hide-on-med-and-down">
 
           <li>
-            <a href="/">
+            <Link href="/">
               <img src='assets/images/header/Logo.png' alt="logo header" />
-            </a>
+            </Link>
           </li>
 
           <li className={classes.menu}>
-            {/* eslint-disable-next-line */}
-            <a className={`waves-effect waves-light btn ${classes.menu}`}>
+            <Link className={`waves-effect waves-light btn ${classes.menu}`}>
               <i class="material-icons left">menu</i>
               Danh mục
-            </a>
+            </Link>
           </li>
 
           <li className={classes.search}>
@@ -109,11 +108,11 @@ function MainNavigation() {
                   }
                 }
               />
-              {/* eslint-disable-next-line */}
-              <a className={`waves-effect waves-light btn ${classes.searchBtn}`}
+              
+              <button className={`waves-effect waves-light btn ${classes.searchBtn}`}
                 onClick={(e) => handleClickSearchCourse(e)}>
                 <i class="material-icons">search</i>
-              </a>
+              </button>
             </form>
           </li>
 
@@ -121,17 +120,15 @@ function MainNavigation() {
         <ul className="right hide-on-med-and-down">
 
           <li>
-            {/* eslint-disable-next-line */}
-            <a href="/login" className={`waves-effect waves-light btn ${classes.handleBtn}`}>
+            <Link to='/login' className={`waves-effect waves-light btn ${classes.handleBtn}`}>
               Đăng Nhập
-            </a>
+            </Link>
           </li>
 
           <li>
-            {/* eslint-disable-next-line */}
-            <a href="/login" className={`waves-effect waves-light btn ${classes.handleBtn}`}>
+            <Link href="/login" className={`waves-effect waves-light btn ${classes.handleBtn}`}>
               Đăng Ký
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
