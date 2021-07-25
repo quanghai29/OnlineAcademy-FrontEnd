@@ -3,21 +3,20 @@ import InputValue from "../../components/Account/InputValue"
 import HeaderForm from "../../components/Account/HeaderForm"
 import { useDispatch, useSelector } from "react-redux"
 import '../../styles/account.scss'
-import { Link } from "react-router-dom"
+import { Link, useHistory} from "react-router-dom"
 import {
   VALIDATE_CODE,
   SUBMIT_VERIFY_CODE_FORM,
   REQUEST_RESET_VERIFY_CODE_FORM
 } from '../../redux/constants/actionTypes'
 import Swal from 'sweetalert2';
-import { useEffect, useHistory } from "react"
+import { useEffect } from "react"
 
 export default function VerifyCode() {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
   const history = useHistory();
   const verifyCodeState = { ...state.verifyCodeReducer };
-  console.log('verify code', verifyCodeState);
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
