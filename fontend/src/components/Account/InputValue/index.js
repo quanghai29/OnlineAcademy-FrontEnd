@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import styles from './InputValue.module.scss'
+import styles from './style.module.scss'
 
 export default function InputValue(props) {
   const state = useSelector(state => state);
