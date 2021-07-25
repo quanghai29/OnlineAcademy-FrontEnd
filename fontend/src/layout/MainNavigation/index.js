@@ -19,9 +19,9 @@ function MainNavigation() {
     })
   }
 
-  if (window.location.pathname === '/course-overview') {
-    return null;
-  }
+  // if (window.location.pathname === '/course-overview') {
+  //   return null;
+  // }
   return (
     <header className={classes.header}>
       <div className={classes.logo}>
