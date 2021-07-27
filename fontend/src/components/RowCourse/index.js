@@ -18,7 +18,7 @@ export default function RowCourse(props) {
             <span className={styles['text-info__author']}>{props.data.author.fullname}</span>
           </div>
           <div className={styles['course-rating']}>
-            <RatingStar rate={4.5} />
+            <RatingStar rate={props.data.avg_vote} />
             <div className={styles['vertical-line']}></div>
             <NumberFormat value={props.data.subscriber} displayType={'text'}
               thousandSeparator={true} thousandsGroupStyle='thousand'
