@@ -70,11 +70,13 @@ export const SET_SELECTED_COURSE = 'SET_SELECTED_COURSE';
 export const UPLOAD_COURSE_IMAGE = 'UPLOAD_COURSE_IMAGE';
 
 
-// =================== Type Action Videos ==========================
+// =================== Type Action Course Overview ==========================
 export const GET_INFO_VIDEOS ='GET_INFO_VIDEOS';
 export const LOAD_VIDEO ='LOAD_VIDEO';
 export const FETCH_LOAD_VIDEO = 'FETCH_LOAD_VIDEO';
 export const FETCH_COURSE_OVERVIEW = 'FETCH_COURSE_OVERVIEW';
 export const SET_COURSE_OVERVIEW = 'SET_COURSE_OVERVIEW';
+export const FETCH_COURSE_COMMENT = 'FETCH_COURSE_COMMENT';
+export const SET_COURSE_COMMENT = 'SET_COURSE_COMMENT';
 
 //===================================================================

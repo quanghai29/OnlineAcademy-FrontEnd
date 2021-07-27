@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from './style.module.scss';
-import ReactStars from "react-rating-stars-component";
 import Comment from './Comment';
+import { useDispatch, useSelector } from "react-redux";
+import * as actionType from '../../../../redux/constants/actionTypes';
 
 export default function Feedback({course_id}) {
-  //console.log(course_id);
-  const configBigReactStars ={
-    isHalf: true,
-    activeColor: "#EC0101",
-    size: 60,
-    value: 4.7,
-    edit: false
-  };
+  const comments = useSelector(state => state.courseComments.data);
+  const dispatch = useDispatch();
+
+  useEffect(function(){
+    dispatch({
+      type: actionType.FETCH_COURSE_COMMENT,
+      payload: {
+        course_id: course_id
+      }
+    })
+  },[dispatch,course_id])
 
   return (
     <div className="row">
@@ -19,29 +23,12 @@ export default function Feedback({course_id}) {
         <div className={`card ${classes.mycard}`}>
           <div className="card-content dark-text" style={{ padding: "1px 12px" }}>
 
-            <div className="row" style={{marginBottom: 0}}>
-              <div className="col m10 offset-m1">
-                <nav className={classes.starnav}>
-                  <div className="nav-wrapper center-align">
-                    <ul className="left">
-                      <li><h3 className={classes.staravg}>4.5</h3></li>
-                      <li><ReactStars {... configBigReactStars}/></li>
-                    </ul>
-                  </div>
-                </nav>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col offset-m1" style= {{paddingLeft: "22px"}}>
-                <div className ="row">
-                  <h3 className={classes.commenthead}>550</h3>
-                  <h3 className={classes.commenthead}>Nhận xét</h3>
-                  <i className="material-icons">feedback</i>
-                </div> 
-              </div>
-            </div>
-
-            <Comment/>
+            {
+              comments
+              &&
+              comments.map(comment=> <Comment key={comment.id} {...comment}/>)
+            }
+            
           </div>
         </div>
       </div>

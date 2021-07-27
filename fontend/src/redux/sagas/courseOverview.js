@@ -22,8 +22,29 @@ function* watchFetchCourseOverview() {
   yield takeEvery(actionType.FETCH_COURSE_OVERVIEW, fetchCourseOverview);
 }
 
+
+function* fetchCourseComment(action) {
+  try {
+    const response = yield call(axios.get, `${DOMAIN_API}/course/comments/${action.payload.course_id}`);
+    if(response.status === 200){
+      const data = response.data;
+      yield put({
+        type: actionType.SET_COURSE_COMMENT,
+        payload: data
+      });
+    }
+  } catch (error) {
+    //yield put(fetchCourseFail(error.message));
+  }
+}
+
+function* watchCourseComment() {
+  yield takeEvery(actionType.FETCH_COURSE_COMMENT, fetchCourseComment);
+}
+
 export default function* CourseOverviewSaga() {
   yield all([
     watchFetchCourseOverview(),
+    watchCourseComment(),
   ])
 }

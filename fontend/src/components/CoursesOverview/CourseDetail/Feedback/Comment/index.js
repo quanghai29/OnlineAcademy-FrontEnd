@@ -1,41 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from './style.module.scss';
 import Avartar from '../../../../Common/Avartar';
 import ReactStars from "react-rating-stars-component";
 
-export default function Comment() {
-  const configReactStars = {
-    isHalf: true,
-    activeColor: "#EC0101",
-    size: 22,
-    edit: false
-  }
+export default function Comment(props) {
 
-  const configSmallReactStars = {
-    ...configReactStars,
-    value: 4.5
-  };
+  useEffect(function () {
+    
+  },[props.vote]);
 
   return (
     <div className="row" style={{ marginBottom: 0 }}>
       <div className={`card-panel grey lighten-5 z-depth-1 ${classes.cardnostyle}`}>
         <div className="row valign-wrapper">
           <div className="col m1">
-            <Avartar nickName="Triệu Lộ Tư" />
+            <Avartar {...{nickName: props.fullname}} />
           </div>
           <div className="col m10" style={{ margin: 0 }}>
             <div className="row" style={{ margin: 0 }} >
-              <h6 className={classes.darkfontheader}>Triệu lộ tư</h6>
+              <h6 className={classes.darkfontheader}>{props.fullname}</h6>
             </div>
             <div className="row" style={{ margin: 0 }}>
-              <ReactStars {...configSmallReactStars} />
+
+              {
+                props.num_rating
+                &&
+                <ReactStars
+                  isHalf={true}
+                  activeColor="#EC0101"
+                  size={22}
+                  value={+props.vote}
+                  edit={false}
+                />
+              }
+
             </div>
             <div className="row" style={{ margin: 0 }}>
-              <p className={classes.darkfonttext}>“With your budget in mind, it is easy to plan a chartered yacht vacation.
-                Companies often have a fleet of sailing vessels that can accommodate parties of various sizes.”</p>
+              <p className={classes.darkfonttext}>{props.comment}</p>
             </div>
             <div className="row" style={{ margin: 0 }}>
-              <p className={classes.darkfonttext} style={{ color: "#989898" }}>35 mins ago, 15 November 2019</p>
+              <p className={classes.darkfonttext} style={{ color: "#989898" }}>{props.vote_time}</p>
             </div>
           </div>
         </div>

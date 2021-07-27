@@ -9,6 +9,7 @@ import searchCourseReducer from './searchCourse';
 import videoLoader from './videoloader';
 import courseOverview from './courseOverview';
 import selectedCourse from './selectedCourse';
+import courseComments from './courseComments';
 
 export default combineReducers({
   courses,
@@ -20,5 +21,6 @@ export default combineReducers({
   searchCourseReducer,
   videoLoader,
   courseOverview,
-  selectedCourse
+  selectedCourse,
+  courseComments,
 });

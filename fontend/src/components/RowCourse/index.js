@@ -3,6 +3,7 @@ import courseImg from "../../assets/images/image.jpg"
 import RatingStar from "../RatingStar"
 import NumberFormat from 'react-number-format';
 
+
 export default function RowCourse(props) {
 
   return (
