@@ -86,14 +86,14 @@ function MainNavigation() {
         <ul id="nav-mobile" className="left hide-on-med-and-down">
 
           <li>
-            <Link href="/">
+            <Link to="/">
               <img src='assets/images/header/Logo.png' alt="logo header" />
             </Link>
           </li>
 
           <li className={classes.menu}>
-            <Link className={`waves-effect waves-light btn ${classes.menu}`}>
-              <i class="material-icons left">menu</i>
+            <Link className={`waves-effect waves-light btn ${classes.menu}`} to="/">
+              <i className="material-icons left">menu</i>
               Danh mục
             </Link>
           </li>
@@ -111,7 +111,7 @@ function MainNavigation() {
               
               <button className={`waves-effect waves-light btn ${classes.searchBtn}`}
                 onClick={(e) => handleClickSearchCourse(e)}>
-                <i class="material-icons">search</i>
+                <i className="material-icons">search</i>
               </button>
             </form>
           </li>
@@ -126,7 +126,7 @@ function MainNavigation() {
           </li>
 
           <li>
-            <Link href="/login" className={`waves-effect waves-light btn ${classes.handleBtn}`}>
+            <Link to="/login" className={`waves-effect waves-light btn ${classes.handleBtn}`}>
               Đăng Ký
             </Link>
           </li>
