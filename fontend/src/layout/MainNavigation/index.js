@@ -5,18 +5,20 @@ import {
   FETCH_SEARCH_COURSE
 } from "../../redux/constants/actionTypes"
 import { setSearchText } from "../../redux/actions/searchCourse";
-import { Link } from "react-router-dom"
+import { Link, useHistory} from "react-router-dom"
 
 function MainNavigation() {
   const searchCourseState = useSelector(state => state.searchCourseReducer)
   const dispatch = useDispatch();
+  const history = useHistory();
 
   function handleClickSearchCourse(e) {
     e.preventDefault();
     dispatch({
       type: FETCH_SEARCH_COURSE,
       payload: searchCourseState.text
-    })
+    });
+    history.push('/search-result');
   }
 
   // if (window.location.pathname === '/course-overview') {
@@ -86,7 +88,7 @@ function MainNavigation() {
         <ul id="nav-mobile" className="left hide-on-med-and-down">
 
           <li>
-            <Link href="/">
+            <Link to="/">
               <img src='assets/images/header/Logo.png' alt="logo header" />
             </Link>
           </li>
