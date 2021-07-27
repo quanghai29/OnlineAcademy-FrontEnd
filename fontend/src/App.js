@@ -9,6 +9,8 @@ import CourseOverview from './pages/CourseOverview';
 import HomeLecturer from './pages/Lecturer/Home';
 import UpdateCourse from './pages/Lecturer/UpdateCourse';
 
+import PreLoading from './components/PreLoading';
+
 function App() {
   return (
     <Router>
@@ -16,6 +18,7 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route path="/loading" component={PreLoading}/>
         <Route path="/login" component={LogIn}/>
         <Route path="/signup" component={SignUp}/>
         <Route path="/verify-code" component={VerifyCode}/>
