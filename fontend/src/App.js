@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Switch, Route, useLocation} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './styles/main.scss';
 import Home from './pages/Home';
-import Login from './pages/LogIn';
+import Login from './pages/Login';
 import Signup from './pages/Signup';
 import VerifyCode from './pages/VerifyCode';
 import ForgotPassword from './pages/ForgotPassword';
