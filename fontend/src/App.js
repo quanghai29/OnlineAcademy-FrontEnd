@@ -8,8 +8,8 @@ import ForgotPassword from './pages/ForgotPassword';
 import CourseOverview from './pages/CourseOverview';
 import HomeLecturer from './pages/Lecturer/Home';
 import UpdateCourse from './pages/Lecturer/UpdateCourse';
-
 import PreLoading from './components/PreLoading';
+import Learning from './pages/Learning';
 
 function App() {
   return (
@@ -26,7 +26,10 @@ function App() {
         <Route path="/lecturer" component={HomeLecturer} />
         <Route path="/update-course" component={UpdateCourse} />
         <Route path="/course-overview">
-          <CourseOverview />
+          <CourseOverview course_id={1}/>
+        </Route>
+        <Route path="/learning">
+          <Learning course_id={1}/>
         </Route>
       </Switch>
     </Router>
