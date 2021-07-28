@@ -27,7 +27,7 @@ function* fetchVideoLearning(action) {
   try {
     yield put({
       type: actionType.SET_VIDEO_LEARNING,
-      payload: action.payload.video_id
+      payload: action.payload.video_source
     });
   } catch (error) {
     //yield put(fetchCourseFail(error.message));
