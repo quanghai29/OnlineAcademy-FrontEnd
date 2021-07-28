@@ -1,8 +1,9 @@
-@import '../../styles/config';
+@import "../../styles/config";
 
 .header {
-  width: 100vw;
-  padding: 20px;
+  width: 100%;
+  height: auto;
+  padding: 10px 10px;
   top: 0;
   left: 0;
   z-index: 100;
@@ -14,11 +15,16 @@
   }
 
   .menu {
-    margin-top: 15px;
-    margin-left: 40px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: auto;
+    //justify-content: center;
+   // align-items: center;
+    a{
+      background-color: transparent;
+      color: #ffc000;
+      box-shadow: none;
+      width: 20px;
+    }
   }
 
   .menuImg {
@@ -52,6 +58,22 @@
       border-radius: 10px;
       color: #fff;
       padding-left: 40px;
+    }
+
+    .search-btn {
+      border: none;
+      outline: none;
+      background-image: $primaryBg;
+      color: #fff;
+      border-radius: 10px;
+      margin: 0px 5px;
+      height: 48px;
+      font-weight: 500;
+      &:hover {
+        cursor: pointer;
+        background-color: #ffc000;
+        background-image: none;
+      }
     }
   }
 

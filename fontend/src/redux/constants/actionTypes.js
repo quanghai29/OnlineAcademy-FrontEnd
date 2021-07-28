@@ -45,6 +45,14 @@ export const SET_ENTIRE_VERIFY_CODE_FORM_STATE = 'SET_ENTIRE_VERIFY_CODE_FORM_ST
 export const REQUEST_RESET_VERIFY_CODE_FORM = 'REQUEST_RESET_VERIFY_CODE_FORM';
 export const RESET_VERIFY_CODE_FORM = 'RESET_VERIFY_CODE_FORM';
 
+// ========================CONSTANTS FOR SEARCH COURSE ACTIONS ===============================
+export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
+export const FETCH_SEARCH_COURSE = 'FETCH_SEARCH_COURSE';
+export const SET_SEARCH_COURSE_RESULT='SET_SEARCH_COURSE_RESULT';
+export const RESET_SEARCH_FORM= 'RESET_SEARCH_FORM';
+export const RESET_SEARCH_COURSE_STATE = 'RESET_SEARCH_COURSE_STATE';
+
+// ===========================================================================================
 // hotCourses action
 export const FETCH_HOT_COURSES = 'FETCH_HOT_COURSES';
 export const SET_HOT_COURSES = 'SET_HOT_COURSES';
@@ -72,11 +80,13 @@ export const SET_SELECTED_COURSE = 'SET_SELECTED_COURSE';
 export const UPLOAD_COURSE_IMAGE = 'UPLOAD_COURSE_IMAGE';
 
 
-// =================== Type Action Videos ==========================
+// =================== Type Action Course Overview ==========================
 export const GET_INFO_VIDEOS ='GET_INFO_VIDEOS';
 export const LOAD_VIDEO ='LOAD_VIDEO';
 export const FETCH_LOAD_VIDEO = 'FETCH_LOAD_VIDEO';
 export const FETCH_COURSE_OVERVIEW = 'FETCH_COURSE_OVERVIEW';
 export const SET_COURSE_OVERVIEW = 'SET_COURSE_OVERVIEW';
+export const FETCH_COURSE_COMMENT = 'FETCH_COURSE_COMMENT';
+export const SET_COURSE_COMMENT = 'SET_COURSE_COMMENT';
 
 //===================================================================

@@ -5,11 +5,13 @@ import verifyCodeReducer from './verifyCode';
 import hotCourses from './hotCourses';
 import coursesOfLecturer from './coursesOfLecturer';
 import loginReducer from './login';
+import searchCourseReducer from './searchCourse';
 import videoLoader from './videoloader';
 import courseOverview from './courseOverview';
 import selectedCourse from './selectedCourse';
 import latestCourses from './latestCourses';
 import mostViewCourses from './mostViewCourses';
+import courseComments from './courseComments';
 
 export default combineReducers({
   courses,
@@ -18,9 +20,11 @@ export default combineReducers({
   signUpReducer,
   verifyCodeReducer,
   loginReducer,
+  searchCourseReducer,
   videoLoader,
   courseOverview,
   selectedCourse,
   latestCourses,
-  mostViewCourses
+  mostViewCourses,
+  courseComments,
 });

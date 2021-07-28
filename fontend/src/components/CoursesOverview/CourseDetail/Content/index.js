@@ -6,7 +6,6 @@ import Chapter from './Chapter';
 import Video from './Video';
 
 export default function Content(props) {
-  console.log(props);
   useEffect(function () {
     initCollapsible();
   })
@@ -22,12 +21,14 @@ export default function Content(props) {
           {
             props.chapters &&
             props.chapters.map(chapter =>
-              <li key= {chapter.id}>
+              <li key= {chapter.chapter_id}>
                 <div className="collapsible-header">
                   <Chapter {...chapter}/>
                 </div>
                 <div className="collapsible-body">
-                  <Video />
+                  {
+                    chapter.videos.map(video => <Video key={video.video_id} {...video}/>)
+                  }
                 </div>
               </li>
             )
