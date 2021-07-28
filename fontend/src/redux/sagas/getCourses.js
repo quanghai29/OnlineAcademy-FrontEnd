@@ -1,20 +1,41 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
-import axios from 'axios';
+import { all, takeLatest, put, call } from 'redux-saga/effects';
+import { getCourses } from '../../api/course';
 import * as type from '../constants/actionTypes';
-import { setCourse, fetchCourseFails } from '../actions/course';
+import {
+  setLatestCourses,
+  fetchLatestCoursesFail,
+  setMostViewCourses,
+  fetchMostViewCoursesFail,
+} from '../actions/course';
 
-function* fetchCourse() {
-    try {
-        const response = yield call(axios.get, 'http://localhost:5050/courses');
-        // console.log(response.data);
-        yield put(setCourse(response.data));
-    } catch (error) {
-        yield put(fetchCourseFails(error.message));
-    }
+function* fetchMostViewCourses(action) {
+  try {
+    const data = yield call(getCourses.getMostViewCourses);
+    console.log(data);
+    yield put(setMostViewCourses(data));
+  } catch (error) {
+    yield put(fetchMostViewCoursesFail(error.message));
+  }
 }
 
-function* watchFetchCourse() {
-    yield takeEvery(type.FETCH_COURSES, fetchCourse);
+function* watchMostViewCourses() {
+  yield takeLatest(type.FETCH_MOST_VIEW_COURSES, fetchMostViewCourses);
 }
 
-export default watchFetchCourse;
+function* fetchLatestCourses(action) {
+  try {
+    const data = yield call(getCourses.getLatestCourses);
+    console.log(data);
+    yield put(setLatestCourses(data));
+  } catch (error) {
+    yield put(fetchLatestCoursesFail(error.message));
+  }
+}
+
+function* watchLatestCourses() {
+  yield takeLatest(type.FETCH_LATEST_COURSES, fetchLatestCourses);
+}
+
+export default function* uploadCourseSaga() {
+  yield all([watchLatestCourses(), watchMostViewCourses()]);
+}

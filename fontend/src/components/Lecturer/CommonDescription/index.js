@@ -3,17 +3,8 @@ import { Select } from 'react-materialize';
 import { useDispatch } from 'react-redux';
 import { uploadCourse } from '../../../redux/actions/coursesOfLecturer';
 import { useForm } from 'react-hook-form';
-// import { EditorState, convertToRaw } from 'draft-js';
-// import { Editor } from 'react-draft-wysiwyg';
-// import draftToHtml from 'draftjs-to-html';
-// import htmlToDraft from 'html-to-draftjs';
 
 const CommonDescription = () => {
-  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
-  // const onEditorStateChange = (editorState) => {
-  //   setEditorState(editorState);
-  // }
   const dispatch = useDispatch();
   const {
     register,
@@ -66,14 +57,6 @@ const CommonDescription = () => {
         </div>
         <div className="row">
           <div className="input-field col s12">
-            {/* <Editor
-              editorState={editorState}
-              toolbarClassName="toolbarClassName"
-              wrapperClassName="wrapperClassName"
-              editorClassName="editorClassName"
-              onEditorStateChange={() => onEditorStateChange}
-            />
-            <textarea value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}></textarea> */}
             <textarea
               id="textarea1"
               className="materialize-textarea"

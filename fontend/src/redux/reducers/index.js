@@ -9,6 +9,8 @@ import searchCourseReducer from './searchCourse';
 import videoLoader from './videoloader';
 import courseOverview from './courseOverview';
 import selectedCourse from './selectedCourse';
+import latestCourses from './latestCourses';
+import mostViewCourses from './mostViewCourses';
 import courseComments from './courseComments';
 import courseLearning from './courseLearning';
 
@@ -23,6 +25,8 @@ export default combineReducers({
   videoLoader,
   courseOverview,
   selectedCourse,
+  latestCourses,
+  mostViewCourses,
   courseComments,
   courseLearning,
 });
