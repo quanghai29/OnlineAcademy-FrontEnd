@@ -18,3 +18,22 @@ export const uploadData = {
         }
     }
 }
+
+export const getCourses = {
+    getLatestCourses: async () => {
+        try {
+            const { data } = await appAPI.get('/course/10-latest');
+            return data;
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    },
+    getMostViewCourses: async () => {
+        try {
+            const { data } = await appAPI.get('/course/10-latest');
+            return data;
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    }
+}

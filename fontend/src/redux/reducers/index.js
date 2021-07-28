@@ -8,6 +8,8 @@ import loginReducer from './login';
 import videoLoader from './videoloader';
 import courseOverview from './courseOverview';
 import selectedCourse from './selectedCourse';
+import latestCourses from './latestCourses';
+import mostViewCourses from './mostViewCourses';
 
 export default combineReducers({
   courses,
@@ -18,5 +20,7 @@ export default combineReducers({
   loginReducer,
   videoLoader,
   courseOverview,
-  selectedCourse
+  selectedCourse,
+  latestCourses,
+  mostViewCourses
 });

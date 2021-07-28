@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCourses } from '../../redux/actions/course';
-import { fetchHotCourse } from '../../redux/actions/hotCourses';
+import { fetchLatestCourses, fetchMostViewCourses } from '../../redux/actions/course';
 import Layout from '../../layout/Layout';
 import classes from './Home.module.scss';
 import Courses from '../../components/Courses';
@@ -9,11 +8,13 @@ import Hero from '../../components/Hero';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { courses, hotCourses } = useSelector((state) => state);
+  const { latestCourses, mostViewCourses } = useSelector((state) => state);
+  console.log(latestCourses.data);
+  console.log(mostViewCourses.data);
 
   useEffect(() => {
-    dispatch(fetchCourses());
-    dispatch(fetchHotCourse());
+    dispatch(fetchLatestCourses());
+    dispatch(fetchMostViewCourses());
     
   }, [dispatch]);
 
@@ -27,10 +28,10 @@ const Home = () => {
             <p>được cập nhật hàng tuần, hàng tháng</p>
           </div>
           <section>
-            <Courses courses={courses.data} title='Hot Trong Tuần' />
+            <Courses courses={latestCourses.data} title='Những khóa học mới nhất' />
           </section>
           <section>
-            <Courses courses={hotCourses.data} title='Lượt xem nhiều nhất' />
+            <Courses courses={mostViewCourses.data} title='Lượt xem nhiều nhất' />
           </section>
         </main>
       </div>
