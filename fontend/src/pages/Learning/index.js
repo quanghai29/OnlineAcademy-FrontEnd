@@ -8,6 +8,7 @@ const Learning = ({course_id = 1}) => {
   const courseLearning = useSelector((state) => state.courseLearning.data);
   const {chapters, ...courseInfo} = courseLearning;
   
+  const video_source = 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4'
   const dispatch = useDispatch();
 
   useEffect(function() {
@@ -23,7 +24,7 @@ const Learning = ({course_id = 1}) => {
   return (
     <div className="row" style={{padding: 0, margin: 0}}>
       <div className="row">
-        <VideoPlayer {...courseInfo}/>
+        <VideoPlayer {...{...courseInfo, video_source }}/>
       </div>
       <div className="row">
         <Content {...{chapters: chapters}}/>

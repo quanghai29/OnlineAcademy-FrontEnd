@@ -1,4 +1,4 @@
-import LoginContainer from "../../components/Login/LoginContainer";
+import LoginContainer from "../../components/Login";
 
 const Login =()=>{
   return(
