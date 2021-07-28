@@ -45,11 +45,21 @@
   align-items: center;
   span{
     margin-right: 10px;
+    white-space: nowrap;
   }
-  div{
+  
     input,ul,select{
       font-size: 14px !important;
       margin: 0 !important;
+    }
+  select{
+    display: inline-block !important;
+    border-radius: 25px !important;
+    outline: none;
+    height: 2rem !important;
+    align-items: center;
+    &:hover{
+      border: 1px solid #18a0fb;
     }
   }
 }
@@ -97,4 +107,12 @@
 
 .disable-previous-next{
   display: none;
+}
+
+.loading--position{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
