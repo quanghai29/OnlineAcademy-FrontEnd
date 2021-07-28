@@ -1,10 +1,12 @@
 import React from 'react';
 import { Select } from 'react-materialize';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { uploadCourse } from '../../../redux/actions/coursesOfLecturer';
 import { useForm } from 'react-hook-form';
+import Swal from "sweetalert2"
 
 const CommonDescription = () => {
+  const {uploadingCommonDesc, uploadedCommonDescError} = useSelector(state => state.uploadCourse);
   const dispatch = useDispatch();
   const {
     register,
@@ -17,6 +19,22 @@ const CommonDescription = () => {
     console.log(data.category_id);
     data.category_id = +data.category_id;
     dispatch(uploadCourse(data));
+    if(!uploadingCommonDesc) {
+      if(uploadedCommonDescError) {
+        Swal.fire({
+          title: "Upload Failure",
+          text: uploadedCommonDescError,
+          icon: 'error',
+          confirmButtonText: 'EXIT'
+        })
+      } else {
+        Swal.fire({
+          title: "Upload Success",
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+      }
+    }
   };
 
   const requiredStyle = {

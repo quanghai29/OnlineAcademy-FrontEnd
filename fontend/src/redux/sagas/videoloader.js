@@ -1,4 +1,4 @@
-import { takeEvery, call, put, all } from 'redux-saga/effects';
+import { takeEvery, put, all } from 'redux-saga/effects';
 //import axios from 'axios';
 import * as actionVideo from '../actions/videoloader';
 import * as actionType from '../constants/actionTypes';

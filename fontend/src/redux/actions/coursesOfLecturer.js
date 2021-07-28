@@ -26,7 +26,29 @@ export const uploadCourse = (data) => ({
   payload: data
 });
 
+export const uploadCourseDone = () => ({
+  type: type.UPLOAD_COURSE_DONE
+})
+
+export const uploadCourseFail = (message) => ({
+  type: type.UPLOAD_COURSE_FAIL,
+  payload: {
+    message
+  }
+})
+
 export const uploadCourseImage = (data) => ({
   type: type.UPLOAD_COURSE_IMAGE,
   payload: data
 });
+
+export const uploadCourseImgDone = () => ({
+  type: type.UPLOAD_COURSE_IMAGE_DONE
+})
+
+export const uploadCourseImgFail = (message) => ({
+  type: type.UPLOAD_COURSE_IMAGE_FAIL,
+  payload: {
+    message
+  }
+})

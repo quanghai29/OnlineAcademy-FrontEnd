@@ -6,7 +6,7 @@ import CourseDetail from '../../components/CoursesOverview/CourseDetail';
 import { useDispatch, useSelector} from 'react-redux';
 import * as actionType from '../../redux/constants/actionTypes';
 
-const CourseOverview = ({course_id = 1}) => {
+const CourseOverview = ({course_id}) => {
   const courseOverview = useSelector((state) => state.courseOverview);
   const {chapters, ...overviewData} = courseOverview.data;
   const dispatch = useDispatch();
