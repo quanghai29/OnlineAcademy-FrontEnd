@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from './VideoPlayer.module.scss';
 import ReactPlayer from 'react-player';
 import { Link } from "react-router-dom";
 //import { useDispatch, useSelector } from 'react-redux';
 //import * as actionVideoLoader from '../../../redux/actions/videoloader';
 
-export default function VideoPlayer() {
+export default function VideoPlayer(props) {
   // const dispatch = useDispatch();
   // const videoLoader = useSelector((state)=>state.videoLoader);
   
-  // useEffect(() => {
+  // useEffect(() => { 
   //   dispatch(actionVideoLoader.fetchloadvideo());
   // }, [dispatch, videoLoader]);
 
   const configReactPlayer = {
     className: 'react-player',
-    url: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4',
+    url: props.video_source,
     width: "100%",
     height: "100%",
     controls: true,

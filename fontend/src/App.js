@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './styles/main.scss';
 import Home from './pages/Home';
-import Login from './pages/Login';
 import Signup from './pages/Signup';
 import VerifyCode from './pages/VerifyCode';
 import ForgotPassword from './pages/ForgotPassword';
 import CourseOverview from './pages/CourseOverview';
 import HomeLecturer from './pages/Lecturer/Home';
 import UpdateCourse from './pages/Lecturer/UpdateCourse';
-import PreLoading from './components/PreLoading';
+//import PreLoading from './components/PreLoading';
 import Learning from './pages/Learning';
 import SearchCourseResult from './pages/SearchCourseResult';
+import Login from './pages/Login';
 
 function App() {
   return (
