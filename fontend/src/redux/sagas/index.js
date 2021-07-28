@@ -9,6 +9,7 @@ import loginSaga from './login';
 import searchCourseSaga from './searchCourse';
 import videoLoaderSaga from './videoloader';
 import CourseOverviewSaga from './courseOverview';
+import CourseLearningSaga from './courseLearning';
 
 export default function* rootSaga() {
     yield all([
@@ -22,6 +23,7 @@ export default function* rootSaga() {
         loginSaga(),
         searchCourseSaga(),
         videoLoaderSaga(),
-        CourseOverviewSaga()
+        CourseOverviewSaga(),
+        CourseLearningSaga(),
     ])
 }

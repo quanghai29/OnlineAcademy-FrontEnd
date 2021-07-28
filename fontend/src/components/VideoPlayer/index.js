@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import classes from './VideoPlayer.module.scss';
 import ReactPlayer from 'react-player';
+import { Link } from "react-router-dom";
 //import { useDispatch, useSelector } from 'react-redux';
 //import * as actionVideoLoader from '../../../redux/actions/videoloader';
 
@@ -14,7 +15,7 @@ export default function VideoPlayer() {
 
   const configReactPlayer = {
     className: 'react-player',
-    url: '',
+    url: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4',
     width: "100%",
     height: "100%",
     controls: true,
@@ -38,10 +39,10 @@ export default function VideoPlayer() {
       <div className={`row ${classes.controlheader}`}>
 
         <div className="col m4">
-          <a className={classes.backcouse} href="/">
+          <Link className={classes.backcouse} href="/">
             <i className="material-icons left">arrow_back</i>
-            Khóa học
-          </a>
+            Trang chủ
+          </Link>
         </div>
 
         <div className="col m4 right">
@@ -52,10 +53,8 @@ export default function VideoPlayer() {
         </div>
 
       </div>
-      <div className="row" style={{ height: "100%", marginBottom: "0px" }}>
-        <div className="col m10 offset-m1">
-          <ReactPlayer {...configReactPlayer} />
-        </div>
+      <div className={`row ${classes.videoPlayer}`}>
+        <ReactPlayer {...configReactPlayer} />
       </div>
 
     </div>
