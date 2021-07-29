@@ -2,7 +2,7 @@ import {
   SET_SEARCH_TEXT,
   SET_SEARCH_COURSE_RESULT,
   RESET_SEARCH_FORM,
-  RESET_SEARCH_COURSE_STATE
+  RESET_SEARCH_COURSE_STATE,
 } from "../constants/actionTypes"
 
 export const setSearchText=(text)=>{

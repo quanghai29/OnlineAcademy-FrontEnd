@@ -1,7 +1,7 @@
 
-import ActionButton from "../../components/Account/ActionButton"
-import InputValue from "../../components/Account/InputValue"
-import HeaderForm from "../../components/Account/HeaderForm"
+import ActionButton from "../Account/ActionButton"
+import InputValue from "../Account/InputValue"
+import HeaderForm from "../Account/HeaderForm"
 import '../../styles/account.scss'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
