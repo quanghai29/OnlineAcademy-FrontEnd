@@ -19,6 +19,8 @@ export default function SearchCourseResultContainer(props) {
   const [selectedPage, setSelectedPage] = useState(0);
   const [sortedData, setSortedData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [orderBy, setOrderBy] = useState('avg_vote');
+  const [orderDir, setOrderDir] = useState('desc');
 
   const handlePageClick = (data) => {
     setSelectedPage(data.selected);
@@ -28,12 +30,24 @@ export default function SearchCourseResultContainer(props) {
 
   useEffect(() => {
     if (searchResult.courses) {
-      let data = _.orderBy(searchResult.courses, ['sum_vote'], ['asc']);
+      let data = _.orderBy(searchResult.courses, [orderBy], [orderDir]);
       setSortedData(data);
       setIsLoading(false);
     }
-  }, [searchResult.courses])
+  }, [searchResult.courses,orderBy,orderDir])
 
+  const optionData = [
+    {orderBy:'avg_vote', orderDir:'desc'},
+    {orderBy:'avg_vote', orderDir:'asc'},
+    {orderBy:'price', orderDir:'desc'},
+    {orderBy:'price', orderDir:'asc'},
+  ]
+
+  function handleChooseOptionSort(e){
+    const index = e.target.value;
+    setOrderBy(optionData[index].orderBy);
+    setOrderDir(optionData[index].orderDir)
+  }
 
   let contentEle = null;
   if (isLoading || !props.isSearched) {
@@ -86,9 +100,11 @@ export default function SearchCourseResultContainer(props) {
           </div>
           <div className={`input-field ${styles['custom-input-field']}`}>
             <span>Sắp xếp theo: </span>
-            <select>
-              <option value="1">Tăng dần theo lượt vote</option>
-              <option value="2">Giảm dần theo lượt vote</option>
+            <select onChange={handleChooseOptionSort}>
+              <option value={0}>Giảm dần theo lượt vote</option>
+              <option value={1}>Tăng dần theo lượt vote</option>
+              <option value={2}>Giảm dần theo giá</option>
+              <option value={3}>Tăng dần theo giá</option>
             </select>
           </div>
         </div>
