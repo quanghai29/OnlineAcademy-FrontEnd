@@ -7,11 +7,11 @@ import ForgotPassword from './pages/ForgotPassword';
 import CourseOverview from './pages/CourseOverview';
 import HomeLecturer from './pages/Lecturer/Home';
 import UpdateCourse from './pages/Lecturer/UpdateCourse';
-//import PreLoading from './components/PreLoading';
 import Learning from './pages/Learning';
 import SearchCourseResult from './pages/SearchCourseResult';
 import UpdateProfile from './pages/User/UpdateProfile';
 import Login from './pages/Login';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
         <Route path="/update-course" component={UpdateCourse} />
         <Route path="/update-profile" component={UpdateProfile} />
         <Route path="/search-result" component={SearchCourseResult}/>
+        <Route path="/admin" component={Admin}/>
         <Route path="/course-overview">
           <CourseOverview course_id={1}/>
         </Route>

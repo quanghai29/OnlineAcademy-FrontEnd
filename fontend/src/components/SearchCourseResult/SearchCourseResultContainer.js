@@ -1,5 +1,5 @@
 import RowCourse from "../RowCourse"
-import styles from './ListRowCourse.module.scss'
+import styles from './SearchCourse.module.scss'
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useEffect, useState } from "react";
 import * as _ from "lodash";
