@@ -3,20 +3,21 @@ import classes from './VideoPlayer.module.scss';
 import ReactPlayer from 'react-player';
 import { Link } from "react-router-dom";
 import { DOMAIN_API } from "../../redux/constants/common";
+import { useSelector } from "react-redux";
 //import { useDispatch, useSelector } from 'react-redux';
 //import * as actionVideoLoader from '../../../redux/actions/videoloader';
 
 export default function VideoPlayer(props) {
   // const dispatch = useDispatch();
   // const videoLoader = useSelector((state)=>state.videoLoader);
-  
-  // useEffect(() => { 
-  //   dispatch(actionVideoLoader.fetchloadvideo());
-  // }, [dispatch, videoLoader]);
+
+  const video_source = useSelector((state) => state.videoLearning.data);
+
+  useEffect(()=>{},[video_source]);
 
   const configReactPlayer = {
     className: 'react-player',
-    url: `${DOMAIN_API}/common/media/load_video/${props.video_source}`,
+    url: `${DOMAIN_API}/common/media/load_video/${video_source}`,
     width: "100%",
     height: "100%",
     controls: true,

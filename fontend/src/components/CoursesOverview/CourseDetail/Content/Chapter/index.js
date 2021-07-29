@@ -1,5 +1,6 @@
 import React from "react";
 import classes from './style.module.scss';
+import {timeFormart} from '../../../../../utils/helpers';
 
 export default function Chapter(props) {
   return (
@@ -12,7 +13,7 @@ export default function Chapter(props) {
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li><p>{props.sum_video_chapter} bài học</p></li>
           <li><p>&#8728;</p></li>
-          <li><p>{props.sum_duration_chapter} giây</p></li>
+          <li><p>{ timeFormart(props.sum_duration_chapter)}</p></li>
         </ul>
       </div>
     </nav>
