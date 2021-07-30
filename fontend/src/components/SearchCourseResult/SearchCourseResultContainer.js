@@ -23,7 +23,7 @@ export default function SearchCourseResultContainer(props) {
   const [orderBy, setOrderBy] = useState('avg_vote');
   const [orderDir, setOrderDir] = useState('desc');
 
-  const handlePageClick = (data) => {
+  const handleClickSelectedPage = (data) => {
     setSelectedPage(data.selected);
     let offset = Math.ceil(data.selected * amountItemPerPage);
     setOffset(offset);
@@ -122,7 +122,7 @@ export default function SearchCourseResultContainer(props) {
           searchResult.courses.length / amountItemPerPage)}
           pageRangeDisplayed={5}
           marginPagesDisplayed={2}
-          handleClickSelectedPage={handlePageClick}
+          handleClickSelectedPage={handleClickSelectedPage}
           selectedPage={selectedPage}
         />
       </div>

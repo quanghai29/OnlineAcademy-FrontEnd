@@ -1,4 +1,3 @@
-import PaginationContainer from "../PaginationContainer/PaginationContainer";
 import { Link } from "react-router-dom";
 import styles from "./AdminContainer.module.scss"
 
@@ -13,17 +12,13 @@ const AdminContainer = ({ children, title }) => {
       </div>
       <div className={styles['admin__title']}>
         <span className={styles['title']}>{title}</span>
-        <span class="material-icons">
+        <span className="material-icons">
           format_list_bulleted
         </span>
       </div>
       <div className={styles['children-content']}>
         {children}
       </div>
-      <PaginationContainer pageCount={10}
-        pageRangeDisplayed={5}
-        marginPagesDisplayed={2}
-      />
     </div>
   )
 }
