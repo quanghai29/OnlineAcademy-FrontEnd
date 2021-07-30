@@ -11,7 +11,7 @@ import Learning from './pages/Learning';
 import SearchCourseResult from './pages/SearchCourseResult';
 import UpdateProfile from './pages/User/UpdateProfile';
 import Login from './pages/Login';
-import Admin from './pages/Admin';
+import AdminCategory from './pages/AdminCategory';
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
         <Route path="/update-course" component={UpdateCourse} />
         <Route path="/update-profile" component={UpdateProfile} />
         <Route path="/search-result" component={SearchCourseResult}/>
-        <Route path="/admin" component={Admin}/>
+        <Route path="/admin/category" component={AdminCategory}/>
         <Route path="/course-overview">
           <CourseOverview course_id={1}/>
         </Route>
