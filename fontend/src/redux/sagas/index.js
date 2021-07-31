@@ -11,6 +11,9 @@ import videoLoaderSaga from './videoloader';
 import CourseOverviewSaga from './courseOverview';
 import CourseLearningSaga from './courseLearning';
 import categorySaga from './category';
+import FavoriteCourseSaga from './favoriteCourse';
+import RegisterCourseSaga from './registerCourse';
+import CourseCommentSaga from './courseComment';
 
 export default function* rootSaga() {
   yield all([
@@ -27,5 +30,8 @@ export default function* rootSaga() {
     CourseOverviewSaga(),
     CourseLearningSaga(),
     categorySaga(),
+    FavoriteCourseSaga(),
+    RegisterCourseSaga(),
+    CourseCommentSaga(),
   ])
 }
