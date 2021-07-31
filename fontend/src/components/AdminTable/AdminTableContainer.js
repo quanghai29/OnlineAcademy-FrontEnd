@@ -3,8 +3,8 @@ import styles from "./AdminTableContainer.module.scss"
 
 const AdminTableContainer = (props) => {
   const headerValues = [];
-  const headerKeys =[];
-  for(let key in props.headers){
+  const headerKeys = [];
+  for (let key in props.headers) {
     headerKeys.push(key);
     headerValues.push(props.headers[key]);
   }
@@ -29,13 +29,14 @@ const AdminTableContainer = (props) => {
                 <th key={index}>{item}</th>
               )
             })}
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {props.data.map((item, index) => {
             return (
               <tr key={index}>
-                <td>{props.startIndex +index + 1}</td>
+                <td>{props.startIndex + index + 1}</td>
                 <td>{item[headerKeys[1]]}</td>
                 <td>{item[headerKeys[2]]}</td>
                 <td>{item[headerKeys[3]]}</td>

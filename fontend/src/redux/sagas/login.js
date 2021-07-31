@@ -14,7 +14,7 @@ import {
 import{
   submitLoginForm,
   activeAccount
-} from "../axios/account"
+} from "../../api/account"
 
 function* requestSetUsername(action) {
   const validateResult = yield call(validateUsername,

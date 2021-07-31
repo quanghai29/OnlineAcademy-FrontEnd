@@ -96,3 +96,9 @@ export const SET_COURSE_LEARNING = 'SET_COURSE_LEARNING';
 export const FETCH_VIDEO_LEARNING = 'FETCH_VIDEO_LEARNING';
 export const SET_VIDEO_LEARNING = 'SET_VIDEO_LEARNING';
 //===================================================================
+
+// ================== Action types of Admin and Category===========================
+export const FETCH_CATEGORY_DATA = 'FETCH_CATEGORY_DATA';
+export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA'
+
+

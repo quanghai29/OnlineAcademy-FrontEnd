@@ -2,46 +2,57 @@ import AdminContainer from "../Admin/AdminContainer";
 import styles from "./AdminCategory.module.scss";
 import AdminTableContainer from "../AdminTable/AdminTableContainer";
 import PaginationContainer from "../PaginationContainer/PaginationContainer";
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategory } from "../../redux/actions/category"
 
 const AdminCategoryContainer = () => {
+  const categoryState = useSelector(state => state.categoryReducer);
+  const dispatch = useDispatch();
   const perPage = 5;
 
   //Tạo keys của headers trùng với keys của item trong tableData 
   const headers = {
-    stt:'STT',
+    stt: 'STT',
     category_name: 'Danh mục',
-    last_update:'Ngày cập nhật',
-    amount_course:'Số lượng khóa học',
-    
-  }; 
+    last_update: 'Ngày cập nhật',
+    amount_course: 'Số lượng khóa học',
+  };
 
-  const tableData = [
-    {id: 1,category_name: 'Lập trình web',last_update: '07/04/2021', amount_course: 20},
-    {id: 2,category_name: 'Lập trình mobile',last_update: '07/04/2021', amount_course: 20},
-    {id: 3,category_name: 'Lập trình C/C++',last_update: '07/04/2021', amount_course: 20},
-    {id: 4,category_name: 'Lập trình game',last_update: '07/04/2021', amount_course: 20},
-    {id: 5,category_name: 'Lập trình dữ liệu',last_update: '07/04/2021', amount_course: 20},
-    {id: 5,category_name: 'Lập trình AI',last_update: '07/04/2021', amount_course: 20}
-  ]
-
+  const [isLoading, setIsLoading] = useState(true);
   const [pageData, setPageData] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [categories, setCategories] = useState([]);
 
-  useEffect(()=>{
-    const data = tableData.slice(offset, offset+perPage);
-    setPageData(data);
-  }, [offset])
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, []);
 
-  function handleEditTableItem(item){
+  useEffect(() => {
+    if (categoryState.categories) {
+      setCategories(categoryState.categories);
+      setIsLoading(false);
+    }else{
+      setIsLoading(true);
+    }
+  }, [categoryState])
+
+  useEffect(() => {
+    if (categories.length > 0) {
+      const data = categories.slice(offset, offset + perPage);
+      setPageData(data);
+    }
+  }, [offset,categories])
+
+  function handleEditTableItem(item) {
     console.log('edit item', item);
   }
 
-  function handleDeleteTableItem(item){
+  function handleDeleteTableItem(item) {
     console.log('delete item', item);
   }
 
-  function handleClickSelectedPage(data){
+  function handleClickSelectedPage(data) {
     const selected = data.selected;
     let offset = Math.ceil(selected * perPage);
     setOffset(offset);
@@ -59,15 +70,20 @@ const AdminCategoryContainer = () => {
             Tạo danh mục
           </button>
         </div>
-        <AdminTableContainer headers={headers} data={pageData}
-          editItem={handleEditTableItem} deleteItem={handleDeleteTableItem}
-          startIndex={offset}
-        />
       </div>
-      <PaginationContainer pageCount={Math.ceil(tableData.length/perPage)}
-        pageRangeDisplayed={5} marginPagesDisplayed={2}
-        handleClickSelectedPage={handleClickSelectedPage}
-      />
+      {
+        !isLoading && <>
+          <AdminTableContainer headers={headers} data={pageData}
+            editItem={handleEditTableItem} deleteItem={handleDeleteTableItem}
+            startIndex={offset}
+          />
+          <PaginationContainer pageCount={Math.ceil(categories.length / perPage)}
+            pageRangeDisplayed={5} marginPagesDisplayed={2}
+            handleClickSelectedPage={handleClickSelectedPage}
+          />
+        </>
+      }
+
     </AdminContainer>
   )
 }
