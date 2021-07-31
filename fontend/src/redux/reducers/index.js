@@ -15,6 +15,8 @@ import courseComments from './courseComments';
 import uploadCourse from './uploadCourse';
 import courseLearning from './courseLearning';
 import videoLearning from './videoLearning';
+import favoriteCourse from './favoriteCourse';
+import registerCourse from'./registerCourse';
 
 export default combineReducers({
   courses,
@@ -33,4 +35,6 @@ export default combineReducers({
   uploadCourse,
   courseLearning,
   videoLearning,
+  favoriteCourse,
+  registerCourse
 });

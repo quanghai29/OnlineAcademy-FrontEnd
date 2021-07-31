@@ -9,8 +9,7 @@ import {timeFormart} from '../../../../../utils/helpers';
 
 export default function Video(props) {
   const dispatch = useDispatch();
-  const video_source = '1.mp4';
-
+  
   const playVideo = (isLearning, video_source) => {
     if (isLearning && video_source) {
       dispatch({
@@ -21,10 +20,13 @@ export default function Video(props) {
       })
     }
   }
+  useEffect(function(){
 
-  const configReactPlayer = {
+  },[props.video_source])
+
+  let configReactPlayer = {
     className: 'react-player',
-    url: video_source && `${DOMAIN_API}/common/media/load_video/${video_source}`,
+    url: `${DOMAIN_API}/common/media/load_video/${props.video_source}`,
     width: "100%",
     height: "100%",
     controls: true,
@@ -35,10 +37,6 @@ export default function Video(props) {
           controlsList: 'nodownload'  //<- this is the important bit
         }
       }
-    },
-    onPlay: () => {
-    },
-    onPause: () => {
     },
   };
 
@@ -69,7 +67,7 @@ export default function Video(props) {
             {
               props.isPreview ?
                 <li>
-                  <button data-target={props.video_id} class="btn modal-trigger">Xem thử</button>
+                  <button data-target={props.video_id} className="btn modal-trigger">Xem thử</button>
                 </li>
                 : <li><p>&ensp;</p></li>
             }
@@ -80,7 +78,7 @@ export default function Video(props) {
               &&
               <div id={props.video_id} className={`modal ${classes.styleModal}`}>
                 <div className="modal-content">
-                  <ReactPlayer {...configReactPlayer} />
+                  <ReactPlayer {...configReactPlayer}/>
                 </div>
               </div>
             }

@@ -14,6 +14,9 @@ import UpdateProfile from './pages/User/UpdateProfile';
 import Login from './pages/Login';
 
 function App() {
+  //test otpToken first
+  localStorage.setItem('otpToken', '123456');
+  
   return (
     <Router>
       <Switch>
