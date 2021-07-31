@@ -14,11 +14,15 @@ function MainNavigation() {
 
   function handleClickSearchCourse(e) {
     e.preventDefault();
-    dispatch({
-      type: FETCH_SEARCH_COURSE,
-      payload: searchCourseState.text
-    });
-    history.push('/search-result');
+    if(searchCourseState.text){
+      dispatch({
+        type: FETCH_SEARCH_COURSE,
+        payload: searchCourseState.text
+      });
+      history.push('/search-result');
+    }else{
+      return;
+    }
   }
 
   // if (window.location.pathname === '/course-overview') {
