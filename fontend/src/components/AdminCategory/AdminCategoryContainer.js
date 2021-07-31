@@ -6,13 +6,16 @@ import {useEffect, useState} from 'react'
 
 const AdminCategoryContainer = () => {
   const perPage = 5;
-  const headers = [
-    'STT',
-    'Danh mục',
-    'Ngày cập nhật',
-    'Số lượng khóa học',
-    ''
-  ]
+
+  //Tạo keys của headers trùng với keys của item trong tableData 
+  const headers = {
+    stt:'STT',
+    category_name: 'Danh mục',
+    last_update:'Ngày cập nhật',
+    amount_course:'Số lượng khóa học',
+    
+  }; 
+
   const tableData = [
     {id: 1,category_name: 'Lập trình web',last_update: '07/04/2021', amount_course: 20},
     {id: 2,category_name: 'Lập trình mobile',last_update: '07/04/2021', amount_course: 20},

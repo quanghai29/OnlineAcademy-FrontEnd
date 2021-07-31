@@ -2,8 +2,14 @@
 import styles from "./AdminTableContainer.module.scss"
 
 const AdminTableContainer = (props) => {
-  const headers = props.headers
-
+  const headerValues = [];
+  const headerKeys =[];
+  for(let key in props.headers){
+    headerKeys.push(key);
+    headerValues.push(props.headers[key]);
+  }
+  console.log('header key', headerKeys);
+  console.log('header value', headerValues)
 
   function handleEditItem(e) {
     props.editItem(e.target.id);
@@ -18,7 +24,7 @@ const AdminTableContainer = (props) => {
       <table className={styles['admin-table']}>
         <thead>
           <tr>
-            {headers.map((item, index) => {
+            {headerValues?.map((item, index) => {
               return (
                 <th key={index}>{item}</th>
               )
@@ -30,9 +36,9 @@ const AdminTableContainer = (props) => {
             return (
               <tr key={index}>
                 <td>{props.startIndex +index + 1}</td>
-                <td>{item.category_name}</td>
-                <td>{item.last_update}</td>
-                <td>{item.amount_course}</td>
+                <td>{item[headerKeys[1]]}</td>
+                <td>{item[headerKeys[2]]}</td>
+                <td>{item[headerKeys[3]]}</td>
                 <td>
                   <span id={item.id} onClick={handleEditItem}
                     className={`material-icons ${styles['edit-icon']}`}>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Swal from 'sweetalert2';
+import jwt from 'jsonwebtoken';
 
 const baseUrl = 'http://localhost:3001';
 const instance = axios.create({
@@ -62,9 +63,11 @@ export async function submitVerifyCodeForm(data) {
 export async function submitLoginForm(data) {
   try {
     const response = await instance.post('/auth', data);
-    //console.log(response.data);
     if (!response.data.shouldConfirmEmail) {
       if (response.data.authenticated) {
+        const decoded = jwt.verify(response.data.accessToken,
+          'HOA_ROI_CUA_PHAT');
+        localStorage.setItem('decodePayload', JSON.stringify(decoded));
         localStorage.setItem('accessToken', response.data.accessToken);
         localStorage.setItem('refreshToken', response.data.refreshToken);
       } else {
@@ -89,7 +92,6 @@ export async function submitLoginForm(data) {
 export async function activeAccount(email) {
   const responseData = await instance.post(
     '/account/resend-code', { email })
-  //console.log(responseData);
   responseData.data.otpToken && localStorage.setItem(
     'otpToken', responseData.data.otpToken);
 }
