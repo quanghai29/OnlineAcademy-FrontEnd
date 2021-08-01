@@ -60,9 +60,14 @@ export async function submitLoginForm(data) {
     const response = await instance.post('/auth', data);
     if (!response.data.shouldConfirmEmail) {
       if (response.data.authenticated) {
-        const decoded = jwt.verify(response.data.accessToken,
-          'HOA_ROI_CUA_PHAT');
-        localStorage.setItem('decodePayload', JSON.stringify(decoded));
+        try{
+          const decoded = jwt.verify(response.data.accessToken,
+            'HOA_ROI_CUA_PHAT');
+            localStorage.setItem('decodePayload', JSON.stringify(decoded));
+        }catch(err){
+          console.log(err);          
+        }
+        
         localStorage.setItem('accessToken', response.data.accessToken);
         localStorage.setItem('refreshToken', response.data.refreshToken);
       } else {

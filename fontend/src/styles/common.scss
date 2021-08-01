@@ -67,3 +67,15 @@ $linkColor: #FFC000;
     background-image: linear-gradient(to right,#FFC000, #FF8A00);
   }
 }
+
+@mixin warningMessage{
+  display: inline-block !important;
+  margin: 5px 10px !important;
+  color: red !important;
+  font-size: 13px !important;
+}
+
+@mixin warningBorder{
+  border: solid 1px red !important;
+  box-shadow: none !important;
+}

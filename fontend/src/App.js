@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './styles/main.scss';
 import Home from './pages/Home';
-import Signup from './pages/SignUp';
+import Signup from './pages/TempSignup';
 import VerifyCode from './pages/VerifyCode';
 import ForgotPassword from './pages/ForgotPassword';
 import CourseOverview from './pages/CourseOverview';
@@ -10,7 +10,7 @@ import UpdateCourse from './pages/Lecturer/UpdateCourse';
 import Learning from './pages/Learning';
 import SearchCourseResult from './pages/SearchCourseResult';
 import UpdateProfile from './pages/User/UpdateProfile';
-import Login from './pages/LogIn';
+import Login from './pages/TempLogin';
 import AdminCategory from './pages/AdminCategory';
 
 function App() {

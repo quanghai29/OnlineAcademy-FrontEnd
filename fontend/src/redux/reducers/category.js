@@ -1,9 +1,11 @@
 import {
-  SET_CATEGORY_DATA
+  SET_CATEGORY_DATA,
+  SET_CATEGORY_WARNING
 } from "../constants/actionTypes"
 
 const initialState = {
-  categories: null
+  categories: null,
+  warningMess: ''
 }
 
 const categoryReducer = (state=initialState, action)=>{
@@ -13,6 +15,14 @@ const categoryReducer = (state=initialState, action)=>{
         ...state, 
         categories: action.data
       };
+
+      return newState;
+    }
+    case SET_CATEGORY_WARNING:{
+      let newState = {
+        ...state,
+        warningMess: action.data
+      }
 
       return newState;
     }

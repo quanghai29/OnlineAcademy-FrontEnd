@@ -63,21 +63,21 @@ const AdminCategoryContainer = () => {
     setOffset(offset);
   }
 
-  function handleClickCreateCategory(){
+  function handleClickCreateCategory() {
     setIsShowFormModal(true);
   }
 
-  function handleClickCloseModal(){
+  function handleClickCloseModal() {
     setIsShowFormModal(false);
     setInputValue('');
   }
 
-  function handleClickSaveCategory(e){
+  function handleClickSaveCategory(e) {
     e.preventDefault();
     console.log('save category');
   }
 
-  function handleOnchangeValue(e){
+  function handleOnchangeValue(e) {
     setInputValue(e.target.value);
   }
 
@@ -116,8 +116,15 @@ const AdminCategoryContainer = () => {
             <div className={styles['form-group']}>
               <form>
                 <div>
-                  <input type="text" placeholder="Tên danh mục" 
-                  value={inputValue} onChange={handleOnchangeValue}/>
+                  {
+                    categoryState.warningMess &&
+                    <span className={styles['message--warning']}>
+                      {categoryState.warningMess}</span>
+                  }
+                  <input type="text" placeholder="Tên danh mục"
+                    value={inputValue} onChange={handleOnchangeValue}
+                    className={categoryState.warningMess ? styles['border--warning'] : ''}
+                  />
                 </div>
                 <div className={styles['form__footer']}>
                   <button onClick={handleClickSaveCategory}>Lưu</button>

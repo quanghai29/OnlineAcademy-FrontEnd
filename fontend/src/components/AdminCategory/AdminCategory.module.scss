@@ -61,3 +61,11 @@
   justify-content: flex-end;
   @include close-modal-icon;
 }
+
+.border--warning{
+  @include warningBorder;
+}
+
+.message--warning{
+  @include warningMessage;
+}
