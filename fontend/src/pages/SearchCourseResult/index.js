@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 const SearchCourseResult = () => {
   const searchCourseState = useSelector(state => state.searchCourseReducer);
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
-  let location = useLocation();
-  useEffect(() => {
-    dispatch(resetSearchCourseState());
-  }, [location, dispatch]);
+  // let location = useLocation();
+  // useEffect(() => {
+  //   dispatch(resetSearchCourseState());
+  // }, [location, dispatch]);
 
   useEffect(() => {
     let elmnt = document.getElementById("search_result");
@@ -25,7 +25,7 @@ const SearchCourseResult = () => {
 
   return (
     <Layout>
-      <SearchCourseResultContainer isSearched={searchCourseState.isSearchedCourse}
+      <SearchCourseResultContainer isSearched = {searchCourseState.isSearched}
         data={searchCourseState.result} />
     </Layout>
   )

@@ -1,0 +1,23 @@
+
+.create-btn-container{
+  display: flex;
+  justify-content: flex-end;
+  button{
+    display: flex;
+    align-items: center;
+    color: #007791;
+    font-weight: bold;
+    background-color: #FFFFFF;
+    padding: 5px 10px ;
+    border-radius: 10px;
+    border: 1px solid #007791;
+    &:hover{
+      cursor: pointer;
+      color: #FFFFFF;
+      background-color: #007791;
+    }
+    .icon{
+      margin-right: 10px;
+    }
+  }
+}

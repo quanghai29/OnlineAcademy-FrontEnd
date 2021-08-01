@@ -1,0 +1,39 @@
+@import "../../styles/common.scss";
+
+.table-container{
+  margin: 25px 0;
+}
+
+.admin-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  th{
+    text-align: left;
+    border-bottom: 1px solid $linkColor;
+    padding-bottom: 3px;
+  }
+  td{
+    text-align: left;
+    border-bottom: 1px solid #979797;
+    padding: 15px 0 5px;
+    &:last-child{
+      text-align: right;
+      .edit-icon{
+        color: #272EAE;
+        margin-right: 10px;
+        &:hover{
+          cursor: pointer;
+        }
+      }
+
+      .delete-icon{
+        color: #ED1C24;
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  
+}

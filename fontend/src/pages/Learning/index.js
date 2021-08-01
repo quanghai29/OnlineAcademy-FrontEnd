@@ -1,36 +1,48 @@
 import React, { useEffect } from 'react';
 import VideoPlayer from '../../components/VideoPlayer';
 import Content from '../../components/CoursesOverview/CourseDetail/Content';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actionType from '../../redux/constants/actionTypes';
 
-const Learning = ({course_id = 1}) => {
+const Learning = ({ course_id = 1 }) => {
   const courseLearning = useSelector((state) => state.courseLearning.data);
-  const {chapters, ...courseInfo} = courseLearning;
-  
-  const video_source = 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4'
+  const { chapters, ...courseInfo } = courseLearning;
+
   const dispatch = useDispatch();
 
-  useEffect(function() {
+  useEffect(function () {
     dispatch({
       type: actionType.FETCH_COURSE_LEARNING,
       payload: {
         course_id: course_id
       }
     })
-  },[dispatch,course_id])
+  }, [dispatch, course_id])
 
+  getVideoLearning();
 
+  function getVideoLearning() {
+    if (courseInfo.video_source_learning) {
+      dispatch({
+        type: actionType.FETCH_VIDEO_LEARNING,
+        payload: {
+          video_source: courseInfo.video_source_learning
+        }
+      })
+    }
+  }
+
+  console.log(chapters);
   return (
-    <div className="row" style={{padding: 0, margin: 0}}>
+    <div className="row" style={{ padding: 0, margin: 0 }}>
       <div className="row">
-        <VideoPlayer {...{...courseInfo, video_source }}/>
+        <VideoPlayer {...courseInfo} />
       </div>
       <div className="row">
-        <Content {...{chapters: chapters}}/>
+        <Content {...{ chapters: chapters }} />
       </div>
     </div>
-   
+
   );
 };
 

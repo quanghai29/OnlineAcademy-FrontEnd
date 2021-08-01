@@ -1,4 +1,4 @@
-import { all} from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
 import watchFetchCourse from './getCourses';
 import watchFetchHotCourse from './getHotCourses';
 import lecturerCoursesSaga from './getCoursesOfLecturer';
@@ -12,6 +12,10 @@ import CourseOverviewSaga from './courseOverview';
 import CourseLearningSaga from './courseLearning';
 import getCourseSaga from './getCourses';
 import userProfileSaga from './useProfile';
+import categorySaga from './category';
+import FavoriteCourseSaga from './favoriteCourse';
+import RegisterCourseSaga from './registerCourse';
+import CourseCommentSaga from './courseComment';
 
 export default function* rootSaga() {
     yield all([
@@ -29,5 +33,9 @@ export default function* rootSaga() {
         CourseLearningSaga(),
         getCourseSaga(),
         userProfileSaga(),
+        categorySaga(),
+        FavoriteCourseSaga(),
+        RegisterCourseSaga(),
+        CourseCommentSaga(),
     ])
 }

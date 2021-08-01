@@ -1,15 +1,15 @@
 import * as actionType from '../constants/actionTypes';
 
 const initialState ={
-  video_id: 0
+  data: ''
 }
 
-const videoLoader = (state=initialState, action)=>{
+const videoLearning = (state=initialState, action)=>{
   switch(action.type){
     case actionType.SET_VIDEO_LEARNING:
     {
       let newState = {...state};
-      newState.video_id = action.payload;
+      newState.data = action.payload;
 
       return newState;
     }
@@ -20,4 +20,4 @@ const videoLoader = (state=initialState, action)=>{
 
 }
 
-export default videoLoader
+export default videoLearning;

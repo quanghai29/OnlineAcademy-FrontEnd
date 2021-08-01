@@ -1,0 +1,34 @@
+@import "../../styles/common.scss";
+
+.admin-container{
+  margin: 25px 100px;
+  .link-group{
+    a{
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      .text{
+        color: #000000;
+        margin-left: 5px;
+      }
+  
+      .icon{
+        color: $linkColor;
+      }
+    }
+    margin-bottom: 50px;
+  }
+  .admin__title{
+    display:  flex;
+    align-items: center;
+    margin-bottom: 30px;
+    .title{
+      margin-right: 10px;
+    }
+    @include titleText;
+  }
+}
+
+.children-content{
+  margin: 20px 0;
+}

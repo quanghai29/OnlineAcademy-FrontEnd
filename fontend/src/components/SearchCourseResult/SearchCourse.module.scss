@@ -1,0 +1,70 @@
+@import "../../styles/common.scss";
+
+.container{
+  margin: 100px;
+}
+
+.task-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .task-show{
+    font-size: 14px;
+    display: flex;
+    .show-option{
+      margin-left: 100px;
+      display: flex;
+      ul{
+        display: flex;
+        margin: 0;
+        list-style-type: none;
+        li{
+          margin: 0 10px;
+          &:hover{
+            cursor: pointer;
+            color: #18a0fb;
+          }
+        }
+      }
+    }
+  }
+  .task-sort{
+    font-size: 14px;
+  }
+}
+
+.result-title{
+  @include titleText;
+}
+
+.custom-input-field{
+  display: flex;
+  align-items: center;
+  span{
+    margin-right: 10px;
+    white-space: nowrap;
+  }
+  
+    input,ul,select{
+      font-size: 14px !important;
+      margin: 0 !important;
+    }
+  select{
+    display: inline-block !important;
+    border-radius: 25px !important;
+    outline: none;
+    height: 2rem !important;
+    align-items: center;
+    &:hover{
+      border: 1px solid #18a0fb;
+    }
+  }
+}
+
+.loading--position{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

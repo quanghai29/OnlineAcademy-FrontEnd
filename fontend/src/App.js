@@ -7,13 +7,16 @@ import ForgotPassword from './pages/ForgotPassword';
 import CourseOverview from './pages/CourseOverview';
 import HomeLecturer from './pages/Lecturer/Home';
 import UpdateCourse from './pages/Lecturer/UpdateCourse';
-//import PreLoading from './components/PreLoading';
 import Learning from './pages/Learning';
 import SearchCourseResult from './pages/SearchCourseResult';
 import UpdateProfile from './pages/User/UpdateProfile';
 import Login from './pages/LogIn';
+import AdminCategory from './pages/AdminCategory';
 
 function App() {
+  //test otpToken first
+  localStorage.setItem('otpToken', '123456');
+  
   return (
     <Router>
       <Switch>
@@ -28,6 +31,7 @@ function App() {
         <Route path="/update-course" component={UpdateCourse} />
         <Route path="/update-profile" component={UpdateProfile} />
         <Route path="/search-result" component={SearchCourseResult}/>
+        <Route path="/admin/category" component={AdminCategory}/>
         <Route path="/course-overview">
           <CourseOverview course_id={1}/>
         </Route>

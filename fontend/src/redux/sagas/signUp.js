@@ -1,7 +1,7 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
 import * as signUpActions from '../actions/signUp.js'
 import * as validateAccount from '../../utils/account/validate'
-import * as accountCallApi from '../axios/account'
+import * as accountCallApi from '../../api/account'
 import {
   VALIDATE_SIGN_UP_USERNAME,
   VALIDATE_EMAIL,

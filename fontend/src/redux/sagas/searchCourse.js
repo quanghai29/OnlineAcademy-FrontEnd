@@ -4,7 +4,7 @@ import {
 } from "../constants/actionTypes"
 import {
   getSearchCourseResult
-} from "../axios/course"
+} from "../../api/course"
 import {
   setSearchCourseResult,
   resetSearchForm
