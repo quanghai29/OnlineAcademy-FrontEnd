@@ -4,8 +4,16 @@ import AdminTableContainer from "../AdminTable/AdminTableContainer";
 import PaginationContainer from "../PaginationContainer/PaginationContainer";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategory } from "../../redux/actions/category"
+import {
+  fetchCategory,
+  setCategoryWarning,
+  submitCategoryForm,
+  setIsShowFormModal,
+  setCategoryInputValue
+} from "../../redux/actions/category"
 import ModalContainer from "../Modal/ModalContainer";
+import { REQUEST_EDIT_CATEGORY_ITEM, REQUEST_CREATE_CATEGORY_ITEM }
+  from "../../redux/constants/actionTypes";
 
 const AdminCategoryContainer = () => {
   const categoryState = useSelector(state => state.categoryReducer);
@@ -24,8 +32,7 @@ const AdminCategoryContainer = () => {
   const [pageData, setPageData] = useState([]);
   const [offset, setOffset] = useState(0);
   const [categories, setCategories] = useState([]);
-  const [isShowFormModal, setIsShowFormModal] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [editIndex, setEditIndex] = useState(-1);
 
   useEffect(() => {
     dispatch(fetchCategory());
@@ -48,9 +55,9 @@ const AdminCategoryContainer = () => {
   }, [offset, categories])
 
   function handleEditTableItem(item) {
-    console.log('edit item', item);
-    setIsShowFormModal(true);
-    setInputValue(categories[item].category_name)
+    dispatch(setIsShowFormModal(true));
+    dispatch(setCategoryInputValue(categories[offset+item].category_name));
+    setEditIndex(offset+item);
   }
 
   function handleDeleteTableItem(item) {
@@ -64,21 +71,38 @@ const AdminCategoryContainer = () => {
   }
 
   function handleClickCreateCategory() {
-    setIsShowFormModal(true);
+    dispatch(setIsShowFormModal(true));
   }
 
   function handleClickCloseModal() {
-    setIsShowFormModal(false);
-    setInputValue('');
+    dispatch(setIsShowFormModal(false));
+    dispatch(setCategoryInputValue(''));
+    setEditIndex(-1);
+    dispatch(setCategoryWarning(''));
   }
 
-  function handleClickSaveCategory(e) {
+  function handleClickSubmitCategory(e) {
     e.preventDefault();
-    console.log('save category');
+    let data = {};
+
+    let date = new Date().toLocaleString("en-AU");
+    let day = date.split(',')[0];
+
+    data.category_name = categoryState.inputValue;
+
+    if (editIndex >= 0) {//Edit
+      data.id = categories[editIndex].id;
+      data.last_update = day;
+      data.index = +editIndex;
+      dispatch(submitCategoryForm(REQUEST_EDIT_CATEGORY_ITEM, data));
+    } else {// Create
+      data.category_name = categoryState.inputValue;
+      dispatch(submitCategoryForm(REQUEST_CREATE_CATEGORY_ITEM, data));
+    }
   }
 
   function handleOnchangeValue(e) {
-    setInputValue(e.target.value);
+    dispatch(setCategoryInputValue(e.target.value));
   }
 
   return (
@@ -108,7 +132,7 @@ const AdminCategoryContainer = () => {
         }
       </AdminContainer>
       {
-        isShowFormModal && <ModalContainer>
+        categoryState.isShowFormModal && <ModalContainer>
           <div className={styles['create-form-container']}>
             <div className={styles['close-modal-icon']}>
               <span onClick={handleClickCloseModal}>&times;</span>
@@ -122,12 +146,12 @@ const AdminCategoryContainer = () => {
                       {categoryState.warningMess}</span>
                   }
                   <input type="text" placeholder="Tên danh mục"
-                    value={inputValue} onChange={handleOnchangeValue}
+                    value={categoryState.inputValue} onChange={handleOnchangeValue}
                     className={categoryState.warningMess ? styles['border--warning'] : ''}
                   />
                 </div>
                 <div className={styles['form__footer']}>
-                  <button onClick={handleClickSaveCategory}>Lưu</button>
+                  <button onClick={handleClickSubmitCategory}>Lưu</button>
                 </div>
               </form>
             </div>

@@ -2,7 +2,10 @@ import {
   SET_CATEGORY_DATA,
   FETCH_CATEGORY_DATA,
   SET_CATEGORY_WARNING,
-  SUBMIT_CATEGORY_FORM
+  EDIT_CATEGORY_ITEM,
+  CREATE_CATEGORY_ITEM,
+  SET_IS_SHOW_FORM_MODAL,
+  SET_CATEGORY_INPUT_VALUE
 } from "../constants/actionTypes"
 
 export const setCategory = (data)=>{
@@ -25,9 +28,36 @@ export const setCategoryWarning =(data)=>{
   }
 }
 
-export const submitCategoryForm = (data)=>{
+export const editCategory = (data)=>{
   return{
-    type: SUBMIT_CATEGORY_FORM,
+    type: EDIT_CATEGORY_ITEM,
+    data
+  }
+}
+
+export const createCategory = ()=>{
+  return{
+    type: CREATE_CATEGORY_ITEM,
+  }
+}
+
+export const submitCategoryForm = (type, data)=>{
+  return{
+    type,
+    data
+  }
+}
+
+export const setIsShowFormModal = (data)=>{
+  return{
+    type: SET_IS_SHOW_FORM_MODAL,
+    data
+  }
+}
+
+export const setCategoryInputValue = (data)=>{
+  return{
+    type: SET_CATEGORY_INPUT_VALUE,
     data
   }
 }

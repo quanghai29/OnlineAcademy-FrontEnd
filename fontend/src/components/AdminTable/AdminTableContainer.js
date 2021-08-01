@@ -10,11 +10,11 @@ const AdminTableContainer = (props) => {
   }
 
   function handleEditItem(e) {
-    props.editItem(e.target.id);
+    props.editItem(+e.target.id);
   }
 
   function handleDeleteItem(e) {
-    props.deleteItem(e.target.id);
+    props.deleteItem(+e.target.id);
   }
 
   return (

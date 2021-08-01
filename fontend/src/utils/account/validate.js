@@ -9,7 +9,7 @@ export const validateUsername = (username) => {
 export const validateEmail = (email) => {
   if (email === "") {
     return {
-      warningMess: 'Please enter a valid email!',
+      warningMess: 'Vui lòng nhập vào một email hợp lệ!',
       data: ''
     }
   } else {
@@ -17,17 +17,17 @@ export const validateEmail = (email) => {
     let isValidEmail = re.test(String(email).toLowerCase());
 
     return isValidEmail ? { warningMess: '', data: email }
-      : { warningMess: 'Email is invalid!', data: email }
+      : { warningMess: 'Email không hợp lệ!', data: email }
   }
 }
 
 export const confirmPassword = (data) => {
   let result = {};
   if (data.confirmPassword === '') {
-    result.warningMess = 'Please enter the password again!';
+    result.warningMess = 'Vui lòng nhập lại mật khẩu!';
   } else {
     if (data.password !== data.confirmPassword) {
-      result.warningMess = 'The password is not corresponding';
+      result.warningMess = 'Mật khẩu không khớp';
     } else {
       result.warningMess = '';
     }
@@ -40,16 +40,16 @@ export const confirmPassword = (data) => {
 export const validatePassword = (password) => {
   let result = {};
   if (!password) {
-    result = { warningMess: 'Please enter a password!' };
+    result = { warningMess: 'Vui lòng nhập vào mật khẩu!' };
   } else {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     let isValidPassword = regex.test(password);
 
     result = isValidPassword ? { warningMess: '', data: password }
       : {
-        warningMess: `Minimum 8 characters,
-       at least 1 uppercase letter, 
-       1 lowercase letter and 1 number`,
+        warningMess: `Chứa ít nhất 8 kí tự bao gồm
+      ít nhất 1 chữ in hoa, 
+       1 chữ thường và 1 số`,
         data: password
       };
   }
@@ -63,22 +63,22 @@ export const validateEntireSignUpForm = (signUpFormState) => {
   if (newSignUpFormState.username === '' &&
     newSignUpFormState.usernameWarningMess === '') {
     isSubmit = false;
-    newSignUpFormState.usernameWarningMess = 'Please enter a your username';
+    newSignUpFormState.usernameWarningMess = 'Vui lòng nhập vào username của bạn';
   }
   if (newSignUpFormState.email === '' &&
     newSignUpFormState.emailWarningMess === '') {
     isSubmit = false;
-    newSignUpFormState.emailWarningMess = 'Please enter your email';
+    newSignUpFormState.emailWarningMess = 'Vui lòng nhập email của bạn';
   }
   if (newSignUpFormState.password === '' &&
     newSignUpFormState.passwordWarningMess === '') {
     isSubmit = false;
-    newSignUpFormState.passwordWarningMess = 'Please enter your password';
+    newSignUpFormState.passwordWarningMess = 'Vui lòng nhập mật khẩu của bạn';
   }
   if (newSignUpFormState.confirmPassword === '' &&
     newSignUpFormState.confirmPasswordWarningMess === '') {
     isSubmit = false;
-    newSignUpFormState.confirmPasswordWarningMess = 'Please enter your password again';
+    newSignUpFormState.confirmPasswordWarningMess = 'Vui lòng nhập lại mật khẩu!';
   }
 
   if (isSubmit) {
@@ -119,7 +119,7 @@ export const validateEntireSignUpForm = (signUpFormState) => {
 export const validateVerifyCode = (code) => {
   let result = {};
   result = code ? { warningMess: '', data: code }
-    : { warningMess: 'Please enter the code!' }
+    : { warningMess: 'Vui lòng nhập mã xác thực' }
 
   return result;
 }
@@ -132,7 +132,7 @@ export const validateEntireVerifyCodeForm = (verifyCodeFormState) => {
   if (newFormState.code === 0 &&
     newFormState.warningMess === '') {
     isSubmit = false;
-    newFormState.warningMess = 'Please enter a verify code';
+    newFormState.warningMess = 'Vui lòng nhập vào mã xác thực';
   }
 
   if (isSubmit) {
@@ -165,11 +165,11 @@ export const validateEntireLoginForm = (loginForm) => {
 
   if (newFormState.username === '' && newFormState.usernameWarningMess === '') {
     isSubmit = false;
-    newFormState.usernameWarningMess = 'Please enter your username';
+    newFormState.usernameWarningMess = 'Vui lòng nhập username của bạn';
   }
   if (newFormState.password === '' && newFormState.passwordWarningMess === '') {
     isSubmit = false;
-    newFormState.passwordWarningMess = 'Please enter your password';
+    newFormState.passwordWarningMess = 'Vui lòng nhập mật khẩu của bạn';
   }
 
   if (isSubmit) {

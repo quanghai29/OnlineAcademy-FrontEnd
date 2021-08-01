@@ -30,7 +30,6 @@ export async function submitVerifyCodeForm(data) {
           try {
             await instance.post('/account/resend-code', { email }).then(
               res => {
-                //console.log('res', res);
                 res.data.otpToken && localStorage.setItem(
                   'otpToken', res.data.otpToken);
               }

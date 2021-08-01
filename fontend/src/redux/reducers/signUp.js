@@ -22,7 +22,8 @@ const initialState = {
   },
 
   response: {},
-  isExist: true,
+  isExistUsername: true,
+  isExistEmail: true,
 }
 
 const signUpReducer = (state = initialState, action) => {
@@ -68,11 +69,14 @@ const signUpReducer = (state = initialState, action) => {
 
     case SET_SIGN_UP_RESPONSE: {
       let newState = { ...state };
-      if (action.payload.isExist) {
+      if (action.payload.isExistedUsername) {
         newState.form.usernameWarningMess =
-          'The user name is exist. Please choose another username';
-      } else {
-        newState.isExist = false;
+          'Username đã tồn tại. Vui lòng chọn username khác';
+      } else if (action.payload.isExistedEmail) {
+        newState.form.emailWarningMess =
+          'Email đã tồn tại. Vui lòng chọn email khác';
+      }else {
+        newState.isExistUsername = false;
       }
       newState.response = { ...action.payload };
 
@@ -81,7 +85,8 @@ const signUpReducer = (state = initialState, action) => {
     case RESET_SIGN_UP_FORM: {
       let newState = { ...state };
       newState.response = {};
-      newState.isExist = true;
+      newState.isExistUsername = true;
+      newState.isExistEmail = true;
       newState.form.username = newState.form.email =
         newState.form.password = newState.form.confirmPassword =
         newState.form.usernameWarningMess = newState.form.emailWarningMess =
