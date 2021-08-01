@@ -10,7 +10,7 @@ import UpdateCourse from './pages/Lecturer/UpdateCourse';
 import Learning from './pages/Learning';
 import SearchCourseResult from './pages/SearchCourseResult';
 import UpdateProfile from './pages/User/UpdateProfile';
-import Login from './pages/tempLogin';
+import Login from './pages/Login';
 import AdminCategory from './pages/AdminCategory';
 
 function App() {
