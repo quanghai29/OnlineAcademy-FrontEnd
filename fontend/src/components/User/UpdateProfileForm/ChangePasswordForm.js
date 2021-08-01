@@ -22,7 +22,7 @@ const ChangePasswordForm = () => {
             <input
               id="old_password"
               type="password"
-              class="validate"
+              className="validate"
               {...register('old_password', {
                 required: 'You must specify a password',
                 minLength: {
@@ -40,7 +40,7 @@ const ChangePasswordForm = () => {
             <input
               id="new_password"
               type="password"
-              class="validate"
+              className="validate"
               {...register('new_password', {
                 required: 'You must specify a password',
                 minLength: {
@@ -58,7 +58,7 @@ const ChangePasswordForm = () => {
             <input
               id="repeat_new_pass"
               type="password"
-              class="validate"
+              className="validate"
               {...register('password_repeat', {
                 validate: (value) =>
                   value === val_new_pass || 'The passwords do not match',
@@ -68,7 +68,7 @@ const ChangePasswordForm = () => {
             <label htmlFor="repeat_new_pass">Nhập lại mật khẩu mới</label>
           </div>
         </div>
-        <button class="btn waves-effect" type="submit">
+        <button className="btn waves-effect" type="submit">
           Submit
           <i className="material-icons right">send</i>
         </button>

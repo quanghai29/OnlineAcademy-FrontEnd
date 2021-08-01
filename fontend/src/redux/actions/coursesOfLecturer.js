@@ -5,8 +5,11 @@ export const setLecturerCourses = (data) => ({
   payload: data,
 });
 
-export const fetchLecturerCourses = () => ({
+export const fetchLecturerCourses = (lecturer_id) => ({
   type: type.FETCH_LECTURER_COURSES,
+  payload: {
+    lecturer_id
+  }
 });
 
 export const fetchLecturerCourseFail = (message) => ({

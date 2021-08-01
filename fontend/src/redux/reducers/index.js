@@ -14,6 +14,7 @@ import mostViewCourses from './mostViewCourses';
 import courseComments from './courseComments';
 import uploadCourse from './uploadCourse';
 import courseLearning from './courseLearning';
+import userProfile from './userProfile';
 
 export default combineReducers({
   courses,
@@ -31,4 +32,5 @@ export default combineReducers({
   courseComments,
   uploadCourse,
   courseLearning,
+  userProfile,
 });

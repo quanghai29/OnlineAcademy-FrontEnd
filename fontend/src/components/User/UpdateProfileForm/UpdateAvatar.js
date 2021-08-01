@@ -42,12 +42,12 @@ const UpdateAvatar = () => {
         <div className="row">
           <div className="col s2 offset-s10">
           <button
-            class="btn waves-effect waves-light"
+            className="btn waves-effect waves-light"
             type="submit"
             name="action"
           >
             Submit
-            <i class="material-icons right">send</i>
+            <i className="material-icons right">send</i>
           </button>
           </div>
         </div>
