@@ -10,12 +10,12 @@ import UpdateCourse from './pages/Lecturer/UpdateCourse';
 import Learning from './pages/Learning';
 import SearchCourseResult from './pages/SearchCourseResult';
 import UpdateProfile from './pages/User/UpdateProfile';
-import Login from './pages/Login';
+import Login from './pages/tempLogin';
 import AdminCategory from './pages/AdminCategory';
 
 function App() {
-  //test otpToken first
-  localStorage.setItem('otpToken', '123456');
+  // //test otpToken first
+  // localStorage.setItem('otpToken', '123456');
   
   return (
     <Router>
