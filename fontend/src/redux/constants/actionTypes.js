@@ -109,6 +109,6 @@ export const SET_UPDATE_COURSE_COMMENT = 'SET_UPDATE_COURSE_COMMENT';
 
 // ================== Action types of Admin and Category===========================
 export const FETCH_CATEGORY_DATA = 'FETCH_CATEGORY_DATA';
-export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA'
+export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA';
 
 

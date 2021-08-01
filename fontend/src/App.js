@@ -14,8 +14,6 @@ import Login from './pages/Login';
 import AdminCategory from './pages/AdminCategory';
 
 function App() {
-  // //test otpToken first
-  // localStorage.setItem('otpToken', '123456');
   
   return (
     <Router>
