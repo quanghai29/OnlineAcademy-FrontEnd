@@ -8,12 +8,13 @@ import classes from './Home.module.scss';
 
 const HomeLecturer = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [coursesPerPage] = useState(3);
+  const [coursesPerPage] = useState(5);
   const dispatch = useDispatch();
   const { data, isLoading } = useSelector((state) => state.coursesOfLecturer);
 
   useEffect(() => {
-    dispatch(fetchLecturerCourses());
+    const lecturer_id = 2;
+    dispatch(fetchLecturerCourses(lecturer_id));
   }, [dispatch]);
 
   // Get current posts
@@ -36,7 +37,7 @@ const HomeLecturer = () => {
       <div className="container">
         <div className={classes.header}>
           <p>Khóa học của tôi</p>
-          <a href="#!" className="waves-effect waves-light btn">
+          <a href="/update-course" className="waves-effect waves-light btn">
             <i class="material-icons left">add_box</i>Tạo khóa học
           </a>
         </div>
