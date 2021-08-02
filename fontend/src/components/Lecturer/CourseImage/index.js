@@ -8,6 +8,7 @@ const CourseImage = () => {
     'assets/images/lecturer/default_image.png'
   );
   const [file, setFile] = useState(null);
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   const selectedCourse = useSelector((state) => state.selectedCourse.data);
   const { uploadingCourseImg, uploadedCourseImgError } = useSelector(
@@ -18,6 +19,7 @@ const CourseImage = () => {
   const onChangeUploadImage = (e) => {
     setSrcFile(URL.createObjectURL(e.target.files[0]));
     setFile(e.target.files[0]);
+    setDisableSubmit(false);
   };
 
   const onSubmitHandler = (e) => {
@@ -26,7 +28,6 @@ const CourseImage = () => {
     formData.append('img', file);
     formData.append('img_title', selectedCourse.title);
     formData.append('course_id', selectedCourse.id);
-    console.log(formData);
     dispatch(uploadCourseImage(formData));
     if(!uploadingCourseImg) {
       if(uploadedCourseImgError) {
@@ -41,6 +42,8 @@ const CourseImage = () => {
           title: "Upload Image Success",
           icon: 'success',
           confirmButtonText: 'OK'
+        }).then(() => {
+          setDisableSubmit(true);
         })
       }
     }
@@ -68,6 +71,7 @@ const CourseImage = () => {
                   id="course-img-file"
                   accept=".jpg, .jpeg, .png"
                   onChange={onChangeUploadImage}
+                  disabled={uploadingCourseImg}
                 />
               </div>
               <div className="file-path-wrapper">
@@ -82,6 +86,7 @@ const CourseImage = () => {
               class="btn waves-effect waves-light"
               type="submit"
               name="action"
+              disabled={disableSubmit}
             >
               Submit
               <i class="material-icons right">send</i>

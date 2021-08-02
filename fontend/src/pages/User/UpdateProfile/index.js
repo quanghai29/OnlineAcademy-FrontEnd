@@ -16,8 +16,8 @@ const UpdateProfile = () => {
     })
 
     useEffect(() => {
-      const user_id = 2;
-      dispatch(fetchUserProfile(user_id));
+      const {userId} = JSON.parse(localStorage.decodePayload);
+      dispatch(fetchUserProfile(+userId));
     }, [dispatch])
     
     const initTabs = () => {

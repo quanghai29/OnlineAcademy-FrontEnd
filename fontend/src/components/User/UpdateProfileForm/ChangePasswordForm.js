@@ -1,7 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserPassword } from '../../../redux/actions/userProfile';
+import Swal from 'sweetalert2';
 
 const ChangePasswordForm = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -10,8 +14,29 @@ const ChangePasswordForm = () => {
   } = useForm();
   let val_new_pass = watch('new_password', '');
 
-  const onSubmitHandler = async (data) => {
-    alert(JSON.stringify(data));
+  const {data, isLoading, error} = useSelector(state => state.userProfile);
+
+  const onSubmitHandler = async (formData, e) => {
+    formData.account_id = data.id;
+    dispatch(updateUserPassword(formData));
+    if (!isLoading) {
+      if (error) {
+        Swal.fire({
+          title: 'Update Pasword Failure',
+          text: error,
+          icon: 'error',
+          confirmButtonText: 'EXIT',
+        });
+      } else {
+        Swal.fire({
+          title: 'Update Pasword Success',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          e.target.reset();
+        });
+      }
+    }
   };
 
   return (
