@@ -4,14 +4,16 @@ import {
   EDIT_CATEGORY_ITEM,
   CREATE_CATEGORY_ITEM,
   SET_IS_SHOW_FORM_MODAL,
-  SET_CATEGORY_INPUT_VALUE
+  SET_CATEGORY_INPUT_VALUE, 
+  DELETE_CATEGORY_ITEM
 } from "../constants/actionTypes"
 
 const initialState = {
   categories: null,
   warningMess: '',
   isShowFormModal: false,
-  inputValue: ''
+  inputValue: '',
+  indexOfDeletedItem: -1
 }
 
 const categoryReducer = (state=initialState, action)=>{
@@ -63,6 +65,12 @@ const categoryReducer = (state=initialState, action)=>{
         ...state,
         inputValue: action.data
       }
+      return newState;
+    }
+    case DELETE_CATEGORY_ITEM:{
+      let newState = {...state};
+      newState.indexOfDeletedItem = action.data;
+      newState.categories.splice(action.data, 1);
       return newState;
     }
     default:{

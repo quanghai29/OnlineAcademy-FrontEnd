@@ -5,7 +5,9 @@ import {
   EDIT_CATEGORY_ITEM,
   CREATE_CATEGORY_ITEM,
   SET_IS_SHOW_FORM_MODAL,
-  SET_CATEGORY_INPUT_VALUE
+  SET_CATEGORY_INPUT_VALUE,
+  REQUEST_DELETE_CATEGORY_ITEM,
+  DELETE_CATEGORY_ITEM
 } from "../constants/actionTypes"
 
 export const setCategory = (data)=>{
@@ -58,6 +60,20 @@ export const setIsShowFormModal = (data)=>{
 export const setCategoryInputValue = (data)=>{
   return{
     type: SET_CATEGORY_INPUT_VALUE,
+    data
+  }
+}
+
+export const requestDeleteCategoryItem = (data)=>{
+  return{
+    type: REQUEST_DELETE_CATEGORY_ITEM,
+    data
+  }
+}
+
+export const deleteCategoryItem = (data)=>{
+  return{
+    type: DELETE_CATEGORY_ITEM,
     data
   }
 }

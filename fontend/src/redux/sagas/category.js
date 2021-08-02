@@ -3,7 +3,8 @@ import * as categoryActions from "../actions/category"
 import {
   FETCH_CATEGORY_DATA,
   REQUEST_EDIT_CATEGORY_ITEM,
-  REQUEST_CREATE_CATEGORY_ITEM
+  REQUEST_CREATE_CATEGORY_ITEM, 
+  REQUEST_DELETE_CATEGORY_ITEM
 } from "../constants/actionTypes"
 import * as categoryApi from "../../api/category"
 import { isEmpty } from "../../utils/common"
@@ -62,10 +63,22 @@ function* watchCreateCategoryItem() {
   yield takeLatest(REQUEST_CREATE_CATEGORY_ITEM, requestCreateCategoryItem);
 }
 
+function* requestDeleteCategoryItem(action){
+  // delete in local
+  yield put(categoryActions.deleteCategoryItem(action.data.index));
+
+  yield call(categoryApi.deleteCategoryItem,{id:action.data.id});
+}
+
+function* watchDeleteCategoryItem(){
+  yield takeLatest(REQUEST_DELETE_CATEGORY_ITEM, requestDeleteCategoryItem);
+}
+
 export default function* categorySaga() {
   yield all([
     watchFetchCategory(),
     watchEditCategoryItem(),
-    watchCreateCategoryItem()
+    watchCreateCategoryItem(),
+    watchDeleteCategoryItem()
   ])
 }

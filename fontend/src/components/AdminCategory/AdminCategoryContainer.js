@@ -9,14 +9,18 @@ import {
   setCategoryWarning,
   submitCategoryForm,
   setIsShowFormModal,
-  setCategoryInputValue
+  setCategoryInputValue,
+  requestDeleteCategoryItem
 } from "../../redux/actions/category"
 import ModalContainer from "../Modal/ModalContainer";
 import { REQUEST_EDIT_CATEGORY_ITEM, REQUEST_CREATE_CATEGORY_ITEM }
   from "../../redux/constants/actionTypes";
+import Swal from 'sweetalert2';
+
 
 const AdminCategoryContainer = () => {
   const categoryState = useSelector(state => state.categoryReducer);
+  const { categories, indexOfDeletedItem } = categoryState;
   const dispatch = useDispatch();
   const perPage = 5;
 
@@ -31,43 +35,83 @@ const AdminCategoryContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [pageData, setPageData] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [categories, setCategories] = useState([]);
   const [editIndex, setEditIndex] = useState(-1);
+  const [selectedPage, setSelectedPage] = useState(0);
+
+  useEffect(() => {
+    if ((indexOfDeletedItem === categories?.length) &&
+      (indexOfDeletedItem % 5 === 0)) {
+      setSelectedPage(selectedPage - 1);
+    }
+  }, [categories, indexOfDeletedItem])
 
   useEffect(() => {
     dispatch(fetchCategory());
   }, []);
 
   useEffect(() => {
-    if (categoryState.categories) {
-      setCategories(categoryState.categories);
+    if (categories) {
       setIsLoading(false);
     } else {
       setIsLoading(true);
     }
-  }, [categoryState])
+  }, [categories])
 
   useEffect(() => {
-    if (categories.length > 0) {
-      const data = categories.slice(offset, offset + perPage);
+    let offset = Math.ceil(selectedPage * perPage);
+    setOffset(offset);
+  }, [selectedPage])
+
+  useEffect(() => {
+    if (categoryState.categories?.length > 0) {
+      const data = categoryState.categories.slice(offset, offset + perPage);
       setPageData(data);
     }
-  }, [offset, categories])
+  }, [offset, categoryState])
 
   function handleEditTableItem(item) {
     dispatch(setIsShowFormModal(true));
-    dispatch(setCategoryInputValue(categories[offset+item].category_name));
-    setEditIndex(offset+item);
+    dispatch(setCategoryInputValue(categories[offset + item].category_name));
+    setEditIndex(offset + item);
   }
 
   function handleDeleteTableItem(item) {
-    console.log('delete item', item);
+    if (categories[item + offset].amount_course > 0) {
+      Swal.fire({
+        title: 'Warning',
+        text: `You won't be able to delete this category. Because it contains courses!`,
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+      })
+    } else {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: `You won't be able to revert this!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Swal.fire(
+          //   'Deleted!',
+          //   'Your file has been deleted.',
+          //   'success'
+          // )
+
+          const data = {};
+          data.id = categories[item + offset].id;
+          data.index = item + offset;
+          dispatch(requestDeleteCategoryItem(data));
+        }
+      })
+    }
   }
 
   function handleClickSelectedPage(data) {
-    const selected = data.selected;
-    let offset = Math.ceil(selected * perPage);
-    setOffset(offset);
+    setSelectedPage(data.selected);
   }
 
   function handleClickCreateCategory() {
@@ -127,6 +171,7 @@ const AdminCategoryContainer = () => {
             <PaginationContainer pageCount={Math.ceil(categories.length / perPage)}
               pageRangeDisplayed={5} marginPagesDisplayed={2}
               handleClickSelectedPage={handleClickSelectedPage}
+              selectedPage={selectedPage}
             />
           </>
         }

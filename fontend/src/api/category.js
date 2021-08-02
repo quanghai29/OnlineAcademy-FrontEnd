@@ -2,21 +2,21 @@ import appAPI from "../redux/axios/course";
 import Swal from 'sweetalert2';
 
 export const getCategoryData = async () => {
-  const result = await appAPI.get('/admin/category');
+  const res = await appAPI.get('/admin/category');
 
-  return result.data.categories;
+  return res.data.categories;
 }
 
 export const editCategoryItem = async (data) => {
-  const result = await appAPI.patch('/admin/category', data);
+  const res = await appAPI.patch('/admin/category', data);
 
-  return result.data;
+  return res.data;
 }
 
 export const createCategoryItem = async (data) => {
   try {
-    const result = await appAPI.post('/admin/category', data);
-    if (result.status === 201) {
+    const res = await appAPI.post('/admin/category', data);
+    if (res.status === 201) {
       Swal.fire({
         icon: 'success',
         title: 'Create successfully',
@@ -24,8 +24,17 @@ export const createCategoryItem = async (data) => {
         timer: 1000
       })
     }
-    return result.data;
+    return res.data;
   } catch (err) {
+    console.log(err);
+  }
+}
+
+export const deleteCategoryItem = async(data)=>{
+  try{
+    appAPI.defaults.headers.common['category_id']=data.id;
+    const res = await appAPI.delete('/admin/category');
+  }catch(err){
     console.log(err);
   }
 }
