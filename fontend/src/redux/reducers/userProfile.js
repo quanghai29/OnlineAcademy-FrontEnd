@@ -47,6 +47,42 @@ const userProfile = (state = initialState, action) => {
         isLoading: false,
         error: action.payload.message
       }
+    case type.UPDATE_MEMBER_IMAGE:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case type.UPDATE_MEMBER_IMAGE_DONE:
+      return {
+        ...state,
+        isLoading: false,
+        data: {
+          ...state.data,
+          img_source: action.payload.img_source
+        }
+      }
+    case type.UPDATE_MEMBER_IMAGE_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.mesage
+      }
+    case type.UPDATE_MEMBER_PASSWORD:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case type.UPDATE_MEMBER_PASSWORD_DONE:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case type.UPDATE_MEMBER_PASSWORD_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.message
+      }
     default:
       return state;
   }

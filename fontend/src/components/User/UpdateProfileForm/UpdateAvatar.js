@@ -1,17 +1,60 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserImage } from '../../../redux/actions/userProfile';
+import Swal from 'sweetalert2';
 
 const UpdateAvatar = () => {
-    const [srcFile, setSrcFile] = useState(
-        'assets/images/lecturer/default_image.png'
-      );
+  const [srcFile, setSrcFile] = useState(
+    'assets/images/lecturer/default_image.png'
+  );
+  const [disableSubmit, setDisableSubmit] = useState(true);
+  const [selectedFile, setSelectedFile] = useState(null);
 
-      const onChangeUploadImage = (e) => {
-        setSrcFile(URL.createObjectURL(e.target.files[0]));
-      };
+  const dispatch = useDispatch();
 
-    return (
-        <div className="row">
-      <form>
+  const { data, isLoading, error } = useSelector((state) => state.userProfile);
+
+  useEffect(() => {
+    if (data) {
+      setSrcFile(`http://localhost:3001/common/media/image/${data.img_source}`);
+    }
+  }, [data]);
+
+  const onChangeUploadImage = (e) => {
+    setSrcFile(URL.createObjectURL(e.target.files[0]));
+    setSelectedFile(e.target.files[0]);
+    setDisableSubmit(false);
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('avatar', selectedFile);
+    formData.append('account_id', data.id);
+    dispatch(updateUserImage(formData));
+    if (!isLoading) {
+      if (error) {
+        Swal.fire({
+          title: 'Update Image Failure',
+          text: error,
+          icon: 'error',
+          confirmButtonText: 'EXIT',
+        });
+      } else {
+        Swal.fire({
+          title: 'Update Image Success',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          setDisableSubmit(true);
+        });
+      }
+    }
+  };
+
+  return (
+    <div className="row">
+      <form onSubmit={onSubmitHandler}>
         <div className="row">
           <div className="col s6">
             <label htmlFor="course-img-file">
@@ -41,19 +84,20 @@ const UpdateAvatar = () => {
         </div>
         <div className="row">
           <div className="col s2 offset-s10">
-          <button
-            className="btn waves-effect waves-light"
-            type="submit"
-            name="action"
-          >
-            Submit
-            <i className="material-icons right">send</i>
-          </button>
+            <button
+              className="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+              disabled={disableSubmit}
+            >
+              Submit
+              <i className="material-icons right">send</i>
+            </button>
           </div>
         </div>
       </form>
     </div>
-    )
-}
+  );
+};
 
-export default UpdateAvatar
+export default UpdateAvatar;

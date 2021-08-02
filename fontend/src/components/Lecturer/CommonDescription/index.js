@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Select } from 'react-materialize';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadCourse } from '../../../redux/actions/coursesOfLecturer';
@@ -6,7 +6,12 @@ import { useForm } from 'react-hook-form';
 import Swal from "sweetalert2"
 
 const CommonDescription = () => {
+  const [disableSubmit, setDisableSubmit] = useState(true);
+
   const {uploadingCommonDesc, uploadedCommonDescError} = useSelector(state => state.uploadCourse);
+  const {data} = useSelector(state => state.selectedCourse);
+  console.log(data);
+  
   const dispatch = useDispatch();
   const {
     register,
@@ -14,11 +19,11 @@ const CommonDescription = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    data.lecturer_id = 1;
-    console.log(data.category_id);
-    data.category_id = +data.category_id;
-    dispatch(uploadCourse(data));
+  const onSubmit = (formData) => {
+    formData.lecturer_id = 2;
+    console.log(formData.category_id);
+    formData.category_id = +formData.category_id;
+    dispatch(uploadCourse(formData));
     if(!uploadingCommonDesc) {
       if(uploadedCommonDescError) {
         Swal.fire({
@@ -32,9 +37,15 @@ const CommonDescription = () => {
           title: "Upload Success",
           icon: 'success',
           confirmButtonText: 'OK'
+        }).then(() => {
+          setDisableSubmit(true);
         })
       }
     }
+  };
+
+  const onChangeInputHandler = (e) => {
+    setDisableSubmit(false);
   };
 
   const requiredStyle = {
@@ -52,6 +63,8 @@ const CommonDescription = () => {
               type="text"
               className="validate"
               {...register('title', { required: true })}
+              onChange={onChangeInputHandler}
+              disabled={uploadingCommonDesc}
             />
             {errors.title && (
               <span style={requiredStyle}>This field is required</span>
@@ -66,6 +79,8 @@ const CommonDescription = () => {
               type="text"
               className="validate"
               {...register('short_description', { required: true })}
+              onChange={onChangeInputHandler}
+              disabled={uploadingCommonDesc}
             />
             {errors.short_description && (
               <span style={requiredStyle}>This field is required</span>
@@ -79,6 +94,8 @@ const CommonDescription = () => {
               id="textarea1"
               className="materialize-textarea"
               {...register('full_description', { required: true })}
+              onChange={onChangeInputHandler}
+              disabled={uploadingCommonDesc}
             ></textarea>
             {errors.full_description && (
               <span style={requiredStyle}>This field is required</span>
@@ -109,6 +126,8 @@ const CommonDescription = () => {
             }}
             value=""
             {...register('category_id', { required: true })}
+            onChange={onChangeInputHandler}
+            disabled={uploadingCommonDesc}
           >
             <option disabled value="">
               Chọn danh mục
@@ -127,6 +146,8 @@ const CommonDescription = () => {
               type="text"
               className="validate"
               {...register('price', { required: true })}
+              onChange={onChangeInputHandler}
+              disabled={uploadingCommonDesc}
             />
             {errors.price && (
               <span style={requiredStyle}>This field is required</span>
@@ -139,6 +160,8 @@ const CommonDescription = () => {
               type="text"
               className="validate"
               {...register('discount', { required: true })}
+              onChange={onChangeInputHandler}
+              disabled={uploadingCommonDesc}
             />
             {errors.discount && (
               <span style={requiredStyle}>This field is required</span>
@@ -146,7 +169,7 @@ const CommonDescription = () => {
             <label htmlFor="discount">Khuyến mãi</label>
           </div>
         </div>
-        <button class="btn waves-effect" type="submit">
+        <button class="btn waves-effect" type="submit" disabled={disableSubmit}>
           Submit
           <i className="material-icons right">send</i>
         </button>
