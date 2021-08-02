@@ -45,3 +45,37 @@ $linkColor: #FFC000;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+@mixin close-modal-icon {
+  color: #aaaaaa;
+  &:hover{
+      cursor: pointer;
+      color: #000;
+  }
+}
+
+@mixin submitting-modal-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  width: 80px;
+  background-image: linear-gradient(to right, #FF8A00, #FFC000);
+  color: #FFFFFF;
+  &:hover{
+    cursor: pointer;
+    background-image: linear-gradient(to right,#FFC000, #FF8A00);
+  }
+}
+
+@mixin warningMessage{
+  display: inline-block !important;
+  margin: 5px !important;
+  color: red !important;
+  font-size: 13px !important;
+}
+
+@mixin warningBorder{
+  border: solid 1px red !important;
+  box-shadow: none !important;
+}
