@@ -1,7 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserPassword } from '../../../redux/actions/userProfile';
+import Swal from 'sweetalert2';
 
 const ChangePasswordForm = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -10,8 +14,29 @@ const ChangePasswordForm = () => {
   } = useForm();
   let val_new_pass = watch('new_password', '');
 
-  const onSubmitHandler = async (data) => {
-    alert(JSON.stringify(data));
+  const {data, isLoading, error} = useSelector(state => state.userProfile);
+
+  const onSubmitHandler = async (formData, e) => {
+    formData.account_id = data.id;
+    dispatch(updateUserPassword(formData));
+    if (!isLoading) {
+      if (error) {
+        Swal.fire({
+          title: 'Update Pasword Failure',
+          text: error,
+          icon: 'error',
+          confirmButtonText: 'EXIT',
+        });
+      } else {
+        Swal.fire({
+          title: 'Update Pasword Success',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          e.target.reset();
+        });
+      }
+    }
   };
 
   return (
@@ -22,7 +47,7 @@ const ChangePasswordForm = () => {
             <input
               id="old_password"
               type="password"
-              class="validate"
+              className="validate"
               {...register('old_password', {
                 required: 'You must specify a password',
                 minLength: {
@@ -40,7 +65,7 @@ const ChangePasswordForm = () => {
             <input
               id="new_password"
               type="password"
-              class="validate"
+              className="validate"
               {...register('new_password', {
                 required: 'You must specify a password',
                 minLength: {
@@ -58,7 +83,7 @@ const ChangePasswordForm = () => {
             <input
               id="repeat_new_pass"
               type="password"
-              class="validate"
+              className="validate"
               {...register('password_repeat', {
                 validate: (value) =>
                   value === val_new_pass || 'The passwords do not match',
@@ -68,7 +93,7 @@ const ChangePasswordForm = () => {
             <label htmlFor="repeat_new_pass">Nhập lại mật khẩu mới</label>
           </div>
         </div>
-        <button class="btn waves-effect" type="submit">
+        <button className="btn waves-effect" type="submit">
           Submit
           <i className="material-icons right">send</i>
         </button>

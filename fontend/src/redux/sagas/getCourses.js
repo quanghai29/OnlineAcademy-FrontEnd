@@ -11,7 +11,6 @@ import {
 function* fetchMostViewCourses(action) {
   try {
     const data = yield call(getCourses.getMostViewCourses);
-    console.log(data);
     yield put(setMostViewCourses(data));
   } catch (error) {
     yield put(fetchMostViewCoursesFail(error.message));
@@ -25,7 +24,6 @@ function* watchMostViewCourses() {
 function* fetchLatestCourses(action) {
   try {
     const data = yield call(getCourses.getLatestCourses);
-    console.log(data);
     yield put(setLatestCourses(data));
   } catch (error) {
     yield put(fetchLatestCoursesFail(error.message));
@@ -36,6 +34,6 @@ function* watchLatestCourses() {
   yield takeLatest(type.FETCH_LATEST_COURSES, fetchLatestCourses);
 }
 
-export default function* uploadCourseSaga() {
+export default function* getCourseSaga() {
   yield all([watchLatestCourses(), watchMostViewCourses()]);
 }

@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchUserProfile } from '../../../redux/actions/userProfile';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import Layout from '../../../layout/Layout';
 import PersonalInfoForm from '../../../components/User/UpdateProfileForm/PersonalInfoForm';
@@ -7,9 +9,16 @@ import ChangePasswordForm from '../../../components/User/UpdateProfileForm/Chang
 
 const UpdateProfile = () => {
 
+  const dispatch = useDispatch();
+
     useEffect(() => {
         initTabs();
     })
+
+    useEffect(() => {
+      const {userId} = JSON.parse(localStorage.decodePayload);
+      dispatch(fetchUserProfile(+userId));
+    }, [dispatch])
     
     const initTabs = () => {
         const el = document.getElementById('tabs-update-profile');

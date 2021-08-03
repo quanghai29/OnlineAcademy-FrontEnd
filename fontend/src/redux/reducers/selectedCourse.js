@@ -1,7 +1,7 @@
 import * as type from '../constants/actionTypes';
 
 const initialState = {
-    data: null
+    data: {}
   };
 
   const selectedCourse = (state = initialState, action) => {
