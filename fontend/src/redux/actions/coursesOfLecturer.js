@@ -55,3 +55,45 @@ export const uploadCourseImgFail = (message) => ({
     message
   }
 })
+
+export const setIsUpdateCourse = (value) => ({
+  type: type.SET_IS_UPDATE_COURSE,
+  payload: value
+})
+
+export const updateCommonInfoCourse = (formData, course_id) => ({
+  type: type.UPDATE_COURSE_COMMON_INFO,
+  payload: {
+    formData,
+    course_id,
+  },
+});
+
+export const updateCommonInfoCourseDone = (course) => ({
+  type: type.UPDATE_COURSE_COMMON_INFO_DONE,
+  payload: course,
+});
+
+export const updateCommonInfoCourseFail = (message) => ({
+  type: type.UPDATE_COURSE_COMMON_INFO_FAIL,
+  payload: {
+    message,
+  },
+});
+
+export const deleteCourseById = (id) => ({
+  type: type.DELETE_COURSE,
+  payload: id
+});
+
+export const deleteCourseByIdDone = (id) => ({
+  type: type.DELETE_COURSE_DONE,
+  payload: id
+});
+
+export const deleteCourseByIdFail = (message) => ({
+  type: type.UPDATE_COURSE_COMMON_INFO_FAIL,
+  payload: {
+    message,
+  },
+})

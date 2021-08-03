@@ -25,7 +25,7 @@ const PersonalInfoForm = () => {
     setDisableSubmit(false);
   };
 
-  const onSubmithandler = async (formData) => {
+  const onSubmitHandler = async (formData) => {
     dispatch(updateUserProfile(formData, +data.account_id));
     setDisableSubmit(true);
     if(!isLoading) {
@@ -48,7 +48,7 @@ const PersonalInfoForm = () => {
 
   return (
     <div className="row">
-      <form className="col s12" onSubmit={handleSubmit(onSubmithandler)}>
+      <form className="col s12" onSubmit={handleSubmit(onSubmitHandler)}>
         <div className="row">
           <div className="input-field col s12">
             <input
