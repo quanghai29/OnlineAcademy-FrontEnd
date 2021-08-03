@@ -1,7 +1,9 @@
 import React from 'react';
 import { useHistory } from "react-router-dom"
 import { useDispatch } from 'react-redux';
+import Swal from "sweetalert2"
 import { setSelectedCourse } from '../../../redux/actions/selectedCourse';
+import { setIsUpdateCourse, deleteCourseById } from '../../../redux/actions/coursesOfLecturer';
 import HorizotalCard from '../HorizotalCard';
 import classes from './CourseTable.module.scss';
 
@@ -11,7 +13,22 @@ const CourseItem = ({course}) => {
 
   const onClickEditHandler = (e) => {
     dispatch(setSelectedCourse(course));
+    dispatch(setIsUpdateCourse(true));
     history.push('/update-course');
+  }
+
+  const onClickDeleteCourseHandler = (e) => {
+    Swal.fire({
+      title: "Warning",
+      text: "bạn có chắc muốn xóa",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'YES'
+    }).then((result) => {
+      if(result.isConfirmed) {
+        dispatch(deleteCourseById(course.id));
+      } 
+    })
   }
 
     return (
@@ -23,7 +40,7 @@ const CourseItem = ({course}) => {
           <td>{+course.status === 0 ? 'Chưa hoàn thành' : 'Đã hoàn thành'}</td>
           <td>
             <button onClick={onClickEditHandler} className={`${classes.editBtn} ${classes.Btn}`}><span className="material-icons">edit</span></button>
-            <button className={`${classes.deleteBtn} ${classes.Btn}`}><span className="material-icons">delete</span></button>
+            <button onClick={onClickDeleteCourseHandler} className={`${classes.deleteBtn} ${classes.Btn}`}><span className="material-icons">delete</span></button>
           </td>
         </tr>
     )

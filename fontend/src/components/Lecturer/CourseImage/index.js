@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { uploadCourseImage } from '../../../redux/actions/coursesOfLecturer';
 import Swal from "sweetalert2"
@@ -11,15 +11,33 @@ const CourseImage = () => {
   const [disableSubmit, setDisableSubmit] = useState(true);
 
   const selectedCourse = useSelector((state) => state.selectedCourse.data);
-  const { uploadingCourseImg, uploadedCourseImgError } = useSelector(
+  const { uploadingCourseImg, uploadedCourseImgError, isUpdateCourse } = useSelector(
     (state) => state.uploadCourse
   );
+  const { data } = useSelector((state) => state.selectedCourse);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if(isUpdateCourse) {
+      if (data) {
+        setSrcFile(`http://localhost:3001/common/media/image/${data.img_source}`);
+      }
+    }
+  }, [data, isUpdateCourse]);
+
   const onChangeUploadImage = (e) => {
-    setSrcFile(URL.createObjectURL(e.target.files[0]));
-    setFile(e.target.files[0]);
-    setDisableSubmit(false);
+    if(data) {
+      setSrcFile(URL.createObjectURL(e.target.files[0]));
+      setFile(e.target.files[0]);
+      setDisableSubmit(false);
+    } else {
+      Swal.fire({
+        title: "Failure",
+        text: "Hãy cập nhật thông tin chung trước",
+        icon: 'error',
+        confirmButtonText: 'EXIT'
+      });
+    }
   };
 
   const onSubmitHandler = (e) => {
@@ -83,7 +101,7 @@ const CourseImage = () => {
         <div className="row">
           <div className="col s2 offset-s10">
             <button
-              class="btn waves-effect waves-light"
+              className="btn waves-effect waves-light"
               type="submit"
               name="action"
               disabled={disableSubmit}

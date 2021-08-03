@@ -17,7 +17,30 @@ export const uploadData = {
       throw new Error(err.message);
     }
   },
+  updateCommonInfoCourse: async (formData, course_id) => {
+    try {
+      const { title, short_description, full_description, category_id, price, discount } = formData;
+      const { data } = await appAPI.patch(`/lecturer/course/${course_id}`, {
+        title, short_description, full_description, category_id, price, discount
+      });
+      data.id = course_id;
+      return data;
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
 };
+
+export const deleteCourses = {
+  deleteCourseById: async (id) => {
+    try {
+      const { data } = await appAPI.delete(`/lecturer/course/${id}`);
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+}
 
 export const getCourses = {
   getLatestCourses: async () => {
