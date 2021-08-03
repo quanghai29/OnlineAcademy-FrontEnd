@@ -10,7 +10,7 @@ import PaginationContainer from "../PaginationContainer/PaginationContainer";
 export default function SearchCourseResultContainer(props) {
   document.addEventListener('DOMContentLoaded', function () {
     let elems = document.querySelectorAll('select');
-    let instances = M.FormSelect.init(elems, styles['task-sort']);
+    M.FormSelect.init(elems, styles['task-sort']);
   });
 
   const searchResult = props.data;
