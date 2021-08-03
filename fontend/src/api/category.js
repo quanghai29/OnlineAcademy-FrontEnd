@@ -33,7 +33,7 @@ export const createCategoryItem = async (data) => {
 export const deleteCategoryItem = async(data)=>{
   try{
     appAPI.defaults.headers.common['category_id']=data.id;
-    const res = await appAPI.delete('/admin/category');
+    await appAPI.delete('/admin/category');
   }catch(err){
     console.log(err);
   }

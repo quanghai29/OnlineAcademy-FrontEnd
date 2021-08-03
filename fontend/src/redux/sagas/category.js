@@ -31,7 +31,7 @@ function* requestEditCategoryItem(action) {
       id: action.data.id,
     }
 
-    const response = yield call(categoryApi.editCategoryItem, dataSubmit);
+    yield call(categoryApi.editCategoryItem, dataSubmit);
     
   }
 }

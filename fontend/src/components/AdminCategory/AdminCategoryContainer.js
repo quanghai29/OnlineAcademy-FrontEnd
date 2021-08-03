@@ -41,13 +41,14 @@ const AdminCategoryContainer = () => {
   useEffect(() => {
     if ((indexOfDeletedItem === categories?.length) &&
       (indexOfDeletedItem % 5 === 0)) {
-      setSelectedPage(selectedPage - 1);
+      const amountPage = Math.ceil(categories.length/perPage);
+      setSelectedPage(amountPage- 1);
     }
   }, [categories, indexOfDeletedItem])
 
   useEffect(() => {
     dispatch(fetchCategory());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (categories) {
@@ -95,12 +96,6 @@ const AdminCategoryContainer = () => {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          // Swal.fire(
-          //   'Deleted!',
-          //   'Your file has been deleted.',
-          //   'success'
-          // )
-
           const data = {};
           data.id = categories[item + offset].id;
           data.index = item + offset;
