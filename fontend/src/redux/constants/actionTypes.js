@@ -135,4 +135,9 @@ export const SET_CATEGORY_INPUT_VALUE = 'SET_CATEGORY_INPUT_VALUE';
 export const REQUEST_DELETE_CATEGORY_ITEM = 'REQUEST_DELETE_CATEGORY_ITEM';
 export const DELETE_CATEGORY_ITEM = 'DELETE_CATEGORY_ITEM';
 
+// ================== Action types of Admin and Student ===============================
+export const FETCH_STUDENT_DATA = 'FETCH_STUDENT_DATA';
+export const SET_STUDENT_DATA = 'SET_STUDENT_DATA';
+export const REQUEST_DELETE_STUDENT_ITEM = 'REQUEST_DELETE_STUDENT_ITEM';
+export const DELETE_STUDENT_ITEM = 'DELETE_STUDENT_ITEM';
 

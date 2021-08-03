@@ -12,6 +12,7 @@ import SearchCourseResult from './pages/SearchCourseResult';
 import UpdateProfile from './pages/User/UpdateProfile';
 import Login from './pages/TempLogin';
 import AdminCategory from './pages/AdminCategory';
+import AdminStudent from './pages/AdminStudent';
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
         <Route path="/update-profile" component={UpdateProfile} />
         <Route path="/search-result" component={SearchCourseResult}/>
         <Route path="/admin/category" component={AdminCategory}/>
+        <Route path="/admin/student" component={AdminStudent}/>
         <Route path="/course-overview">
           <CourseOverview course_id={1}/>
         </Route>

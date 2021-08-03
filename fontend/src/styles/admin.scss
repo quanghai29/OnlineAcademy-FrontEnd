@@ -1,4 +1,4 @@
-@import "../../styles/common.scss";
+@import "./common.scss";
 
 .table-container{
   margin: 25px 0;
@@ -19,21 +19,22 @@
     padding: 15px 0 5px;
     &:last-child{
       text-align: right;
-      .edit-icon{
-        color: #007791;
-        margin-right: 10px;
-        &:hover{
-          cursor: pointer;
-        }
-      }
-
-      .delete-icon{
-        color: #f34147;
-        &:hover{
-          cursor: pointer;
-        }
-      }
     }
   }
   
+}
+
+@mixin left-icon{
+  color: #007791;
+  margin-right: 10px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+@mixin delete-icon{
+  color: #f34147;
+  &:hover{
+    cursor: pointer;
+  }
 }

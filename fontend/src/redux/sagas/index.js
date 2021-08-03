@@ -16,6 +16,7 @@ import categorySaga from './category';
 import FavoriteCourseSaga from './favoriteCourse';
 import RegisterCourseSaga from './registerCourse';
 import CourseCommentSaga from './courseComment';
+import studentSaga from './student';
 
 export default function* rootSaga() {
     yield all([
@@ -37,5 +38,6 @@ export default function* rootSaga() {
         FavoriteCourseSaga(),
         RegisterCourseSaga(),
         CourseCommentSaga(),
+        studentSaga(),
     ])
 }

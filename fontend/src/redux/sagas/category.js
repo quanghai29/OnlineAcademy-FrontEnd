@@ -6,11 +6,11 @@ import {
   REQUEST_CREATE_CATEGORY_ITEM, 
   REQUEST_DELETE_CATEGORY_ITEM
 } from "../constants/actionTypes"
-import * as categoryApi from "../../api/category"
+import * as adminApi from "../../api/admin"
 import { isEmpty } from "../../utils/common"
 
 function* requestFetchCategory() {
-  const result = yield call(categoryApi.getCategoryData);
+  const result = yield call(adminApi.getCategoryData);
 
   yield put(categoryActions.setCategory(result));
 }
@@ -31,7 +31,7 @@ function* requestEditCategoryItem(action) {
       id: action.data.id,
     }
 
-    yield call(categoryApi.editCategoryItem, dataSubmit);
+    yield call(adminApi.editCategoryItem, dataSubmit);
     
   }
 }
@@ -47,7 +47,7 @@ function* requestCreateCategoryItem(action) {
     warning = 'Không để trống trường này';
     yield put(categoryActions.setCategoryWarning(warning));
   } else {
-    const response = yield call(categoryApi.createCategoryItem, action.data);
+    const response = yield call(adminApi.createCategoryItem, action.data);
     if(response.code===201){
       yield requestFetchCategory();
       yield put(categoryActions.createCategory());
@@ -67,7 +67,7 @@ function* requestDeleteCategoryItem(action){
   // delete in local
   yield put(categoryActions.deleteCategoryItem(action.data.index));
 
-  yield call(categoryApi.deleteCategoryItem,{id:action.data.id});
+  yield call(adminApi.deleteCategoryItem,{id:action.data.id});
 }
 
 function* watchDeleteCategoryItem(){

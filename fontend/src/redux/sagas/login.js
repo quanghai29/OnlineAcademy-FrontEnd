@@ -44,6 +44,7 @@ function* requestSetEntireLoginForm(action) {
     const resData = yield call(submitLoginForm, validateResult.dataToSubmit);
     yield put(loginActions.setLoginResponse(resData));
     if(resData.isAuth){
+      
       yield put(loginActions.resetLoginForm());
     }
   } else {

@@ -38,3 +38,23 @@ export const deleteCategoryItem = async(data)=>{
     console.log(err);
   }
 }
+
+export const getStudentData = async()=>{
+  try{
+    const result = await appAPI.get('/admin/student');
+    if(result.status === 200)
+      return result.data;
+  }catch(err){
+    console.log(err);
+  }
+}
+
+export const deleteStudentItem = async(student_id)=>{
+  try{
+    appAPI.defaults.headers.common['student_id']=student_id;
+    const result = await appAPI.delete('/admin/student');
+    console.log('result', result);
+  }catch(err){
+    console.log(err);
+  }
+}
