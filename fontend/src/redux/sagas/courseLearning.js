@@ -5,14 +5,34 @@ import {DOMAIN_API} from '../constants/common';
 
 function* fetchCouseLearning(action) {
   try {
-    const response = yield call(axios.get, `${DOMAIN_API}/student/course/learning/${action.payload.course_id}`);
-    if(response.status === 200){
-      const data = response.data;
-      yield put({
-        type: actionType.SET_COURSE_LEARNING,
-        payload: data
-      });
-    }
+    // const response = yield call(axios.get, `${DOMAIN_API}/student/course/learning/${action.payload.course_id}`);
+    // if(response.status === 200){
+    //   const data = response.data;
+    //   yield put({
+    //     type: actionType.SET_COURSE_LEARNING,
+    //     payload: data
+    //   });
+    // }
+
+    yield call (function* (){
+      const response = yield axios.get(
+        `${DOMAIN_API}/student/course/learning/${action.payload.course_id}`,
+        {
+          headers:
+          {
+            'x-access-token': localStorage.getItem('accessToken')
+          }
+        }
+      )
+
+      if(response.status === 200){
+        const data = response.data;
+        yield put({
+          type: actionType.SET_COURSE_LEARNING,
+          payload: data
+        });
+      }
+    })
   } catch (error) {
     //yield put(fetchCourseFail(error.message));
   }
