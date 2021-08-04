@@ -1,28 +1,19 @@
+import styles from "./LecturerTable.module.scss"
 
-import styles from "./AdminTableContainer.module.scss"
-
-const AdminTableContainer = (props) => {
-  const headerValues = [];
-  const headerKeys = [];
-  for (let key in props.headers) {
-    headerKeys.push(key);
-    headerValues.push(props.headers[key]);
-  }
-
-  function handleEditItem(e) {
+const LecturerTable = (props)=>{
+  function handleOpenItem(e) {
     props.editItem(+e.target.id);
   }
 
   function handleDeleteItem(e) {
     props.deleteItem(+e.target.id);
   }
-
   return (
     <div className={styles['table-container']}>
       <table className={styles['admin-table']}>
         <thead>
           <tr>
-            {headerValues?.map((item, index) => {
+            {props.headers.map((item, index) => {
               return (
                 <th key={index}>{item}</th>
               )
@@ -31,17 +22,20 @@ const AdminTableContainer = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.data.map((item, index) => {
+          {
+            props.data.length >0 && props.data.map((item, index) => {
             return (
               <tr key={index}>
                 <td>{props.startIndex + index + 1}</td>
-                <td>{item[headerKeys[1]]}</td>
-                <td>{item[headerKeys[2]]}</td>
-                <td>{item[headerKeys[3]]}</td>
+                <td>{item.username}</td>
+                <td>{item.password}</td>
+                <td>{item.email}</td>
+                <td>{item.create_date}</td>
+                <td>{item.creator}</td>
                 <td>
-                  <span id={index} onClick={handleEditItem}
-                    className={`material-icons ${styles['edit-icon']}`}>
-                    edit
+                  <span id={index} onClick={handleOpenItem}
+                    className={`material-icons ${styles['open-in-new-icon']}`}>
+                    open_in_new
                   </span>
                   <span id={index} onClick={handleDeleteItem}
                     className={`material-icons ${styles['delete-icon']}`}>
@@ -57,4 +51,4 @@ const AdminTableContainer = (props) => {
   )
 }
 
-export default AdminTableContainer;
+export default LecturerTable;

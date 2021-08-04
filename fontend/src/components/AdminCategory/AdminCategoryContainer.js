@@ -1,6 +1,6 @@
 import AdminContainer from "../Admin/AdminContainer";
 import styles from "./AdminCategory.module.scss";
-import AdminTableContainer from "../AdminTable/AdminTableContainer";
+import CategoryTable from "./CategoryTable";
 import PaginationContainer from "../PaginationContainer/PaginationContainer";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import {
   setIsShowFormModal,
   setCategoryInputValue,
   requestDeleteCategoryItem
-} from "../../redux/actions/category"
+} from "../../redux/actions/admin_category"
 import ModalContainer from "../Modal/ModalContainer";
 import { REQUEST_EDIT_CATEGORY_ITEM, REQUEST_CREATE_CATEGORY_ITEM }
   from "../../redux/constants/actionTypes";
@@ -19,18 +19,18 @@ import Swal from 'sweetalert2';
 
 
 const AdminCategoryContainer = () => {
-  const categoryState = useSelector(state => state.categoryReducer);
+  const categoryState = useSelector(state => state.adminCategoryReducer);
   const { categories, indexOfDeletedItem } = categoryState;
   const dispatch = useDispatch();
   const perPage = 5;
 
   //Tạo keys của headers trùng với keys của item trong tableData 
-  const headers = {
-    stt: 'STT',
-    category_name: 'Danh mục',
-    last_update: 'Ngày cập nhật',
-    amount_course: 'Số lượng khóa học',
-  };
+  const headers = [
+    'STT',
+    'Danh mục',
+    'Ngày cập nhật',
+    'Số lượng khóa học',
+  ];
 
   const [isLoading, setIsLoading] = useState(true);
   const [pageData, setPageData] = useState([]);
@@ -41,8 +41,8 @@ const AdminCategoryContainer = () => {
   useEffect(() => {
     if ((indexOfDeletedItem === categories?.length) &&
       (indexOfDeletedItem % 5 === 0)) {
-      const amountPage = Math.ceil(categories.length/perPage);
-      setSelectedPage(amountPage- 1);
+      const amountPage = Math.ceil(categories.length / perPage);
+      setSelectedPage(amountPage - 1);
     }
   }, [categories, indexOfDeletedItem])
 
@@ -76,8 +76,8 @@ const AdminCategoryContainer = () => {
     setEditIndex(offset + item);
   }
 
-  function handleDeleteTableItem(item) {
-    if (categories[item + offset].amount_course > 0) {
+  function handleDeleteTableItem(index) {
+    if (categories[index + offset].amount_course > 0) {
       Swal.fire({
         title: 'Warning',
         text: `You won't be able to delete this category. Because it contains courses!`,
@@ -97,8 +97,8 @@ const AdminCategoryContainer = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           const data = {};
-          data.id = categories[item + offset].id;
-          data.index = item + offset;
+          data.id = categories[index + offset].id;
+          data.index = index + offset;
           dispatch(requestDeleteCategoryItem(data));
         }
       })
@@ -146,7 +146,9 @@ const AdminCategoryContainer = () => {
 
   return (
     <>
-      <AdminContainer title="Danh sách category">
+      <AdminContainer title="Danh sách category" listIcon={<span className="material-icons">
+        format_list_bulleted
+      </span>}>
         <div>
           <div className={styles['create-btn-container']}>
             <button onClick={handleClickCreateCategory}>
@@ -159,7 +161,7 @@ const AdminCategoryContainer = () => {
         </div>
         {
           !isLoading && <>
-            <AdminTableContainer headers={headers} data={pageData}
+            <CategoryTable headers={headers} data={pageData}
               editItem={handleEditTableItem} deleteItem={handleDeleteTableItem}
               startIndex={offset}
             />

@@ -16,10 +16,12 @@ import uploadCourse from './uploadCourse';
 import courseLearning from './courseLearning';
 import userProfile from './userProfile';
 import videoLearning from './videoLearning';
-import categoryReducer from './category';
+import adminCategoryReducer from './admin_category';
 import favoriteCourse from './favoriteCourse';
 import registerCourse from'./registerCourse';
 import header from './header';
+import adminStudentReducer from './admin_student';
+import adminLecturerReducer from './admin_lecturer';
 
 export default combineReducers({
   courses,
@@ -39,8 +41,10 @@ export default combineReducers({
   courseLearning,
   userProfile,
   videoLearning,
-  categoryReducer,
+  adminCategoryReducer,
   favoriteCourse,
   registerCourse,
   header,
+  adminStudentReducer,
+  adminLecturerReducer
 });

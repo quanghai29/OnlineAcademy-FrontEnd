@@ -21,7 +21,7 @@ const Pagination = ({
           </a>
         </li>
         {pageNumbers.map((number) => (
-          <li className={number === currentPage ? 'active' : ''}>
+          <li key={number} className={number === currentPage ? 'active' : ''}>
             <a onClick={() => paginate(number)} href="#!">
               {number}
             </a>
