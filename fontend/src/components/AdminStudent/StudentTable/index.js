@@ -3,7 +3,7 @@ import styles from "./StudentTable.module.scss"
 const StudentTable = (props) => {
 
   function handleOpenItem(e) {
-    props.editItem(+e.target.id);
+    props.openItem(+e.target.id);
   }
 
   function handleDeleteItem(e) {

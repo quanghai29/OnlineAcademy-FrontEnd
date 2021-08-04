@@ -5,15 +5,18 @@ import ModalContainer from "../Modal/ModalContainer"
 import styles from "./AdminLecturer.module.scss"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchLecturerData
+} from "../../redux/actions/admin_lecturer"
 
 const AdminLecturerContainer = () => {
-  const lecturerState = useSelector(state=> state.adminLecturerReducer);
-  const {lecturers} = lecturerState;
+  const lecturerState = useSelector(state => state.adminLecturerReducer);
+  const { lecturers } = lecturerState;
   const dispatch = useDispatch();
   const perPage = 5;
 
   const headers = [
-    "STT", 
+    "STT",
     "Tên đăng nhập",
     "Mật khẩu",
     "Email",
@@ -33,9 +36,9 @@ const AdminLecturerContainer = () => {
   //   }
   // }, [students, indexOfDeletedItem])
 
-  // useEffect(() => {
-  //   dispatch(fetchStudenData());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchLecturerData());
+  }, [dispatch]);
 
   useEffect(() => {
     if (lecturers) {
@@ -57,16 +60,24 @@ const AdminLecturerContainer = () => {
     }
   }, [offset, lecturers, lecturerState])
 
-  function handleClickCloseModal(){
+  function handleClickCloseModal() {
 
   }
 
-  function handleClickSubmitLecturer(){
+  function handleClickSubmitLecturer() {
 
   }
 
-  function handleClickSelectedPage(){
+  function handleDeleteLecturerItem(index) {
+    console.log('delete at', offset + index);
+  }
 
+  function handleOpenLecturerItem(index) {
+    console.log('open at', offset + index);
+  }
+
+  function handleClickSelectedPage(data) {
+    setSelectedPage(data.selected);
   }
   return (
     <AdminContainer title="Danh sách giảng viên"
@@ -82,11 +93,17 @@ const AdminLecturerContainer = () => {
         </div>
       </div>
 
-      <LecturerTable headers={headers} data={pageData}/>
-      <PaginationContainer pageCount={Math.ceil(lecturers?.length / perPage)}
+      {
+        !isLoading && <>
+          <LecturerTable headers={headers} data={pageData} startIndex={offset}
+            deleteItem={handleDeleteLecturerItem} openItem={handleOpenLecturerItem}
+          />
+          <PaginationContainer pageCount={Math.ceil(lecturers?.length / perPage)}
             pageRangeDisplayed={5} marginPagesDisplayed={2}
             handleClickSelectedPage={handleClickSelectedPage}
-            selectedPage={selectedPage}/>
+            selectedPage={selectedPage} />
+        </>
+      }
       {/* <ModalContainer>
           <div className={styles['create-form-container']}>
             <div className={styles['close-modal-icon']}>

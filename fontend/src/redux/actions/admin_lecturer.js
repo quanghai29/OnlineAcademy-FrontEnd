@@ -3,7 +3,7 @@ import {
   SET_LECTURER_DATA
 } from "../constants/actionTypes"
 
-export const fetchLecturerDat = ()=>{
+export const fetchLecturerData = ()=>{
   return{
     type: FETCH_LECTURER_DATA
   }

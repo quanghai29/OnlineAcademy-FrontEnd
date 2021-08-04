@@ -2,8 +2,6 @@ import {
   SET_CATEGORY_DATA,
   FETCH_CATEGORY_DATA,
   SET_CATEGORY_WARNING,
-  EDIT_CATEGORY_ITEM,
-  CREATE_CATEGORY_ITEM,
   SET_IS_SHOW_FORM_MODAL,
   SET_CATEGORY_INPUT_VALUE,
   REQUEST_DELETE_CATEGORY_ITEM,
@@ -27,19 +25,6 @@ export const setCategoryWarning =(data)=>{
   return{
     type: SET_CATEGORY_WARNING,
     data
-  }
-}
-
-export const editCategory = (data)=>{
-  return{
-    type: EDIT_CATEGORY_ITEM,
-    data
-  }
-}
-
-export const createCategory = ()=>{
-  return{
-    type: CREATE_CATEGORY_ITEM,
   }
 }
 

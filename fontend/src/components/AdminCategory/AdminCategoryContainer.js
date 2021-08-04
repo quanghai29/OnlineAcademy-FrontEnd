@@ -133,7 +133,9 @@ const AdminCategoryContainer = () => {
       data.id = categories[editIndex].id;
       data.last_update = day;
       data.index = +editIndex;
+      data.categories = categories;
       dispatch(submitCategoryForm(REQUEST_EDIT_CATEGORY_ITEM, data));
+      setEditIndex(-1);
     } else {// Create
       data.category_name = categoryState.inputValue;
       dispatch(submitCategoryForm(REQUEST_CREATE_CATEGORY_ITEM, data));

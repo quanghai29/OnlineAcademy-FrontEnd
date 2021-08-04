@@ -1,16 +1,20 @@
 import appAPI from "../redux/axios/course";
 import Swal from 'sweetalert2';
+import {instance} from "../redux/axios/account"
 
 export const getCategoryData = async () => {
-  const res = await appAPI.get('/admin/category');
+  const res = await instance.get('/admin/category');
 
   return res.data.categories;
 }
 
 export const editCategoryItem = async (data) => {
-  const res = await appAPI.patch('/admin/category', data);
-
-  return res.data;
+  try {
+    const res = await appAPI.patch('/admin/category', data);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export const createCategoryItem = async (data) => {
@@ -63,7 +67,7 @@ export const getLecturerData = async () => {
   try {
     const result = await appAPI.get('admin/lecturer');
     if (result.status === 200)
-        return result.data;
+      return result.data;
   } catch (err) {
     console.log(err);
   }

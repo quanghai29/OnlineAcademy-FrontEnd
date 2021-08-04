@@ -1,13 +1,18 @@
 import styles from "./LecturerTable.module.scss"
 
-const LecturerTable = (props)=>{
+const LecturerTable = (props) => {
   function handleOpenItem(e) {
-    props.editItem(+e.target.id);
+    props.openItem(+e.target.id);
   }
 
   function handleDeleteItem(e) {
     props.deleteItem(+e.target.id);
   }
+
+  function handleEditItem(e){
+    props.editItem(+e.target.id)
+  }
+
   return (
     <div className={styles['table-container']}>
       <table className={styles['admin-table']}>
@@ -23,28 +28,32 @@ const LecturerTable = (props)=>{
         </thead>
         <tbody>
           {
-            props.data.length >0 && props.data.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td>{props.startIndex + index + 1}</td>
-                <td>{item.username}</td>
-                <td>{item.password}</td>
-                <td>{item.email}</td>
-                <td>{item.create_date}</td>
-                <td>{item.creator}</td>
-                <td>
-                  <span id={index} onClick={handleOpenItem}
-                    className={`material-icons ${styles['open-in-new-icon']}`}>
-                    open_in_new
+            props.data.length > 0 && props.data.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{props.startIndex + index + 1}</td>
+                  <td>{item.username}</td>
+                  <td>**********************</td>
+                  <td>{item.email}</td>
+                  <td>{item.create_date}</td>
+                  <td>{item.creator}</td>
+                  <td>
+                    <span id={index} onClick={handleOpenItem}
+                      className={`material-icons ${styles['open-in-new-icon']}`}>
+                      open_in_new
+                    </span>
+                    <span id={index} onClick={handleEditItem}
+                    className={`material-icons ${styles['edit-icon']}`}>
+                    edit
                   </span>
-                  <span id={index} onClick={handleDeleteItem}
-                    className={`material-icons ${styles['delete-icon']}`}>
-                    delete
-                  </span>
-                </td>
-              </tr>
-            )
-          })}
+                    <span id={index} onClick={handleDeleteItem}
+                      className={`material-icons ${styles['delete-icon']}`}>
+                      delete
+                    </span>
+                  </td>
+                </tr>
+              )
+            })}
         </tbody>
       </table>
     </div>

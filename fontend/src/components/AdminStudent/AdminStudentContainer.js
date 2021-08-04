@@ -84,6 +84,10 @@ const AdminStudentContainer = () => {
     setSelectedPage(data.selected);
   }
 
+  function handleOpenItem(index){
+    
+  }
+
   return (
     <AdminContainer title="Danh sách học viên"
       listIcon={<span className="material-icons">
@@ -92,7 +96,8 @@ const AdminStudentContainer = () => {
       {
         !isLoading && <>
           <StudentTable headers={headers} data={pageData}
-            startIndex={offset} deleteItem={handleDeleteTableItem}/>
+            startIndex={offset} deleteItem={handleDeleteTableItem} 
+            openItem={handleOpenItem}/>
           <PaginationContainer pageCount={Math.ceil(students.length / perPage)}
             pageRangeDisplayed={5} marginPagesDisplayed={2}
             handleClickSelectedPage={handleClickSelectedPage}

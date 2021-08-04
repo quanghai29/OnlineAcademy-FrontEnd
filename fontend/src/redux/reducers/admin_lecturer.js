@@ -3,7 +3,7 @@ import {
 } from "../constants/actionTypes"
 
 const initialState = {
-  lecturers:[]
+  lecturers:null
 }
 
 const adminLecturerReducer = (state = initialState, action)=>{
