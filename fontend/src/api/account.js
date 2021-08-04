@@ -1,6 +1,6 @@
 import {instance} from "../redux/axios/account"
 import Swal from 'sweetalert2';
-import jwt from 'jsonwebtoken';
+import {parseJwt} from '../utils/helpers';
 
 export async function submitSignUpForm(data) {
   return await instance.post('/account/signup', data).then(res => {
@@ -60,15 +60,16 @@ export async function submitLoginForm(data) {
     if (!response.data.shouldConfirmEmail) {
       if (response.data.authenticated) {
         try{
-          const decoded = jwt.verify(response.data.accessToken,
-            'HOA_ROI_CUA_PHAT');
-            localStorage.setItem('decodePayload', JSON.stringify(decoded));
+          const decoded = parseJwt(response.data.accessToken);
+          localStorage.setItem('decodePayload', JSON.stringify(decoded));
+          localStorage.GelApp_userId =  decoded.userId;
         }catch(err){
           console.log(err);          
         }
         
         localStorage.setItem('accessToken', response.data.accessToken);
         localStorage.setItem('refreshToken', response.data.refreshToken);
+        
       } else {
         Swal.fire({
           icon: 'error',
@@ -81,7 +82,10 @@ export async function submitLoginForm(data) {
       isAuth: response.data.authenticated,
       username: response.data.username || '',
       email: response.data.email || '',
-      shouldConfirmEmail: response.data.shouldConfirmEmail
+      shouldConfirmEmail: response.data.shouldConfirmEmail,
+      role: response.data.role,
+      fullname: response.data.fullname,
+      img_source: response.data.img_source,
     };
   } catch (err) {
     console.log(err);

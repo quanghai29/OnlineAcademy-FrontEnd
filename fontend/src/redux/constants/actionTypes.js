@@ -35,6 +35,7 @@ export const RESET_RESPONSE_DATA = 'RESET_RESPONSE_DATA';
 export const SET_ENTIRE_SIGN_UP_FORM_STATE = 'SET_ENTIRE_SIGN_UP_FORM_STATE';
 export const REQUEST_RESET_SIGN_UP_FORM = 'REQUEST_RESET_SIGN_UP_FORM';
 export const RESET_SIGN_UP_FORM = 'RESET_SIGN_UP_FORM';
+export const RESET_LOGIN_STATE = 'RESET_LOGIN_STATE';
 
 // ===================CONSTANT FOR VERIFY CODE FORM ACTIONS ==========================
 export const VALIDATE_CODE =  'VALIDATE_CODE';
@@ -119,6 +120,16 @@ export const FETCH_COURSE_ONE_COMMENT = 'FETCH_COURSE_ONE_COMMENT';
 export const SET_COURSE_ONE_COMMENT = 'SET_COURSE_ONE_COMMENT';
 export const FETCH_UPDATE_COURSE_COMMENT = 'FETCH_UPDATE_COURSE_COMMENT';
 export const SET_UPDATE_COURSE_COMMENT = 'SET_UPDATE_COURSE_COMMENT';
+//===================================================================
+
+// =================== Type Action HEADER ==================
+export const FETCH_HEADER = 'FETCH_HEADER';
+export const SET_HEADER = 'SET_HEADER';
+//===================================================================
+
+// =================== Type Action LOGOUT ==================
+export const FETCH_LOGOUT = 'FETCH_LOGOUT';
+export const SET_LOGOUT = 'SET_LOGOUT';
 //===================================================================
 
 // ================== Action types of Admin and Category===========================

@@ -5,8 +5,22 @@ import LecturerNavbar from './lecturerNavbar';
 import AdminNavbar from './adminNavbar';
 import GuestNavbar from './guestNavbar';
 import SearchNavbar from './searchNavbar';
+import {useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {ROLE_STUDENT, ROLE_LECTURER, ROLE_ADMIN} from '../../redux/constants/common'; 
+import * as actionType from '../../redux/constants/actionTypes';
 
 function MainNavigation() {
+  const header = useSelector(state => state.header.data);
+  const dispatch = useDispatch();
+
+  useEffect(function(){
+    dispatch({
+      type: actionType.FETCH_HEADER
+    })
+  },[dispatch])
+
+  //console.log(header);
 
   return (
     <nav className={classes.header}>
@@ -20,20 +34,24 @@ function MainNavigation() {
           </li>
         </ul>
 
-        {/*Đã đăng nhập - Student + Guest */}
-        <SearchNavbar/>
-
-        {/*Chưa đăng nhập */}
-        {/* <GuestNavbar/> */}
+        {/* Đã/Chưa đăng nhập - Student + Guest */}
+        {
+          (!header.isAuth && <SearchNavbar/>)
+          ||
+          (header.isAuth && header.role === ROLE_STUDENT && <SearchNavbar/>)
+        }
+        
+        {/* Chưa đăng nhập */}
+        { !header.isAuth && <GuestNavbar /> }
 
         {/*Đã đăng nhập - Student */}
-        <StudentNavbar />
+        { header.isAuth && header.role === ROLE_STUDENT && <StudentNavbar {...header}/> }
 
         {/*Đã đăng nhập - Lecturer */}
-        {/* <LecturerNavbar/> */}
+        { header.isAuth && header.role === ROLE_LECTURER && <LecturerNavbar {...header}/> }
 
         {/*Đã đăng nhập - Admin */}
-        {/* <AdminNavbar/> */}
+        { header.isAuth && header.role === ROLE_ADMIN && <AdminNavbar {...header}/> }
 
       </div>
     </nav>

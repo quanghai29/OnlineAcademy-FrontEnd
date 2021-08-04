@@ -2,19 +2,36 @@
 
 
 .menu {
-  a {
-    background-color: transparent !important;
-    color: #ff8a00 !important;
-    box-shadow: none !important;
-    font-weight: bold !important;
-    i {
-      color: #ff8a00;
-    }
-  }
+  position: relative !important;
+}
 
-  a:hover{
-    color: #ff8a00 !important;
+.menuIcon {
+  background-color: transparent !important;
+  color: #ff8a00 !important;
+  box-shadow: none !important;
+  font-weight: bold !important;
+  i {
+    color: #ff8a00;
   }
+}
+
+.menuIcon:hover{
+  color: #ff8a00 !important;
+}
+
+.dropcontent{
+  width: 300px !important;
+  height: auto !important;
+  position: absolute !important;
+  left: 25px !important;
+  top: 54px !important;
+  font-weight: 500 !important;
+  //padding-top: 10px !important;
+}
+
+.item{
+  margin-bottom: 0 !important;
+  padding: 15px 0px !important;
 }
 
 .search {

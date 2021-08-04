@@ -1,6 +1,5 @@
 import classes from './style.module.scss';
 import { Link } from "react-router-dom";
-import SearchNavbar from '../searchNavbar';
 
 export default function GuestNavbar() {
   return (
@@ -12,7 +11,7 @@ export default function GuestNavbar() {
       </li>
 
       <li>
-        <Link to="/login" className={`waves-effect waves-light btn ${classes.handleBtn}`}>
+        <Link to="/signup" className={`waves-effect waves-light btn ${classes.handleBtn}`}>
           Đăng Ký
         </Link>
       </li>
