@@ -12,11 +12,12 @@ import CourseOverviewSaga from './courseOverview';
 import CourseLearningSaga from './courseLearning';
 import getCourseSaga from './getCourses';
 import userProfileSaga from './useProfile';
-import categorySaga from './category';
+import adminCategorySaga from './admin_category';
 import FavoriteCourseSaga from './favoriteCourse';
 import RegisterCourseSaga from './registerCourse';
 import CourseCommentSaga from './courseComment';
-import studentSaga from './student';
+import adminStudentSaga from './admin_student';
+import adminLecturerSaga from './admin_lecturer';
 
 export default function* rootSaga() {
     yield all([
@@ -34,10 +35,11 @@ export default function* rootSaga() {
         CourseLearningSaga(),
         getCourseSaga(),
         userProfileSaga(),
-        categorySaga(),
+        adminCategorySaga(),
         FavoriteCourseSaga(),
         RegisterCourseSaga(),
         CourseCommentSaga(),
-        studentSaga(),
+        adminStudentSaga(),
+        adminLecturerSaga(),
     ])
 }

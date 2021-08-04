@@ -1,5 +1,5 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import * as studentActions from "../actions/student";
+import * as studentActions from "../actions/admin_student";
 import {
   FETCH_STUDENT_DATA,
   REQUEST_DELETE_STUDENT_ITEM
@@ -25,7 +25,7 @@ function* watchDeleteStudentItem(){
   yield takeLatest(REQUEST_DELETE_STUDENT_ITEM, requestDeleteStudentItem);
 }
 
-export default function* studentSaga(){
+export default function* adminStudentSaga(){
   yield all([
     watchFetchStudentData(),
     watchDeleteStudentItem()

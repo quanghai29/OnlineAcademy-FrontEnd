@@ -1,5 +1,5 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import * as categoryActions from "../actions/category"
+import * as categoryActions from "../actions/admin_category"
 import {
   FETCH_CATEGORY_DATA,
   REQUEST_EDIT_CATEGORY_ITEM,
@@ -74,7 +74,7 @@ function* watchDeleteCategoryItem(){
   yield takeLatest(REQUEST_DELETE_CATEGORY_ITEM, requestDeleteCategoryItem);
 }
 
-export default function* categorySaga() {
+export default function* adminCategorySaga() {
   yield all([
     watchFetchCategory(),
     watchEditCategoryItem(),

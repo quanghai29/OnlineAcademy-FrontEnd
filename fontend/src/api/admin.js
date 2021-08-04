@@ -30,31 +30,41 @@ export const createCategoryItem = async (data) => {
   }
 }
 
-export const deleteCategoryItem = async(data)=>{
-  try{
-    appAPI.defaults.headers.common['category_id']=data.id;
+export const deleteCategoryItem = async (data) => {
+  try {
+    appAPI.defaults.headers.common['category_id'] = data.id;
     await appAPI.delete('/admin/category');
-  }catch(err){
+  } catch (err) {
     console.log(err);
   }
 }
 
-export const getStudentData = async()=>{
-  try{
+export const getStudentData = async () => {
+  try {
     const result = await appAPI.get('/admin/student');
-    if(result.status === 200)
+    if (result.status === 200)
       return result.data;
-  }catch(err){
+  } catch (err) {
     console.log(err);
   }
 }
 
-export const deleteStudentItem = async(student_id)=>{
-  try{
-    appAPI.defaults.headers.common['student_id']=student_id;
+export const deleteStudentItem = async (student_id) => {
+  try {
+    appAPI.defaults.headers.common['student_id'] = student_id;
     const result = await appAPI.delete('/admin/student');
     console.log('result', result);
-  }catch(err){
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getLecturerData = async () => {
+  try {
+    const result = await appAPI.get('admin/lecturer');
+    if (result.status === 200)
+        return result.data;
+  } catch (err) {
     console.log(err);
   }
 }

@@ -8,7 +8,7 @@ const initialState ={
   indexOfDeletedItem: -1
 }
 
-const studentReducer = (state = initialState, action)=>{
+const adminStudentReducer = (state = initialState, action)=>{
   switch(action.type){
     case SET_STUDENT_DATA:{
       let newState = {
@@ -29,4 +29,4 @@ const studentReducer = (state = initialState, action)=>{
   }
 }
 
-export default studentReducer;
+export default adminStudentReducer;

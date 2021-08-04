@@ -16,7 +16,7 @@ const initialState = {
   indexOfDeletedItem: -1
 }
 
-const categoryReducer = (state=initialState, action)=>{
+const adminCategoryReducer = (state=initialState, action)=>{
   switch(action.type){
     case SET_CATEGORY_DATA:{
       let newState={
@@ -79,4 +79,4 @@ const categoryReducer = (state=initialState, action)=>{
   }
 }
 
-export default categoryReducer;
+export default adminCategoryReducer;

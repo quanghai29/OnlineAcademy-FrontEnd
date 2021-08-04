@@ -6,19 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchStudentData,
   requestDeleteStudentItem
-} from "../../redux/actions/student";
+} from "../../redux/actions/admin_student";
 import Swal from 'sweetalert2';
 
 
 const AdminStudentContainer = () => {
-  const studentState = useSelector(state => state.studentReducer);
+  const studentState = useSelector(state => state.adminStudentReducer);
   const { students,indexOfDeletedItem } = studentState;
   const dispatch = useDispatch();
   const perPage = 5;
 
   const headers = [
     'STT',
-    'Username',
+    'Tên đăng nhập',
     'Họ tên',
     'Email',
     "Ngày tạo"

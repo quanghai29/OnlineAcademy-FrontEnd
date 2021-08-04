@@ -148,3 +148,6 @@ export const SET_STUDENT_DATA = 'SET_STUDENT_DATA';
 export const REQUEST_DELETE_STUDENT_ITEM = 'REQUEST_DELETE_STUDENT_ITEM';
 export const DELETE_STUDENT_ITEM = 'DELETE_STUDENT_ITEM';
 
+// ================== Action types of Admin and Lecturer ===============================
+export const FETCH_LECTURER_DATA = 'FETCH_LECTURER_DATA';
+export const SET_LECTURER_DATA = 'SET_LECTURER_DATA';

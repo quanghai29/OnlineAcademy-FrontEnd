@@ -11,7 +11,7 @@ import {
   setIsShowFormModal,
   setCategoryInputValue,
   requestDeleteCategoryItem
-} from "../../redux/actions/category"
+} from "../../redux/actions/admin_category"
 import ModalContainer from "../Modal/ModalContainer";
 import { REQUEST_EDIT_CATEGORY_ITEM, REQUEST_CREATE_CATEGORY_ITEM }
   from "../../redux/constants/actionTypes";
@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
 
 
 const AdminCategoryContainer = () => {
-  const categoryState = useSelector(state => state.categoryReducer);
+  const categoryState = useSelector(state => state.adminCategoryReducer);
   const { categories, indexOfDeletedItem } = categoryState;
   const dispatch = useDispatch();
   const perPage = 5;
