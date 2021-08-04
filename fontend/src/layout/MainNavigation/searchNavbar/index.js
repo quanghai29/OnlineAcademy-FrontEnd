@@ -5,12 +5,12 @@ import {
 } from "../../../redux/constants/actionTypes"
 import { setSearchText } from "../../../redux/actions/searchCourse";
 import { Link, useHistory } from "react-router-dom";
-import { fetchCategory } from "../../../redux/actions/category";
+import { fetchCategory } from "../../../redux/actions/admin_category";
 import { useEffect } from 'react';
 
 export default function SearchNavbar() {
   const searchCourseState = useSelector(state => state.searchCourseReducer)
-  const categoryState = useSelector(state => state.categoryReducer.categories);
+  const categoryState = useSelector(state => state.adminCategoryReducer.categories);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -32,7 +32,7 @@ export default function SearchNavbar() {
     }
   }
 
-  console.log(categoryState)
+  //console.log(categoryState)
   return (
     <ul className="left hide-on-med-and-down">
       <li className={classes.menu}>
@@ -54,7 +54,7 @@ export default function SearchNavbar() {
                     <Link to="/" key={item.id}>{item.category_name}</Link>
                   </div>
                   <div className="col m2">
-                    <div className="chip red white-text">{item.amount_course}</div>
+                    <h6 className= {classes.amount}>{item.amount_course}</h6>
                   </div>
                 </li>
               )
