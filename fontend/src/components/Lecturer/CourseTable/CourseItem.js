@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import Swal from "sweetalert2"
 import { setSelectedCourse } from '../../../redux/actions/selectedCourse';
 import { setIsUpdateCourse, deleteCourseById } from '../../../redux/actions/coursesOfLecturer';
+import { requestFetchChaptersOfCourse } from '../../../redux/actions/chaptersOfCourse'
 import HorizotalCard from '../HorizotalCard';
 import classes from './CourseTable.module.scss';
 
@@ -13,6 +14,7 @@ const CourseItem = ({course}) => {
 
   const onClickEditHandler = (e) => {
     dispatch(setSelectedCourse(course));
+    dispatch(requestFetchChaptersOfCourse(course.id));
     dispatch(setIsUpdateCourse(true));
     history.push('/update-course');
   }
