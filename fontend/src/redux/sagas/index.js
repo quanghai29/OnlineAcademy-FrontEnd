@@ -16,6 +16,8 @@ import adminCategorySaga from './admin_category';
 import FavoriteCourseSaga from './favoriteCourse';
 import RegisterCourseSaga from './registerCourse';
 import CourseCommentSaga from './courseComment';
+import HeaderSaga from './header';
+import LogoutSaga from './logout';
 import adminStudentSaga from './admin_student';
 import adminLecturerSaga from './admin_lecturer';
 
@@ -39,6 +41,8 @@ export default function* rootSaga() {
         FavoriteCourseSaga(),
         RegisterCourseSaga(),
         CourseCommentSaga(),
+        HeaderSaga(),
+        LogoutSaga(),
         adminStudentSaga(),
         adminLecturerSaga(),
     ])

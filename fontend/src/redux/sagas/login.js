@@ -10,8 +10,9 @@ import {
   VALIDATE_LOG_IN_PASSWORD,
   SUBMIT_LOG_IN_FORM,
   REQUEST_ACTIVE_ACCOUNT,
+  RESET_LOGIN_STATE
 } from "../constants/actionTypes"
-import{
+import {
   submitLoginForm,
   activeAccount
 } from "../../api/account"
@@ -43,24 +44,25 @@ function* requestSetEntireLoginForm(action) {
     //call Api submit form
     const resData = yield call(submitLoginForm, validateResult.dataToSubmit);
     yield put(loginActions.setLoginResponse(resData));
-    if(resData.isAuth){
-      
-      yield put(loginActions.resetLoginForm());
+    if (resData.isAuth) {
+      yield put({
+        type: RESET_LOGIN_STATE
+      })
     }
   } else {
     yield put(loginActions.setEntireLoginForm(validateResult.newFormState));
   }
 }
-function* watchSetEntireLoginForm(){
+function* watchSetEntireLoginForm() {
   yield takeLatest(SUBMIT_LOG_IN_FORM, requestSetEntireLoginForm);
 }
 
-function* requestActiveAccount(action){
+function* requestActiveAccount(action) {
   yield call(activeAccount, action.payload.email);
   yield put(loginActions.resetResponseData());
   yield put(loginActions.resetLoginForm());
 }
-function* watchRequestActiveAccount(){
+function* watchRequestActiveAccount() {
   yield takeLatest(REQUEST_ACTIVE_ACCOUNT, requestActiveAccount);
 }
 

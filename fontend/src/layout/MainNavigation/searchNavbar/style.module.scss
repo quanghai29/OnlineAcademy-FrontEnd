@@ -1,0 +1,111 @@
+@import "../../../styles/config";
+
+
+.menu {
+  position: relative !important;
+}
+
+.menuIcon {
+  background-color: transparent !important;
+  color: #ff8a00 !important;
+  box-shadow: none !important;
+  font-weight: bold !important;
+  i {
+    color: #ff8a00;
+  }
+}
+
+.menuIcon:hover{
+  color: #ff8a00 !important;
+}
+
+.dropcontent{
+  width: 300px !important;
+  height: auto !important;
+  position: absolute !important;
+  left: 25px !important;
+  top: 54px !important;
+  font-weight: 500 !important;
+  //padding-top: 10px !important;
+}
+
+.item{
+  margin-bottom: 0 !important;
+  padding: 15px 0px !important;
+}
+
+.amount{
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+
+.search {
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  position: relative !important;
+  margin-right: 25px !important;
+  img {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+  input {
+    background: linear-gradient(253.58deg, #FFC000 1.55%, #FF8A00 95.8%);
+    height: auto;
+    border: none !important;
+    border-radius: 5px !important;
+    color: #fff;
+    padding: 15px 5px;
+    padding-left: 25px !important;
+    text-decoration: black !important ;
+
+    @media (max-width: $small-and-down) {
+      // styles for small screens and down
+
+    }
+    @media (min-width: $medium-and-up) {
+      // styles for medium screens and larger
+      width: 200px !important;
+    }
+    @media (max-width: $medium-and-down) {
+      // styles for medium screens and down
+      width: 400px !important;
+    }
+    @media (min-width: $large-and-up) {
+      // styles for large screens and up
+      width: 500px !important;
+    }
+    @media (min-width: $extra-large-and-up) {
+      // styles for extra large screens and up
+      width: 600px !important;
+    }
+  }
+
+  input:focus{
+    border-bottom: none !important;
+    border: none  !important;
+    box-shadow: none !important;
+  }
+
+  input::placeholder{
+    color: white;
+  }
+
+  .searchBtn {
+    background-color: white !important;
+    box-shadow: none;
+    position: absolute;
+    left: 89%;
+    top: 10%;
+    border-radius: 5px;
+    
+    i{
+      color:black;
+      position: relative;
+      top: -34%;
+      left: 12%;
+    }
+  }
+}
