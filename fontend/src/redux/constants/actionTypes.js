@@ -35,6 +35,7 @@ export const RESET_RESPONSE_DATA = 'RESET_RESPONSE_DATA';
 export const SET_ENTIRE_SIGN_UP_FORM_STATE = 'SET_ENTIRE_SIGN_UP_FORM_STATE';
 export const REQUEST_RESET_SIGN_UP_FORM = 'REQUEST_RESET_SIGN_UP_FORM';
 export const RESET_SIGN_UP_FORM = 'RESET_SIGN_UP_FORM';
+export const RESET_LOGIN_STATE = 'RESET_LOGIN_STATE';
 
 // ===================CONSTANT FOR VERIFY CODE FORM ACTIONS ==========================
 export const VALIDATE_CODE =  'VALIDATE_CODE';
@@ -128,13 +129,21 @@ export const FETCH_UPDATE_COURSE_COMMENT = 'FETCH_UPDATE_COURSE_COMMENT';
 export const SET_UPDATE_COURSE_COMMENT = 'SET_UPDATE_COURSE_COMMENT';
 //===================================================================
 
+// =================== Type Action HEADER ==================
+export const FETCH_HEADER = 'FETCH_HEADER';
+export const SET_HEADER = 'SET_HEADER';
+//===================================================================
+
+// =================== Type Action LOGOUT ==================
+export const FETCH_LOGOUT = 'FETCH_LOGOUT';
+export const SET_LOGOUT = 'SET_LOGOUT';
+//===================================================================
+
 // ================== Action types of Admin and Category===========================
 export const FETCH_CATEGORY_DATA = 'FETCH_CATEGORY_DATA';
 export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA';
 export const REQUEST_EDIT_CATEGORY_ITEM = 'REQUEST_EDIT_CATEGORY_ITEM';
 export const REQUEST_CREATE_CATEGORY_ITEM = 'REQUEST_CREATE_CATEGORY_ITEM';
-export const EDIT_CATEGORY_ITEM = 'EDIT_CATEGORY_ITEM';
-export const CREATE_CATEGORY_ITEM = 'CREATE_CATEGORY_ITEM';
 export const SET_CATEGORY_WARNING = 'SET_CATEGORY_WARNING';
 export const SUBMIT_CATEGORY_FORM = 'SUBMIT_CATEGORY_FORM';
 export const SET_IS_SHOW_FORM_MODAL='SET_IS_SHOW_FORM_MODAL';
@@ -142,4 +151,12 @@ export const SET_CATEGORY_INPUT_VALUE = 'SET_CATEGORY_INPUT_VALUE';
 export const REQUEST_DELETE_CATEGORY_ITEM = 'REQUEST_DELETE_CATEGORY_ITEM';
 export const DELETE_CATEGORY_ITEM = 'DELETE_CATEGORY_ITEM';
 
+// ================== Action types of Admin and Student ===============================
+export const FETCH_STUDENT_DATA = 'FETCH_STUDENT_DATA';
+export const SET_STUDENT_DATA = 'SET_STUDENT_DATA';
+export const REQUEST_DELETE_STUDENT_ITEM = 'REQUEST_DELETE_STUDENT_ITEM';
+export const DELETE_STUDENT_ITEM = 'DELETE_STUDENT_ITEM';
 
+// ================== Action types of Admin and Lecturer ===============================
+export const FETCH_LECTURER_DATA = 'FETCH_LECTURER_DATA';
+export const SET_LECTURER_DATA = 'SET_LECTURER_DATA';

@@ -1,14 +1,7 @@
 
-import styles from "./AdminTableContainer.module.scss"
+import styles from "./CategoryTable.module.scss"
 
-const AdminTableContainer = (props) => {
-  const headerValues = [];
-  const headerKeys = [];
-  for (let key in props.headers) {
-    headerKeys.push(key);
-    headerValues.push(props.headers[key]);
-  }
-
+const CategoryTable = (props) => {
   function handleEditItem(e) {
     props.editItem(+e.target.id);
   }
@@ -22,7 +15,7 @@ const AdminTableContainer = (props) => {
       <table className={styles['admin-table']}>
         <thead>
           <tr>
-            {headerValues?.map((item, index) => {
+            {props.headers.map((item, index) => {
               return (
                 <th key={index}>{item}</th>
               )
@@ -31,13 +24,14 @@ const AdminTableContainer = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.data.map((item, index) => {
+          { props.data.length>0 && props.data.map((item, index) => {
             return (
               <tr key={index}>
                 <td>{props.startIndex + index + 1}</td>
-                <td>{item[headerKeys[1]]}</td>
-                <td>{item[headerKeys[2]]}</td>
-                <td>{item[headerKeys[3]]}</td>
+                <td>{item.category_name}</td>
+                <td>{item.last_update}</td>
+                <td>{item.amount_course}</td>
+
                 <td>
                   <span id={index} onClick={handleEditItem}
                     className={`material-icons ${styles['edit-icon']}`}>
@@ -57,4 +51,4 @@ const AdminTableContainer = (props) => {
   )
 }
 
-export default AdminTableContainer;
+export default CategoryTable;
