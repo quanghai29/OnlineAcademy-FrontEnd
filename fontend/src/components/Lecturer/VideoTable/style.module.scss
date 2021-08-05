@@ -1,0 +1,30 @@
+.videoTableItem {
+
+    .actionVideo {
+        display: flex;
+        justify-content: flex-end;
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            margin: 0 5px;
+            color: #01579b;
+        }
+    }
+
+    .titleVideo {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        span {
+            color: #f57c00;
+            margin: 0 0.5rem;
+            cursor: pointer;
+        }
+    }
+    
+}
