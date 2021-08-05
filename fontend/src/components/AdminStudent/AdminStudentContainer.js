@@ -35,7 +35,7 @@ const AdminStudentContainer = () => {
       const amountPage = Math.ceil(students?.length / perPage);
       setSelectedPage(amountPage - 1);
     }
-  }, [students, indexOfDeletedItem])
+  }, [students, indexOfDeletedItem, studentState]);
 
   useEffect(() => {
     dispatch(fetchStudentData());

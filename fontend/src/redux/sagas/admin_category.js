@@ -7,7 +7,7 @@ import {
   REQUEST_DELETE_CATEGORY_ITEM
 } from "../constants/actionTypes"
 import * as adminApi from "../../api/admin"
-import * as checkFunctions from "../../utils/common"
+import * as validateFunctions from "../../utils/validate"
 
 function* requestFetchCategory() {
   const result = yield call(adminApi.getCategoryData);
@@ -19,7 +19,7 @@ function* watchFetchCategory() {
 }
 
 function* requestEditCategoryItem(action) {
-  const isEmpty = yield call(checkFunctions.isEmpty, action.data.category_name);
+  const isEmpty = yield call(validateFunctions.isEmpty, action.data.category_name);
   let warning = '';
   if (isEmpty) {
     warning = 'Không để trống trường này';
@@ -44,7 +44,7 @@ function* watchEditCategoryItem() {
 }
 
 function* requestCreateCategoryItem(action) {
-  const isEmpty = yield call(checkFunctions.isEmpty, action.data.category_name);
+  const isEmpty = yield call(validateFunctions.isEmpty, action.data.category_name);
   let warning = '';
   if (isEmpty) {
     warning = 'Không để trống trường này';
