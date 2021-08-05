@@ -1,0 +1,33 @@
+.chapterTable {
+    margin-top: 3rem;
+}
+
+.chapterTableItem {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        margin: 0 5px;
+        color: #01579b;
+    }
+
+    .titleLeft {
+        display: flex;
+
+        .title {
+            color: #f57c00;
+        }
+    }
+
+    .titleRight {
+        display: flex;
+    }
+}

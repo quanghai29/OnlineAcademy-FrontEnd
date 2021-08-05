@@ -1,15 +1,16 @@
 import {
-  SET_USERNAME,
+  SET_SIGN_UP_USERNAME,
   SET_EMAIL,
-  SET_PASSWORD,
+  SET_SIGN_UP_PASSWORD,
   SET_CONFIRM_PASSWORD, 
   SET_SIGN_UP_RESPONSE, 
-  SET_ENTIRE_SIGN_UP_FORM_STATE
+  SET_ENTIRE_SIGN_UP_FORM_STATE,
+  RESET_SIGN_UP_FORM
 } from '../constants/actionTypes'
 
-export const setUsernameAction = (data)=>{
+export const setSignUpUsernameAction = (data)=>{
   return {
-    type: SET_USERNAME,
+    type: SET_SIGN_UP_USERNAME,
     payload: {...data}
   }
 }
@@ -21,9 +22,9 @@ export const setEmailAction = (data)=>{
   }
 }
 
-export const setPasswordAction = (data)=>{
+export const setSignUpPasswordAction = (data)=>{
   return{
-    type: SET_PASSWORD,
+    type: SET_SIGN_UP_PASSWORD,
     payload: {...data}
   }
 }
@@ -35,7 +36,7 @@ export const setConfirmPasswordAction = (data)=>{
   }
 }
 
-export const setResponseAction = (data)=>{
+export const setSignUpResponseAction = (data)=>{
   return {
     type: SET_SIGN_UP_RESPONSE, 
     payload: {...data}
@@ -46,5 +47,11 @@ export const setEntireSignUpFormStateAction = (data)=>{
   return{
     type: SET_ENTIRE_SIGN_UP_FORM_STATE,
     payload: {...data}
+  }
+}
+
+export const resetSignUpForm = ()=>{
+  return {
+    type: RESET_SIGN_UP_FORM
   }
 }

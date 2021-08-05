@@ -2,12 +2,12 @@ import React from 'react';
 import RatingStar from '../RatingStar';
 import classes from './Course.module.scss';
 
-const Course = ({image, title, lecturer, rating, totalStudent, price}) => (
+const Course = ({ title, lecturer, rating, totalStudent, price}) => (
     <article className={classes.card}>
-      <img src={image} alt={`Course ${title}`} />
+      <img src="assets/images/course/course1.png" alt={`Course ${title}`} />
       <div className={classes.content}>
         <p className={classes.title}>{title}</p>
-        <p className={classes.lecturer}>{lecturer}</p>
+        <p className={classes.lecturer_name}>{lecturer}</p>
         <div className={classes.description}>
           <div className={classes.rating}>
             <p>{rating}</p>

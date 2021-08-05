@@ -1,0 +1,29 @@
+.dropdown{
+  width: 40px;
+  height: 40px;
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+  padding: 0 !important;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.dropdown:hover{
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.dropcontent{
+  width: 250px !important;
+  position: absolute !important;
+  left: -195px !important;
+  top: 54px !important;
+
+  h6{
+    color:  #000 !important; 
+  }
+
+  li{
+    font-weight: 400;
+  }
+}

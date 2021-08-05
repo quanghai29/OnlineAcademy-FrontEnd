@@ -14,7 +14,7 @@ function* fetchHotCourse() {
 }
 
 function* watchFetchHotCourse() {
-    yield takeEvery(type.FETCH_COURSE, fetchHotCourse);
+    yield takeEvery(type.FETCH_COURSES, fetchHotCourse);
 }
 
 export default watchFetchHotCourse;

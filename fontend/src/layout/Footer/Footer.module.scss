@@ -1,6 +1,6 @@
 .footer {
-    width: 100vw;
-    height: 312px;
+    width: 100%;
+    height: auto;
 
     .footerTop {
         display: flex;
@@ -40,7 +40,7 @@
     .footerBottom {
         background: black;
         height: 40px;
-        width: 100vw;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;

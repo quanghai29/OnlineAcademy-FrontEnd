@@ -5,7 +5,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import Chapter from './Chapter';
 import Video from './Video';
 
-export default function Overview() {
+export default function Content(props) {
   useEffect(function () {
     initCollapsible();
   })
@@ -18,14 +18,21 @@ export default function Overview() {
     <div className="row">
       <div className="col m10 offset-m1">
         <ul className="collapsible popout">
-          <li>
-            <div className="collapsible-header">
-              <Chapter/>
-            </div>
-            <div className="collapsible-body">
-              <Video/>
-            </div>
-          </li>
+          {
+            props.chapters &&
+            props.chapters.map(chapter =>
+              <li key= {chapter.chapter_id}>
+                <div className="collapsible-header">
+                  <Chapter {...chapter}/>
+                </div>
+                <div className="collapsible-body">
+                  {
+                    chapter.videos.map(video => <Video key={video.video_id} {...video}/>)
+                  }
+                </div>
+              </li>
+            )
+          }
         </ul>
       </div>
     </div>

@@ -1,0 +1,130 @@
+@import '../../../styles/config';
+
+.playerwrapper{
+  background: rgba(0, 0, 0, 0.6) !important;
+  margin: 0 !important;
+  width: 100%;
+  padding: 10px 0px !important;
+}
+
+.controlheader{
+  color: white !important;
+  padding: 14px 10px;
+  padding-top: 30px !important;
+  font-weight: bold;
+  //position: absolute;
+  height: auto;
+}
+
+.backcouse{
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+
+  i{
+    color: #FFC000  !important;
+  }
+}
+
+.namecourse{
+  color: white;
+  font-weight: bold;
+  float: right !important;
+  font-size: 16px;
+}
+
+.rowStar{
+  display: flex;
+  
+  h6{
+    color: #EC0101;
+    font-weight: 500
+  }
+
+  p{
+    font-size: 15px;
+    margin-top: 10px !important;
+  }
+}
+
+.bestseller{
+  background: $primaryBg;
+  padding: 0px 10px;
+  padding-top: 10px;
+  border-radius: 5%;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.createdBy{
+  display: flex;
+  h5{
+    font-weight: bold;
+    margin-top: 10px;
+  }
+}
+
+.release{
+  display: flex;
+  p{
+    margin-top: 0px;
+  }
+}
+
+.watchlist{
+  display: flex;
+  a{
+    background-color: transparent;
+    border: solid white 1px;
+  }
+
+  a:after{
+    background-color: transparent;
+    opacity: 0;
+  }
+}
+
+.courseplay{
+  border-radius: 7%;
+}
+
+.playImage{
+  opacity: 0.8;
+  background-color: black;
+  border-radius: 7.5%;
+  position: relative;
+
+  a{
+    color: white;
+  }
+
+  i{
+    position: absolute;
+    left: 42%;
+    top: 32%;
+    font-size: 85px;
+  }
+}
+
+
+.price{
+  h5{
+    color: black;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  a{
+    color: #FFC000;
+    width: 100%;
+    height: 45px;
+    background-color: transparent;
+    border: #FFC000 solid 2px;
+    padding: 5px 2px;
+  }
+
+  a:hover{
+    background-color: #FF8A00;
+    color: white;
+  }
+  
+}

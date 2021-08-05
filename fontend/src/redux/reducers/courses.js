@@ -8,18 +8,18 @@ const initialState = {
 
   const courses = (state = initialState, action) => {
     switch (action.type) {
-      case type.SET_COURSE:
+      case type.SET_COURSES:
         return {
           ...state,
           data: action.payload,
           isLoading: false
         };
-      case type.FETCH_COURSE:
+      case type.FETCH_COURSES:
         return {
           ...state,
           isLoading: true
         };
-      case type.FETCH_FAILURE:
+      case type.FETCH_COURSES_FAILURE:
         return {
           ...state,
           isLoading: false,

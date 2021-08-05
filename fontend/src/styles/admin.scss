@@ -1,0 +1,93 @@
+@import "./common.scss";
+
+.table-container{
+  margin: 25px 0;
+}
+
+.admin-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  th{
+    text-align: left;
+    border-bottom: 1px solid $linkColor;
+    padding-bottom: 3px;
+  }
+  td{
+    text-align: left;
+    border-bottom: 1px solid #979797;
+    padding: 15px 0 5px;
+    &:last-child{
+      text-align: right;
+    }
+  }
+  
+}
+
+@mixin left-icon{
+  color: #007791;
+  margin-right: 10px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+@mixin delete-icon{
+  color: #f34147;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+@mixin create-btn {
+  button{
+    display: flex;
+    align-items: center;
+    color: #007791;
+    font-weight: bold;
+    background-color: #FFFFFF;
+    padding: 5px 10px ;
+    border-radius: 10px;
+    border: 1px solid #007791;
+    &:hover{
+      cursor: pointer;
+      color: #FFFFFF;
+      background-color: #007791;
+    }
+    .icon{
+      margin-right: 10px;
+    }
+  }
+}
+
+@mixin admin-form-container{
+  max-width: 100%;
+  width: 500px;
+  height: auto;
+  background-color: #FFFFFF;
+  padding: 0px 10px;
+  border-radius: 5px;
+}
+
+@mixin admin-form-group{
+  padding: 15px;
+  form{
+    input{
+      width: 100%;
+      line-height: 2;
+      border-radius: 5px;
+      border: 1px solid #979797;
+      outline: none;
+      padding: 5px 10px;
+    }
+
+    .form__footer{
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+      button{
+        @include submitting-modal-btn;
+      }
+    }
+  }
+}

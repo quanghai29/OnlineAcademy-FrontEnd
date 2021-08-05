@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCourse } from '../../redux/actions/course';
-import { fetchHotCourse } from '../../redux/actions/hotCourses';
+import { fetchLatestCourses, fetchMostViewCourses } from '../../redux/actions/course';
 import Layout from '../../layout/Layout';
 import classes from './Home.module.scss';
 import Courses from '../../components/Courses';
@@ -9,28 +8,33 @@ import Hero from '../../components/Hero';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { courses, hotCourses } = useSelector((state) => state);
+  const { latestCourses, mostViewCourses } = useSelector((state) => state);
+  const videoReducer = useSelector((state) => state.videoReducer);
 
+  console.log('video state', videoReducer);
   useEffect(() => {
-    dispatch(fetchCourse());
-    dispatch(fetchHotCourse());
+    dispatch(fetchLatestCourses());
+    dispatch(fetchMostViewCourses());
   }, [dispatch]);
+
 
   return (
     <Layout>
       <div className={classes.container}>
         <Hero />
         <main className={classes.main}>
-          <div className={classes.welcome}>
-            <p>Tất cả các khóa học đặc sắc nhất</p>
-            <p>được cập nhật hàng tuần, hàng tháng</p>
+          <div>
+            <div className={classes.welcome}>
+              <p>Tất cả các khóa học đặc sắc nhất</p>
+              <p>được cập nhật hàng tuần, hàng tháng</p>
+            </div>
+            <section>
+            <Courses courses={latestCourses.data} title='Những khóa học mới nhất' />
+          </section>
+          <section>
+            <Courses courses={mostViewCourses.data} title='Lượt xem nhiều nhất' />
+          </section>
           </div>
-          <section>
-            <Courses courses={courses.data} title='Hot Trong Tuần' />
-          </section>
-          <section>
-            <Courses courses={hotCourses.data} title='Lượt xem nhiều nhất' />
-          </section>
         </main>
       </div>
       {/* <DevTools /> */}

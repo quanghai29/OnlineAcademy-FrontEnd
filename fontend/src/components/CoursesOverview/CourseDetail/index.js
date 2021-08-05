@@ -4,8 +4,10 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import Overview from './Overview/index';
 import Content from './Content/index';
 import Feedback from './Feedback/index';
+//import { useDispatch, useSelector} from 'react-redux';
+//import * as actionType from '../../../redux/constants/actionTypes';
 
-export default function VideoPlayer() {
+export default function CourseOverview(props) {
 
   useEffect(function () {
     initTabs();
@@ -18,28 +20,32 @@ export default function VideoPlayer() {
 
   return (
     <div className="row">
-      <div className="col s12" style={{padding:0}}>
+      <div className="col m12" style={{padding:0}}>
         <ul id="tabs-swipe-video" className={`tabs ${classes.containnercommon}`}>
-          <li className="tab col s4"><a href="#overview">Tổng Quan</a></li>
-          <li className="tab col s4"><a href="#content">Nội dung</a></li>
-          <li className="tab col s4"><a href="#feedback">Đánh giá</a></li>
+          <li className="tab col m4"><a href="#overview">Tổng Quan</a></li>
+          <li className="tab col m4"><a href="#content">Nội dung</a></li>
+          <li className="tab col m4"><a href="#feedback">Đánh giá</a></li>
         </ul>
       </div>
-      <div id="overview" className="col s12">
+      <div id="overview" className="col m12">
         <div className="section">
-          <Overview />
+          <Overview {...props.overviewData}/>
         </div>
       </div>
-      <div id="content" className="col s12">
+      <div id="content" className="col m12">
         <div className="section">
-          <Content />
+          <Content {...{chapters: props.chapters}}/>
         </div>
       </div>
-      <div id="feedback" className="col s12">
+      <div id="feedback" className="col m12">
         <div className="section">
-          <Feedback/>
+          <Feedback {...{
+            course_id: props.course_id, 
+            isFeedbacked: props.overviewData.isFeedbacked, 
+            isRegister: props.overviewData.isRegister,
+          }}/>
         </div>
-      </div>
+      </div> 
     </div>
   )
 };

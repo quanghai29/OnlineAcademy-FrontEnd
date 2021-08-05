@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLecturerCourse } from '../../../redux/actions/coursesOfLecturer';
+import { useHistory } from 'react-router-dom';
+import { fetchLecturerCourses, setIsUpdateCourse } from '../../../redux/actions/coursesOfLecturer';
+import { resetChaptersOfCourse } from '../../../redux/actions/chaptersOfCourse';
 import Layout from '../../../layout/Layout';
 import CourseTable from '../../../components/Lecturer/CourseTable';
 import Pagination from '../../../components/Pagination';
@@ -8,12 +10,14 @@ import classes from './Home.module.scss';
 
 const HomeLecturer = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [coursesPerPage] = useState(3);
+  const [coursesPerPage] = useState(5);
   const dispatch = useDispatch();
+  const history = useHistory();
   const { data, isLoading } = useSelector((state) => state.coursesOfLecturer);
 
   useEffect(() => {
-    dispatch(fetchLecturerCourse());
+    const lecturer_id = 2; // {userId} = JSON.parse(localStorage.decodePayload);
+    dispatch(fetchLecturerCourses(lecturer_id));
   }, [dispatch]);
 
   // Get current posts
@@ -31,14 +35,20 @@ const HomeLecturer = () => {
     setCurrentPage(pageNumber);
   };
 
+  const onClickAddNewCourseHandler = (e) => {
+    dispatch(setIsUpdateCourse(false));
+    dispatch(resetChaptersOfCourse());
+    history.push('/update-course')
+  }
+
   return (
     <Layout>
       <div className="container">
         <div className={classes.header}>
           <p>Khóa học của tôi</p>
-          <a href="#!" className="waves-effect waves-light btn">
-            <i class="material-icons left">add_box</i>Tạo khóa học
-          </a>
+          <button onClick={onClickAddNewCourseHandler} className="waves-effect waves-light btn">
+            <i className="material-icons left">add_box</i>Tạo khóa học
+          </button>
         </div>
         <CourseTable courses={currentCourses} isLoading={isLoading} />
         <Pagination
