@@ -4,7 +4,6 @@ import {instance} from "../redux/axios/account"
 
 export const getCategoryData = async () => {
   const res = await instance.get('/admin/category');
-
   return res.data.categories;
 }
 

@@ -139,6 +139,11 @@ export const FETCH_LOGOUT = 'FETCH_LOGOUT';
 export const SET_LOGOUT = 'SET_LOGOUT';
 //===================================================================
 
+// =================== Type Action Course of Category ==================
+export const FETCH_COURSE_OF_CATEGORY = 'FETCH_COURSE_OF_CATEGORY';
+export const SET_COURSE_OF_CATEGORY = 'SET_COURSE_OF_CATEGORY';
+//===================================================================
+
 // ================== Action types of Admin and Category===========================
 export const FETCH_CATEGORY_DATA = 'FETCH_CATEGORY_DATA';
 export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA';

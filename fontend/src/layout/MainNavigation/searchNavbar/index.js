@@ -7,6 +7,7 @@ import { setSearchText } from "../../../redux/actions/searchCourse";
 import { Link, useHistory } from "react-router-dom";
 import { fetchCategory } from "../../../redux/actions/admin_category";
 import { useEffect } from 'react';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 export default function SearchNavbar() {
   const searchCourseState = useSelector(state => state.searchCourseReducer)
@@ -14,6 +15,9 @@ export default function SearchNavbar() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const elems = document.querySelectorAll('.dropdown-trigger');
+  M.Dropdown.init(elems, {});
 
   useEffect(function () {
     dispatch(fetchCategory());
@@ -32,13 +36,12 @@ export default function SearchNavbar() {
     }
   }
 
-  //console.log(categoryState)
   return (
     <ul className="left hide-on-med-and-down">
       <li className={classes.menu}>
 
         {/* eslint-disable-next-line */}
-        <a className={`dropdown-trigger waves-effect waves-light btn ${classes.menuIcon}`} href="#" data-target="category">
+        <a className={`dropdown-trigger waves-effect waves-light btn ${classes.menuIcon}`} data-target="category">
           <i className="material-icons left">menu</i>
           Danh mục
         </a>
@@ -49,12 +52,21 @@ export default function SearchNavbar() {
             &&
             categoryState.map(item => {
               return (
-                <li className={`row ${classes.item}`}>
+                <li key={item.id} className={`row ${classes.item}`}>
                   <div className="col m9">
-                    <Link to="/" key={item.id}>{item.category_name}</Link>
+                    <Link to={{
+                      pathname: "/course-of-category",
+                      state: {
+                        category_id: item.id,
+                        category_name: item.category_name,
+                        amount_course: item.amount_course,
+                      },
+                    }}>
+                      {item.category_name}
+                    </Link>
                   </div>
                   <div className="col m2">
-                    <h6 className= {classes.amount}>{item.amount_course}</h6>
+                    <h6 className={classes.amount}>{item.amount_course}</h6>
                   </div>
                 </li>
               )

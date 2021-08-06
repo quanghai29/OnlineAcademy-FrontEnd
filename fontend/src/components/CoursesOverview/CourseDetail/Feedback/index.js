@@ -27,12 +27,6 @@ export default function Feedback(props) {
 
   const initInputComment = () => {
     if (props.isFeedbacked) {
-      //làm tạm payload để test
-      // localStorage.setItem('decodePayload', JSON.stringify({
-      //   userId: 1,
-      //   role: 3
-      // }))
-
       //lấy userid
       const decodePayload = localStorage.getItem('decodePayload');
       
@@ -45,10 +39,13 @@ export default function Feedback(props) {
         .find(comment => comment.course_id === props.course_id
           && comment.student_id === userId);
 
+      console.log(studentComment);
       //set lại state
       if(studentComment){
         setRating(studentComment.vote);
         setComment(studentComment.comment);
+        console.log(rating);
+        console.log(contentComment)
       }
     }
   }

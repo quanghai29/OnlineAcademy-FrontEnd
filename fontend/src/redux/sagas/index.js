@@ -20,6 +20,7 @@ import HeaderSaga from './header';
 import LogoutSaga from './logout';
 import adminStudentSaga from './admin_student';
 import adminLecturerSaga from './admin_lecturer';
+import CourseCategorySaga from './courseCategory';
 
 export default function* rootSaga() {
     yield all([
@@ -45,5 +46,6 @@ export default function* rootSaga() {
         LogoutSaga(),
         adminStudentSaga(),
         adminLecturerSaga(),
+        CourseCategorySaga(),
     ])
 }
