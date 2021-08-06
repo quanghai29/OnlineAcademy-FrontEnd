@@ -6,7 +6,7 @@ import {
 } from "../constants/actionTypes"
 
 const initialState = {
-  result: [],
+  result: null,
   text: '',
   isSearched: false
 }

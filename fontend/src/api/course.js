@@ -70,7 +70,6 @@ export const getCourses = {
 };
 
 export const getSearchCourseResult = async (text) => {
-  // gắn accessToken vào headers...
   //call api
   const response = await appAPI.post('/course/search', {
     text_search: text,

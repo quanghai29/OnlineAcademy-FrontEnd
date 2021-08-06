@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 
 export default function RowCourse(props) {
-  console.log(props);
   return (
     <div className={styles['row-course-container']}>
       <div className={styles['row-course__right-content']}>
