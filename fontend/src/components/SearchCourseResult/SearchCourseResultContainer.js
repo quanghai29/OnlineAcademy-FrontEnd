@@ -10,8 +10,7 @@ import PaginationContainer from "../PaginationContainer/PaginationContainer";
 // data:{
 //  courses: [],
 //  keyword: string
-// },
-// isSearched: boolean
+// }
 //}
 export default function SearchCourseResultContainer(props) {
   document.addEventListener('DOMContentLoaded', function () {
@@ -20,7 +19,6 @@ export default function SearchCourseResultContainer(props) {
   });
 
   let searchResult =  props.data;
-  const {isSearched} = props;
 
   const [amountItemPerPage, setItemInPage] = useState(5);// amount of item per a page
   const [offset, setOffset] = useState(0);
@@ -45,11 +43,10 @@ export default function SearchCourseResultContainer(props) {
   }, [searchResult, orderBy, orderDir]);
 
   useEffect(()=>{
-    if(!isSearched){
+    if(!searchResult){
       setIsLoading(false);
-      // setSortedData([]);
     }
-  }, [isSearched])
+  }, [searchResult])
 
   const optionSort = [
     { orderBy: 'avg_vote', orderDir: 'desc' },

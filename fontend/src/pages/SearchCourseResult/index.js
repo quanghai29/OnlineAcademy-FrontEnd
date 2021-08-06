@@ -14,8 +14,7 @@ const SearchCourseResult = () => {
 
   return (
     <Layout>
-      <SearchCourseResultContainer isSearched = {searchCourseState.isSearched}
-        data={searchCourseState.result} />
+      <SearchCourseResultContainer data={searchCourseState.result} />
     </Layout>
   )
 }
