@@ -107,7 +107,7 @@ const CourseImage = () => {
               disabled={disableSubmit}
             >
               Submit
-              <i class="material-icons right">send</i>
+              <i className="material-icons right">send</i>
             </button>
           </div>
         </div>

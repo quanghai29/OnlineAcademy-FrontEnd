@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchLecturerCourses, setIsUpdateCourse } from '../../../redux/actions/coursesOfLecturer';
+import { resetChaptersOfCourse } from '../../../redux/actions/chaptersOfCourse';
 import Layout from '../../../layout/Layout';
 import CourseTable from '../../../components/Lecturer/CourseTable';
 import Pagination from '../../../components/Pagination';
@@ -36,6 +37,7 @@ const HomeLecturer = () => {
 
   const onClickAddNewCourseHandler = (e) => {
     dispatch(setIsUpdateCourse(false));
+    dispatch(resetChaptersOfCourse());
     history.push('/update-course')
   }
 
