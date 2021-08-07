@@ -1,4 +1,5 @@
 import React from 'react';
+import currency from 'currency.js';
 import RatingStar from '../RatingStar';
 import classes from './Course.module.scss';
 
@@ -19,7 +20,7 @@ const Course = ({ title, lecturer, rating, totalStudent, price}) => (
           <img src="assets/images/course/student.png" alt="student" />
           </div>
         </div>
-        <p>{price} VND</p>
+        <p>{currency(price, { separator: ',', symbol: '', precision: 0 }).format()} VND</p>
       </div>
     </article>
 );

@@ -58,7 +58,6 @@ const initialState = {
           isLoading: true
         }
       case type.DELETE_COURSE_DONE:
-        console.log(action.payload);
         return {
           ...state,
           isLoading: false,
