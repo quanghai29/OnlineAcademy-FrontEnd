@@ -2,23 +2,10 @@ import { takeEvery, call, put, all } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionType from '../constants/actionTypes';
 import {DOMAIN_API} from '../constants/common';
-//import appAPI from '../axios/course';
+import Swal from 'sweetalert2';
 
 function* fetchCourseOverview(action) {
   try {
-    // const response = yield call(function(){
-    //   appAPI.get(`/course/${action.payload.course_id}`);
-    // })
-    // //const response = yield call(axios.get, `${DOMAIN_API}/course/${action.payload.course_id}`);
-    // if(response.status === 200){
-    //   const data = response.data;
-    //   yield put({
-    //     type: actionType.SET_COURSE_OVERVIEW,
-    //     payload: data
-    //   });
-    // }
-
-    
     yield call (function* (){
       const response = yield axios.get(
         `${DOMAIN_API}/course/${action.payload.course_id}`,
@@ -38,8 +25,12 @@ function* fetchCourseOverview(action) {
         });
       }
     })
-  } catch (error) {
-    //yield put(fetchCourseFail(error.message));
+  } catch (err) {
+    console.log(err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Something went wrong',
+    })
   }
 }
 
@@ -58,8 +49,12 @@ function* fetchCourseComment(action) {
         payload: data
       });
     }
-  } catch (error) {
-    //yield put(fetchCourseFail(error.message));
+  } catch (err) {
+    console.log(err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Something went wrong',
+    })
   }
 }
 

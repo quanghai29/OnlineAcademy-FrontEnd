@@ -25,6 +25,9 @@ import header from './header';
 import adminStudentReducer from './admin_student';
 import adminLecturerReducer from './admin_lecturer';
 import courseCategory from './courseCategory';
+import studentCourseRegister from './studentCourseRegister';
+import studentCourseWatchlist from './studentCourseWatchlist';
+import category from './category';
 
 export default combineReducers({
   courses,
@@ -53,4 +56,7 @@ export default combineReducers({
   adminStudentReducer,
   adminLecturerReducer,
   courseCategory,
+  studentCourseRegister,
+  studentCourseWatchlist,
+  category,
 });

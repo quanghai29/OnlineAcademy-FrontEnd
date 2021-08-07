@@ -7,7 +7,6 @@ import verifyCodeSaga from './verifyCode';
 import uploadCourseSaga from './uploadCourse';
 import loginSaga from './login';
 import searchCourseSaga from './searchCourse';
-import videoLoaderSaga from './videoloader';
 import CourseOverviewSaga from './courseOverview';
 import CourseLearningSaga from './courseLearning';
 import getCourseSaga from './getCourses';
@@ -22,6 +21,8 @@ import LogoutSaga from './logout';
 import adminStudentSaga from './admin_student';
 import adminLecturerSaga from './admin_lecturer';
 import CourseCategorySaga from './courseCategory';
+import StudentCourseRegister from './studentCourseRegister';
+import StudentCourseWatchlist from './studentCourseWatchlist';
 
 export default function* rootSaga() {
     yield all([
@@ -34,7 +35,6 @@ export default function* rootSaga() {
         uploadCourseSaga(),
         loginSaga(),
         searchCourseSaga(),
-        videoLoaderSaga(),
         CourseOverviewSaga(),
         CourseLearningSaga(),
         getCourseSaga(),
@@ -49,5 +49,7 @@ export default function* rootSaga() {
         adminStudentSaga(),
         adminLecturerSaga(),
         CourseCategorySaga(),
+        StudentCourseRegister(),
+        StudentCourseWatchlist(),
     ])
 }

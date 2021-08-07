@@ -144,6 +144,16 @@ export const FETCH_COURSE_OF_CATEGORY = 'FETCH_COURSE_OF_CATEGORY';
 export const SET_COURSE_OF_CATEGORY = 'SET_COURSE_OF_CATEGORY';
 //===================================================================
 
+// =================== Type Action Course of Student Register ==================
+export const FETCH_STUDENT_COURSE_REGISTER = 'FETCH_STUDENT_COURSE_REGISTER';
+export const SET_STUDENT_COURSE_REGISTER = 'SET_STUDENT_COURSE_REGISTER';
+//===================================================================
+
+// =================== Type Action Course of Student Register ==================
+export const FETCH_STUDENT_COURSE_WATCHLIST = 'FETCH_STUDENT_COURSE_WATCHLIST';
+export const SET_STUDENT_COURSE_WATCHLIST = 'SET_STUDENT_COURSE_WATCHLIST';
+//===================================================================
+
 // ================== Action types of Admin and Category===========================
 export const FETCH_CATEGORY_DATA = 'FETCH_CATEGORY_DATA';
 export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA';
@@ -173,3 +183,8 @@ export const SET_LECTURER_USERNAME = 'SET_LECTURER_USERNAME';
 export const SET_LECTURER_PASSWORD = 'SET_LECTURER_PASSWORD';
 export const SET_LECTURER_USERNAME_WARNING = 'SET_LECTURER_USERNAME_WARNING';
 export const SET_LECTURER_PASSWORD_WARNING = 'SET_LECTURER_PASSWORD_WARNING';
+
+// =================== Type Action  Category ==================
+export const FETCH_CATEGORY = 'FETCH_CATEGORY';
+export const SET_CATEGORY = 'SET_CATEGORY';
+//===================================================================

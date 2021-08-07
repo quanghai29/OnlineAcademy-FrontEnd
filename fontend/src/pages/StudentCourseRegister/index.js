@@ -1,48 +1,40 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import Layout from '../../layout/Layout';
 import * as actionType from '../../redux/constants/actionTypes';
 import RowCourse from '../../components/RowCourse';
 import classes from './style.module.scss';
 
-const CourseCategory = () => {
-  const location = useLocation();
-  const stateLocation = location.state;
-  const courseCategory = useSelector(state => state.courseCategory.data);
+const CourseRegister = () => {
+  const stCoureRegister = useSelector(state => state.studentCourseRegister.data);
   const dispatch = useDispatch();
 
+
   useEffect(function () {
-    if (stateLocation && stateLocation.category_id > 0) {
-      dispatch({
-        type: actionType.FETCH_COURSE_OF_CATEGORY,
-        payload: {
-          category_id: stateLocation.category_id
-        }
-      })
-    }
-  }, [dispatch, stateLocation])
+    dispatch({
+      type: actionType.FETCH_STUDENT_COURSE_REGISTER
+    })
+  }, [dispatch])
 
   return (
     <Layout>
       <div className="row">
         <div className="col m10 offset-m1">
           <h5 className={classes.cateHeader}>
-            {stateLocation && stateLocation.category_name}
-            &nbsp;:&nbsp;
-            {stateLocation && stateLocation.amount_course} khóa học
+            Khóa học đã đăng ký
+            <i className="material-icons">class</i>
           </h5>
           <div className="progress">
             <div className="determinate" style={{width: "100%"}} />
           </div>
-        </div>
+        </div>        
       </div>
       <div className="row">
         <div className="col m10 offset-m1">
           {
-            courseCategory
+            stCoureRegister
             &&
-            courseCategory.map(item => {
+            stCoureRegister.map(item => {
               return (
                 <div className="card">
                   <div className="card-content">
@@ -53,9 +45,9 @@ const CourseCategory = () => {
             })
           }
           {
-            courseCategory
-            &&
-            courseCategory.length === 0
+            stCoureRegister
+            && 
+            stCoureRegister.length === 0
             &&
             <div className={classes.noneData}></div>
           }
@@ -65,4 +57,4 @@ const CourseCategory = () => {
   );
 };
 
-export default CourseCategory;
+export default CourseRegister;

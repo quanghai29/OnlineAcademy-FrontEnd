@@ -3,23 +3,31 @@ import VideoPlayer from '../../components/VideoPlayer';
 import Content from '../../components/CoursesOverview/CourseDetail/Content';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actionType from '../../redux/constants/actionTypes';
+import { useLocation } from 'react-router-dom';
 
-const Learning = ({ course_id = 1 }) => {
+const Learning = () => {
   const courseLearning = useSelector((state) => state.courseLearning.data);
+  const location = useLocation();
+  const stateLocation = location.state;
   const { chapters, ...courseInfo } = courseLearning;
 
   const dispatch = useDispatch();
 
   useEffect(function () {
-    dispatch({
-      type: actionType.FETCH_COURSE_LEARNING,
-      payload: {
-        course_id: course_id
-      }
-    })
-  }, [dispatch, course_id])
+    if (stateLocation && stateLocation.course_id > 0) {
+      dispatch({
+        type: actionType.FETCH_COURSE_LEARNING,
+        payload: {
+          course_id: stateLocation.course_id
+        }
+      })
+    }
+  }, [dispatch,stateLocation])
 
-  getVideoLearning();
+  if(stateLocation && stateLocation.course_id > 0){
+    getVideoLearning();
+  }
+  
 
   function getVideoLearning() {
     if (courseInfo.video_source_learning) {
@@ -32,7 +40,6 @@ const Learning = ({ course_id = 1 }) => {
     }
   }
 
-  console.log(chapters);
   return (
     <div className="row" style={{ padding: 0, margin: 0 }}>
       <div className="row">

@@ -5,13 +5,13 @@ import {
 } from "../../../redux/constants/actionTypes"
 import { setSearchText } from "../../../redux/actions/searchCourse";
 import { Link, useHistory } from "react-router-dom";
-import { fetchCategory } from "../../../redux/actions/admin_category";
 import { useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import * as actionType from '../../../redux/constants/actionTypes';
 
 export default function SearchNavbar() {
   const searchCourseState = useSelector(state => state.searchCourseReducer)
-  const categoryState = useSelector(state => state.adminCategoryReducer.categories);
+  const categoryState = useSelector(state => state.category.data);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -20,7 +20,9 @@ export default function SearchNavbar() {
   M.Dropdown.init(elems, {});
 
   useEffect(function () {
-    dispatch(fetchCategory());
+    dispatch({
+      type: actionType.FETCH_CATEGORY
+    });
   }, [dispatch])
 
   function handleClickSearchCourse(e) {

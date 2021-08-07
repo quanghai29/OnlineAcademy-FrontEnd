@@ -15,6 +15,8 @@ import AdminCategory from './pages/AdminCategory';
 import AdminStudent from './pages/AdminStudent';
 import AdminLecturer from './pages/AdminLecturer';
 import CourseCategory from './pages/CourseCategory';
+import StudentCourseRegister from './pages/StudentCourseRegister';
+import StudentCourseWatchlist from './pages/StudentCourseWatchlist';
 
 function App() {
   
@@ -36,10 +38,10 @@ function App() {
         <Route path="/admin/student" component={AdminStudent}/>
         <Route path="/admin/lecturer" component={AdminLecturer}/>
         <Route path="/course-overview" component={CourseOverview}/>
-        <Route path="/learning">
-          <Learning course_id={1}/>
-        </Route>
+        <Route path="/learning" component={Learning}/>
         <Route path="/course-of-category" component={CourseCategory}/>
+        <Route path="/student-course-of-register" component={StudentCourseRegister}/>
+        <Route path="/student-course-of-watchlist" component={StudentCourseWatchlist}/>
       </Switch>
     </Router>
   );
