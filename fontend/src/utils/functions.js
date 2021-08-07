@@ -4,6 +4,7 @@ export const isEmpty = (value) => {
 
 export const validateUsername = (username) => {
   let warningMess = '';
+  // eslint-disable-next-line
   const regex = /^[\x00-\x7F]+$/;
   if(!username){
     warningMess = "Vui lòng không để trống trường này";
