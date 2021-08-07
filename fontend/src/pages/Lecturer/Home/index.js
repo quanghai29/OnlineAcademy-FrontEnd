@@ -44,8 +44,8 @@ const HomeLecturer = () => {
   return (
     <Layout>
       <div className="container">
-        <div className={classes.header}>
-          <p>Khóa học của tôi</p>
+        <div className={classes.headerLecturer}>
+          <p className={classes.title}>Khóa học của tôi</p>
           <button onClick={onClickAddNewCourseHandler} className="waves-effect waves-light btn">
             <i className="material-icons left">add_box</i>Tạo khóa học
           </button>

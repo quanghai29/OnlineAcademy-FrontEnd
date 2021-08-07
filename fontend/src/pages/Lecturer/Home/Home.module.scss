@@ -1,11 +1,12 @@
 @import '../../../styles/config';
 
-.header {
+.headerLecturer {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    p {
+    .title {
         font-size: 30px;
         font-weight: bold;
         color: $primaryColor;
