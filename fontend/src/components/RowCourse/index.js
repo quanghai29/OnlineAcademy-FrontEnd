@@ -1,6 +1,6 @@
-import styles from "./RowCourse.module.scss"
-import courseImg from "../../assets/images/image.jpg"
-import RatingStar from "../RatingStar"
+import styles from "./RowCourse.module.scss";
+import courseImg from "../../assets/images/image.jpg";
+import ReactStars from "react-rating-stars-component";
 import NumberFormat from 'react-number-format';
 import { Link } from "react-router-dom";
 
@@ -27,7 +27,12 @@ export default function RowCourse(props) {
             <span className={styles['text-info__author']}>{props.data.author.fullname}</span>
           </div>
           <div className={styles['course-rating']}>
-            <RatingStar rate={props.data.avg_vote} />
+            <span className={styles['amount-rating']}> {props.data.avg_vote}</span>
+            <ReactStars value={props.data.avg_vote} 
+              isHalf={true}
+              activeColor="#EC0101"
+              size={25}
+            />
             <div className={styles['vertical-line']}></div>
             <NumberFormat value={props.data.subscriber} displayType={'text'}
               thousandSeparator={true} thousandsGroupStyle='thousand'
