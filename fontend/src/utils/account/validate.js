@@ -1,8 +1,12 @@
+import * as functions from "../functions"
 
 export const validateUsername = (username) => {
-  let result = {};
-  result = username ? { warningMess: '', data: username }
-    : { warningMess: 'Please enter a valid full name!' }
+  let result = {
+    data: username,
+    warningMess: ''
+  };
+  const warning = functions.validateUsername(username);
+  result.warningMess = warning;
   return result;
 }
 
