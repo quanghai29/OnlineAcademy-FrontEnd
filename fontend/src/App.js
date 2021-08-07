@@ -16,8 +16,8 @@ import AdminStudent from './pages/AdminStudent';
 import AdminLecturer from './pages/AdminLecturer';
 import CourseCategory from './pages/CourseCategory';
 
+
 function App() {
-  
   return (
     <Router>
       <Switch>

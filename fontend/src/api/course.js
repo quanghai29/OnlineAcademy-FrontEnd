@@ -76,7 +76,7 @@ export const getSearchCourseResult = async (text) => {
   });
 
   if (response.status === 200) {
-    return response.data.data;
+    return response.data.data.courses;
   } else {
     // error
   }

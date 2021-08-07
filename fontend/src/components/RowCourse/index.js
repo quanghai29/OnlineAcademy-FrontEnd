@@ -1,11 +1,11 @@
 import styles from "./RowCourse.module.scss";
 import courseImg from "../../assets/images/image.jpg";
-import ReactStars from "react-rating-stars-component";
 import NumberFormat from 'react-number-format';
 import { Link } from "react-router-dom";
-
+import StarRatings from 'react-star-ratings';
 
 export default function RowCourse(props) {
+
   return (
     <div className={styles['row-course-container']}>
       <div className={styles['row-course__right-content']}>
@@ -28,11 +28,9 @@ export default function RowCourse(props) {
           </div>
           <div className={styles['course-rating']}>
             <span className={styles['amount-rating']}> {props.data.avg_vote}</span>
-            <ReactStars value={props.data.avg_vote} 
-              isHalf={true}
-              activeColor="#EC0101"
-              size={25}
-            />
+            <StarRatings rating={props.data.avg_vote}
+              starRatedColor="#EC0101"
+              name='rating' starDimension="15px" starSpacing="0"/>
             <div className={styles['vertical-line']}></div>
             <NumberFormat value={props.data.subscriber} displayType={'text'}
               thousandSeparator={true} thousandsGroupStyle='thousand'
@@ -47,7 +45,7 @@ export default function RowCourse(props) {
       <div className={styles['row-course__price']}>
         <NumberFormat value={props.data.discount === 0 ? props.data.price :
           props.data.price * props.data.discount} displayType={'text'}
-          thousandSeparator={true} thousandsGroupStyle='thousand' suffix="VND"/>
+          thousandSeparator={true} thousandsGroupStyle='thousand' suffix="VND" />
       </div>
     </div>
   )
