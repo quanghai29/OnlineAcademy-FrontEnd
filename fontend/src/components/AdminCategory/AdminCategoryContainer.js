@@ -44,7 +44,7 @@ const AdminCategoryContainer = () => {
       const amountPage = Math.ceil(categories.length / perPage);
       setSelectedPage(amountPage - 1);
     }
-  }, [categories, indexOfDeletedItem])
+  }, [categories, indexOfDeletedItem, categoryState]);
 
   useEffect(() => {
     dispatch(fetchCategory());

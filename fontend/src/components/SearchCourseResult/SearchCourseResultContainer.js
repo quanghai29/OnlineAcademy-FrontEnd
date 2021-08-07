@@ -6,14 +6,19 @@ import * as _ from "lodash";
 import PreLoading from "../PreLoading/index"
 import PaginationContainer from "../PaginationContainer/PaginationContainer";
 
-
+//props:{
+// data:{
+//  courses: [],
+//  keyword: string
+// }
+//}
 export default function SearchCourseResultContainer(props) {
   document.addEventListener('DOMContentLoaded', function () {
     let elems = document.querySelectorAll('select');
     M.FormSelect.init(elems, styles['task-sort']);
   });
 
-  const searchResult = props.data;
+  let searchResult =  props.data;
 
   const [amountItemPerPage, setItemInPage] = useState(5);// amount of item per a page
   const [offset, setOffset] = useState(0);
@@ -30,14 +35,20 @@ export default function SearchCourseResultContainer(props) {
   };
 
   useEffect(() => {
-    if (searchResult.courses) {
-      let data = _.orderBy(searchResult.courses, [orderBy], [orderDir]);
+    if (searchResult?.courses) {
+      let data = _.orderBy(searchResult?.courses, [orderBy], [orderDir]);
       setSortedData(data);
       setIsLoading(false);
     }
-  }, [searchResult.courses, orderBy, orderDir])
+  }, [searchResult, orderBy, orderDir]);
 
-  const optionData = [
+  useEffect(()=>{
+    if(!searchResult){
+      setIsLoading(false);
+    }
+  }, [searchResult])
+
+  const optionSort = [
     { orderBy: 'avg_vote', orderDir: 'desc' },
     { orderBy: 'avg_vote', orderDir: 'asc' },
     { orderBy: 'price', orderDir: 'desc' },
@@ -46,12 +57,12 @@ export default function SearchCourseResultContainer(props) {
 
   function handleChooseOptionSort(e) {
     const index = e.target.value;
-    setOrderBy(optionData[index].orderBy);
-    setOrderDir(optionData[index].orderDir)
+    setOrderBy(optionSort[index].orderBy);
+    setOrderDir(optionSort[index].orderDir)
   }
 
   let contentEle = null;
-  if (isLoading || !props.isSearched) {
+  if (isLoading) {
     contentEle = <div className={styles['loading--position']}>
       <PreLoading />
     </div>
@@ -59,15 +70,15 @@ export default function SearchCourseResultContainer(props) {
     contentEle =
       <div className={styles['container']} id="search_result">
         <div className={styles['result-title']}>
-          {searchResult.courses.length} Kết quả tìm kiếm cho {`"${searchResult.keyWord}"`}
+          {searchResult?.courses.length || 0} Kết quả tìm kiếm cho {`"${searchResult?.keyWord || ''}"`}
         </div>
         <div className={styles['task-bar']}>
           <div className={styles['task-show']}>
             <span>
-              Hiển thị {searchResult.courses.length >= amountItemPerPage ?
+              Hiển thị {searchResult?.courses.length >= amountItemPerPage ?
                 `${offset + 1}-${offset + amountItemPerPage} `
-                : `${offset + 1}-${offset + searchResult.courses.length} `}
-              của {searchResult.courses.length} kết quả
+                : `${offset + 1}-${offset + searchResult?.courses.length || 0} `}
+              của {searchResult?.courses.length} kết quả
             </span>
             <div className={styles['show-option']}>Show:
               <ul>
@@ -119,7 +130,7 @@ export default function SearchCourseResultContainer(props) {
         }
 
         <PaginationContainer pageCount={Math.ceil(
-          searchResult.courses.length / amountItemPerPage)}
+          searchResult?.courses.length / amountItemPerPage)}
           pageRangeDisplayed={5}
           marginPagesDisplayed={2}
           handleClickSelectedPage={handleClickSelectedPage}

@@ -24,6 +24,7 @@ import selectedChapter from './selectedChapter';
 import header from './header';
 import adminStudentReducer from './admin_student';
 import adminLecturerReducer from './admin_lecturer';
+import courseCategory from './courseCategory';
 
 export default combineReducers({
   courses,
@@ -50,5 +51,6 @@ export default combineReducers({
   selectedChapter,
   header,
   adminStudentReducer,
-  adminLecturerReducer
+  adminLecturerReducer,
+  courseCategory,
 });

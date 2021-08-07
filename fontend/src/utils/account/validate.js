@@ -59,59 +59,41 @@ export const validatePassword = (password) => {
 
 export const validateEntireSignUpForm = (signUpFormState) => {
   let isSubmit = true;
-  let newSignUpFormState = { ...signUpFormState };
-  if (newSignUpFormState.username === '' &&
-    newSignUpFormState.usernameWarningMess === '') {
+  let formData = { ...signUpFormState };
+  let newSignUpFormState = null;
+  if (!formData.username && !formData.usernameWarningMess) {
     isSubmit = false;
-    newSignUpFormState.usernameWarningMess = 'Vui lòng nhập vào username của bạn';
+    formData.usernameWarningMess = 'Vui lòng nhập vào username của bạn';
   }
-  if (newSignUpFormState.email === '' &&
-    newSignUpFormState.emailWarningMess === '') {
+  if (!formData.email && !formData.emailWarningMess) {
     isSubmit = false;
-    newSignUpFormState.emailWarningMess = 'Vui lòng nhập email của bạn';
+    formData.emailWarningMess = 'Vui lòng nhập email của bạn';
   }
-  if (newSignUpFormState.password === '' &&
-    newSignUpFormState.passwordWarningMess === '') {
+  if (!formData.password && !formData.passwordWarningMess) {
     isSubmit = false;
-    newSignUpFormState.passwordWarningMess = 'Vui lòng nhập mật khẩu của bạn';
+    formData.passwordWarningMess = 'Vui lòng nhập mật khẩu của bạn';
   }
-  if (newSignUpFormState.confirmPassword === '' &&
-    newSignUpFormState.confirmPasswordWarningMess === '') {
+  if (!formData.confirmPassword && !formData.confirmPasswordWarningMess) {
     isSubmit = false;
-    newSignUpFormState.confirmPasswordWarningMess = 'Vui lòng nhập lại mật khẩu!';
+    formData.confirmPasswordWarningMess = 'Vui lòng nhập lại mật khẩu!';
   }
 
-  if (isSubmit) {
-    if ((newSignUpFormState.username !== '' &&
-      newSignUpFormState.email !== '' &&
-      newSignUpFormState.password !== '' &&
-      newSignUpFormState.confirmPassword !== '') &&
-      (newSignUpFormState.usernameWarningMess === '' &&
-        newSignUpFormState.emailWarningMess === '' &&
-        newSignUpFormState.passwordWarningMess === '' &&
-        newSignUpFormState.confirmPasswordWarningMess === ''
-      )) {
-      return {
-        isSubmit,
-        dataToSubmit: {
-          username: newSignUpFormState.username,
-          email: newSignUpFormState.email,
-          password: newSignUpFormState.password,
-          account_role: 3
-        }
-      }
-    } else {
-      isSubmit = false;
-      return {
-        isSubmit,
-        newSignUpFormState
-      }
-    }
+  if (formData.usernameWarningMess || formData.emailWarningMess ||
+    formData.passwordWarningMess || formData.confirmPasswordWarningMess) {
+    isSubmit = false;
+    newSignUpFormState = { ...formData };
   } else {
-    return {
-      isSubmit,
-      newSignUpFormState
+    newSignUpFormState = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+      account_role: 3
     }
+  }
+
+  return {
+    isSubmit,
+    newSignUpFormState
   }
 
 }
@@ -125,74 +107,55 @@ export const validateVerifyCode = (code) => {
 }
 
 export const validateEntireVerifyCodeForm = (verifyCodeFormState) => {
-
   let isSubmit = true;
-  let newFormState = { ...verifyCodeFormState };
+  let formData = { ...verifyCodeFormState };
+  let newFormState = null;
 
-  if (newFormState.code === 0 &&
-    newFormState.warningMess === '') {
+  if (formData.code === 0 && !formData.warningMess) {
     isSubmit = false;
-    newFormState.warningMess = 'Vui lòng nhập vào mã xác thực';
+    formData.warningMess = 'Vui lòng nhập vào mã xác thực';
   }
 
-  if (isSubmit) {
-    if (newFormState.code !== 0 &&
-      newFormState.warningMess === '') {
-      return {
-        isSubmit,
-        dataToSubmit: {
-          code: newFormState.code
-        }
-      }
-    } else {
-      isSubmit = false;
-      return {
-        isSubmit,
-        newFormState
-      }
-    }
+  if (formData.warningMess) {
+    isSubmit = false;
+    newFormState = { ...formData };
   } else {
-    return {
-      isSubmit,
-      newFormState
+    newFormState = {
+      code: formData.code
     }
+  }
+  return {
+    isSubmit,
+    newFormState
   }
 }
 
 export const validateEntireLoginForm = (loginForm) => {
   let isSubmit = true;
-  let newFormState = { ...loginForm };
+  let formData = { ...loginForm };
+  let newFormState = null;
 
-  if (newFormState.username === '' && newFormState.usernameWarningMess === '') {
+  if (!formData.username && !formData.usernameWarningMess) {
     isSubmit = false;
-    newFormState.usernameWarningMess = 'Vui lòng nhập username của bạn';
+    formData.usernameWarningMess = 'Vui lòng nhập username của bạn';
   }
-  if (newFormState.password === '' && newFormState.passwordWarningMess === '') {
+  if (!formData.password && !formData.passwordWarningMess) {
     isSubmit = false;
-    newFormState.passwordWarningMess = 'Vui lòng nhập mật khẩu của bạn';
+    formData.passwordWarningMess = 'Vui lòng nhập mật khẩu của bạn';
   }
 
-  if (isSubmit) {
-    if ((newFormState.username !== '' && newFormState.password !== '') &&
-      (newFormState.usernameWarningMess === '' && newFormState.passwordWarningMess === '')) {
-        return{
-          isSubmit,
-          dataToSubmit:{
-            username: newFormState.username,
-            password: newFormState.password
-          }
-        }
-    } else {
-      isSubmit = false;
-      return {
-        isSubmit,
-        newFormState
-      }
-    }
+
+  if (formData.usernameWarningMess || formData.passwordWarningMess) {
+    isSubmit = false;
+    newFormState = { ...formData };
   } else {
-    return {
-      isSubmit,
-      newFormState
+    newFormState = {
+      username: formData.username,
+      password: formData.password
     }
+  }
+  return {
+    isSubmit,
+    newFormState
   }
 }

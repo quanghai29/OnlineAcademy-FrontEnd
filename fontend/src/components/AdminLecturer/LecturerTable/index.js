@@ -9,10 +9,6 @@ const LecturerTable = (props) => {
     props.deleteItem(+e.target.id);
   }
 
-  function handleEditItem(e){
-    props.editItem(+e.target.id)
-  }
-
   return (
     <div className={styles['table-container']}>
       <table className={styles['admin-table']}>
@@ -33,7 +29,6 @@ const LecturerTable = (props) => {
                 <tr key={index}>
                   <td>{props.startIndex + index + 1}</td>
                   <td>{item.username}</td>
-                  <td>**********************</td>
                   <td>{item.email}</td>
                   <td>{item.create_date}</td>
                   <td>{item.creator}</td>
@@ -42,10 +37,6 @@ const LecturerTable = (props) => {
                       className={`material-icons ${styles['open-in-new-icon']}`}>
                       open_in_new
                     </span>
-                    <span id={index} onClick={handleEditItem}
-                    className={`material-icons ${styles['edit-icon']}`}>
-                    edit
-                  </span>
                     <span id={index} onClick={handleDeleteItem}
                       className={`material-icons ${styles['delete-icon']}`}>
                       delete

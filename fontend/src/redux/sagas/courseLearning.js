@@ -1,20 +1,12 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionType from '../constants/actionTypes';
-import {DOMAIN_API} from '../constants/common';
+import { DOMAIN_API } from '../constants/common';
+import Swal from 'sweetalert2';
 
 function* fetchCouseLearning(action) {
   try {
-    // const response = yield call(axios.get, `${DOMAIN_API}/student/course/learning/${action.payload.course_id}`);
-    // if(response.status === 200){
-    //   const data = response.data;
-    //   yield put({
-    //     type: actionType.SET_COURSE_LEARNING,
-    //     payload: data
-    //   });
-    // }
-
-    yield call (function* (){
+    yield call(function* () {
       const response = yield axios.get(
         `${DOMAIN_API}/student/course/learning/${action.payload.course_id}`,
         {
@@ -24,13 +16,26 @@ function* fetchCouseLearning(action) {
           }
         }
       )
-
-      if(response.status === 200){
-        const data = response.data;
-        yield put({
-          type: actionType.SET_COURSE_LEARNING,
-          payload: data
-        });
+      switch (response.status) {
+        case 200:
+          const data = response.data;
+          yield put({
+            type: actionType.SET_COURSE_LEARNING,
+            payload: data
+          });
+          break;
+        case 400:
+          Swal.fire({
+            icon: 'error',
+            title: response.data.message,
+          })
+          break;
+        default:
+          Swal.fire({
+            icon: 'error',
+            title: 'Server has something error',
+          })
+          break;
       }
     })
   } catch (error) {

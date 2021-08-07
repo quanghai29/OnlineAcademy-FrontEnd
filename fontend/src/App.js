@@ -14,6 +14,7 @@ import Login from './pages/TempLogin';
 import AdminCategory from './pages/AdminCategory';
 import AdminStudent from './pages/AdminStudent';
 import AdminLecturer from './pages/AdminLecturer';
+import CourseCategory from './pages/CourseCategory';
 
 function App() {
   
@@ -34,12 +35,11 @@ function App() {
         <Route path="/admin/category" component={AdminCategory}/>
         <Route path="/admin/student" component={AdminStudent}/>
         <Route path="/admin/lecturer" component={AdminLecturer}/>
-        <Route path="/course-overview">
-          <CourseOverview course_id={1}/>
-        </Route>
+        <Route path="/course-overview" component={CourseOverview}/>
         <Route path="/learning">
           <Learning course_id={1}/>
         </Route>
+        <Route path="/course-of-category" component={CourseCategory}/>
       </Switch>
     </Router>
   );

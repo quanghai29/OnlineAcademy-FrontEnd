@@ -2,10 +2,10 @@ import styles from "./RowCourse.module.scss"
 import courseImg from "../../assets/images/image.jpg"
 import RatingStar from "../RatingStar"
 import NumberFormat from 'react-number-format';
+import { Link } from "react-router-dom";
 
 
 export default function RowCourse(props) {
-
   return (
     <div className={styles['row-course-container']}>
       <div className={styles['row-course__right-content']}>
@@ -14,7 +14,15 @@ export default function RowCourse(props) {
         </div>
         <div className={styles['row-course__info']}>
           <div className={styles['text-info']}>
-            <span className={styles['text-info__title']}>{props.data.title}</span>
+            <Link className={styles['text-info__title']}
+              to={{
+                pathname: "/course-overview",
+                state: {
+                  course_id: props.data.id,
+                },
+              }}>
+              {props.data.title}
+            </Link>
             <span className={styles['text-info__short-description']}>{props.data.short_description}</span>
             <span className={styles['text-info__author']}>{props.data.author.fullname}</span>
           </div>

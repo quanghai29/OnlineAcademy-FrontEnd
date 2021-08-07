@@ -36,11 +36,11 @@ function MainNavigation() {
 
         {/* Đã/Chưa đăng nhập - Student + Guest */}
         {
-          (!header.isAuth && <SearchNavbar/>)
-          ||
-          (header.isAuth && header.role === ROLE_STUDENT && <SearchNavbar/>)
+          !header.isAuth  || (header.isAuth && header.role === ROLE_STUDENT)
+          ? <SearchNavbar/>
+          : <div></div>
         }
-        
+
         {/* Chưa đăng nhập */}
         { !header.isAuth && <GuestNavbar /> }
 

@@ -6,19 +6,24 @@ import styles from "./AdminLecturer.module.scss"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchLecturerData
+  fetchLecturerData,
+  requestDeleteLecturerItem,
+  setIsShowLecturerFormModal,
+  setLecturerUsername,
+  setLecturerPassword,
+  requestCreateLecturerItem
 } from "../../redux/actions/admin_lecturer"
+import Swal from 'sweetalert2';
 
 const AdminLecturerContainer = () => {
   const lecturerState = useSelector(state => state.adminLecturerReducer);
-  const { lecturers } = lecturerState;
+  const { lecturers, indexOfDeletedItem, isShowFormModal, form } = lecturerState;
   const dispatch = useDispatch();
   const perPage = 5;
 
   const headers = [
     "STT",
     "Tên đăng nhập",
-    "Mật khẩu",
     "Email",
     "Ngày tạo",
     "Người tạo"
@@ -28,13 +33,13 @@ const AdminLecturerContainer = () => {
   const [offset, setOffset] = useState(0);
   const [selectedPage, setSelectedPage] = useState(0);
 
-  // useEffect(() => {
-  //   if ((indexOfDeletedItem === students?.length) &&
-  //     (indexOfDeletedItem % 5 === 0)) {
-  //     const amountPage = Math.ceil(students?.length / perPage);
-  //     setSelectedPage(amountPage - 1);
-  //   }
-  // }, [students, indexOfDeletedItem])
+  useEffect(() => {
+    if ((indexOfDeletedItem === lecturers?.length) &&
+      (indexOfDeletedItem % 5 === 0)) {
+      const amountPage = Math.ceil(lecturers?.length / perPage);
+      setSelectedPage(amountPage - 1);
+    }
+  }, [lecturers, indexOfDeletedItem, lecturerState]);
 
   useEffect(() => {
     dispatch(fetchLecturerData());
@@ -61,15 +66,37 @@ const AdminLecturerContainer = () => {
   }, [offset, lecturers, lecturerState])
 
   function handleClickCloseModal() {
-
+    dispatch(setIsShowLecturerFormModal(false));
   }
 
-  function handleClickSubmitLecturer() {
+  function handleClickSubmitLecturer(e) {
+    e.preventDefault();
+    const data ={
+      username: form.username,
+      password: form.password,
+      creator: 'admin'
+    };
 
+    dispatch(requestCreateLecturerItem(data));
   }
 
   function handleDeleteLecturerItem(index) {
-    console.log('delete at', offset + index);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `You won't be able to revert this!`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const data = {};
+        data.id = lecturers[index + offset].id;
+        data.index = index + offset;
+        dispatch(requestDeleteLecturerItem(data));
+      }
+    })
   }
 
   function handleOpenLecturerItem(index) {
@@ -79,47 +106,76 @@ const AdminLecturerContainer = () => {
   function handleClickSelectedPage(data) {
     setSelectedPage(data.selected);
   }
-  return (
-    <AdminContainer title="Danh sách giảng viên"
-      listIcon={<i className="fas fa-chalkboard-teacher"></i>}>
-      <div>
-        <div className={styles['create-btn-container']}>
-          <button >
-            <span className={`material-icons ${styles['icon']}`}>
-              add_box
-            </span>
-            Thêm tài khoản
-          </button>
-        </div>
-      </div>
 
+  function handleClickCreateLecturer() {
+    dispatch(setIsShowLecturerFormModal(true));
+  }
+
+  function handleOnchangeUsername(e) {
+    dispatch(setLecturerUsername(e.target.value));
+  }
+
+  function handleOnchangePassword(e) {
+    dispatch(setLecturerPassword(e.target.value));
+  }
+  return (
+    <>
+      <AdminContainer title="Danh sách giảng viên"
+        listIcon={<i className="fas fa-chalkboard-teacher"></i>}>
+        <div>
+          <div className={styles['create-btn-container']}>
+            <button onClick={handleClickCreateLecturer}>
+              <span className={`material-icons ${styles['icon']}`}>
+                add_box
+              </span>
+              Thêm tài khoản
+            </button>
+          </div>
+        </div>
+
+        {
+          !isLoading && <>
+            <LecturerTable headers={headers} data={pageData} startIndex={offset}
+              deleteItem={handleDeleteLecturerItem} openItem={handleOpenLecturerItem}
+            />
+            <PaginationContainer pageCount={Math.ceil(lecturers?.length / perPage)}
+              pageRangeDisplayed={5} marginPagesDisplayed={2}
+              handleClickSelectedPage={handleClickSelectedPage}
+              selectedPage={selectedPage} />
+          </>
+        }
+
+      </AdminContainer>
       {
-        !isLoading && <>
-          <LecturerTable headers={headers} data={pageData} startIndex={offset}
-            deleteItem={handleDeleteLecturerItem} openItem={handleOpenLecturerItem}
-          />
-          <PaginationContainer pageCount={Math.ceil(lecturers?.length / perPage)}
-            pageRangeDisplayed={5} marginPagesDisplayed={2}
-            handleClickSelectedPage={handleClickSelectedPage}
-            selectedPage={selectedPage} />
-        </>
-      }
-      {/* <ModalContainer>
+        isShowFormModal && <ModalContainer>
           <div className={styles['create-form-container']}>
             <div className={styles['close-modal-icon']}>
               <span onClick={handleClickCloseModal}>&times;</span>
             </div>
             <div className={styles['form-group']}>
               <form>
-                <div>
+                <div className={styles['input-group']}>
                   {
-                    // categoryState.warningMess &&
-                    // <span className={styles['message--warning']}>
-                    //   {categoryState.warningMess}</span>
+                    form.usernameWarning &&
+                    <span className={styles['message--warning']}>
+                      {form.usernameWarning}</span>
                   }
-                  <input type="text" placeholder="Tên danh mục"
-    
+                  <input type="text" placeholder="Tên đăng nhập"
+                    value={form.username} onChange={handleOnchangeUsername}
+                    className={form.usernameWarning ? styles['border--warning'] : ''}
                   />
+                </div>
+                <div className={styles['input-group']}>
+                  {
+                    form.passwordWarning &&
+                    <span className={styles['message--warning']}>
+                      {form.passwordWarning}</span>
+                  }
+                  <input type="password" placeholder="Mật khẩu"
+                    value={form.password} onChange={handleOnchangePassword}
+                    className={form.passwordWarning ? styles['border--warning'] : ''}
+                  />
+
                 </div>
                 <div className={styles['form__footer']}>
                   <button onClick={handleClickSubmitLecturer}>Lưu</button>
@@ -127,8 +183,9 @@ const AdminLecturerContainer = () => {
               </form>
             </div>
           </div>
-        </ModalContainer> */}
-    </AdminContainer>
+        </ModalContainer>
+      }
+    </>
   )
 }
 

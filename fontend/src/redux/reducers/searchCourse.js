@@ -6,9 +6,9 @@ import {
 } from "../constants/actionTypes"
 
 const initialState = {
-  result: [],
+  result: null,
   text: '',
-  isSearched: false
+  // isSearched: false
 }
 
 const searchCourseReducer = (state = initialState, action) => {
@@ -24,7 +24,7 @@ const searchCourseReducer = (state = initialState, action) => {
       let newState = {
         ...state,
         result: action.data,
-        isSearched: true
+        // isSearched: true
       }
       return newState;
     }
@@ -40,7 +40,7 @@ const searchCourseReducer = (state = initialState, action) => {
         ...state,
         result: [],
         text: '',
-        isSearched: false
+        // isSearched: false
       }
 
       return newState;

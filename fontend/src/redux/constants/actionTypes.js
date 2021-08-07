@@ -139,6 +139,11 @@ export const FETCH_LOGOUT = 'FETCH_LOGOUT';
 export const SET_LOGOUT = 'SET_LOGOUT';
 //===================================================================
 
+// =================== Type Action Course of Category ==================
+export const FETCH_COURSE_OF_CATEGORY = 'FETCH_COURSE_OF_CATEGORY';
+export const SET_COURSE_OF_CATEGORY = 'SET_COURSE_OF_CATEGORY';
+//===================================================================
+
 // ================== Action types of Admin and Category===========================
 export const FETCH_CATEGORY_DATA = 'FETCH_CATEGORY_DATA';
 export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA';
@@ -160,3 +165,11 @@ export const DELETE_STUDENT_ITEM = 'DELETE_STUDENT_ITEM';
 // ================== Action types of Admin and Lecturer ===============================
 export const FETCH_LECTURER_DATA = 'FETCH_LECTURER_DATA';
 export const SET_LECTURER_DATA = 'SET_LECTURER_DATA';
+export const REQUEST_DELETE_LECTURER_ITEM = 'REQUEST_DELETE_LECTURER_ITEM';
+export const DELETE_LECTURER_ITEM = 'DELETE_LECTURER_ITEM';
+export const REQUEST_CREATE_LECTURER_ITEM = 'REQUEST_CREATE_LECTURER_ITEM';
+export const SET_IS_SHOW_LECTURE_FORM_MODAL = 'SET_IS_SHOW_LECTURE_FORM_MODAL';
+export const SET_LECTURER_USERNAME = 'SET_LECTURER_USERNAME';
+export const SET_LECTURER_PASSWORD = 'SET_LECTURER_PASSWORD';
+export const SET_LECTURER_USERNAME_WARNING = 'SET_LECTURER_USERNAME_WARNING';
+export const SET_LECTURER_PASSWORD_WARNING = 'SET_LECTURER_PASSWORD_WARNING';

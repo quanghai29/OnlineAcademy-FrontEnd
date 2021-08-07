@@ -29,7 +29,7 @@ function* requestSubmitVerifyCodeForm(action) {
    
   if (validateResult.isSubmit) {
     const result = yield call(submitVerifyCodeForm,
-      validateResult.dataToSubmit);
+      validateResult.newFormState);
     yield put(verifyCodeActions.setResponseAction(result));
   } else {
     yield put(verifyCodeActions.setEntireVerifyCodeFormStateAction(
