@@ -57,7 +57,7 @@ function* requestSubmitSignUpForm(action) {
   if (validateResult.isSubmit) {//allow submit
     //call Api
     const res = yield call(accountCallApi.submitSignUpForm,
-      validateResult.dataToSubmit);
+      validateResult.newSignUpFormState);
     yield put(signUpActions.setSignUpResponseAction(res));
   } else {
     yield put(signUpActions.setEntireSignUpFormStateAction(

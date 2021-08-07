@@ -47,11 +47,9 @@ export const REQUEST_RESET_VERIFY_CODE_FORM = 'REQUEST_RESET_VERIFY_CODE_FORM';
 export const RESET_VERIFY_CODE_FORM = 'RESET_VERIFY_CODE_FORM';
 
 // ========================CONSTANTS FOR SEARCH COURSE ACTIONS ===============================
-export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 export const FETCH_SEARCH_COURSE = 'FETCH_SEARCH_COURSE';
 export const SET_SEARCH_COURSE_RESULT='SET_SEARCH_COURSE_RESULT';
-export const RESET_SEARCH_FORM= 'RESET_SEARCH_FORM';
-export const RESET_SEARCH_COURSE_STATE = 'RESET_SEARCH_COURSE_STATE';
+// export const RESET_SEARCH_COURSE_STATE = 'RESET_SEARCH_COURSE_STATE';
 
 // ===========================================================================================
 // hotCourses action

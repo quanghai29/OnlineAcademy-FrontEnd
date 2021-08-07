@@ -91,3 +91,13 @@
     }
   }
 }
+
+.eye-icon{
+  position: absolute;
+  top: 30%;
+  right: 10px;
+  font-size: 15px;
+    &:hover{
+      cursor: pointer;
+    }
+}

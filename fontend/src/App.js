@@ -18,8 +18,8 @@ import CourseCategory from './pages/CourseCategory';
 import StudentCourseRegister from './pages/StudentCourseRegister';
 import StudentCourseWatchlist from './pages/StudentCourseWatchlist';
 
+
 function App() {
-  
   return (
     <Router>
       <Switch>

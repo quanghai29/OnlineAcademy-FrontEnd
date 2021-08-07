@@ -88,7 +88,7 @@ export default function SignupContainer() {
                 return (
                   <InputValue type={item.type}
                     placeholder={item.placeholder}
-                    style={{ marginBottom: "15px" }}
+                    style={{ marginBottom: "5px" }}
                     name={item.name}
                     actionType={item.actionType}
                     warningMess={item.warningMess}

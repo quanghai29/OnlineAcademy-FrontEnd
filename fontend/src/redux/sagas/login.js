@@ -42,7 +42,7 @@ function* requestSetEntireLoginForm(action) {
     action.payload);
   if (validateResult.isSubmit) {
     //call Api submit form
-    const resData = yield call(submitLoginForm, validateResult.dataToSubmit);
+    const resData = yield call(submitLoginForm, validateResult.newFormState);
     yield put(loginActions.setLoginResponse(resData));
     if (resData.isAuth) {
       yield put({

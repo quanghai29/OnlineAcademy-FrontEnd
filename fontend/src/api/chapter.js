@@ -29,5 +29,25 @@ export const uploadData = {
     } catch (err) {
       throw new Error(err.message);
     }
+  },
+  uploadVideo: async (formData) => {
+    try {
+      const { data } = await appAPI.post('/lecturer/video', formData);
+      console.log(data);
+      return data;
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+}
+
+export const deleteData = {
+  deleteChapter: async (id) => {
+    try {
+      const { data } = await appAPI.delete(`/lecturer/chapter/${id}`);
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 }
