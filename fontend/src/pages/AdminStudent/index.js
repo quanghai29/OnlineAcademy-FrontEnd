@@ -1,8 +1,11 @@
 import AdminStudentContainer from "../../components/AdminStudent/AdminStudentContainer";
+import Layout from "../../layout/Layout";
 
-const AdminStudent = ()=>{
-  return(
-    <AdminStudentContainer/>
+const AdminStudent = () => {
+  return (
+    <Layout>
+      <AdminStudentContainer />
+    </Layout>
   )
 }
 
