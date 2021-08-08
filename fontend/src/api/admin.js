@@ -82,7 +82,6 @@ export const deleteLecturerItem = async (lecturer_id) => {
 }
 
 export const createLecturerItem = async(data) => {
-  console.log('api', data);
   try {
     const res = await appAPI.post('/admin/lecturer', data);
     if (res.status === 201) {
@@ -94,6 +93,26 @@ export const createLecturerItem = async(data) => {
       })
     }
     return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getCourseData = async()=>{
+  try{
+    const result = await appAPI.get('/admin/course');
+    if(result.status === 200)
+      return result.data;
+  }catch(err){
+    console.log(err);
+  }
+}
+
+export const deleteAdminCourseItem = async(course_id)=>{
+  try {
+    appAPI.defaults.headers.common['course_id'] = course_id;
+    const result = await appAPI.delete('/admin/course');
+    console.log('res delete', result);
   } catch (err) {
     console.log(err);
   }

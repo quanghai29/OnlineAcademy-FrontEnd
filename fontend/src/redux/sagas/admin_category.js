@@ -1,9 +1,9 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
 import * as categoryActions from "../actions/admin_category"
 import {
-  FETCH_CATEGORY_DATA,
-  REQUEST_EDIT_CATEGORY_ITEM,
-  REQUEST_CREATE_CATEGORY_ITEM,
+  FETCH_ADMIN_CATEGORY,
+  REQUEST_EDIT_ADMIN_CATEGORY_ITEM,
+  REQUEST_CREATE_ADMIN_CATEGORY_ITEM,
   REQUEST_DELETE_CATEGORY_ITEM
 } from "../constants/actionTypes"
 import * as adminApi from "../../api/admin"
@@ -15,7 +15,7 @@ function* requestFetchCategory() {
 }
 
 function* watchFetchCategory() {
-  yield takeLatest(FETCH_CATEGORY_DATA, requestFetchCategory);
+  yield takeLatest(FETCH_ADMIN_CATEGORY, requestFetchCategory);
 }
 
 function* requestEditCategoryItem(action) {
@@ -40,7 +40,7 @@ function* requestEditCategoryItem(action) {
 }
 
 function* watchEditCategoryItem() {
-  yield takeLatest(REQUEST_EDIT_CATEGORY_ITEM, requestEditCategoryItem);
+  yield takeLatest(REQUEST_EDIT_ADMIN_CATEGORY_ITEM, requestEditCategoryItem);
 }
 
 function* requestCreateCategoryItem(action) {
@@ -62,7 +62,7 @@ function* requestCreateCategoryItem(action) {
 }
 
 function* watchCreateCategoryItem() {
-  yield takeLatest(REQUEST_CREATE_CATEGORY_ITEM, requestCreateCategoryItem);
+  yield takeLatest(REQUEST_CREATE_ADMIN_CATEGORY_ITEM, requestCreateCategoryItem);
 }
 
 function* requestDeleteCategoryItem(action) {
