@@ -9,6 +9,7 @@ import {
   requestDeleteAdminCourseItem
 } from "../../redux/actions/admin_course"
 import Swal from 'sweetalert2';
+import { useHistory } from "react-router-dom";
 
 const AdminCourseContainer = () => {
   const courseState = useSelector(state => state.adminCourseReducer);
@@ -22,7 +23,9 @@ const AdminCourseContainer = () => {
     "Cập nhật lần cuối",
     "Trạng thái",
     "Người tạo"
-  ]
+  ];
+
+  let history = useHistory();
 
   const [isLoading, setIsLoading] = useState(true);
   const [pageData, setPageData] = useState([]);
@@ -89,7 +92,12 @@ const AdminCourseContainer = () => {
   }
 
   function handleOpenItem(index) {
-    console.log('open item at', offset + index);
+    history.push({
+      pathname: '/course-overview',
+      state:{
+        course_id: courses[index + offset].course_id
+      }
+    })
   }
 
   return (
