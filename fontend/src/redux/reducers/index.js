@@ -25,13 +25,10 @@ import header from './header';
 import adminStudentReducer from './admin_student';
 import adminLecturerReducer from './admin_lecturer';
 import courseCategory from './courseCategory';
-<<<<<<< HEAD
 import selectedVideo from './seletedVideo';
-=======
 import studentCourseRegister from './studentCourseRegister';
 import studentCourseWatchlist from './studentCourseWatchlist';
 import category from './category';
->>>>>>> 072931b07cabd66c53761440b48c4266140b5ec0
 
 export default combineReducers({
   courses,
@@ -60,11 +57,8 @@ export default combineReducers({
   adminStudentReducer,
   adminLecturerReducer,
   courseCategory,
-<<<<<<< HEAD
   selectedVideo,
-=======
   studentCourseRegister,
   studentCourseWatchlist,
   category,
->>>>>>> 072931b07cabd66c53761440b48c4266140b5ec0
 });
