@@ -1,8 +1,11 @@
 import AdminLecturerContainer from "../../components/AdminLecturer/AdminLecturerContainer";
+import Layout from "../../layout/Layout";
 
-const AdminLecturer = ()=>{
-  return(
-    <AdminLecturerContainer/>
+const AdminLecturer = () => {
+  return (
+    <Layout>
+      <AdminLecturerContainer />
+    </Layout>
   )
 }
 

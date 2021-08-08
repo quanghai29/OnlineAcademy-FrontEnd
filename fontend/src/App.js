@@ -17,6 +17,7 @@ import AdminLecturer from './pages/AdminLecturer';
 import CourseCategory from './pages/CourseCategory';
 import StudentCourseRegister from './pages/StudentCourseRegister';
 import StudentCourseWatchlist from './pages/StudentCourseWatchlist';
+import AdminCourse from './pages/AdminCourse';
 
 
 function App() {
@@ -34,9 +35,10 @@ function App() {
         <Route path="/update-course" component={UpdateCourse} />
         <Route path="/update-profile" component={UpdateProfile} />
         <Route path="/search-result" component={SearchCourseResult}/>
-        <Route path="/admin/category" component={AdminCategory}/>
-        <Route path="/admin/student" component={AdminStudent}/>
-        <Route path="/admin/lecturer" component={AdminLecturer}/>
+        <Route path="/admin-category" component={AdminCategory}/>
+        <Route path="/admin-student" component={AdminStudent}/>
+        <Route path="/admin-lecturer" component={AdminLecturer}/>
+        <Route path ="/admin-course" component={AdminCourse}/>
         <Route path="/course-overview" component={CourseOverview}/>
         <Route path="/learning" component={Learning}/>
         <Route path="/course-of-category" component={CourseCategory}/>
