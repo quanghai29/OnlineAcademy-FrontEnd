@@ -15,7 +15,8 @@ function* fetchUpdateCourseComment(action) {
         yield put({
           type: actionType.FETCH_COURSE_COMMENT,
           payload: {
-            course_id: action.payload.course_id
+            course_id: action.payload.course_id,
+            isFeedbacked: true,
           }
         })
         break;

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import classes from './style.module.scss';
-import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import currency from "currency.js";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionType from "../../../redux/constants/actionTypes";
+import StarRatings from 'react-star-ratings';
+
 
 export default function OverviewInfo(props) {
   const dispatch = useDispatch();
@@ -79,13 +80,12 @@ export default function OverviewInfo(props) {
             {
               props.num_rating
               &&
-              <ReactStars
-                isHalf={true}
-                activeColor="#EC0101"
-                size={25}
-                value={+props.num_rating}
-                edit={false}
-              />
+              <div style={{paddingTop: "10px"}}>
+                 <StarRatings rating={+props.num_rating}
+                    starRatedColor="#EC0101"
+                    name='rating' starDimension="20px" starSpacing="0"/>
+              </div>
+             
             }
 
             <p>&ensp;</p>
