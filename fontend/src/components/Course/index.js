@@ -1,6 +1,6 @@
 import React from 'react';
 import currency from 'currency.js';
-import RatingStar from '../RatingStar';
+import ReactStars from "react-rating-stars-component";
 import classes from './Course.module.scss';
 
 const Course = ({ title, lecturer, rating, totalStudent, price}) => (
@@ -12,7 +12,13 @@ const Course = ({ title, lecturer, rating, totalStudent, price}) => (
         <div className={classes.description}>
           <div className={classes.rating}>
             <p>{rating}</p>
-            <RatingStar rate={rating} />
+            <ReactStars
+                isHalf={true}
+                activeColor="#EC0101"
+                size={25}
+                value={+rating}
+                edit={false}
+              />
           </div>
           <div className={classes.fence}></div>
           <div className={classes.students}>

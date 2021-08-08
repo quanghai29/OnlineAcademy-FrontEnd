@@ -40,7 +40,8 @@ const initialState = {
           full_description: action.payload.full_description,
           category_id: action.payload.category_id,
           price: action.payload.price,
-          discount: action.payload.discount
+          discount: action.payload.discount,
+          course_status: action.payload.course_status
         };
         
         return {

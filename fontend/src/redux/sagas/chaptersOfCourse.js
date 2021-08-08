@@ -11,8 +11,25 @@ import {
   deleteChapterByIdDone,
   deleteChapterByIdFail,
   uploadVideoDone,
-  uploadVideoFail
+  uploadVideoFail,
+  updateVideoTitleDone,
+  updateVideoTitleFail,
+  deleteVideoByIdDone,
+  deleteVideoByIdFail
 } from '../actions/chaptersOfCourse';
+
+function* deleteVideoById(action) {
+  try {
+    const data = yield call(deleteData.deleteVideo, action.payload.id, action.payload.formData);
+    yield put(deleteVideoByIdDone(data));
+  } catch (error) {
+    yield put(deleteVideoByIdFail(error.message));
+  }
+}
+
+function* watchDeleteVideoById() {
+  yield takeLatest(actionTypes.DELETE_VIDEO, deleteVideoById);
+}
 
 function* uploadNewVideo(action) {
   try {
@@ -88,12 +105,31 @@ function* watchUpdateChapterTitle() {
   yield takeLatest(actionTypes.UPDATE_TITLE_CHAPTER, updateChapterTitle);
 }
 
+function* updateVideoTitle(action) {
+  try {
+    const data = yield call(
+      uploadData.updateVideoTitle,
+      action.payload.formData,
+      action.payload.id
+    );
+    yield put(updateVideoTitleDone(data));
+  } catch (error) {
+    yield put(updateVideoTitleFail(error.message));
+  }
+}
+
+function* watchUpdateVideoTitle() {
+  yield takeLatest(actionTypes.UPDATE_TITLE_VIDEO, updateVideoTitle);
+}
+
 export default function* chaptersOfCourseSaga() {
   yield all([
     watchRequestFetchChapters(),
     watchUploadNewChapter(),
     watchUpdateChapterTitle(),
     watchDeleteChapterById(),
-    watchUploadNewVideo()
+    watchUploadNewVideo(),
+    watchUpdateVideoTitle(),
+    watchDeleteVideoById()
   ]);
 }

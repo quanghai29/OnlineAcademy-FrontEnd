@@ -7,6 +7,7 @@ import EditTitleChapterModal from '../../Modals/EditTitleChapterModal';
 import classes from '../styles.module.scss';
 import Swal from 'sweetalert2';
 import AddVideoModal from '../../Modals/AddVideoModal';
+import EditTitleVideoModal from '../../Modals/EditTitleVideoModal';
 
 const ChapterTableItem = ({chapter}) => {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ const ChapterTableItem = ({chapter}) => {
     <div className="card">
       <EditTitleChapterModal />
       <AddVideoModal />
+      <EditTitleVideoModal />
       <div className={`card-content ${classes.chapterTableItem}`}>
         <div className={classes.titleLeft}>
           <button onClick={onClickBtnHiddenVideo}>{isHiddenVideoTable ? <span className="large material-icons">expand_more</span> : <span className="material-icons">expand_less</span>}</button>

@@ -15,7 +15,7 @@ const CourseTable = ({ courses, isLoading }) => {
           <th>Ngày tạo</th>
           <th>Cập nhật lần cuối</th>
           <th>Trạng thái</th>
-          <th>&nbsp;</th>
+          <th style={{width: 101}}>&nbsp;</th>
         </tr>
       </thead>
 
