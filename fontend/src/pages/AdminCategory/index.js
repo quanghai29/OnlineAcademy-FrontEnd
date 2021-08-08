@@ -1,8 +1,10 @@
 import AdminCategoryContainer from "../../components/AdminCategory/AdminCategoryContainer";
-
+import Layout from "../../layout/Layout";
 const AdminCategory = ()=>{
   return(
-    <AdminCategoryContainer/>
+    <Layout>
+      <AdminCategoryContainer/>
+    </Layout>
   )
 }
 

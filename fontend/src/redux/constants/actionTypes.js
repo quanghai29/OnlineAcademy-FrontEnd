@@ -47,11 +47,9 @@ export const REQUEST_RESET_VERIFY_CODE_FORM = 'REQUEST_RESET_VERIFY_CODE_FORM';
 export const RESET_VERIFY_CODE_FORM = 'RESET_VERIFY_CODE_FORM';
 
 // ========================CONSTANTS FOR SEARCH COURSE ACTIONS ===============================
-export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 export const FETCH_SEARCH_COURSE = 'FETCH_SEARCH_COURSE';
 export const SET_SEARCH_COURSE_RESULT='SET_SEARCH_COURSE_RESULT';
-export const RESET_SEARCH_FORM= 'RESET_SEARCH_FORM';
-export const RESET_SEARCH_COURSE_STATE = 'RESET_SEARCH_COURSE_STATE';
+// export const RESET_SEARCH_COURSE_STATE = 'RESET_SEARCH_COURSE_STATE';
 
 // ===========================================================================================
 // hotCourses action
@@ -144,6 +142,16 @@ export const FETCH_COURSE_OF_CATEGORY = 'FETCH_COURSE_OF_CATEGORY';
 export const SET_COURSE_OF_CATEGORY = 'SET_COURSE_OF_CATEGORY';
 //===================================================================
 
+// =================== Type Action Course of Student Register ==================
+export const FETCH_STUDENT_COURSE_REGISTER = 'FETCH_STUDENT_COURSE_REGISTER';
+export const SET_STUDENT_COURSE_REGISTER = 'SET_STUDENT_COURSE_REGISTER';
+//===================================================================
+
+// =================== Type Action Course of Student Register ==================
+export const FETCH_STUDENT_COURSE_WATCHLIST = 'FETCH_STUDENT_COURSE_WATCHLIST';
+export const SET_STUDENT_COURSE_WATCHLIST = 'SET_STUDENT_COURSE_WATCHLIST';
+//===================================================================
+
 // ================== Action types of Admin and Category===========================
 export const FETCH_CATEGORY_DATA = 'FETCH_CATEGORY_DATA';
 export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA';
@@ -173,3 +181,8 @@ export const SET_LECTURER_USERNAME = 'SET_LECTURER_USERNAME';
 export const SET_LECTURER_PASSWORD = 'SET_LECTURER_PASSWORD';
 export const SET_LECTURER_USERNAME_WARNING = 'SET_LECTURER_USERNAME_WARNING';
 export const SET_LECTURER_PASSWORD_WARNING = 'SET_LECTURER_PASSWORD_WARNING';
+
+// =================== Type Action  Category ==================
+export const FETCH_CATEGORY = 'FETCH_CATEGORY';
+export const SET_CATEGORY = 'SET_CATEGORY';
+//===================================================================

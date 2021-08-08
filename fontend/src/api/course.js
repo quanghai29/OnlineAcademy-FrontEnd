@@ -76,8 +76,42 @@ export const getSearchCourseResult = async (text) => {
   });
 
   if (response.status === 200) {
-    return response.data.data;
+    return response.data.data.courses;
   } else {
     // error
   }
 };
+
+// #region Quang Hai
+export const studentCourse = {
+  registerCourse : async(payload)=>{
+    const respone = await appAPI.post(`/student/course/learning`, payload,{ validateStatus: false })
+    return respone;
+  },
+  addFavoriteCourse: async(course_id)=>{
+    const respone = await appAPI.post(`/student/watchlist`,{course_id},{ validateStatus: false })
+    return respone;
+  },
+  deleteFavoriteCourse: async(course_id)=>{
+    const respone = await appAPI.delete(`/student/watchlist/${course_id}`,{ validateStatus: false })
+    return respone;
+  },
+  getCourseLearning: async(course_id)=>{
+    const respone = await appAPI.get(`/student/course/learning/${course_id}`,{ validateStatus: false })
+    return respone;
+  },
+  updateCourseComment: async(payload)=>{
+    const respone = await appAPI.post(`/student/course/comment`, payload,{ validateStatus: false })
+    return respone;
+  },
+  getCourseRegister: async()=>{
+    const respone = await appAPI.get(`/student/course/register`,{ validateStatus: false })
+    return respone;
+  },
+  getWatchlist: async()=>{
+    const respone = await appAPI.get(`/student/watchlist`,{ validateStatus: false })
+    return respone;
+  },
+}
+
+// #endregion

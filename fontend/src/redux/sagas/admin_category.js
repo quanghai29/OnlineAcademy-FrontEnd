@@ -7,7 +7,7 @@ import {
   REQUEST_DELETE_CATEGORY_ITEM
 } from "../constants/actionTypes"
 import * as adminApi from "../../api/admin"
-import * as validateFunctions from "../../utils/validate"
+import * as validateFunctions from "../../utils/functions"
 
 function* requestFetchCategory() {
   const result = yield call(adminApi.getCategoryData);

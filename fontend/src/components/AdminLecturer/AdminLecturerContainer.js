@@ -32,6 +32,7 @@ const AdminLecturerContainer = () => {
   const [pageData, setPageData] = useState([]);
   const [offset, setOffset] = useState(0);
   const [selectedPage, setSelectedPage] = useState(0);
+  const [isVisibility, setIsVisibility] = useState(false);
 
   useEffect(() => {
     if ((indexOfDeletedItem === lecturers?.length) &&
@@ -71,7 +72,7 @@ const AdminLecturerContainer = () => {
 
   function handleClickSubmitLecturer(e) {
     e.preventDefault();
-    const data ={
+    const data = {
       username: form.username,
       password: form.password,
       creator: 'admin'
@@ -118,6 +119,25 @@ const AdminLecturerContainer = () => {
   function handleOnchangePassword(e) {
     dispatch(setLecturerPassword(e.target.value));
   }
+
+  function handleToggleVisibility() {
+    setIsVisibility(!isVisibility);
+  }
+
+  let eyeIcon = null;
+  if (isVisibility) {
+    eyeIcon = <span className={`material-icons ${styles['eye-icon']}`}
+      onClick={handleToggleVisibility}
+    >
+      visibility
+    </span>
+  } else {
+    eyeIcon = <span className={`material-icons ${styles['eye-icon']}`}
+      onClick={handleToggleVisibility}>
+      visibility_off
+    </span>
+  }
+
   return (
     <>
       <AdminContainer title="Danh sách giảng viên"
@@ -171,11 +191,15 @@ const AdminLecturerContainer = () => {
                     <span className={styles['message--warning']}>
                       {form.passwordWarning}</span>
                   }
-                  <input type="password" placeholder="Mật khẩu"
-                    value={form.password} onChange={handleOnchangePassword}
-                    className={form.passwordWarning ? styles['border--warning'] : ''}
-                  />
-
+                  <div style={{position:"relative"}}>
+                    <input type={isVisibility ? "text" : "password"} placeholder="Mật khẩu"
+                      value={form.password} onChange={handleOnchangePassword}
+                      className={form.passwordWarning ? styles['border--warning'] : ''}
+                    />
+                    {
+                      form.password && eyeIcon
+                    }
+                  </div>
                 </div>
                 <div className={styles['form__footer']}>
                   <button onClick={handleClickSubmitLecturer}>Lưu</button>

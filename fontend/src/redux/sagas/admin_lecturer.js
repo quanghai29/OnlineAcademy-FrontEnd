@@ -6,7 +6,7 @@ import {
   REQUEST_CREATE_LECTURER_ITEM
 } from "../constants/actionTypes"
 import * as adminApi from "../../api/admin";
-import * as commonFunctions from "../../utils/validate"
+import * as commonFunctions from "../../utils/functions"
 
 function* requestFetchLecturerData() {
   const data = yield call(adminApi.getLecturerData);
@@ -28,10 +28,10 @@ function* watchDeleteLecturerItem() {
 }
 
 function* requestCreateLecturerItem(action) {
-  const isUsernameValid = yield call(commonFunctions.validateUsername,
+  const usernameWarning = yield call(commonFunctions.validateUsername,
     action.data.username);
-  if (!isUsernameValid.isValid) {
-    yield put(lecturerActions.setUsernameWarning(isUsernameValid.warning));
+  if (usernameWarning) {
+    yield put(lecturerActions.setUsernameWarning(usernameWarning));
   }else{
     yield put(lecturerActions.setUsernameWarning(''));
   }
@@ -43,7 +43,7 @@ function* requestCreateLecturerItem(action) {
     yield put(lecturerActions.setPasswordWarning(''));
   }
 
-  if(isUsernameValid.isValid && isPasswordValid.isValid){
+  if(!usernameWarning && isPasswordValid.isValid){
     const res = yield call(adminApi.createLecturerItem,action.data);
     if(res.isUsernameExisted){
       const warning = 'Tên đăng nhập này đã được dùng, vui lòng chọn tên khác';

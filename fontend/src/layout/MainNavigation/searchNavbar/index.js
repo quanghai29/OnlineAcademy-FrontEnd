@@ -1,36 +1,29 @@
 import classes from './style.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  FETCH_SEARCH_COURSE
-} from "../../../redux/constants/actionTypes"
-import { setSearchText } from "../../../redux/actions/searchCourse";
 import { Link, useHistory } from "react-router-dom";
-import { fetchCategory } from "../../../redux/actions/admin_category";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import * as actionType from '../../../redux/constants/actionTypes';
 
 export default function SearchNavbar() {
-  const searchCourseState = useSelector(state => state.searchCourseReducer)
-  const categoryState = useSelector(state => state.adminCategoryReducer.categories);
+  const categoryState = useSelector(state => state.category.data);
 
   const dispatch = useDispatch();
   const history = useHistory();
-
   const elems = document.querySelectorAll('.dropdown-trigger');
   M.Dropdown.init(elems, {});
+  const [text_search, setTextSearch] = useState('');
 
   useEffect(function () {
-    dispatch(fetchCategory());
+    dispatch({
+      type: actionType.FETCH_CATEGORY
+    });
   }, [dispatch])
 
   function handleClickSearchCourse(e) {
     e.preventDefault();
-    if (searchCourseState.text) {
-      dispatch({
-        type: FETCH_SEARCH_COURSE,
-        payload: searchCourseState.text
-      });
-      history.push('/search-result');
+    if (text_search) {
+      history.push(`/search-result?text_search=${text_search}`);
     } else {
       return;
     }
@@ -79,10 +72,10 @@ export default function SearchNavbar() {
       <li className={classes.search}>
         <form style={{ display: "flex", position: "relative" }}>
           <input type="text" placeholder="Tìm kiếm khóa học"
-            value={searchCourseState.text}
+            value={text_search}
             onChange={
               (e) => {
-                dispatch(setSearchText(e.target.value))
+                setTextSearch(e.target.value)
               }
             }
           />

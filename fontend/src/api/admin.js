@@ -1,9 +1,8 @@
 import appAPI from "../redux/axios/course";
 import Swal from 'sweetalert2';
-import { instance } from "../redux/axios/account"
 
 export const getCategoryData = async () => {
-  const res = await instance.get('/admin/category');
+  const res = await appAPI.get('/admin/category');
   return res.data.categories;
 }
 

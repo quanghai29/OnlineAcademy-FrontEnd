@@ -1,36 +1,51 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects';
-import axios from 'axios';
 import * as actionType from '../constants/actionTypes';
-import { DOMAIN_API } from '../constants/common';
 import Swal from 'sweetalert2';
+import { studentCourse } from '../../api/course';
 
 function* fectchRegisterCourse(action) {
   try {
-    const response = yield call(axios.post, `${DOMAIN_API}/student/course/learning/${action.payload.course_id}`);
-    if (response.status === 201) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Đăng ký thành công',
-      })
+    const response = yield call(studentCourse.registerCourse, action.payload);
+    switch (response.status) {
+      case 201:
+        Swal.fire({
+          icon: 'success',
+          title: 'Đăng ký thành công',
+        })
+        yield put({
+          type: actionType.SET_REGISTER_COURSE,
+          payload: {
+            statusRegister: response.status,
+            isRegister: true,
+            course_id: action.payload.course_id
+          }
+        })
+        break;
+      case 400 || 401:
+        Swal.fire({
+          icon: 'error',
+          title: response.data.message,
+        })
+        break;
+      default:
+        Swal.fire({
+          icon: 'error',
+          title: 'Server has something error',
+        })
+        break;
     }
-    yield put({
-      type: actionType.SET_REGISTER_COURSE,
-      payload: {
-        statusRegister: response.status,
-        isRegister: true,
-        course_id: action.payload.course_id
-      }
+  } catch (err) {
+    console.log(err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Something went wrong',
     })
-  } catch (error) {
-    //yield put(fetchCourseFail(error.message));
   }
 }
 
 function* watchRegisterCourse() {
   yield takeEvery(actionType.FETCH_REGISTER_COURSE, fectchRegisterCourse);
 }
-
-
 
 function* fectchIsRegisterCourse(action) {
   try {
@@ -43,7 +58,7 @@ function* fectchIsRegisterCourse(action) {
       }
     })
   } catch (error) {
-    //yield put(fetchCourseFail(error.message));
+    console.log(error);
   }
 }
 

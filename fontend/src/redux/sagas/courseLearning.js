@@ -1,45 +1,39 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects';
-import axios from 'axios';
 import * as actionType from '../constants/actionTypes';
-import { DOMAIN_API } from '../constants/common';
 import Swal from 'sweetalert2';
+import {studentCourse} from '../../api/course';
 
 function* fetchCouseLearning(action) {
   try {
-    yield call(function* () {
-      const response = yield axios.get(
-        `${DOMAIN_API}/student/course/learning/${action.payload.course_id}`,
-        {
-          headers:
-          {
-            'x-access-token': localStorage.getItem('accessToken')
-          }
-        }
-      )
-      switch (response.status) {
-        case 200:
-          const data = response.data;
-          yield put({
-            type: actionType.SET_COURSE_LEARNING,
-            payload: data
-          });
-          break;
-        case 400:
-          Swal.fire({
-            icon: 'error',
-            title: response.data.message,
-          })
-          break;
-        default:
-          Swal.fire({
-            icon: 'error',
-            title: 'Server has something error',
-          })
-          break;
-      }
-    })
+    const response = yield call(studentCourse.getCourseLearning, action.payload.course_id);
+
+    switch (response.status) {
+      case 200:
+        const data = response.data;
+        yield put({
+          type: actionType.SET_COURSE_LEARNING,
+          payload: data
+        });
+        break;
+      case 400 || 401:
+        Swal.fire({
+          icon: 'error',
+          title: response.data.message,
+        })
+        break;
+      default:
+        Swal.fire({
+          icon: 'error',
+          title: 'Server has something error',
+        })
+        break;
+    }
   } catch (error) {
-    //yield put(fetchCourseFail(error.message));
+    Swal.fire({
+      icon: 'error',
+      title: 'Something went wrong',
+    })
+    console.log(error)
   }
 }
 
@@ -55,7 +49,11 @@ function* fetchVideoLearning(action) {
       payload: action.payload.video_source
     });
   } catch (error) {
-    //yield put(fetchCourseFail(error.message));
+    Swal.fire({
+      icon: 'error',
+      title: 'Something went wrong',
+    })
+    console.log(error)
   }
 }
 

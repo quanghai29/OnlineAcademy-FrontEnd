@@ -24,7 +24,7 @@
   
 }
 
-@mixin left-icon{
+.edit-icon, .open-in-new-icon{
   color: #007791;
   margin-right: 10px;
   &:hover{
@@ -32,7 +32,7 @@
   }
 }
 
-@mixin delete-icon{
+.delete-icon{
   color: #f34147;
   &:hover{
     cursor: pointer;
@@ -60,7 +60,18 @@
   }
 }
 
-@mixin admin-form-container{
+.create-btn-container{
+  display: flex;
+  justify-content: flex-end;
+  @include create-btn;
+}
+
+.sorted-container{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.create-form-container{
   max-width: 100%;
   width: 500px;
   height: auto;
@@ -69,7 +80,7 @@
   border-radius: 5px;
 }
 
-@mixin admin-form-group{
+.form-group{
   padding: 15px;
   form{
     input{
@@ -90,4 +101,29 @@
       }
     }
   }
+}
+
+.close-modal-icon{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  @include close-modal-icon;
+}
+
+.eye-icon{
+  position: absolute;
+  top: 30%;
+  right: 10px;
+  font-size: 15px;
+    &:hover{
+      cursor: pointer;
+    }
+}
+
+.border--warning{
+  @include warningBorder;
+}
+
+.message--warning{
+  @include warningMessage;
 }

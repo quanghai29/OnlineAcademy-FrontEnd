@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import classes from './style.module.scss';
-import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import currency from "currency.js";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionType from "../../../redux/constants/actionTypes";
+import StarRatings from 'react-star-ratings';
+
 
 export default function OverviewInfo(props) {
   const dispatch = useDispatch();
@@ -22,12 +23,12 @@ export default function OverviewInfo(props) {
 
     dispatch({
       type: actionType.FETCH_IS_REGISTER_COURSE,
-      payload:{
+      payload: {
         course_id: props.id,
         isRegister: props.isRegister
       }
     })
-  },[dispatch, props.isFavorite, props.isRegister, props.id])
+  }, [dispatch, props.isFavorite, props.isRegister, props.id])
 
   const updateListFavorite = () => {
     //kiểm tra đăng nhập chưa
@@ -48,7 +49,7 @@ export default function OverviewInfo(props) {
   const RegisterLearning = (course_id) => {
     dispatch({
       type: actionType.FETCH_REGISTER_COURSE,
-      payload:{
+      payload: {
         course_id
       }
     })
@@ -79,13 +80,12 @@ export default function OverviewInfo(props) {
             {
               props.num_rating
               &&
-              <ReactStars
-                isHalf={true}
-                activeColor="#EC0101"
-                size={25}
-                value={+props.num_rating}
-                edit={false}
-              />
+              <div style={{paddingTop: "10px"}}>
+                 <StarRatings rating={+props.num_rating}
+                    starRatedColor="#EC0101"
+                    name='rating' starDimension="20px" starSpacing="0"/>
+              </div>
+             
             }
 
             <p>&ensp;</p>
@@ -108,8 +108,8 @@ export default function OverviewInfo(props) {
             <a className="waves-light btn" onClick={updateListFavorite}>
               {
                 favoriteCourse.course_id === props.id
-                &&
-                favoriteCourse.isFavorite
+                  &&
+                  favoriteCourse.isFavorite
                   ? <i className="material-icons right">favorite </i>
                   : <i className="material-icons right">favorite_border</i>
               }
@@ -133,11 +133,19 @@ export default function OverviewInfo(props) {
                 {
 
                   registerCourse.course_id === props.id && registerCourse.isRegister
-                  ?
-                   <Link to="/learning" className="waves-effect waves-light btn">Vào học</Link>
-                  :
-                   <button className="waves-effect waves-light btn" onClick={ () => RegisterLearning(props.id)}>Đăng ký ngay</button>
-                }                
+                    ?
+                    <Link to={{
+                        pathname: "/learning",
+                        state: {
+                          course_id: props.id,
+                        },
+                      }}
+                      className="waves-light btn">
+                      Vào học
+                    </Link>
+                    :
+                    <button className="waves-light btn" onClick={() => RegisterLearning(props.id)}>Đăng ký ngay</button>
+                }
               </div>
 
             </div>

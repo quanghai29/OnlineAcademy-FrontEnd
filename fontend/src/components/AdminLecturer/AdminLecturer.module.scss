@@ -1,34 +1,4 @@
-@import "../../styles/common.scss";
 @import "../../styles/admin.scss";
-
-.create-btn-container{
-  display: flex;
-  justify-content: flex-end;
-  @include create-btn;
-}
-
-.create-form-container{
- @include admin-form-container;
-}
-
-.form-group{
-  @include admin-form-group;
-}
-
-.close-modal-icon{
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  @include close-modal-icon;
-}
-
-.border--warning{
-  @include warningBorder;
-}
-
-.message--warning{
-  @include warningMessage;
-}
 
 .input-group{
   margin-bottom: 10px;

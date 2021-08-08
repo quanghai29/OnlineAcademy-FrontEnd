@@ -3,18 +3,20 @@ export const isEmpty = (value) => {
 }
 
 export const validateUsername = (username) => {
-  const result = {
-    isValid: false,
-    warning: ''
+  let warningMess = '';
+  // eslint-disable-next-line
+  const regex = /^[\x00-\x7F]+$/;
+  if(!username){
+    warningMess = "Vui lòng không để trống trường này";
+    return warningMess;
+  }else if(!regex.test(username.toLowerCase())){
+    warningMess = "Tên đăng nhập là kí tự latin không dấu";
+    return warningMess;
+  }else if(username.includes(" ")){
+    warningMess = "Vui lòng viết liền không khoảng trắng";
+    return warningMess;
   }
 
-  if (!username) {
-    result.warning = "Vui lòng không để trống trường này";
-    return result;
-  } else {
-    result.isValid = true;
-    return result;
-  }
 }
 
 export const validatePassword = (password) => {

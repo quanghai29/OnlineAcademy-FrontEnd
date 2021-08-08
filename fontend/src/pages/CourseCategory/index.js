@@ -29,10 +29,13 @@ const CourseCategory = () => {
         <div className="col m10 offset-m1">
           <h5 className={classes.cateHeader}>
             {stateLocation && stateLocation.category_name}
-            &nbsp;:&nbsp;  
+            &nbsp;:&nbsp;
             {stateLocation && stateLocation.amount_course} khóa học
           </h5>
-        </div>        
+          <div className="progress">
+            <div className="determinate" style={{width: "100%"}} />
+          </div>
+        </div>
       </div>
       <div className="row">
         <div className="col m10 offset-m1">
@@ -41,13 +44,17 @@ const CourseCategory = () => {
             &&
             courseCategory.map(item => {
               return (
-                <RowCourse data={{ ...item, author: item.fullname }} key={item.id} />
+                <div className="card">
+                  <div className="card-content">
+                    <RowCourse data={{ ...item, author: item.fullname, avg_vote:+item.avg_vote }} key={item.id} />
+                  </div>
+                </div>
               )
             })
           }
           {
             courseCategory
-            && 
+            &&
             courseCategory.length === 0
             &&
             <div className={classes.noneData}></div>
