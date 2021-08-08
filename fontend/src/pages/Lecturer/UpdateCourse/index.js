@@ -60,7 +60,7 @@ const UpdateCourse = () => {
           </div>
           <div id="detail-content" className={`col s10 offset-s1 ${classes.detailContent}`}>
           <div className="section" style={{ paddingTop: 50 }}>
-            <button data-target="add-chapter-title-modal" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">add_box</i>Thêm chương mới</button>
+            <button data-target="add-chapter-title-modal" className="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">add_box</i>Thêm chương mới</button>
             <AddTitleChapterModal />
             <ChapterTable />
           </div>

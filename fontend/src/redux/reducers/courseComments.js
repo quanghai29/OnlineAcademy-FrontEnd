@@ -1,7 +1,9 @@
 import * as actionType from '../constants/actionTypes';
 
 const initialState = {
-  data: []
+  data: [],
+  isFeedbacked: false, // check student have already checked
+  student_comment: {} // infomation comment of student
 };
 
 const courseComments = (state = initialState, action) => {
@@ -9,7 +11,7 @@ const courseComments = (state = initialState, action) => {
     case actionType.SET_COURSE_COMMENT:
       return {
         ...state,
-        data : action.payload,
+        ...action.payload
       };
     default:
       return state;

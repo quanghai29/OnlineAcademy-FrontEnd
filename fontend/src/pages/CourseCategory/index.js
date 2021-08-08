@@ -46,7 +46,7 @@ const CourseCategory = () => {
               return (
                 <div className="card">
                   <div className="card-content">
-                    <RowCourse data={{ ...item, author: item.fullname }} key={item.id} />
+                    <RowCourse data={{ ...item, author: item.fullname, avg_vote:+item.avg_vote }} key={item.id} />
                   </div>
                 </div>
               )

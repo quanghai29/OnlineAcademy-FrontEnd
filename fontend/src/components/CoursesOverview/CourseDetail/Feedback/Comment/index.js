@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import classes from './style.module.scss';
 import Avartar from '../../../../Common/Avartar';
-import ReactStars from "react-rating-stars-component";
+import StarRatings from 'react-star-ratings';
 
 export default function Comment(props) {
 
   useEffect(function () {
-    
-  },[props.vote]);
+
+  }, [props.vote]);
 
   return (
     <div className="row" style={{ marginBottom: 0 }}>
       <div className={`card-panel grey lighten-5 z-depth-1 ${classes.cardnostyle}`}>
         <div className="row valign-wrapper">
           <div className="col m1">
-            <Avartar {...{nickName: props.fullname}} />
+            <Avartar {...{ nickName: props.fullname }} />
           </div>
           <div className="col m10" style={{ margin: 0 }}>
             <div className="row" style={{ margin: 0 }} >
@@ -23,15 +23,13 @@ export default function Comment(props) {
             <div className="row" style={{ margin: 0 }}>
 
               {
-                props.num_rating
+                props.vote
                 &&
-                <ReactStars
-                  isHalf={true}
-                  activeColor="#EC0101"
-                  size={22}
-                  value={+props.vote}
-                  edit={false}
-                />
+                <div style={{ paddingTop: "10px" }}>
+                  <StarRatings rating={+props.vote}
+                    starRatedColor="#EC0101"
+                    name='rating' starDimension="20px" starSpacing="0" />
+                </div>
               }
 
             </div>

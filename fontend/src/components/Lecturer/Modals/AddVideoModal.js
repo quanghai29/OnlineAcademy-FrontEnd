@@ -6,13 +6,14 @@ import { uploadVideo } from '../../../redux/actions/chaptersOfCourse';
 import classes from './AddVideoModal.module.scss';
 
 const AddVideoModal = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [disableSubmit, setDisableSubmit] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewVideoUrl, setPreviewVideoUrl] = useState('');
   const [duration, setDuration] = useState(null);
   const [titleVideo, setTitleVideo] = useState('');
+  const [isPreview, setIsPreview] = useState(false);
 
   const { data } = useSelector((state) => state.selectedChapter);
   const { isLoading, error } = useSelector((state) => state.chaptersOfCourse);
@@ -21,6 +22,11 @@ const AddVideoModal = () => {
     setTitleVideo(e.target.value);
     setDisableSubmit(false);
   };
+
+  const onChangeIsPreview = (e) => {
+    console.log(e.target.checked);
+    setIsPreview(e.target.checked);
+  }
 
   const onchangeUploadVideo = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -49,17 +55,18 @@ const AddVideoModal = () => {
       formData.append('video', selectedFile);
       formData.append('chapter_id', data.id);
       formData.append('duration', duration);
-      formData.append('title', titleVideo)
+      formData.append('title', titleVideo);
+      formData.append('isPreview', isPreview ? 1 : 0);
 
-        dispatch(uploadVideo(formData));
+      dispatch(uploadVideo(formData));
 
-        if(!isLoading) {
-          if(!error) {
-            const elem = document.getElementById('add-video-modal');
-            const instance = M.Modal.getInstance(elem);
-            instance.close();
-          }
+      if (!isLoading) {
+        if (!error) {
+          const elem = document.getElementById('add-video-modal');
+          const instance = M.Modal.getInstance(elem);
+          instance.close();
         }
+      }
     } else {
       alert('Please update common Info first');
     }
@@ -77,7 +84,15 @@ const AddVideoModal = () => {
                 className="validate"
                 onChange={onChangeInputHandler}
               />
-              <label htmlFor="video-title">Tiêu đề khóa học</label>
+              <label htmlFor="video-title">Tiêu đề video</label>
+            </div>
+            <div className="input-field col s12">
+              <p>
+                <label>
+                  <input type="checkbox" className="filled-in" onChange={onChangeIsPreview} />
+                  <span>Cho xem trước</span>
+                </label>
+              </p>
             </div>
             <div className="input-field col s12">
               <div className="file-field input-field">
@@ -105,7 +120,9 @@ const AddVideoModal = () => {
                   controls
                 ></video>
               )}
-              {selectedFile && (<p>size: {fileSize(selectedFile.size, {standard: "iec"})}</p>)}
+              {selectedFile && (
+                <p>size: {fileSize(selectedFile.size, { standard: 'iec' })}</p>
+              )}
             </div>
           </div>
         </div>
