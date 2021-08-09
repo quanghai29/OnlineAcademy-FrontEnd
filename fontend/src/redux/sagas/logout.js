@@ -1,5 +1,8 @@
 import { takeEvery, put, all } from 'redux-saga/effects';
 import * as actionType from '../constants/actionTypes';
+import {
+  resetResponseData
+} from "../actions/login"
 
 function* fetchLogOut() {
   try {
@@ -14,6 +17,8 @@ function* fetchLogOut() {
         isAuth: false,
       }
     });
+
+    yield put(resetResponseData());
   } catch (error) {
     //yield put(fetchCourseFail(error.message));
   }

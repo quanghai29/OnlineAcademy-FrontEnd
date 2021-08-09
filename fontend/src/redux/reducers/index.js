@@ -30,6 +30,7 @@ import studentCourseRegister from './studentCourseRegister';
 import studentCourseWatchlist from './studentCourseWatchlist';
 import category from './category';
 import adminCourseReducer from './admin_course';
+import forgotPasswordReducer from './forgotPassword';
 
 export default combineReducers({
   courses,
@@ -63,4 +64,5 @@ export default combineReducers({
   studentCourseWatchlist,
   category,
   adminCourseReducer,
+  forgotPasswordReducer
 });

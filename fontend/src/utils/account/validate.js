@@ -163,3 +163,28 @@ export const validateEntireLoginForm = (loginForm) => {
     newFormState
   }
 }
+
+export const validateEntireForgotPasswordForm = (form)=>{
+  let isSubmit = true;
+  let formData = { ...form };
+  let newForm = null;
+
+  if(!formData.email && !formData.warning){
+    isSubmit=false;
+    formData.warning = 'Vui lòng nhập email của bạn';
+  }
+
+  if(formData.warning){
+    isSubmit = false;
+    newForm={...formData};
+  }else{
+    newForm = {
+      email: formData.email
+    }
+  }
+
+  return{
+    isSubmit,
+    newForm
+  }
+}
