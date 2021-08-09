@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from './VideoPlayer.module.scss';
 import ReactPlayer from 'react-player';
 import { Link } from "react-router-dom";
@@ -10,30 +10,12 @@ import { useSelector } from "react-redux";
 export default function VideoPlayer(props) {
   // const dispatch = useDispatch();
   // const videoLoader = useSelector((state)=>state.videoLoader);
-
+  const player = useRef();
   const video_source = useSelector((state) => state.videoLearning.data);
 
-  useEffect(()=>{},[video_source]);
+  useEffect(() => { }, [video_source]);
 
-  const configReactPlayer = {
-    className: 'react-player',
-    url: `${DOMAIN_API}/common/media/load_video/${video_source}`,
-    width: "100%",
-    height: "100%",
-    controls: true,
-    pip: true,
-    config: {
-      file: {
-        attributes: {
-          controlsList: 'nodownload'  //<- this is the important bit
-        }
-      }
-    },
-    onPlay: () => {
-    },
-    onPause: () => {
-    },
-  };
+  console.log(player)
 
   return (
     <div className={classes.playerwrapper}>
@@ -57,7 +39,25 @@ export default function VideoPlayer(props) {
 
       </div>
       <div className={`row ${classes.videoPlayer}`}>
-        <ReactPlayer {...configReactPlayer} />
+        <ReactPlayer
+          ref = {player}
+          className='react-player'
+          url={`${DOMAIN_API}/common/media/load_video/${video_source}`}
+          width="100%"
+          height="100%"
+          controls={true}
+          pip={true}
+          config = {{
+              file : {
+                attributes: {
+                  controlsList: 'nodownload'  //<- this is the important bit
+                }
+              }
+          }}
+          
+          //onReady = {()=>{player.current.seekTo(5)}}
+          onStart = {()=>{player.current.seekTo(5)}}
+        />
       </div>
 
     </div>
