@@ -30,7 +30,7 @@ const UpdateAvatar = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('avatar', selectedFile);
-    formData.append('account_id', data.id);
+    formData.append('account_id', data.account_id);
     dispatch(updateUserImage(formData));
     if (!isLoading) {
       if (error) {

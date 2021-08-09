@@ -83,6 +83,11 @@ const userProfile = (state = initialState, action) => {
         isLoading: false,
         error: action.payload.message
       }
+    case type.SET_ERROR_INITIAL:
+      return {
+        ...state,
+        error: initialState.error
+      }
     default:
       return state;
   }

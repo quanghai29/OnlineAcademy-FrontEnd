@@ -39,7 +39,8 @@ const CommonDescription = () => {
   }, [isUpdateCourse, data, setValue]);
 
   const onSubmit = async (formData) => {
-    formData.lecturer_id = 2; // {userId} = JSON.parse(localStorage.decodePayload)
+    const {userId} = JSON.parse(localStorage.decodePayload);
+    formData.lecturer_id = userId;
     formData.category_id = +formData.category_id;
     formData.course_status = +formData.course_status;
     console.log(formData.course_status);

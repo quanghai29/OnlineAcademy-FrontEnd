@@ -21,7 +21,7 @@ const EditTitleVideoModal = () => {
 
   useEffect(() => {
     setValue('title', data.title);
-    setValue('isPreview', data.isPreview);
+    setValue('isPreview', +data.isPreview === 1 ? true : false);
     M.updateTextFields();
   }, [data, setValue]);
 
