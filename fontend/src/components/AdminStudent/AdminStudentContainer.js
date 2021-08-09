@@ -85,7 +85,8 @@ const AdminStudentContainer = () => {
   }
 
   function handleOpenItem(index){
-    
+    //student_id = students[index + offset].id
+    console.log('opent item at', offset+index);
   }
 
   return (

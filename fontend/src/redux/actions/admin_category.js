@@ -1,7 +1,7 @@
 import {
-  SET_CATEGORY_DATA,
-  FETCH_CATEGORY_DATA,
-  SET_CATEGORY_WARNING,
+  SET_ADMIN_CATEGORY,
+  FETCH_ADMIN_CATEGORY,
+  SET_ADMIN_CATEGORY_WARNING,
   SET_IS_SHOW_FORM_MODAL,
   SET_CATEGORY_INPUT_VALUE,
   REQUEST_DELETE_CATEGORY_ITEM,
@@ -10,20 +10,20 @@ import {
 
 export const setCategory = (data)=>{
   return{
-    type: SET_CATEGORY_DATA,
+    type: SET_ADMIN_CATEGORY,
     data
   }
 }
 
 export const fetchCategory = ()=>{
   return{
-    type: FETCH_CATEGORY_DATA
+    type: FETCH_ADMIN_CATEGORY
   }
 }
 
 export const setCategoryWarning =(data)=>{
   return{
-    type: SET_CATEGORY_WARNING,
+    type: SET_ADMIN_CATEGORY_WARNING,
     data
   }
 }

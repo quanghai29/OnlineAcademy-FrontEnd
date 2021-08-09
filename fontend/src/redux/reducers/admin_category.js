@@ -1,6 +1,6 @@
 import {
-  SET_CATEGORY_DATA,
-  SET_CATEGORY_WARNING,
+  SET_ADMIN_CATEGORY,
+  SET_ADMIN_CATEGORY_WARNING,
   SET_IS_SHOW_FORM_MODAL,
   SET_CATEGORY_INPUT_VALUE,
   DELETE_CATEGORY_ITEM
@@ -16,7 +16,7 @@ const initialState = {
 
 const adminCategoryReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_CATEGORY_DATA: {
+    case SET_ADMIN_CATEGORY: {
       let newState = {
         ...state,
         categories: action.data,
@@ -28,7 +28,7 @@ const adminCategoryReducer = (state = initialState, action) => {
 
       return newState;
     }
-    case SET_CATEGORY_WARNING: {
+    case SET_ADMIN_CATEGORY_WARNING: {
       let newState = {
         ...state,
         warningMess: action.data
