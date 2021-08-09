@@ -186,3 +186,9 @@ export const SET_LECTURER_PASSWORD_WARNING = 'SET_LECTURER_PASSWORD_WARNING';
 export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 export const SET_CATEGORY = 'SET_CATEGORY';
 //===================================================================
+
+// =================== Type Action Related Course ==================
+export const FETCH_RELATED_COURSE = 'FETCH_RELATED_COURSE';
+export const SET_RELATED_COURSE = 'SET_RELATED_COURSE';
+export const ERROR_RELATED_COURSE = 'ERROR_RELATED_COURSE';
+//===================================================================

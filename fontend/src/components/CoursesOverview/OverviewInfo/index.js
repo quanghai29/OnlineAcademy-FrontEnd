@@ -5,7 +5,7 @@ import currency from "currency.js";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionType from "../../../redux/constants/actionTypes";
 import StarRatings from 'react-star-ratings';
-
+import { DOMAIN_API } from "../../../redux/constants/common";
 
 export default function OverviewInfo(props) {
   const dispatch = useDispatch();
@@ -74,9 +74,12 @@ export default function OverviewInfo(props) {
             <h6>{props.short_description}</h6>
           </div>
           <div className={`row ${classes.rowStar}`}>
-            <div className={classes.bestseller}>Bestseller</div>
+            {
+              props.isBestseller
+              &&
+              <div className={classes.bestseller}>Bestseller</div>
+            }
             <h6>{props.num_rating}&ensp;</h6>
-
             {
               props.num_rating
               &&
@@ -124,8 +127,12 @@ export default function OverviewInfo(props) {
             <div className={`card ${classes.courseplay}`}>
 
               <div className={`card-image ${classes.playImage}`}>
-                <img src="assets/images/home/girlBg.png" alt="ảnh" />
-                <a href="/"><i className="material-icons">play_circle_filled</i></a>
+                <img src={`${DOMAIN_API}/common/media/load_video/${props.course_img_source}`} 
+                    alt={props.course_img_title}
+                    onError={(e)=>{e.target.onerror = null; e.target.src="/assets/images/default.jpeg"}}
+                />
+                {/* eslint-disable-next-line */}
+                <a href="#"><i className="material-icons">play_circle_filled</i></a>
               </div>
 
               <div className={`card-content ${classes.price}`}>

@@ -23,6 +23,7 @@ import adminLecturerSaga from './admin_lecturer';
 import CourseCategorySaga from './courseCategory';
 import StudentCourseRegister from './studentCourseRegister';
 import StudentCourseWatchlist from './studentCourseWatchlist';
+import RelatedCourseSaga from './relatedCourse';
 
 export default function* rootSaga() {
     yield all([
@@ -51,5 +52,6 @@ export default function* rootSaga() {
         CourseCategorySaga(),
         StudentCourseRegister(),
         StudentCourseWatchlist(),
+        RelatedCourseSaga(),
     ])
 }

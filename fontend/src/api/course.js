@@ -1,4 +1,5 @@
 import appAPI from '../redux/axios/course';
+import guestAPI from '../redux/axios/guest';
 
 export const uploadData = {
   uploadCommonInfo: async (info) => {
@@ -110,6 +111,13 @@ export const studentCourse = {
   },
   getWatchlist: async()=>{
     const respone = await appAPI.get(`/student/watchlist`,{ validateStatus: false })
+    return respone;
+  },
+}
+
+export const courseOverview = {
+  relatedCourse : async(category_id)=>{
+    const respone = await guestAPI.get(`/course/bestseller-category/${category_id}` ,{ validateStatus: false })
     return respone;
   },
 }

@@ -28,6 +28,7 @@ import courseCategory from './courseCategory';
 import studentCourseRegister from './studentCourseRegister';
 import studentCourseWatchlist from './studentCourseWatchlist';
 import category from './category';
+import relatedCourse from './relatedCourse';
 
 export default combineReducers({
   courses,
@@ -59,4 +60,5 @@ export default combineReducers({
   studentCourseRegister,
   studentCourseWatchlist,
   category,
+  relatedCourse,
 });
