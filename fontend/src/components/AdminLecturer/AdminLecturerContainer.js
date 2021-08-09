@@ -101,6 +101,7 @@ const AdminLecturerContainer = () => {
   }
 
   function handleOpenLecturerItem(index) {
+    //lecturer_id = lecturers[index + offset].id
     console.log('open at', offset + index);
   }
 

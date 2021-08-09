@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadCourse, updateCommonInfoCourse } from '../../../redux/actions/coursesOfLecturer';
+import {
+  uploadCourse,
+  updateCommonInfoCourse,
+} from '../../../redux/actions/coursesOfLecturer';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 
@@ -29,6 +32,7 @@ const CommonDescription = () => {
         setValue('category_id', data.category_id || '');
         setValue('price', data.price || '0');
         setValue('discount', data.discount || '0');
+        setValue('course_status', data.course_status || '');
       }
     }
     M.updateTextFields();
@@ -36,9 +40,10 @@ const CommonDescription = () => {
 
   const onSubmit = async (formData) => {
     formData.lecturer_id = 2; // {userId} = JSON.parse(localStorage.decodePayload)
-    console.log(formData.category_id);
     formData.category_id = +formData.category_id;
-    if(isUpdateCourse) {
+    formData.course_status = +formData.course_status;
+    console.log(formData.course_status);
+    if (isUpdateCourse) {
       dispatch(updateCommonInfoCourse(formData, data.id));
     } else {
       dispatch(uploadCourse(formData));
@@ -125,23 +130,41 @@ const CommonDescription = () => {
           </div>
         </div>
         <div className="row">
-          <select
-            className="browser-default"
-            defaultValue=""
-            id="category_id"
-            {...register('category_id', { required: true })}
-            onChange={onChangeInputHandler}
-            disabled={uploadingCommonDesc}
-          >
-            <option value="" disabled>
-              Chọn Danh Mục
-            </option>
-            <option value="1">Lập trình Web</option>
-            <option value="2">Lập trình di động</option>
-            <option value="3">Lập trình game</option>
-            <option value="4">Khoa học dữ liệu</option>
-            <option value="5">Kiểm thử phần mềm</option>
-          </select>
+          <div className="input-field col s6">
+            <select
+              className="browser-default"
+              defaultValue=""
+              id="category_id"
+              {...register('category_id', { required: true })}
+              onChange={onChangeInputHandler}
+              disabled={uploadingCommonDesc}
+            >
+              <option value="" disabled>
+                Danh Mục
+              </option>
+              <option value="1">Lập trình Web</option>
+              <option value="2">Lập trình di động</option>
+              <option value="3">Lập trình game</option>
+              <option value="4">Khoa học dữ liệu</option>
+              <option value="5">Kiểm thử phần mềm</option>
+            </select>
+          </div>
+          <div className="input-field col s6">
+            <select
+              className="browser-default"
+              defaultValue=""
+              id="course_status"
+              {...register('course_status')}
+              onChange={onChangeInputHandler}
+              disabled={uploadingCommonDesc}
+            >
+              <option value="" disabled>
+                Status Course
+              </option>
+              <option value="0">Chưa hoàn thành</option>
+              <option value="1">Đã hoàn thành</option>
+            </select>
+          </div>
         </div>
         <div className="row">
           <div className="input-field col s6">
@@ -173,7 +196,11 @@ const CommonDescription = () => {
             <label htmlFor="discount">Khuyến mãi</label>
           </div>
         </div>
-        <button className="btn waves-effect" type="submit" disabled={disableSubmit}>
+        <button
+          className="btn waves-effect"
+          type="submit"
+          disabled={disableSubmit}
+        >
           Submit
           <i className="material-icons right">send</i>
         </button>

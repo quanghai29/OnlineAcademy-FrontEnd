@@ -1,5 +1,7 @@
 .videoTableItem {
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     .actionVideo {
         display: flex;
         justify-content: flex-end;

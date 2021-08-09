@@ -20,9 +20,9 @@ export const uploadData = {
   },
   updateCommonInfoCourse: async (formData, course_id) => {
     try {
-      const { title, short_description, full_description, category_id, price, discount } = formData;
+      const { title, short_description, full_description, category_id, price, discount, course_status } = formData;
       const { data } = await appAPI.patch(`/lecturer/course/${course_id}`, {
-        title, short_description, full_description, category_id, price, discount
+        title, short_description, full_description, category_id, price, discount, course_status
       });
       data.id = course_id;
       return data;

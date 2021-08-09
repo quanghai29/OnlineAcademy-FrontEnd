@@ -1,7 +1,7 @@
 @import "../../styles/common.scss";
 
 .admin-container{
-  margin: 25px 100px;
+  margin: 50px 100px;
   .link-group{
     a{
       display: flex;
@@ -16,12 +16,11 @@
         color: $linkColor;
       }
     }
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
   .admin__title{
     display:  flex;
     align-items: center;
-    margin-bottom: 30px;
     .title{
       margin-right: 10px;
     }

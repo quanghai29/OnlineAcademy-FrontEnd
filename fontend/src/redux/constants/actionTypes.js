@@ -152,25 +152,24 @@ export const FETCH_STUDENT_COURSE_WATCHLIST = 'FETCH_STUDENT_COURSE_WATCHLIST';
 export const SET_STUDENT_COURSE_WATCHLIST = 'SET_STUDENT_COURSE_WATCHLIST';
 //===================================================================
 
-// ================== Action types of Admin and Category===========================
-export const FETCH_CATEGORY_DATA = 'FETCH_CATEGORY_DATA';
-export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA';
-export const REQUEST_EDIT_CATEGORY_ITEM = 'REQUEST_EDIT_CATEGORY_ITEM';
-export const REQUEST_CREATE_CATEGORY_ITEM = 'REQUEST_CREATE_CATEGORY_ITEM';
-export const SET_CATEGORY_WARNING = 'SET_CATEGORY_WARNING';
-export const SUBMIT_CATEGORY_FORM = 'SUBMIT_CATEGORY_FORM';
+// ================== Action types of Admin Category===========================
+export const FETCH_ADMIN_CATEGORY = 'FETCH_ADMIN_CATEGORY';
+export const SET_ADMIN_CATEGORY = 'SET_ADMIN_CATEGORY';
+export const REQUEST_EDIT_ADMIN_CATEGORY_ITEM = 'REQUEST_EDIT_ADMIN_CATEGORY_ITEM';
+export const REQUEST_CREATE_ADMIN_CATEGORY_ITEM = 'REQUEST_CREATE_ADMIN_CATEGORY_ITEM';
+export const SET_ADMIN_CATEGORY_WARNING = 'SET_ADMIN_CATEGORY_WARNING';
 export const SET_IS_SHOW_FORM_MODAL='SET_IS_SHOW_FORM_MODAL';
 export const SET_CATEGORY_INPUT_VALUE = 'SET_CATEGORY_INPUT_VALUE';
 export const REQUEST_DELETE_CATEGORY_ITEM = 'REQUEST_DELETE_CATEGORY_ITEM';
 export const DELETE_CATEGORY_ITEM = 'DELETE_CATEGORY_ITEM';
 
-// ================== Action types of Admin and Student ===============================
+// ================== Action types of Admin Student ===============================
 export const FETCH_STUDENT_DATA = 'FETCH_STUDENT_DATA';
 export const SET_STUDENT_DATA = 'SET_STUDENT_DATA';
 export const REQUEST_DELETE_STUDENT_ITEM = 'REQUEST_DELETE_STUDENT_ITEM';
 export const DELETE_STUDENT_ITEM = 'DELETE_STUDENT_ITEM';
 
-// ================== Action types of Admin and Lecturer ===============================
+// ================== Action types of Admin Lecturer ===============================
 export const FETCH_LECTURER_DATA = 'FETCH_LECTURER_DATA';
 export const SET_LECTURER_DATA = 'SET_LECTURER_DATA';
 export const REQUEST_DELETE_LECTURER_ITEM = 'REQUEST_DELETE_LECTURER_ITEM';
@@ -182,6 +181,11 @@ export const SET_LECTURER_PASSWORD = 'SET_LECTURER_PASSWORD';
 export const SET_LECTURER_USERNAME_WARNING = 'SET_LECTURER_USERNAME_WARNING';
 export const SET_LECTURER_PASSWORD_WARNING = 'SET_LECTURER_PASSWORD_WARNING';
 
+// ==================== Action types of Admin Course =============================
+export const FETCH_ADMIN_COURSE = 'FETCH_ADMIN_COURSE';
+export const SET_ADMIN_COURSE = 'SET_ADMIN_COURSE';
+export const DELETE_ADMIN_COURSE_ITEM ='DELETE_ADMIN_COURSE_ITEM';
+export const REQUEST_DELETE_ADMIN_COURSE_ITEM = 'REQUEST_DELETE_ADMIN_COURSE_ITEM';
 // =================== Type Action  Category ==================
 export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 export const SET_CATEGORY = 'SET_CATEGORY';
