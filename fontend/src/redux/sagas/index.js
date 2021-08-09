@@ -23,6 +23,7 @@ import adminLecturerSaga from './admin_lecturer';
 import CourseCategorySaga from './courseCategory';
 import StudentCourseRegister from './studentCourseRegister';
 import StudentCourseWatchlist from './studentCourseWatchlist';
+import RelatedCourseSaga from './relatedCourse';
 import adminCourseSaga from './admin_course';
 import forgotPasswordSaga from './forgotPassword';
 
@@ -53,6 +54,7 @@ export default function* rootSaga() {
         CourseCategorySaga(),
         StudentCourseRegister(),
         StudentCourseWatchlist(),
+        RelatedCourseSaga(),
         adminCourseSaga(),
         forgotPasswordSaga(),
     ])

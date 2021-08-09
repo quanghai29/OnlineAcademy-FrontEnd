@@ -5,6 +5,7 @@ import CourseDetail from '../../components/CoursesOverview/CourseDetail';
 import { useDispatch, useSelector} from 'react-redux';
 import * as actionType from '../../redux/constants/actionTypes';
 import { useLocation } from 'react-router-dom';
+import RelatedCourse from '../../components/CoursesOverview/RelatedCourse';
 
 const CourseOverview = () => {
   const courseOverview = useSelector((state) => state.courseOverview);
@@ -28,6 +29,7 @@ const CourseOverview = () => {
     <Layout>
       <OverviewInfo {...overviewData}/>
       <CourseDetail {...{chapters, overviewData, course_id: overviewData.id }}/>
+      <RelatedCourse {...{category_id: overviewData.category_id}}/>
     </Layout>
   );
 };

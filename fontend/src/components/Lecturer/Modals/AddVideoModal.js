@@ -24,7 +24,6 @@ const AddVideoModal = () => {
   };
 
   const onChangeIsPreview = (e) => {
-    console.log(e.target.checked);
     setIsPreview(e.target.checked);
   }
 
@@ -38,7 +37,6 @@ const AddVideoModal = () => {
 
       var media = new Audio(reader.result);
       media.onloadedmetadata = function () {
-        console.log(media.duration);
         setDuration(media.duration);
       };
     };
@@ -62,6 +60,7 @@ const AddVideoModal = () => {
 
       if (!isLoading) {
         if (!error) {
+          e.target.reset();
           const elem = document.getElementById('add-video-modal');
           const instance = M.Modal.getInstance(elem);
           instance.close();

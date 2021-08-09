@@ -108,6 +108,7 @@ export const UPDATE_MEMBER_IMAGE_FAIL = 'UPDATE_MEMBER_IMAGE_FAIL';
 export const UPDATE_MEMBER_PASSWORD = 'UPDATE_MEMBER_PASSWORD';
 export const UPDATE_MEMBER_PASSWORD_DONE = 'UPDATE_MEMBER_PASSWORD_DONE';
 export const UPDATE_MEMBER_PASSWORD_FAIL = 'UPDATE_MEMBER_PASSWORD_FAIL';
+export const SET_ERROR_INITIAL = 'SET_ERROR_INITIAL';
 
 // =================== Type Action Course Overview ==========================
 export const GET_INFO_VIDEOS ='GET_INFO_VIDEOS';
@@ -195,4 +196,10 @@ export const REQUEST_DELETE_ADMIN_COURSE_ITEM = 'REQUEST_DELETE_ADMIN_COURSE_ITE
 // =================== Type Action  Category ==================
 export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 export const SET_CATEGORY = 'SET_CATEGORY';
+//===================================================================
+
+// =================== Type Action Related Course ==================
+export const FETCH_RELATED_COURSE = 'FETCH_RELATED_COURSE';
+export const SET_RELATED_COURSE = 'SET_RELATED_COURSE';
+export const ERROR_RELATED_COURSE = 'ERROR_RELATED_COURSE';
 //===================================================================

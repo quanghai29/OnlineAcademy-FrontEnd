@@ -29,6 +29,7 @@ import selectedVideo from './seletedVideo';
 import studentCourseRegister from './studentCourseRegister';
 import studentCourseWatchlist from './studentCourseWatchlist';
 import category from './category';
+import relatedCourse from './relatedCourse';
 import adminCourseReducer from './admin_course';
 import forgotPasswordReducer from './forgotPassword';
 
@@ -63,6 +64,7 @@ export default combineReducers({
   studentCourseRegister,
   studentCourseWatchlist,
   category,
+  relatedCourse,
   adminCourseReducer,
   forgotPasswordReducer
 });

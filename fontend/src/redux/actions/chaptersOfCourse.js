@@ -22,7 +22,7 @@ export const actionTypes = {
     UPDATE_TITLE_VIDEO_FAIL: 'UPDATE_TITLE_VIDEO_FAIL',
     DELETE_VIDEO: 'DELETE_VIDEO',
     DELETE_VIDEO_DONE: 'DELETE_VIDEO_DONE',
-    DELETE_VIDEO_FAIL: 'DELETE_VIDEO_FAIL'
+    DELETE_VIDEO_FAIL: 'DELETE_VIDEO_FAIL',
 }
 
 export const requestFetchChaptersOfCourse = (course_id) => ({
