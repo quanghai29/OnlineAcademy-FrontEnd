@@ -1,5 +1,7 @@
 import AdminCategoryContainer from "../../components/AdminCategory/AdminCategoryContainer";
 import Layout from "../../layout/Layout";
+import WithAuthenticate from "../../components/HOCs/withAuthenticate";
+
 const AdminCategory = ()=>{
   return(
     <Layout>
@@ -8,4 +10,4 @@ const AdminCategory = ()=>{
   )
 }
 
-export default AdminCategory;
+export default WithAuthenticate(AdminCategory, [1]);

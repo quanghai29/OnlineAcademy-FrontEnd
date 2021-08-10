@@ -1,5 +1,6 @@
 import Layout from "../../layout/Layout";
 import AdminCourseContainer from "../../components/AdminCourse/AdminCourseContainer";
+import WithAuthenticate from "../../components/HOCs/withAuthenticate";
 
 const AdminCourse = () => {
   return (
@@ -9,4 +10,4 @@ const AdminCourse = () => {
   )
 }
 
-export default AdminCourse;
+export default WithAuthenticate(AdminCourse, [1]);
