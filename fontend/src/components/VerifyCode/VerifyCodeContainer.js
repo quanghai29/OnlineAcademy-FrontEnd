@@ -32,6 +32,7 @@ export default function VerifyCodeContainer() {
         allowOutsideClick: false
       }).then((result) => {
         if (result.isConfirmed) {
+          localStorage.removeItem('otpToken');
           dispatch({ type: REQUEST_RESET_VERIFY_CODE_FORM });
           history.push('/login');
         }
