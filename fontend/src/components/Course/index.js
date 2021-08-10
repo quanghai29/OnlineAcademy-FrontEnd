@@ -3,22 +3,22 @@ import currency from 'currency.js';
 import StarRatings from 'react-star-ratings';
 import classes from './Course.module.scss';
 
-const Course = ({ title, lecturer, rating, totalStudent, price}) => (
+const Course = ({ title, lecturer, rating, total_student, price, img_source}) => (
     <article className={classes.card}>
-      <img src="assets/images/course/course1.png" alt={`Course ${title}`} />
+      <img src={img_source ? `http://localhost:3001/common/media/image/${img_source}` : 'assets/images/course/course1.png'} alt={`Course ${title}`} />
       <div className={classes.content}>
         <p className={classes.title}>{title}</p>
         <p className={classes.lecturer_name}>{lecturer}</p>
         <div className={classes.description}>
           <div className={classes.rating}>
-            <p>{rating}</p>
+            <p>{rating ? rating : '0.0'}</p>
             <StarRatings rating={+rating}
                     starRatedColor="#EC0101"
                     name='rating' starDimension="20px" starSpacing="0"/>
           </div>
           <div className={classes.fence}></div>
           <div className={classes.students}>
-          <p>{totalStudent}</p>
+          <p>{total_student}</p>
           <img src="assets/images/course/student.png" alt="student" />
           </div>
         </div>

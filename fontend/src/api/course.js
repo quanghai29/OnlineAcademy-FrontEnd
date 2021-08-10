@@ -35,8 +35,9 @@ export const uploadData = {
 export const deleteCourses = {
   deleteCourseById: async (id) => {
     try {
-      const { data } = await appAPI.delete(`/lecturer/course/${id}`);
-      return data;
+      const response = await appAPI.delete(`/lecturer/course/${id}`);
+      console.log(response);
+      return id;
     } catch (error) {
       throw new Error(error.message);
     }
