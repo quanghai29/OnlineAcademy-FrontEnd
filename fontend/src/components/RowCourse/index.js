@@ -30,7 +30,7 @@ export default function RowCourse(props) {
             <span className={styles['amount-rating']}> {props.data.avg_vote}</span>
             <StarRatings rating={props.data.avg_vote}
               starRatedColor="#EC0101"
-              name='rating' starDimension="15px" starSpacing="0"/>
+              name='rating' starDimension="15px" starSpacing="0" />
             <div className={styles['vertical-line']}></div>
             <NumberFormat value={props.data.subscriber} displayType={'text'}
               thousandSeparator={true} thousandsGroupStyle='thousand'
@@ -38,7 +38,10 @@ export default function RowCourse(props) {
             <span className={`material-icons ${styles['school-icon']}`}>school</span>
           </div>
           <div>
-            <button className={styles['btn']}>Best seller</button>
+            {
+              props.data.isBestseller && <div className={styles['best-seller']}>
+                Best seller</div>
+            }
           </div>
         </div>
       </div>

@@ -14,12 +14,14 @@ import {
   requestCreateLecturerItem
 } from "../../redux/actions/admin_lecturer"
 import Swal from 'sweetalert2';
+import { useHistory } from "react-router-dom";
 
 const AdminLecturerContainer = () => {
   const lecturerState = useSelector(state => state.adminLecturerReducer);
   const { lecturers, indexOfDeletedItem, isShowFormModal, form } = lecturerState;
   const dispatch = useDispatch();
   const perPage = 5;
+  const history = useHistory();
 
   const headers = [
     "STT",
@@ -101,8 +103,12 @@ const AdminLecturerContainer = () => {
   }
 
   function handleOpenLecturerItem(index) {
-    //lecturer_id = lecturers[index + offset].id
-    console.log('open at', offset + index);
+    history.push({
+      pathname: '/update-profile',
+      state:{
+        course_id: lecturers[index + offset].id
+      }
+    })
   }
 
   function handleClickSelectedPage(data) {
@@ -192,7 +198,7 @@ const AdminLecturerContainer = () => {
                     <span className={styles['message--warning']}>
                       {form.passwordWarning}</span>
                   }
-                  <div style={{position:"relative"}}>
+                  <div style={{ position: "relative" }}>
                     <input type={isVisibility ? "text" : "password"} placeholder="Mật khẩu"
                       value={form.password} onChange={handleOnchangePassword}
                       className={form.passwordWarning ? styles['border--warning'] : ''}

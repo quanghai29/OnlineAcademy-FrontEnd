@@ -10,7 +10,6 @@ import {
   VALIDATE_LOG_IN_PASSWORD,
   SUBMIT_LOG_IN_FORM,
   REQUEST_ACTIVE_ACCOUNT,
-  RESET_LOGIN_STATE
 } from "../constants/actionTypes"
 import {
   submitLoginForm,
@@ -44,11 +43,7 @@ function* requestSetEntireLoginForm(action) {
     //call Api submit form
     const resData = yield call(submitLoginForm, validateResult.newFormState);
     yield put(loginActions.setLoginResponse(resData));
-    if (resData.isAuth) {
-      yield put({
-        type: RESET_LOGIN_STATE
-      })
-    }
+    yield put(loginActions.resetLoginForm());
   } else {
     yield put(loginActions.setEntireLoginForm(validateResult.newFormState));
   }

@@ -32,6 +32,12 @@ export default function SearchCourseResultContainer(props) {
     setOffset(offset);
   };
 
+  useEffect(()=>{
+    setSelectedPage(0);
+    setOffset(0);
+
+  }, [props.text_search])
+
   useEffect(() => {
     let elmnt = document.getElementById("search_result");
     if (elmnt)

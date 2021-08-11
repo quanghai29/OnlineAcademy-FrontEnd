@@ -81,7 +81,7 @@
       }
     }
 
-    .btn{
+    .best-seller{
       border: none;
       outline: none;
       color: #FFFFFF;
@@ -90,11 +90,8 @@
       padding: 5px 10px;
       border-radius: 10px;
       font-size: 12px;
-      &:hover{
-        cursor: pointer;
-        background-image:none;
-        background-color:#FFC000 ;
-      }
+      width: 6vw;
+      text-align: center;
     }
   }
 }

@@ -25,6 +25,7 @@ import StudentCourseRegister from './studentCourseRegister';
 import StudentCourseWatchlist from './studentCourseWatchlist';
 import RelatedCourseSaga from './relatedCourse';
 import adminCourseSaga from './admin_course';
+import forgotPasswordSaga from './forgotPassword';
 
 export default function* rootSaga() {
     yield all([
@@ -55,5 +56,6 @@ export default function* rootSaga() {
         StudentCourseWatchlist(),
         RelatedCourseSaga(),
         adminCourseSaga(),
+        forgotPasswordSaga(),
     ])
 }

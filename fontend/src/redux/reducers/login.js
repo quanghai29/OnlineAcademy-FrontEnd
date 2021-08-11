@@ -5,7 +5,6 @@ import {
   SET_ENTIRE_LOG_IN_FORM_STATE,
   SET_LOG_IN_RESPONSE, 
   RESET_RESPONSE_DATA,
-  RESET_LOGIN_STATE,
 } from "../constants/actionTypes"
 
 const initialState = {
@@ -67,10 +66,6 @@ const loginReducer = (state = initialState, action) => {
       newState.responseData.shouldConfirmEmail=false;
       newState.responseData.email=newState.responseData.username = '';
 
-      return newState;
-    }
-    case RESET_LOGIN_STATE:{
-      let newState = {...initialState};
       return newState;
     }
     default: {

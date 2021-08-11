@@ -51,7 +51,8 @@ export default function LoginContainer() {
 
   useEffect(()=>{
     if(loginState.responseData.isAuth){
-      history.push('/')
+      
+      history.push('/');
     }
   }, [loginState.responseData.isAuth, history]);
 
@@ -83,7 +84,7 @@ export default function LoginContainer() {
         <div className="container-form">
           <form>
             <HeaderForm class="form-header"
-              spanValue="Log in to your account to continue" />
+              spanValue="Đăng nhập vào tài khoản của bạn để tiếp tục" />
 
             {
               inputValueData.map((item, index) => {
@@ -99,14 +100,14 @@ export default function LoginContainer() {
               })
             }
             <div className="small-text">
-              <Link to='/forgot-password'>Forgot password?</Link>
+              <Link to='/forgot-password'>Quên mật khẩu?</Link>
             </div>
-            <ActionButton style={{ marginTop: "50px" }} action="Log in"
+            <ActionButton style={{ marginTop: "50px" }} action="Đăng nhập"
               onClickActionButton={submitLoginForm}
             />
             <div className="small-text" style={{ marginTop: "10px" }}>
-              <span>Don't have an account?</span>
-              <Link to='/signup'> Sign Up</Link>
+              <span>Bạn chưa có tài khoản?</span>
+              <Link to='/signup'> Đăng kí</Link>
             </div>
           </form>
         </div>
