@@ -1,11 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import * as actionTypes from '../../../redux/constants/actionTypes'
 import { updateUserPassword, setErrorInitial } from '../../../redux/actions/userProfile';
 import Swal from 'sweetalert2';
 
 const ChangePasswordForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -37,6 +40,10 @@ const ChangePasswordForm = () => {
             confirmButtonText: 'OK',
           }).then(() => {
             e.target.reset();
+            dispatch({
+              type: actionTypes.FETCH_LOGOUT
+            });
+            history.push("/login");
           });
         }
       }
