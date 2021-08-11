@@ -25,11 +25,19 @@ const CourseOverview = () => {
     }
   },[dispatch,stateLocation]);
 
+  useEffect(function (){
+    window.scrollTo(0, 0); 
+  })
+
   return (
     <Layout>
       <OverviewInfo {...overviewData}/>
       <CourseDetail {...{chapters, overviewData, course_id: overviewData.id }}/>
-      <RelatedCourse {...{category_id: overviewData.category_id}}/>
+      <RelatedCourse {...{
+        category_id: overviewData.category_id,
+        category_name: overviewData.category_name,
+        course_id: overviewData.id
+      }}/>
     </Layout>
   );
 };

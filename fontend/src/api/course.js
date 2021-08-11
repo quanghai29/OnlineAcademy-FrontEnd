@@ -114,6 +114,14 @@ export const studentCourse = {
     const respone = await appAPI.get(`/student/watchlist`,{ validateStatus: false })
     return respone;
   },
+  updateStateVideoLearning: async(payload)=>{
+    const respone = await appAPI.post(`/student/course/video/update-state`, payload, { validateStatus: false })
+    return respone;
+  },
+  getStateVideoLearning: async(video_id)=>{
+    const respone = await appAPI.get(`/student/course/video/update-state/${video_id}`, { validateStatus: false })
+    return respone;
+  },
 }
 
 export const courseOverview = {

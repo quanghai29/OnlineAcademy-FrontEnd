@@ -31,12 +31,6 @@ export default function OverviewInfo(props) {
   }, [dispatch, props.isFavorite, props.isRegister, props.id])
 
   const updateListFavorite = () => {
-    //kiểm tra đăng nhập chưa
-    const accessToken = localStorage.getItem('otpToken');
-    if (!accessToken) {
-      alert('Vui lòng đăng nhập');
-      return;
-    }
     dispatch({
       type: actionType.UPDATE_FAVORITE_COURSE,
       payload: {
@@ -62,10 +56,11 @@ export default function OverviewInfo(props) {
 
         <div className="col m6 offset-m1" style={{ marginRight: "25px" }}>
           <div className="row">
-            <Link className={classes.backcouse} to="/">
+            {/* eslint-disable-next-line */}
+            <a className={classes.backcouse}>
               <i className="material-icons left">arrow_back</i>
               {props.category_name}
-            </Link>
+            </a>
           </div>
           <div className="row">
             <h4 style={{ fontWeight: 700 }}>{props.title}</h4>
@@ -118,7 +113,6 @@ export default function OverviewInfo(props) {
               }
               Yêu thích
             </a>
-
           </div>
         </div>
 

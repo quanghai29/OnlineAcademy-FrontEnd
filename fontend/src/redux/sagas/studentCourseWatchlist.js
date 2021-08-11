@@ -38,7 +38,7 @@ function* fetchStudentCourseWatchlist() {
 
 
 function* watchFetchStudentCourseWatchlist() {
-  yield takeEvery(actionType.FETCH_STUDENT_COURSE_REGISTER, fetchStudentCourseWatchlist);
+  yield takeEvery(actionType.FETCH_STUDENT_COURSE_WATCHLIST, fetchStudentCourseWatchlist);
 }
 
 export default function* StudentCourseWatchlist() {

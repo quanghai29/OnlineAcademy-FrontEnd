@@ -30,10 +30,20 @@ const RelatedCourse = (props) => {
     <div className="row">
       <div className="row">
         <div className="col m10 offset-m1">
-          <Link to="/" class="waves-light btn">
-            <i class="material-icons right">arrow_forward</i>
+          
+          <Link className="waves-light btn" 
+            to={{
+              pathname: "/course-of-category",
+              state: {
+                category_id: props.category_id,
+                category_name: props.category_name
+              },
+            }}
+          >
+            <i className="material-icons right">arrow_forward</i>
             Khám phá thêm
           </Link>
+
           {
             isLoading
               ?
@@ -56,11 +66,13 @@ const RelatedCourse = (props) => {
             &&
             relatedCourse.data.map(item => {
               return (
-                <div className="card">
-                  <div className="card-content">
-                    <RowCourse data={{ ...item, author: item.fullname, avg_vote: +item.avg_vote }} key={item.id} />
+                item.id === props.course_id
+                  ? <div></div>
+                  : <div className="card" key={item.id}>
+                    <div className="card-content">
+                      <RowCourse data={{ ...item, author: item.fullname, avg_vote: +item.avg_vote }} />
+                    </div>
                   </div>
-                </div>
               )
             })
           }
@@ -73,7 +85,7 @@ const RelatedCourse = (props) => {
             relatedCourse.data.length === 0
             &&
             <div >
-              <h5 className="center-align blue-text text-darken-2" style={{fontWeight:"bold !important"}}>Chưa có dữ liệu</h5>
+              <h5 className="center-align blue-text text-darken-2" style={{ fontWeight: "bold !important" }}>Chưa có dữ liệu</h5>
             </div>
           }
 
@@ -83,9 +95,9 @@ const RelatedCourse = (props) => {
             relatedCourse.hasError
             &&
             <div >
-              <h5 className="center-align blue-text text-darken-2" style={{fontWeight:"bold !important"}}>Đã có lỗi xảy ra</h5>
+              <h5 className="center-align blue-text text-darken-2" style={{ fontWeight: "bold !important" }}>Đã có lỗi xảy ra</h5>
             </div>
-          } 
+          }
         </div>
       </div>
     </div>

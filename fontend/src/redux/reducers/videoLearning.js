@@ -1,17 +1,19 @@
 import * as actionType from '../constants/actionTypes';
 
-const initialState ={
-  data: ''
+const initialState = {
+  data:{},
+  isChangeSource: false,
 }
 
 const videoLearning = (state=initialState, action)=>{
   switch(action.type){
     case actionType.SET_VIDEO_LEARNING:
     {
-      let newState = {...state};
-      newState.data = action.payload;
-
-      return newState;
+      return {
+        ...state,
+        data : action.payload,
+        isChangeSource : true,
+      };
     }
     default:{
       return state

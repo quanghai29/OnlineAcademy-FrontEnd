@@ -44,16 +44,32 @@ function* watchFetchCourseLearning() {
 
 function* fetchVideoLearning(action) {
   try {
-    yield put({
-      type: actionType.SET_VIDEO_LEARNING,
-      payload: action.payload.video_source
-    });
+    //call api here
+    const response = yield call(studentCourse.getStateVideoLearning, action.payload.video_id)
+    switch (response.status) {
+      case 200:
+        const data = response.data;
+        yield put({
+          type: actionType.SET_VIDEO_LEARNING,
+          payload: {
+            ...data,
+            video_source: action.payload.video_source,
+          }
+        });
+        break;
+      case 400 || 401:
+        console.log(response.data.message);
+        break;
+      default:
+        console.log('Server has something error')
+        break;
+    }
   } catch (error) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Something went wrong',
-    })
-    console.log(error)
+    // Swal.fire({
+    //   icon: 'error',
+    //   title: 'Something went wrong',
+    // })
+    console.log(error);
   }
 }
 
@@ -62,9 +78,41 @@ function* watchFetchVideoLearning() {
   yield takeEvery(actionType.FETCH_VIDEO_LEARNING, fetchVideoLearning);
 }
 
+
+function* fetchUpdateStateStudentVideoLearning(action) {
+  try {
+    console.log(action.payload);
+    yield call(studentCourse.updateStateVideoLearning, action.payload);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+function* watchFetchUpdateStateStudentVideoLearning() {
+  yield takeEvery(actionType.FETCH_UPDATE_STATE_STUDENT_VIDEO, fetchUpdateStateStudentVideoLearning);
+}
+
+
+// function* fetchStateStudentVideoLearning(action) {
+//   try {
+//     const response = yield call(studentCourse.getStateVideoLearning, action.payload.video_id);
+//     console.log(response);
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+
+// function* watchUpdateStateStudentVideoLearning() {
+//   yield takeEvery(actionType.FETCH_UPDATE_STATE_STUDENT_VIDEO, fetchStateStudentVideoLearning);
+// }
+
 export default function* CourseLearningSaga() {
   yield all([
     watchFetchCourseLearning(),
     watchFetchVideoLearning(),
+    watchFetchUpdateStateStudentVideoLearning(),
+   // watchUpdateStateStudentVideoLearning(),
   ])
 }
