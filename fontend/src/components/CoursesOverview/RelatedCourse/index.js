@@ -30,8 +30,8 @@ const RelatedCourse = (props) => {
     <div className="row">
       <div className="row">
         <div className="col m10 offset-m1">
-          <Link to="/" class="waves-light btn">
-            <i class="material-icons right">arrow_forward</i>
+          <Link to="/" className="waves-light btn">
+            <i className="material-icons right">arrow_forward</i>
             Khám phá thêm
           </Link>
           {
@@ -56,9 +56,9 @@ const RelatedCourse = (props) => {
             &&
             relatedCourse.data.map(item => {
               return (
-                <div className="card">
+                <div className="card" key={item.id}>
                   <div className="card-content">
-                    <RowCourse data={{ ...item, author: item.fullname, avg_vote: +item.avg_vote }} key={item.id} />
+                    <RowCourse data={{ ...item, author: item.fullname, avg_vote: +item.avg_vote }}/>
                   </div>
                 </div>
               )

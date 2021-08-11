@@ -34,7 +34,8 @@ const Learning = () => {
       dispatch({
         type: actionType.FETCH_VIDEO_LEARNING,
         payload: {
-          video_source: courseInfo.video_source_learning
+          video_source: courseInfo.video_source_learning,
+          video_id: courseInfo.video_id_learning,
         }
       })
     }

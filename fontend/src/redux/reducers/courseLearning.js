@@ -1,7 +1,8 @@
 import * as actionType from '../constants/actionTypes';
 
 const initialState = {
-  data: {}
+  data: {},
+  
 };
 
 const courseLearning = (state = initialState, action) => {

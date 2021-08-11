@@ -196,3 +196,10 @@ export const FETCH_RELATED_COURSE = 'FETCH_RELATED_COURSE';
 export const SET_RELATED_COURSE = 'SET_RELATED_COURSE';
 export const ERROR_RELATED_COURSE = 'ERROR_RELATED_COURSE';
 //===================================================================
+
+// =================== Type Action Student video ==================
+export const FETCH_UPDATE_STATE_STUDENT_VIDEO = 'FETCH_UPDATE_STATE_STUDENT_VIDEO';
+export const SET_UPDATE_STATE_STUDENT_VIDEO = 'SET_UPDATE_STATE_STUDENT_VIDEO';
+export const FETCH_STATE_STUDENT_VIDEO = 'FETCH_STATE_STUDENT_VIDEO';
+export const SET_STATE_STUDENT_VIDEO = 'SET_STATE_STUDENT_VIDEO';
+//===================================================================
