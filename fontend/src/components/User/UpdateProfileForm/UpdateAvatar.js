@@ -58,7 +58,7 @@ const UpdateAvatar = () => {
         <div className="row">
           <div className="col s6">
             <label htmlFor="course-img-file">
-              <img src={srcFile} alt="course" style={{ width: '20rem' }} />
+              <img src={srcFile} onError={e => {e.target.onerror = null; e.target.src = 'assets/images/lecturer/default_image.png'}} alt="course" style={{ width: '20rem' }} />
             </label>
           </div>
           <div className="col s6">
