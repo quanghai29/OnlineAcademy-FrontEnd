@@ -36,6 +36,9 @@ function* addFavoriteCourse(course_id){
             isFavorite: true
           }
         })
+        yield put({
+          type: actionType.FETCH_STUDENT_COURSE_WATCHLIST
+        })
         break;
       case 400 || 401:
         Swal.fire({
@@ -76,6 +79,9 @@ function* deleteFavoriteCourse(course_id){
             course_id: course_id,
             isFavorite: false
           }
+        })
+        yield put({
+          type: actionType.FETCH_STUDENT_COURSE_WATCHLIST
         })
         break;
       case 400 || 401:

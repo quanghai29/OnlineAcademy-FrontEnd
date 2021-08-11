@@ -23,6 +23,10 @@ const CourseCategory = () => {
     }
   }, [dispatch, stateLocation])
 
+  useEffect(function (){
+    window.scrollTo(0, 0); 
+  })
+
   return (
     <Layout>
       <div className="row">
@@ -30,7 +34,7 @@ const CourseCategory = () => {
           <h5 className={classes.cateHeader}>
             {stateLocation && stateLocation.category_name}
             &nbsp;:&nbsp;
-            {stateLocation && stateLocation.amount_course} khóa học
+            {stateLocation && courseCategory.length} khóa học
           </h5>
           <div className="progress">
             <div className="determinate" style={{width: "100%"}} />

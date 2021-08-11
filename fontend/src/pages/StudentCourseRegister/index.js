@@ -36,9 +36,9 @@ const CourseRegister = () => {
             &&
             stCoureRegister.map(item => {
               return (
-                <div className="card">
+                <div className="card" key={item.id}>
                   <div className="card-content">
-                    <RowCourse data={{ ...item, author: item.fullname }} key={item.id} />
+                    <RowCourse data={{ ...item, author: item.fullname, avg_vote:+item.avg_vote }}  />
                   </div>
                 </div>
               )
@@ -49,7 +49,7 @@ const CourseRegister = () => {
             && 
             stCoureRegister.length === 0
             &&
-            <div className={classes.noneData}></div>
+            <div className={classes.noneData}>Danh sách rỗng</div>
           }
         </div>
       </div>

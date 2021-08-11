@@ -9,13 +9,21 @@ const CourseRegister = () => {
   const stCoureWatchlist = useSelector(state => state.studentCourseWatchlist.data);
   const dispatch = useDispatch();
 
-
   useEffect(function () {
     dispatch({
-      type: actionType.FETCH_STUDENT_COURSE_REGISTER
+      type: actionType.FETCH_STUDENT_COURSE_WATCHLIST
     })
   }, [dispatch])
 
+  const updateListFavorite = (course_id) => {
+    dispatch({
+      type: actionType.UPDATE_FAVORITE_COURSE,
+      payload: {
+        course_id: course_id,
+        isFavorite: false
+      }
+    })
+  }
   return (
     <Layout>
       <div className="row">
@@ -36,9 +44,13 @@ const CourseRegister = () => {
             &&
             stCoureWatchlist.map(item => {
               return (
-                <div className="card">
-                  <div className="card-content">
-                    <RowCourse data={{ ...item, author: item.fullname }} key={item.id} />
+                <div className="card" key={item.id}>
+                  <div className={`card-content ${classes.cardContent}`}>
+                    <span class="card-title right">
+                      {/* eslint-disable-next-line */}
+                      <a class="waves-teal btn-flat" onClick={ () => updateListFavorite(item.id)}><i class="large material-icons">close</i></a>
+                    </span>
+                    <RowCourse data={{ ...item, author: item.fullname, avg_vote:+item.avg_vote }} />
                   </div>
                 </div>
               )
@@ -49,7 +61,9 @@ const CourseRegister = () => {
             && 
             stCoureWatchlist.length === 0
             &&
-            <div className={classes.noneData}></div>
+            <div className={classes.noneData}>
+              <h6 className="center">Danh sách rỗng...</h6>
+            </div>
           }
         </div>
       </div>
