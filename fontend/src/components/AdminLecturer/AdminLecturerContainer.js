@@ -104,9 +104,9 @@ const AdminLecturerContainer = () => {
 
   function handleOpenLecturerItem(index) {
     history.push({
-      pathname: '/update-profile',
+      pathname: '/profile',
       state:{
-        course_id: lecturers[index + offset].id
+        user_id: lecturers[index + offset].id
       }
     })
   }
