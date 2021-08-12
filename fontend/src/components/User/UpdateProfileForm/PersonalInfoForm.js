@@ -20,7 +20,6 @@ const PersonalInfoForm = () => {
     if (data) {
       setValue('fullname', data.fullname);
       setValue('headline', data.headline);
-      // setValue('description', data.description);
       setDetailDesc(data.description);
     }
     M.updateTextFields();
@@ -114,20 +113,6 @@ const PersonalInfoForm = () => {
             </label>
           </div>
         </div>
-        {/* <div className="row">
-          <div className="input-field col s12">
-            <textarea
-              id="description"
-              className="materialize-textarea"
-              {...register('description')}
-              onChange={onChangeInputHandler}
-              disabled={isLoading}
-            ></textarea>
-            <label className="active" htmlFor="description">
-              Giới thiệu bản thân
-            </label>
-          </div>
-        </div> */}
         <div className="row">
           <label style={{ marginLeft: 10 }}>Giới thiệu bản thân</label>
           <div className="input-field col s12" onClick={onChangeInputHandler}>
