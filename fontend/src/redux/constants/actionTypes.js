@@ -56,6 +56,7 @@ export const SET_FORGOT_PASSWORD_RESPONSE = 'SET_FORGOT_PASSWORD_RESPONSE'
 // ========================CONSTANTS FOR SEARCH COURSE ACTIONS ===============================
 export const FETCH_SEARCH_COURSE = 'FETCH_SEARCH_COURSE';
 export const SET_SEARCH_COURSE_RESULT='SET_SEARCH_COURSE_RESULT';
+export const SET_IS_LOADING_SEARCH_COURSE = 'SET_IS_LOADING_SEARCH_COURSE'
 
 // ===========================================================================================
 // hotCourses action

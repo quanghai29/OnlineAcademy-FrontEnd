@@ -1,4 +1,5 @@
 import styles from "./CourseTable.module.scss"
+import {DOMAIN_API} from "../../../redux/constants/common"
 
 const CourseTable = (props) => {
 
@@ -32,11 +33,11 @@ const CourseTable = (props) => {
                   <td>
                     <div className={styles['course-column']}>
                       <div className={styles['course-column__img']}>
-                        <img src={`http://localhost:3001/common/media/image/${item.img_source}`} alt={item.img_title} />
+                        <img src={`${DOMAIN_API}/common/media/image/${item.img_source}`} alt={item.img_title} />
                       </div>
                       <div className={styles['course-column__text']}>
                         <span className={styles['title']}>{item.title}</span>
-                        <span>{item.short_description}</span>
+                        <span className={styles['short-description']}>{item.short_description}</span>
                       </div>
                     </div>
                   </td>

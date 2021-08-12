@@ -20,8 +20,8 @@ export default function VerifyCodeContainer() {
 
   const bottomImg = 'assets/images/account/bottom_img.png';
   const topImg = 'assets/images/account/top_img.png';
-  const spanValue = `Please check your email and then 
-  enter OTP-code to active your account!`;
+  const spanValue = `Vui lòng kiểm tra email của bạn,
+   và sau đó nhập mã otp đễ kích hoạt tài khoản!`;
 
   useEffect(() => {
     if (verifyCodeState.response.code === 200) {
@@ -64,8 +64,8 @@ export default function VerifyCodeContainer() {
               reducer='verifyCodeReducer'
             />
             <div className="small-text">
-              <span>Don’t have an account?</span>
-              <Link to='/signup'> Sign Up</Link>
+              <span>Bạn chưa có tài khoản?</span>
+              <Link to='/signup'> Đăng kí</Link>
             </div>
             <ActionButton style={{ marginTop: "50px" }} action="Send"
               onClickActionButton={submitVerifyCodeForm} />
