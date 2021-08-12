@@ -118,10 +118,10 @@ export default function OverviewInfo(props) {
 
         <div className="col m4">
           <div className="row">
-            <div className={`card ${classes.courseplay}`}>
+            <div className="card">
 
               <div className={`card-image ${classes.playImage}`}>
-                <img src={`${DOMAIN_API}/common/media/load_video/${props.course_img_source}`} 
+                <img src={`${DOMAIN_API}/common/media/image/${props.course_img_source}`} 
                     alt={props.course_img_title}
                     onError={(e)=>{e.target.onerror = null; e.target.src="/assets/images/default.jpeg"}}
                 />

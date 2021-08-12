@@ -4,9 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import Swal from "sweetalert2"
 import { updateUserProfile } from '../../../redux/actions/userProfile';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const PersonalInfoForm = () => {
   const [disableSubmit, setDisableSubmit] = useState(true);
+  const [detailDesc, setDetailDesc] = useState('');
+
   const { data, isLoading, error } = useSelector((state) => state.userProfile);
 
   const dispatch = useDispatch();
@@ -16,7 +20,7 @@ const PersonalInfoForm = () => {
     if (data) {
       setValue('fullname', data.fullname);
       setValue('headline', data.headline);
-      setValue('description', data.description);
+      setDetailDesc(data.description);
     }
     M.updateTextFields();
   }, [data, setValue]);
@@ -26,6 +30,7 @@ const PersonalInfoForm = () => {
   };
 
   const onSubmitHandler = async (formData) => {
+    formData.description = detailDesc;
     dispatch(updateUserProfile(formData, +data.account_id));
     setDisableSubmit(true);
     if(!isLoading) {
@@ -45,6 +50,35 @@ const PersonalInfoForm = () => {
       }
     }
   };
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
+      ['link', 'image'],
+      ['clean'],
+    ],
+  };
+
+  const formats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+  ];
 
   return (
     <div className="row">
@@ -80,17 +114,16 @@ const PersonalInfoForm = () => {
           </div>
         </div>
         <div className="row">
-          <div className="input-field col s12">
-            <textarea
-              id="description"
-              className="materialize-textarea"
-              {...register('description')}
-              onChange={onChangeInputHandler}
-              disabled={isLoading}
-            ></textarea>
-            <label className="active" htmlFor="description">
-              Giới thiệu bản thân
-            </label>
+          <label style={{ marginLeft: 10 }}>Giới thiệu bản thân</label>
+          <div className="input-field col s12" onClick={onChangeInputHandler}>
+            <ReactQuill
+              theme="snow"
+              value={detailDesc || ''}
+              onChange={setDetailDesc}
+              modules={modules}
+              formats={formats}
+              placeholder="Giới thiệu bản thân"
+            />
           </div>
         </div>
         <div className="row">
