@@ -2,8 +2,8 @@ import React from "react";
 import classes from './Avartar.module.scss';
 import { DOMAIN_API } from "../../../redux/constants/common";
 
-//imgSrc = path image/ source base code
-//nickname = fullname user
+// imgSrc = path image/ source base code
+// nickname = fullname user
 export default function Overview(props) {
   return (
     <div className="container center-align">
