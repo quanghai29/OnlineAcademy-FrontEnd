@@ -50,7 +50,14 @@ const CourseRegister = () => {
                       {/* eslint-disable-next-line */}
                       <a class="waves-teal btn-flat" onClick={ () => updateListFavorite(item.id)}><i class="large material-icons">close</i></a>
                     </span>
-                    <RowCourse data={{ ...item, author: item.fullname, avg_vote:+item.avg_vote }} />
+                    <RowCourse 
+                      data={{ 
+                        ...item, 
+                        author: item.fullname, 
+                        avg_vote:+item.avg_vote,
+                        image: {img_source: item.course_img_source}
+                      }} 
+                    />
                   </div>
                 </div>
               )

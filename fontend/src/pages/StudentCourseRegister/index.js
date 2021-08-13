@@ -38,7 +38,15 @@ const CourseRegister = () => {
               return (
                 <div className="card" key={item.id}>
                   <div className="card-content">
-                    <RowCourse data={{ ...item, author: item.fullname, avg_vote:+item.avg_vote }}  />
+                    <RowCourse 
+                      data={{ 
+                        ...item, 
+                        author: item.fullname, 
+                        avg_vote:+item.avg_vote,
+                        image: {img_source: item.course_img_source}
+                      }} 
+                      key={item.id} 
+                    />
                   </div>
                 </div>
               )
