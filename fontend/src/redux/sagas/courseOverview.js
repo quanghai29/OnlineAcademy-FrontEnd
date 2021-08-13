@@ -26,11 +26,9 @@ function* fetchCourseOverview(action) {
       }
     })
   } catch (err) {
-    console.log(err);
-    Swal.fire({
-      icon: 'error',
-      title: 'Something went wrong',
-    })
+    yield put({
+      type: actionType.ERROR_COURSE_OVERVIEW
+    });
   }
 }
 
