@@ -80,3 +80,15 @@ $linkColor: #FFC000;
   box-shadow: none !important;
 }
 
+.swiper-button-next, .swiper-button-prev {
+  color: #FF8A00 !important;
+}
+
+// .swiper-button-next {
+//   position: absolute !important;
+//   right: 40px;
+// }
+
+.swiper-pagination-bullet-active {
+  background: #FF8A00 !important;
+}

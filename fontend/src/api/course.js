@@ -69,6 +69,14 @@ export const getCourses = {
       throw new Error(err.message);
     }
   },
+  getHotCourses: async () => {
+    try {
+      const { data } = await appAPI.get('/course/outstanding');
+      return data;
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
 };
 
 export const getSearchCourseResult = async (text) => {
