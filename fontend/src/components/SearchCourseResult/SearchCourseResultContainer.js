@@ -1,6 +1,6 @@
 import RowCourse from "../RowCourse"
 import styles from './SearchCourse.module.scss'
-import M from 'materialize-css/dist/js/materialize.min.js';
+// import M from 'materialize-css/dist/js/materialize.min.js';
 import { useEffect, useState } from "react";
 import * as _ from "lodash";
 import PreLoading from "../PreLoading/index"
@@ -10,19 +10,19 @@ import PaginationContainer from "../PaginationContainer/PaginationContainer";
 // courses: []
 //}
 export default function SearchCourseResultContainer(props) {
-  document.addEventListener('DOMContentLoaded', function () {
-    let elems = document.querySelectorAll('select');
-    M.FormSelect.init(elems, styles['task-sort']);
-  });
+  // document.addEventListener('DOMContentLoaded', function () {
+  //   let elems = document.querySelectorAll('select');
+  //   M.FormSelect.init(elems, styles['task-sort']);
+  // });
 
 
-  let courses =  props.data;
+  let courses = props.data;
+  const { isLoading } = props;
 
   const [amountItemPerPage, setItemInPage] = useState(5);// amount of item per a page
   const [offset, setOffset] = useState(0);
   const [selectedPage, setSelectedPage] = useState(0);
   const [sortedData, setSortedData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [orderBy, setOrderBy] = useState('avg_vote');
   const [orderDir, setOrderDir] = useState('desc');
 
@@ -32,7 +32,7 @@ export default function SearchCourseResultContainer(props) {
     setOffset(offset);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setSelectedPage(0);
     setOffset(0);
 
@@ -49,15 +49,8 @@ export default function SearchCourseResultContainer(props) {
     if (courses) {
       let data = _.orderBy(courses, [orderBy], [orderDir]);
       setSortedData(data);
-      setIsLoading(false);
     }
   }, [courses, orderBy, orderDir]);
-
-  useEffect(()=>{
-    if(!courses){
-      setIsLoading(false);
-    }
-  }, [courses])
 
   const optionSort = [
     { orderBy: 'avg_vote', orderDir: 'desc' },
@@ -79,9 +72,35 @@ export default function SearchCourseResultContainer(props) {
     </div>
   } else {
     contentEle =
+      <>
+        {
+          sortedData.slice(offset, offset + amountItemPerPage).map((item, index) => {
+            return (
+              <RowCourse data={item} key={index} />
+            )
+          })
+        }
+
+        <PaginationContainer pageCount={Math.ceil(
+          courses?.length / amountItemPerPage)}
+          pageRangeDisplayed={5}
+          marginPagesDisplayed={2}
+          handleClickSelectedPage={handleClickSelectedPage}
+          selectedPage={selectedPage}
+        />
+      </>
+  }
+
+  return (
+    <>
       <div className={styles['container']} id="search_result">
         <div className={styles['result-title']}>
-          {courses?.length || 0} Kết quả tìm kiếm cho {`"${props.text_search || ''}"`}
+          {
+            !isLoading && <>
+              {courses?.length || 0} Kết quả tìm kiếm cho {`"${props.text_search || ''}"`}
+            </>
+          }
+
         </div>
         <div className={styles['task-bar']}>
           <div className={styles['task-show']}>
@@ -131,28 +150,8 @@ export default function SearchCourseResultContainer(props) {
             </select>
           </div>
         </div>
-
-        {
-          sortedData.slice(offset, offset + amountItemPerPage).map((item, index) => {
-            return (
-              <RowCourse data={item} key={index} />
-            )
-          })
-        }
-
-        <PaginationContainer pageCount={Math.ceil(
-          courses?.length / amountItemPerPage)}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={2}
-          handleClickSelectedPage={handleClickSelectedPage}
-          selectedPage={selectedPage}
-        />
+        {contentEle}
       </div>
-  }
-
-  return (
-    <>
-      {contentEle}
     </>
   )
 }

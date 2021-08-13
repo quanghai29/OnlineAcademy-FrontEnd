@@ -12,20 +12,31 @@
   position: relative;
   img.bottom-img{
    width: 100%;
-   object-position: bottom;
+  //  object-position: bottom;
+  height: 130px;
+  object-fit: cover;
+   position:absolute;
+   bottom: 0;
+   z-index: 1;
   }
   img.top-img{
     width: 20%;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .container-form{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
+    // margin-bottom: 50px;
+    height: calc(100% - 130px);
     form{
-      width: 350px;
+      width: 300px;
       max-width: 100%;
+      z-index: 2;
+      padding: 60px 0 0;
       .form-header{
         text-align: center;
         margin-bottom: 50px;

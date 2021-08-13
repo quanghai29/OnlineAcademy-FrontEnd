@@ -7,9 +7,12 @@ import {
 } from '../../../redux/actions/coursesOfLecturer';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const CommonDescription = () => {
   const [disableSubmit, setDisableSubmit] = useState(true);
+  const [detailDesc, setDetailDesc] = useState('');
 
   const { uploadingCommonDesc, uploadedCommonDescError, isUpdateCourse } =
     useSelector((state) => state.uploadCourse);
@@ -28,22 +31,22 @@ const CommonDescription = () => {
       if (data) {
         setValue('title', data.title || '');
         setValue('short_description', data.short_description || '');
-        setValue('full_description', data.full_description || '');
         setValue('category_id', data.category_id || '');
         setValue('price', data.price || '0');
         setValue('discount', data.discount || '0');
         setValue('course_status', data.course_status || '');
+        setDetailDesc(data.full_description);
       }
     }
     M.updateTextFields();
   }, [isUpdateCourse, data, setValue]);
 
   const onSubmit = async (formData) => {
-    const {userId} = JSON.parse(localStorage.decodePayload);
+    const { userId } = JSON.parse(localStorage.decodePayload);
     formData.lecturer_id = userId;
     formData.category_id = +formData.category_id;
     formData.course_status = +formData.course_status;
-    console.log(formData.course_status);
+    formData.full_description = detailDesc;
     if (isUpdateCourse) {
       dispatch(updateCommonInfoCourse(formData, data.id));
     } else {
@@ -79,6 +82,35 @@ const CommonDescription = () => {
   };
 
   const onError = (errors, e) => console.log(errors, e);
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
+      ['link', 'image'],
+      ['clean'],
+    ],
+  };
+
+  const formats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+  ];
 
   return (
     <div className="row">
@@ -116,18 +148,16 @@ const CommonDescription = () => {
           </div>
         </div>
         <div className="row">
-          <div className="input-field col s12">
-            <textarea
-              id="textarea1"
-              className="materialize-textarea"
-              {...register('full_description', { required: true })}
-              onChange={onChangeInputHandler}
-              disabled={uploadingCommonDesc}
-            ></textarea>
-            {errors.full_description && (
-              <span style={requiredStyle}>This field is required</span>
-            )}
-            <label htmlFor="textarea1">Textarea</label>
+          <label style={{ marginLeft: 10 }}>Mô tả chi tiết</label>
+          <div className="input-field col s12" onClick={onChangeInputHandler}>
+            <ReactQuill
+              theme="snow"
+              value={detailDesc || ''}
+              onChange={setDetailDesc}
+              modules={modules}
+              formats={formats}
+              placeholder="Mô tả chi tiết"
+            />
           </div>
         </div>
         <div className="row">

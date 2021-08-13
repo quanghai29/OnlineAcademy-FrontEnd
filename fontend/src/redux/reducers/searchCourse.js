@@ -1,9 +1,11 @@
 import {
-  SET_SEARCH_COURSE_RESULT
+  SET_SEARCH_COURSE_RESULT,
+  SET_IS_LOADING_SEARCH_COURSE
 } from "../constants/actionTypes"
 
 const initialState = {
   courses: null,
+  isLoading: false,
 }
 
 const searchCourseReducer = (state = initialState, action) => {
@@ -12,6 +14,14 @@ const searchCourseReducer = (state = initialState, action) => {
       let newState = {
         ...state,
         courses: action.data,
+        isLoading : false
+      }
+      return newState;
+    }
+    case SET_IS_LOADING_SEARCH_COURSE:{
+      let newState = {
+        ...state,
+        isLoading: action.data
       }
       return newState;
     }

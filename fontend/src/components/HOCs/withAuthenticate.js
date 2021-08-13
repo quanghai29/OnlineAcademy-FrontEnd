@@ -21,7 +21,7 @@ const WithAuthenticate = (WrappedComponent, roleArr) => {
       } else {
         history.push('/login');
       }
-    }, [])
+    }, [accessToken,history, role])
 
     return (
       loading ? <div>Loading...</div> : <WrappedComponent {...props} />

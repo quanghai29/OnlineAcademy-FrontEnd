@@ -18,6 +18,7 @@ import CourseCategory from './pages/CourseCategory';
 import StudentCourseRegister from './pages/StudentCourseRegister';
 import StudentCourseWatchlist from './pages/StudentCourseWatchlist';
 import AdminCourse from './pages/AdminCourse';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <Route path="/course-of-category" component={CourseCategory}/>
         <Route path="/student-course-of-register" component={StudentCourseRegister}/>
         <Route path="/student-course-of-watchlist" component={StudentCourseWatchlist}/>
+        <Route path="/profile" component={Profile}/>
       </Switch>
     </Router>
   );

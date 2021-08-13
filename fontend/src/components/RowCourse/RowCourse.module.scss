@@ -14,9 +14,10 @@
 
 .row-course__right-content{
   display: flex;
+  align-items: flex-start;
   .row-course__img{
     img{
-      width: 160px;
+      width: 250px;
       height: auto;
       object-fit: cover;
       border-radius: 15px;
@@ -33,6 +34,7 @@
     .text-info{
       display: flex;
       flex-direction: column;
+      max-width: 30vw;
       .text-info__title{
         background-image: -webkit-linear-gradient(45deg,#FF9F00, #FF8A00);
         font-weight: bold;
@@ -49,17 +51,25 @@
         color: #000000;
         font-size: 12px;
         font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -webkit-box-orient: vertical;
+        margin-bottom: 5px;
       }
       .text-info__author{
         color: #979797;
         font-size: 12px;
         font-weight: bold;
+        margin-bottom: 5px;
       }
     }
 
     .course-rating{
       display: flex;
       align-items: center;
+      margin-bottom: 5px;
       .vertical-line{
         border: 1px solid #979797;
         margin: 0px 5px;
