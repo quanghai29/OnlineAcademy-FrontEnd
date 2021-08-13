@@ -10,6 +10,7 @@ export const category = {
   getHotCategories: async () => {
     try {
       const { data } = await appAPI.get('/course/category-mostbestseller');
+      console.log(data);
       return data;
     } catch (err) {
       throw new Error(err.message);
