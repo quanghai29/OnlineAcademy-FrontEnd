@@ -14,6 +14,8 @@ import {
 import { useEffect } from "react"
 import Swal from "sweetalert2"
 import { useHistory } from "react-router-dom"
+import styles from "./Login.module.scss"
+
 
 
 export default function LoginContainer() {
@@ -44,14 +46,15 @@ export default function LoginContainer() {
     }
   }, [
     loginState.responseData.shouldConfirmEmail,
-    history, 
+    history,
     dispatch,
     loginState.responseData.email
   ])
 
-  useEffect(()=>{
-    if(loginState.responseData.isAuth){
-      history.push('/')
+  useEffect(() => {
+    if (loginState.responseData.isAuth) {
+
+      history.push('/');
     }
   }, [loginState.responseData.isAuth, history]);
 
@@ -83,7 +86,7 @@ export default function LoginContainer() {
         <div className="container-form">
           <form>
             <HeaderForm class="form-header"
-              spanValue="Log in to your account to continue" />
+              spanValue="Đăng nhập vào tài khoản của bạn để tiếp tục" />
 
             {
               inputValueData.map((item, index) => {
@@ -93,20 +96,31 @@ export default function LoginContainer() {
                     actionType={item.actionType}
                     warningMess={item.warningMess}
                     reducer="loginReducer"
-                    style={{ marginBottom: index === 0 ? '15px' : '' }}
+                    // style={{ marginBottom: index === 0 ? '15px' : '' }}
                     key={index} />
                 )
               })
             }
             <div className="small-text">
-              <Link to='/forgot-password'>Forgot password?</Link>
+              <Link to='/forgot-password'>Quên mật khẩu?</Link>
             </div>
-            <ActionButton style={{ marginTop: "50px" }} action="Log in"
+            <ActionButton style={{ marginTop: "50px" }} action="Đăng nhập"
               onClickActionButton={submitLoginForm}
             />
             <div className="small-text" style={{ marginTop: "10px" }}>
-              <span>Don't have an account?</span>
-              <Link to='/signup'> Sign Up</Link>
+              <span>Bạn chưa có tài khoản?</span>
+              <Link to='/signup'> Đăng kí</Link>
+            </div>
+            <div className={styles['login-with-other-container']}>
+              <span>Hoặc đăng nhập bằng</span>
+              <div>
+                <i class={`fab fa-google ${styles['google-icon']}`}></i>
+                <i class={`fab fa-facebook ${styles['facebook-icon']}`}></i>
+              </div>
+              {/* <button>
+                <img src={googleLogo} alt="google logo"></img>
+                Đăng nhập với Google
+              </button> */}
             </div>
           </form>
         </div>

@@ -1,5 +1,5 @@
 import classes from './style.module.scss';
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import Avartar from '../../../components/Common/Avartar';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useDispatch } from 'react-redux';
@@ -11,10 +11,12 @@ export default function LecturerNavbar(props) {
   // eslint-disable-next-line
   const instances = M.Dropdown.init(elems, {});
   const dispatch = useDispatch();
+  const history = useHistory();
   const logout = ()=>{
     dispatch({
       type: actionType.FETCH_LOGOUT
     })
+    history.push('/');
   }
 
   return (
@@ -43,8 +45,8 @@ export default function LecturerNavbar(props) {
 
           <li className="divider" tabIndex={-1} />
 
-          <li><Link to="/"><i className="material-icons">person</i>Tài khoản của tôi</Link></li>
-          <li><Link to="/"><i className="material-icons">class</i>Khóa học của tôi</Link></li>
+          <li><Link to="/update-profile"><i className="material-icons">person</i>Tài khoản của tôi</Link></li>
+          <li><Link to="/lecturer"><i className="material-icons">class</i>Khóa học của tôi</Link></li>
           
           {/* eslint-disable-next-line */}
           <li><a onClick={logout}><i className="material-icons">keyboard_return</i>Đăng xuất</a></li>

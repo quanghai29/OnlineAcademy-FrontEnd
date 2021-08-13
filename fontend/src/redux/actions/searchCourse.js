@@ -1,16 +1,8 @@
 import {
-  SET_SEARCH_TEXT,
   SET_SEARCH_COURSE_RESULT,
-  RESET_SEARCH_FORM,
-  RESET_SEARCH_COURSE_STATE,
+  FETCH_SEARCH_COURSE,
+  SET_IS_LOADING_SEARCH_COURSE
 } from "../constants/actionTypes"
-
-export const setSearchText=(text)=>{
-  return {
-    type: SET_SEARCH_TEXT,
-    text
-  }
-}
 
 export const setSearchCourseResult=(data)=>{
   return {
@@ -19,14 +11,16 @@ export const setSearchCourseResult=(data)=>{
   }
 }
 
-export const resetSearchForm = ()=>{
+export const setIsLoading = (data)=>{
   return{
-    type: RESET_SEARCH_FORM
+    type: SET_IS_LOADING_SEARCH_COURSE,
+    data
   }
 }
 
-export const resetSearchCourseState =()=>{
+export const fetchSearchingCourse = (data)=>{
   return {
-    type: RESET_SEARCH_COURSE_STATE
+    type: FETCH_SEARCH_COURSE,
+    payload : data
   }
 }

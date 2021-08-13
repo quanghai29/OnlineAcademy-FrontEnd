@@ -5,7 +5,7 @@ function Layout({ children}) {
   return (
     <div>
       <MainNavigation />
-      <div>{children}</div>
+        <div style={{position:"relative"}}>{children}</div>
       <Footer />
     </div>
   );

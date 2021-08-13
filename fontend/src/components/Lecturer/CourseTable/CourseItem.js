@@ -39,7 +39,7 @@ const CourseItem = ({course}) => {
           <td>{<HorizotalCard title={course.title} shortDesc={course.short_description} img_source={course.img_source} />}</td>
           <td>{course.create_date}</td>
           <td>{course.last_update}</td>
-          <td>{+course.status === 0 ? 'Chưa hoàn thành' : 'Đã hoàn thành'}</td>
+          <td>{+course.course_status === 0 ? 'Chưa hoàn thành' : 'Đã hoàn thành'}</td>
           <td>
             <button onClick={onClickEditHandler} className={`${classes.editBtn} ${classes.Btn}`}><span className="material-icons">edit</span></button>
             <button onClick={onClickDeleteCourseHandler} className={`${classes.deleteBtn} ${classes.Btn}`}><span className="material-icons">delete</span></button>

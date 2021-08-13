@@ -13,7 +13,10 @@ import {
   requestDeleteCategoryItem
 } from "../../redux/actions/admin_category"
 import ModalContainer from "../Modal/ModalContainer";
-import { REQUEST_EDIT_CATEGORY_ITEM, REQUEST_CREATE_CATEGORY_ITEM }
+import {
+  REQUEST_EDIT_ADMIN_CATEGORY_ITEM,
+  REQUEST_CREATE_ADMIN_CATEGORY_ITEM
+}
   from "../../redux/constants/actionTypes";
 import Swal from 'sweetalert2';
 
@@ -44,7 +47,7 @@ const AdminCategoryContainer = () => {
       const amountPage = Math.ceil(categories.length / perPage);
       setSelectedPage(amountPage - 1);
     }
-  }, [categories, indexOfDeletedItem])
+  }, [categories, indexOfDeletedItem, categoryState]);
 
   useEffect(() => {
     dispatch(fetchCategory());
@@ -134,11 +137,11 @@ const AdminCategoryContainer = () => {
       data.last_update = day;
       data.index = +editIndex;
       data.categories = categories;
-      dispatch(submitCategoryForm(REQUEST_EDIT_CATEGORY_ITEM, data));
+      dispatch(submitCategoryForm(REQUEST_EDIT_ADMIN_CATEGORY_ITEM, data));
       setEditIndex(-1);
     } else {// Create
       data.category_name = categoryState.inputValue;
-      dispatch(submitCategoryForm(REQUEST_CREATE_CATEGORY_ITEM, data));
+      dispatch(submitCategoryForm(REQUEST_CREATE_ADMIN_CATEGORY_ITEM, data));
     }
   }
 

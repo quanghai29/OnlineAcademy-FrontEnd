@@ -1,0 +1,20 @@
+.login-with-other-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+  .facebook-icon, .google-icon{
+    margin: 10px;
+    font-size: 30px;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+  .facebook-icon:hover{
+    color: #1877f2;
+  }
+  .google-icon:hover{
+    color: #e34133;
+  }
+}

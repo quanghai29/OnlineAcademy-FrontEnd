@@ -58,7 +58,7 @@ const AddTitleChapterModal = () => {
             {errors.title && (
               <span>This field is required</span>
             )}
-            <label htmlFor="chapter-title">Tiêu đề khóa học</label>
+            <label htmlFor="chapter-title">Tiêu đề chapter</label>
           </div>
         </div>
        

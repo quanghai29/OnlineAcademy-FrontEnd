@@ -1,8 +1,7 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects';
-import axios from 'axios';
 import * as actionType from '../constants/actionTypes';
-import { DOMAIN_API } from '../constants/common';
-
+import Swal from 'sweetalert2';
+import {studentCourse} from '../../api/course';
 
 function* updateFavoriteCourse(action) {
   try {
@@ -23,20 +22,42 @@ function* watchUpdateFavoriteCourse() {
 
 function* addFavoriteCourse(course_id){
   try {
-    const response = yield call(axios.post, `${DOMAIN_API}/student/watchlist/${course_id}`);
-    if(response.status === 201){
-      //Thêm thành công
-      yield put({
-        type: actionType.FETCH_FAVORITE_COURSE,
-        payload:{
-          course_id: course_id,
-          isFavorite: true
-        }
-      })
-    }else{
-      //Thêm thất bại
+    const response = yield call(studentCourse.addFavoriteCourse, course_id);
+    switch (response.status) {
+      case 201:
+        Swal.fire({
+          icon: 'success',
+          title: 'Đã thêm vào danh sách yêu thích',
+        })
+        yield put({
+          type: actionType.FETCH_FAVORITE_COURSE,
+          payload:{
+            course_id: course_id,
+            isFavorite: true
+          }
+        })
+        yield put({
+          type: actionType.FETCH_STUDENT_COURSE_WATCHLIST
+        })
+        break;
+      case 400 || 401:
+        Swal.fire({
+          icon: 'error',
+          title: response.data.message,
+        })
+        break;
+      default:
+        Swal.fire({
+          icon: 'error',
+          title: 'Server has something error',
+        })
+        break;
     }
   } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Something went wrong',
+    })
     console.log(error);
   }
 }
@@ -44,20 +65,43 @@ function* addFavoriteCourse(course_id){
 
 function* deleteFavoriteCourse(course_id){
   try {
-    const response = yield call(axios.delete, `${DOMAIN_API}/student/watchlist/${course_id}`);
-    if(response.status === 204){
-      //Xóa thành công
-      yield put({
-        type: actionType.FETCH_FAVORITE_COURSE,
-        payload: {
-          course_id: course_id,
-          isFavorite: false
-        }
-      })
-    }else{
-      //Xóa thất bại
+    const respone = yield call(studentCourse.deleteFavoriteCourse, course_id);
+
+    switch (respone.status) {
+      case 204:
+        Swal.fire({
+          icon: 'success',
+          title: 'Đã xóa khỏi danh sách yêu thích',
+        })
+        yield put({
+          type: actionType.FETCH_FAVORITE_COURSE,
+          payload: {
+            course_id: course_id,
+            isFavorite: false
+          }
+        })
+        yield put({
+          type: actionType.FETCH_STUDENT_COURSE_WATCHLIST
+        })
+        break;
+      case 400 || 401:
+        Swal.fire({
+          icon: 'error',
+          title: respone.data.message,
+        })
+        break;
+      default:
+        Swal.fire({
+          icon: 'error',
+          title: 'Server has something error',
+        })
+        break;
     }
   } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Something went wrong',
+    })
     console.log(error);
   }
 }

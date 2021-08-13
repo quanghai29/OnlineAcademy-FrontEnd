@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadCourse, updateCommonInfoCourse } from '../../../redux/actions/coursesOfLecturer';
+import {
+  uploadCourse,
+  updateCommonInfoCourse,
+} from '../../../redux/actions/coursesOfLecturer';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const CommonDescription = () => {
   const [disableSubmit, setDisableSubmit] = useState(true);
+  const [detailDesc, setDetailDesc] = useState('');
 
   const { uploadingCommonDesc, uploadedCommonDescError, isUpdateCourse } =
     useSelector((state) => state.uploadCourse);
@@ -25,20 +31,23 @@ const CommonDescription = () => {
       if (data) {
         setValue('title', data.title || '');
         setValue('short_description', data.short_description || '');
-        setValue('full_description', data.full_description || '');
         setValue('category_id', data.category_id || '');
         setValue('price', data.price || '0');
         setValue('discount', data.discount || '0');
+        setValue('course_status', data.course_status || '');
+        setDetailDesc(data.full_description);
       }
     }
     M.updateTextFields();
   }, [isUpdateCourse, data, setValue]);
 
   const onSubmit = async (formData) => {
-    formData.lecturer_id = 2; // {userId} = JSON.parse(localStorage.decodePayload)
-    console.log(formData.category_id);
+    const { userId } = JSON.parse(localStorage.decodePayload);
+    formData.lecturer_id = userId;
     formData.category_id = +formData.category_id;
-    if(isUpdateCourse) {
+    formData.course_status = +formData.course_status;
+    formData.full_description = detailDesc;
+    if (isUpdateCourse) {
       dispatch(updateCommonInfoCourse(formData, data.id));
     } else {
       dispatch(uploadCourse(formData));
@@ -73,6 +82,35 @@ const CommonDescription = () => {
   };
 
   const onError = (errors, e) => console.log(errors, e);
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
+      ['link', 'image'],
+      ['clean'],
+    ],
+  };
+
+  const formats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+  ];
 
   return (
     <div className="row">
@@ -110,38 +148,54 @@ const CommonDescription = () => {
           </div>
         </div>
         <div className="row">
-          <div className="input-field col s12">
-            <textarea
-              id="textarea1"
-              className="materialize-textarea"
-              {...register('full_description', { required: true })}
-              onChange={onChangeInputHandler}
-              disabled={uploadingCommonDesc}
-            ></textarea>
-            {errors.full_description && (
-              <span style={requiredStyle}>This field is required</span>
-            )}
-            <label htmlFor="textarea1">Textarea</label>
+          <label style={{ marginLeft: 10 }}>Mô tả chi tiết</label>
+          <div className="input-field col s12" onClick={onChangeInputHandler}>
+            <ReactQuill
+              theme="snow"
+              value={detailDesc || ''}
+              onChange={setDetailDesc}
+              modules={modules}
+              formats={formats}
+              placeholder="Mô tả chi tiết"
+            />
           </div>
         </div>
         <div className="row">
-          <select
-            className="browser-default"
-            defaultValue=""
-            id="category_id"
-            {...register('category_id', { required: true })}
-            onChange={onChangeInputHandler}
-            disabled={uploadingCommonDesc}
-          >
-            <option value="" disabled>
-              Chọn Danh Mục
-            </option>
-            <option value="1">Lập trình Web</option>
-            <option value="2">Lập trình di động</option>
-            <option value="3">Lập trình game</option>
-            <option value="4">Khoa học dữ liệu</option>
-            <option value="5">Kiểm thử phần mềm</option>
-          </select>
+          <div className="input-field col s6">
+            <select
+              className="browser-default"
+              defaultValue=""
+              id="category_id"
+              {...register('category_id', { required: true })}
+              onChange={onChangeInputHandler}
+              disabled={uploadingCommonDesc}
+            >
+              <option value="" disabled>
+                Danh Mục
+              </option>
+              <option value="1">Lập trình Web</option>
+              <option value="2">Lập trình di động</option>
+              <option value="3">Lập trình game</option>
+              <option value="4">Khoa học dữ liệu</option>
+              <option value="5">Kiểm thử phần mềm</option>
+            </select>
+          </div>
+          <div className="input-field col s6">
+            <select
+              className="browser-default"
+              defaultValue=""
+              id="course_status"
+              {...register('course_status')}
+              onChange={onChangeInputHandler}
+              disabled={uploadingCommonDesc}
+            >
+              <option value="" disabled>
+                Status Course
+              </option>
+              <option value="0">Chưa hoàn thành</option>
+              <option value="1">Đã hoàn thành</option>
+            </select>
+          </div>
         </div>
         <div className="row">
           <div className="input-field col s6">
@@ -173,7 +227,11 @@ const CommonDescription = () => {
             <label htmlFor="discount">Khuyến mãi</label>
           </div>
         </div>
-        <button className="btn waves-effect" type="submit" disabled={disableSubmit}>
+        <button
+          className="btn waves-effect"
+          type="submit"
+          disabled={disableSubmit}
+        >
           Submit
           <i className="material-icons right">send</i>
         </button>

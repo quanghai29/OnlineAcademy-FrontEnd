@@ -24,6 +24,15 @@ import selectedChapter from './selectedChapter';
 import header from './header';
 import adminStudentReducer from './admin_student';
 import adminLecturerReducer from './admin_lecturer';
+import courseCategory from './courseCategory';
+import selectedVideo from './seletedVideo';
+import studentCourseRegister from './studentCourseRegister';
+import studentCourseWatchlist from './studentCourseWatchlist';
+import category from './category';
+import relatedCourse from './relatedCourse';
+import adminCourseReducer from './admin_course';
+import stateStudentVideoLearning from './stateStudentVideoLearning';
+import forgotPasswordReducer from './forgotPassword';
 
 export default combineReducers({
   courses,
@@ -50,5 +59,14 @@ export default combineReducers({
   selectedChapter,
   header,
   adminStudentReducer,
-  adminLecturerReducer
+  adminLecturerReducer,
+  courseCategory,
+  selectedVideo,
+  studentCourseRegister,
+  studentCourseWatchlist,
+  category,
+  relatedCourse,
+  adminCourseReducer,
+  stateStudentVideoLearning,
+  forgotPasswordReducer
 });

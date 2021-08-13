@@ -1,0 +1,30 @@
+@import "../../../styles/admin.scss";
+
+.course-column{
+  display: flex;
+  &__img{
+    img{
+      width: 120px;
+      height: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+  }
+  &__text{
+    width: 300px;
+    .title{
+      font-weight: bold;
+    }
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+
+    .short-description{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* number of lines to show */
+      -webkit-box-orient: vertical;
+    }
+  }
+}

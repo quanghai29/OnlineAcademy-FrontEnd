@@ -98,3 +98,12 @@ export async function activeAccount(email) {
   responseData.data.otpToken && localStorage.setItem(
     'otpToken', responseData.data.otpToken);
 }
+
+export async function submitEmail(data){
+  try{
+    const res = await instance.post('/account/forgot-password', data);
+    return res.data;
+  }catch(err){
+    console.log(err);
+  }
+}

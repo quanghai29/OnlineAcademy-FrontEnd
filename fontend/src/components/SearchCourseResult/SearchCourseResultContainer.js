@@ -1,25 +1,28 @@
 import RowCourse from "../RowCourse"
 import styles from './SearchCourse.module.scss'
-import M from 'materialize-css/dist/js/materialize.min.js';
+// import M from 'materialize-css/dist/js/materialize.min.js';
 import { useEffect, useState } from "react";
 import * as _ from "lodash";
 import PreLoading from "../PreLoading/index"
 import PaginationContainer from "../PaginationContainer/PaginationContainer";
 
-
+//props:{
+// courses: []
+//}
 export default function SearchCourseResultContainer(props) {
-  document.addEventListener('DOMContentLoaded', function () {
-    let elems = document.querySelectorAll('select');
-    M.FormSelect.init(elems, styles['task-sort']);
-  });
+  // document.addEventListener('DOMContentLoaded', function () {
+  //   let elems = document.querySelectorAll('select');
+  //   M.FormSelect.init(elems, styles['task-sort']);
+  // });
 
-  const searchResult = props.data;
+
+  let courses = props.data;
+  const { isLoading } = props;
 
   const [amountItemPerPage, setItemInPage] = useState(5);// amount of item per a page
   const [offset, setOffset] = useState(0);
   const [selectedPage, setSelectedPage] = useState(0);
   const [sortedData, setSortedData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [orderBy, setOrderBy] = useState('avg_vote');
   const [orderDir, setOrderDir] = useState('desc');
 
@@ -30,14 +33,26 @@ export default function SearchCourseResultContainer(props) {
   };
 
   useEffect(() => {
-    if (searchResult.courses) {
-      let data = _.orderBy(searchResult.courses, [orderBy], [orderDir]);
-      setSortedData(data);
-      setIsLoading(false);
-    }
-  }, [searchResult.courses, orderBy, orderDir])
+    setSelectedPage(0);
+    setOffset(0);
 
-  const optionData = [
+  }, [props.text_search])
+
+  useEffect(() => {
+    let elmnt = document.getElementById("search_result");
+    if (elmnt)
+      elmnt.scrollIntoView();
+  }, [courses]);
+
+
+  useEffect(() => {
+    if (courses) {
+      let data = _.orderBy(courses, [orderBy], [orderDir]);
+      setSortedData(data);
+    }
+  }, [courses, orderBy, orderDir]);
+
+  const optionSort = [
     { orderBy: 'avg_vote', orderDir: 'desc' },
     { orderBy: 'avg_vote', orderDir: 'asc' },
     { orderBy: 'price', orderDir: 'desc' },
@@ -46,28 +61,54 @@ export default function SearchCourseResultContainer(props) {
 
   function handleChooseOptionSort(e) {
     const index = e.target.value;
-    setOrderBy(optionData[index].orderBy);
-    setOrderDir(optionData[index].orderDir)
+    setOrderBy(optionSort[index].orderBy);
+    setOrderDir(optionSort[index].orderDir)
   }
 
   let contentEle = null;
-  if (isLoading || !props.isSearched) {
+  if (isLoading) {
     contentEle = <div className={styles['loading--position']}>
       <PreLoading />
     </div>
   } else {
     contentEle =
+      <>
+        {
+          sortedData.slice(offset, offset + amountItemPerPage).map((item, index) => {
+            return (
+              <RowCourse data={item} key={index} />
+            )
+          })
+        }
+
+        <PaginationContainer pageCount={Math.ceil(
+          courses?.length / amountItemPerPage)}
+          pageRangeDisplayed={5}
+          marginPagesDisplayed={2}
+          handleClickSelectedPage={handleClickSelectedPage}
+          selectedPage={selectedPage}
+        />
+      </>
+  }
+
+  return (
+    <>
       <div className={styles['container']} id="search_result">
         <div className={styles['result-title']}>
-          {searchResult.courses.length} Kết quả tìm kiếm cho {`"${searchResult.keyWord}"`}
+          {
+            !isLoading && <>
+              {courses?.length || 0} Kết quả tìm kiếm cho {`"${props.text_search || ''}"`}
+            </>
+          }
+
         </div>
         <div className={styles['task-bar']}>
           <div className={styles['task-show']}>
             <span>
-              Hiển thị {searchResult.courses.length >= amountItemPerPage ?
+              Hiển thị {courses?.length >= amountItemPerPage ?
                 `${offset + 1}-${offset + amountItemPerPage} `
-                : `${offset + 1}-${offset + searchResult.courses.length} `}
-              của {searchResult.courses.length} kết quả
+                : `${offset + 1}-${offset + courses?.length || 0} `}
+              của {courses?.length} kết quả
             </span>
             <div className={styles['show-option']}>Show:
               <ul>
@@ -109,28 +150,8 @@ export default function SearchCourseResultContainer(props) {
             </select>
           </div>
         </div>
-
-        {
-          sortedData.slice(offset, offset + amountItemPerPage).map((item, index) => {
-            return (
-              <RowCourse data={item} key={index} />
-            )
-          })
-        }
-
-        <PaginationContainer pageCount={Math.ceil(
-          searchResult.courses.length / amountItemPerPage)}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={2}
-          handleClickSelectedPage={handleClickSelectedPage}
-          selectedPage={selectedPage}
-        />
+        {contentEle}
       </div>
-  }
-
-  return (
-    <>
-      {contentEle}
     </>
   )
 }

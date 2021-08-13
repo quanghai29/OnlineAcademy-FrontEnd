@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchLecturerCourses, setIsUpdateCourse } from '../../../redux/actions/coursesOfLecturer';
+import {
+  fetchLecturerCourses,
+  setIsUpdateCourse,
+} from '../../../redux/actions/coursesOfLecturer';
 import { resetChaptersOfCourse } from '../../../redux/actions/chaptersOfCourse';
 import Layout from '../../../layout/Layout';
 import CourseTable from '../../../components/Lecturer/CourseTable';
@@ -16,8 +19,8 @@ const HomeLecturer = () => {
   const { data, isLoading } = useSelector((state) => state.coursesOfLecturer);
 
   useEffect(() => {
-    const lecturer_id = 2; // {userId} = JSON.parse(localStorage.decodePayload);
-    dispatch(fetchLecturerCourses(lecturer_id));
+    const { userId } = JSON.parse(localStorage.decodePayload);
+    dispatch(fetchLecturerCourses(userId));
   }, [dispatch]);
 
   // Get current posts
@@ -26,6 +29,7 @@ const HomeLecturer = () => {
   const currentCourses = data.slice(indexOfFirstCourse, indexOfLastCourse);
   const totalCourses = data.length;
   const totalPages = Math.ceil(totalCourses / coursesPerPage) + 1;
+  console.log(currentCourses)
 
   // Change page
   const paginate = (pageNumber) => {
@@ -38,25 +42,32 @@ const HomeLecturer = () => {
   const onClickAddNewCourseHandler = (e) => {
     dispatch(setIsUpdateCourse(false));
     dispatch(resetChaptersOfCourse());
-    history.push('/update-course')
-  }
+    history.push('/update-course');
+  };
 
   return (
     <Layout>
       <div className="container">
-        <div className={classes.header}>
-          <p>Khóa học của tôi</p>
-          <button onClick={onClickAddNewCourseHandler} className="waves-effect waves-light btn">
+        <div className={classes.headerLecturer}>
+          <p className={classes.title}>Khóa học của tôi</p>
+          <button
+            onClick={onClickAddNewCourseHandler}
+            className="waves-effect waves-light btn"
+          >
             <i className="material-icons left">add_box</i>Tạo khóa học
           </button>
         </div>
-        <CourseTable courses={currentCourses} isLoading={isLoading} />
-        <Pagination
-          coursesPerPage={coursesPerPage}
-          totalCourses={totalCourses}
-          currentPage={currentPage}
-          paginate={paginate}
-        />
+        {currentCourses.length === 0 ? (<p>Chưa có khóa học nào</p>) : (
+          <Fragment>
+            <CourseTable courses={currentCourses} isLoading={isLoading} />
+            <Pagination
+              coursesPerPage={coursesPerPage}
+              totalCourses={totalCourses}
+              currentPage={currentPage}
+              paginate={paginate}
+            />
+          </Fragment>
+        )}
       </div>
     </Layout>
   );

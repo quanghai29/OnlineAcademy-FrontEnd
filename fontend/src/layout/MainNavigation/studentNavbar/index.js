@@ -1,5 +1,5 @@
 import classes from './style.module.scss';
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import Avartar from '../../../components/Common/Avartar';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useDispatch } from 'react-redux';
@@ -9,11 +9,14 @@ export default function StudentNavbar(props) {
   const elems = document.querySelectorAll('.dropdown-trigger');
   // eslint-disable-next-line
   const instances = M.Dropdown.init(elems, {});
+  const history = useHistory();
   const dispatch = useDispatch();
   const logout = ()=>{
     dispatch({
       type: actionType.FETCH_LOGOUT
     })
+
+    history.push('/');
   }
   return (
     <ul className="right hide-on-med-and-down">
@@ -40,9 +43,9 @@ export default function StudentNavbar(props) {
 
           <li className="divider" tabIndex={-1} />
 
-          <li><Link to="/"><i className="material-icons">person</i>Tài khoản của tôi</Link></li>
-          <li><Link to="/"><i className="material-icons">class</i>Khóa học của tôi</Link></li>
-          <li><Link to="/"><i className="material-icons">favorite</i>Khóa học yêu thích</Link></li>
+          <li><Link to="/update-profile"><i className="material-icons">person</i>Tài khoản của tôi</Link></li>
+          <li><Link to="/student-course-of-register"><i className="material-icons">class</i>Khóa học của tôi</Link></li>
+          <li><Link to="/student-course-of-watchlist"><i className="material-icons">favorite</i>Khóa học yêu thích</Link></li>
 
           {/* eslint-disable-next-line */}
           <li><a onClick={logout}><i className="material-icons">keyboard_return</i>Đăng xuất</a></li>

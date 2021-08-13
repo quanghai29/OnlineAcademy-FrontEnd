@@ -73,3 +73,7 @@ export const updateUserPasswordFail = (message) => ({
     message,
   },
 });
+
+export const setErrorInitial = _ => ({
+  type: type.SET_ERROR_INITIAL
+})

@@ -1,42 +1,53 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUserPassword } from '../../../redux/actions/userProfile';
+import { useHistory } from 'react-router-dom';
+import * as actionTypes from '../../../redux/constants/actionTypes'
+import { updateUserPassword, setErrorInitial } from '../../../redux/actions/userProfile';
 import Swal from 'sweetalert2';
 
 const ChangePasswordForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm();
   let val_new_pass = watch('new_password', '');
 
-  const {data, isLoading, error} = useSelector(state => state.userProfile);
+  const { data, isLoading, error } = useSelector((state) => state.userProfile);
 
   const onSubmitHandler = async (formData, e) => {
-    formData.account_id = data.id;
+    formData.account_id = data.account_id;
     dispatch(updateUserPassword(formData));
-    if (!isLoading) {
-      if (error) {
-        Swal.fire({
-          title: 'Update Pasword Failure',
-          text: error,
-          icon: 'error',
-          confirmButtonText: 'EXIT',
-        });
-      } else {
-        Swal.fire({
-          title: 'Update Pasword Success',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        }).then(() => {
-          e.target.reset();
-        });
+    setTimeout(() => {
+      if (!isLoading) {
+        if (error) {
+          Swal.fire({
+            title: 'Update Pasword Failure',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'EXIT',
+          }).then(() => {
+            dispatch(setErrorInitial());
+          });
+        } else {
+          Swal.fire({
+            title: 'Update Pasword Success',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }).then(() => {
+            e.target.reset();
+            dispatch({
+              type: actionTypes.FETCH_LOGOUT
+            });
+            history.push("/login");
+          });
+        }
       }
-    }
+    }, 1000);
   };
 
   return (

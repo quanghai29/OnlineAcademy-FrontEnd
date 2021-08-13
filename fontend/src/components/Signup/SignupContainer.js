@@ -82,13 +82,13 @@ export default function SignupContainer() {
         <div className="container-form">
           <form>
             <HeaderForm class="form-header"
-              spanValue="Please create a new account here" />
+              spanValue="Tạo một tài khoản tại đây" />
             {
               inputValueData.map((item, index) => {
                 return (
                   <InputValue type={item.type}
                     placeholder={item.placeholder}
-                    style={{ marginBottom: "15px" }}
+                    style={{ marginBottom: "5px" }}
                     name={item.name}
                     actionType={item.actionType}
                     warningMess={item.warningMess}
@@ -98,12 +98,12 @@ export default function SignupContainer() {
               })
             }
             <div className="small-text">
-              <span>Already have an account?</span>
+              <span>Bạn đã có tài khoản?</span>
               <Link to='/login'>
-                Log In</Link>
+                Đăng nhập</Link>
             </div>
             <ActionButton style={{ marginTop: "50px" }}
-              action="Sign Up"
+              action="Đăng kí"
               onClickActionButton={submitSignupForm}
             />
           </form>

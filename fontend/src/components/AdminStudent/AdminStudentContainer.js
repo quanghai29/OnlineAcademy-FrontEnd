@@ -8,6 +8,7 @@ import {
   requestDeleteStudentItem
 } from "../../redux/actions/admin_student";
 import Swal from 'sweetalert2';
+import { useHistory } from "react-router";
 
 
 const AdminStudentContainer = () => {
@@ -15,6 +16,7 @@ const AdminStudentContainer = () => {
   const { students,indexOfDeletedItem } = studentState;
   const dispatch = useDispatch();
   const perPage = 5;
+  const history = useHistory();
 
   const headers = [
     'STT',
@@ -35,7 +37,7 @@ const AdminStudentContainer = () => {
       const amountPage = Math.ceil(students?.length / perPage);
       setSelectedPage(amountPage - 1);
     }
-  }, [students, indexOfDeletedItem])
+  }, [students, indexOfDeletedItem, studentState]);
 
   useEffect(() => {
     dispatch(fetchStudentData());
@@ -85,7 +87,12 @@ const AdminStudentContainer = () => {
   }
 
   function handleOpenItem(index){
-    
+    history.push({
+      pathname: '/profile',
+      state:{
+        user_id: students[index + offset].id
+      }
+    })
   }
 
   return (

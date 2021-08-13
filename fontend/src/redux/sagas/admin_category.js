@@ -1,13 +1,13 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
 import * as categoryActions from "../actions/admin_category"
 import {
-  FETCH_CATEGORY_DATA,
-  REQUEST_EDIT_CATEGORY_ITEM,
-  REQUEST_CREATE_CATEGORY_ITEM,
+  FETCH_ADMIN_CATEGORY,
+  REQUEST_EDIT_ADMIN_CATEGORY_ITEM,
+  REQUEST_CREATE_ADMIN_CATEGORY_ITEM,
   REQUEST_DELETE_CATEGORY_ITEM
 } from "../constants/actionTypes"
 import * as adminApi from "../../api/admin"
-import * as checkFunctions from "../../utils/common"
+import * as validateFunctions from "../../utils/functions"
 
 function* requestFetchCategory() {
   const result = yield call(adminApi.getCategoryData);
@@ -15,11 +15,11 @@ function* requestFetchCategory() {
 }
 
 function* watchFetchCategory() {
-  yield takeLatest(FETCH_CATEGORY_DATA, requestFetchCategory);
+  yield takeLatest(FETCH_ADMIN_CATEGORY, requestFetchCategory);
 }
 
 function* requestEditCategoryItem(action) {
-  const isEmpty = yield call(checkFunctions.isEmpty, action.data.category_name);
+  const isEmpty = yield call(validateFunctions.isEmpty, action.data.category_name);
   let warning = '';
   if (isEmpty) {
     warning = 'Không để trống trường này';
@@ -40,11 +40,11 @@ function* requestEditCategoryItem(action) {
 }
 
 function* watchEditCategoryItem() {
-  yield takeLatest(REQUEST_EDIT_CATEGORY_ITEM, requestEditCategoryItem);
+  yield takeLatest(REQUEST_EDIT_ADMIN_CATEGORY_ITEM, requestEditCategoryItem);
 }
 
 function* requestCreateCategoryItem(action) {
-  const isEmpty = yield call(checkFunctions.isEmpty, action.data.category_name);
+  const isEmpty = yield call(validateFunctions.isEmpty, action.data.category_name);
   let warning = '';
   if (isEmpty) {
     warning = 'Không để trống trường này';
@@ -62,7 +62,7 @@ function* requestCreateCategoryItem(action) {
 }
 
 function* watchCreateCategoryItem() {
-  yield takeLatest(REQUEST_CREATE_CATEGORY_ITEM, requestCreateCategoryItem);
+  yield takeLatest(REQUEST_CREATE_ADMIN_CATEGORY_ITEM, requestCreateCategoryItem);
 }
 
 function* requestDeleteCategoryItem(action) {

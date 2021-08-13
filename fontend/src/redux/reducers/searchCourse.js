@@ -1,48 +1,28 @@
 import {
-  SET_SEARCH_TEXT,
   SET_SEARCH_COURSE_RESULT,
-  RESET_SEARCH_FORM,
-  RESET_SEARCH_COURSE_STATE,
+  SET_IS_LOADING_SEARCH_COURSE
 } from "../constants/actionTypes"
 
 const initialState = {
-  result: [],
-  text: '',
-  isSearched: false
+  courses: null,
+  isLoading: false,
 }
 
 const searchCourseReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_SEARCH_TEXT: {
-      let newState = {
-        ...state,
-        text: action.text
-      }
-      return newState;
-    }
     case SET_SEARCH_COURSE_RESULT: {
       let newState = {
         ...state,
-        result: action.data,
-        isSearched: true
+        courses: action.data,
+        isLoading : false
       }
       return newState;
     }
-    case RESET_SEARCH_FORM: {
+    case SET_IS_LOADING_SEARCH_COURSE:{
       let newState = {
         ...state,
-        text: ''
+        isLoading: action.data
       }
-      return newState;
-    }
-    case RESET_SEARCH_COURSE_STATE: {
-      let newState = {
-        ...state,
-        result: [],
-        text: '',
-        isSearched: false
-      }
-
       return newState;
     }
     default: {

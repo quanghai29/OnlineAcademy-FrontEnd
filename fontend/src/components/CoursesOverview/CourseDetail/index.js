@@ -8,7 +8,6 @@ import Feedback from './Feedback/index';
 //import * as actionType from '../../../redux/constants/actionTypes';
 
 export default function CourseOverview(props) {
-
   useEffect(function () {
     initTabs();
   });

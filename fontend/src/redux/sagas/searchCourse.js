@@ -6,8 +6,7 @@ import {
   getSearchCourseResult
 } from "../../api/course"
 import {
-  setSearchCourseResult,
-  resetSearchForm
+  setSearchCourseResult
 } from "../actions/searchCourse"
 
 function* requestFetchSearchCourse(action) {
@@ -18,9 +17,6 @@ function* requestFetchSearchCourse(action) {
     //call api to search 
     const searchResult = yield call(getSearchCourseResult, action.payload);
     yield put(setSearchCourseResult(searchResult));
-
-    //reset search form
-    yield put(resetSearchForm());
   }
 }
 

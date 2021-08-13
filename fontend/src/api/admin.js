@@ -1,10 +1,8 @@
 import appAPI from "../redux/axios/course";
 import Swal from 'sweetalert2';
-import {instance} from "../redux/axios/account"
 
 export const getCategoryData = async () => {
-  const res = await instance.get('/admin/category');
-
+  const res = await appAPI.get('/admin/category');
   return res.data.categories;
 }
 
@@ -68,6 +66,53 @@ export const getLecturerData = async () => {
     const result = await appAPI.get('admin/lecturer');
     if (result.status === 200)
       return result.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const deleteLecturerItem = async (lecturer_id) => {
+  try {
+    appAPI.defaults.headers.common['lecturer_id'] = lecturer_id;
+    const result = await appAPI.delete('/admin/lecturer');
+    console.log('res delete', result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const createLecturerItem = async(data) => {
+  try {
+    const res = await appAPI.post('/admin/lecturer', data);
+    if (res.status === 201) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Create successfully',
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getCourseData = async()=>{
+  try{
+    const result = await appAPI.get('/admin/course');
+    if(result.status === 200)
+      return result.data;
+  }catch(err){
+    console.log(err);
+  }
+}
+
+export const deleteAdminCourseItem = async(course_id)=>{
+  try {
+    appAPI.defaults.headers.common['course_id'] = course_id;
+    const result = await appAPI.delete('/admin/course');
+    console.log('res delete', result);
   } catch (err) {
     console.log(err);
   }

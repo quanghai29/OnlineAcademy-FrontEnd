@@ -1,0 +1,25 @@
+@import "../../styles/admin.scss";
+
+.custom-input-field{
+  display: flex;
+  align-items: center;
+  span{
+    margin-right: 10px;
+    white-space: nowrap;
+  }
+  
+    input,ul,select{
+      font-size: 14px !important;
+      margin: 0 !important;
+    }
+  select{
+    display: inline-block !important;
+    border-radius: 25px !important;
+    outline: none;
+    height: 2.5rem !important;
+    align-items: center;
+    &:hover{
+      border: 1px solid #18a0fb;
+    }
+  }
+}
