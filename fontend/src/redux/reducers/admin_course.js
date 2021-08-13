@@ -1,11 +1,13 @@
 import {
   SET_ADMIN_COURSE,
-  DELETE_ADMIN_COURSE_ITEM
+  DELETE_ADMIN_COURSE_ITEM,
+  SET_ADMIN_COURSE_LOADING
 } from "../constants/actionTypes"
 
 const initialState = {
   courses: [],
-  indexOfDeletedItem: -1
+  indexOfDeletedItem: -1,
+  isLoading: false
 }
 
 const adminCourseReducer = (state = initialState, action)=>{
@@ -14,7 +16,8 @@ const adminCourseReducer = (state = initialState, action)=>{
       let newState = {
         ...state,
         courses: action.data,
-        indexOfDeletedItem: -1
+        indexOfDeletedItem: -1,
+        isLoading: false
       }
       return newState;
     }
@@ -23,6 +26,13 @@ const adminCourseReducer = (state = initialState, action)=>{
       newState.courses.splice(action.data, 1);
       newState.indexOfDeletedItem = action.data;
       
+      return newState;
+    }
+    case SET_ADMIN_COURSE_LOADING:{
+      let newState={
+        ...state,
+        isLoading: action.data
+      }
       return newState;
     }
     default:{

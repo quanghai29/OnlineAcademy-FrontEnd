@@ -8,7 +8,8 @@ import {
   SET_LECTURER_USERNAME,
   SET_LECTURER_PASSWORD,
   SET_LECTURER_USERNAME_WARNING,
-  SET_LECTURER_PASSWORD_WARNING
+  SET_LECTURER_PASSWORD_WARNING,
+  SET_ADMIN_LECTURER_LOADING
 } from "../constants/actionTypes"
 
 export const fetchLecturerData = ()=>{
@@ -76,6 +77,13 @@ export const setUsernameWarning = (data)=>{
 export const setPasswordWarning = (data)=>{
   return{
     type: SET_LECTURER_PASSWORD_WARNING,
+    data
+  }
+}
+
+export const setLecturerLoading = (data)=>{
+  return{
+    type: SET_ADMIN_LECTURER_LOADING,
     data
   }
 }

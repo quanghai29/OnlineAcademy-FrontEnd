@@ -10,7 +10,8 @@ import {
   submitCategoryForm,
   setIsShowFormModal,
   setCategoryInputValue,
-  requestDeleteCategoryItem
+  requestDeleteCategoryItem,
+  setCategoryLoading
 } from "../../redux/actions/admin_category"
 import ModalContainer from "../Modal/ModalContainer";
 import {
@@ -19,11 +20,12 @@ import {
 }
   from "../../redux/constants/actionTypes";
 import Swal from 'sweetalert2';
+import PreLoading from "../PreLoading/index"
 
 
 const AdminCategoryContainer = () => {
   const categoryState = useSelector(state => state.adminCategoryReducer);
-  const { categories, indexOfDeletedItem } = categoryState;
+  const { categories, indexOfDeletedItem, isLoading } = categoryState;
   const dispatch = useDispatch();
   const perPage = 5;
 
@@ -35,7 +37,6 @@ const AdminCategoryContainer = () => {
     'Số lượng khóa học',
   ];
 
-  const [isLoading, setIsLoading] = useState(true);
   const [pageData, setPageData] = useState([]);
   const [offset, setOffset] = useState(0);
   const [editIndex, setEditIndex] = useState(-1);
@@ -50,16 +51,9 @@ const AdminCategoryContainer = () => {
   }, [categories, indexOfDeletedItem, categoryState]);
 
   useEffect(() => {
+    dispatch(setCategoryLoading(true));
     dispatch(fetchCategory());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (categories) {
-      setIsLoading(false);
-    } else {
-      setIsLoading(true);
-    }
-  }, [categories])
 
   useEffect(() => {
     let offset = Math.ceil(selectedPage * perPage);
@@ -149,6 +143,25 @@ const AdminCategoryContainer = () => {
     dispatch(setCategoryInputValue(e.target.value));
   }
 
+  let tableContent = null;
+  if (isLoading) {
+    tableContent = <div className={styles['loading--position']}>
+      <PreLoading />
+    </div>
+  } else {
+    tableContent = <>
+      <CategoryTable headers={headers} data={pageData}
+        editItem={handleEditTableItem} deleteItem={handleDeleteTableItem}
+        startIndex={offset}
+      />
+      <PaginationContainer pageCount={Math.ceil(categories?.length / perPage)}
+        pageRangeDisplayed={5} marginPagesDisplayed={2}
+        handleClickSelectedPage={handleClickSelectedPage}
+        selectedPage={selectedPage}
+      />
+    </>
+  }
+
   return (
     <>
       <AdminContainer title="Danh sách category" listIcon={<span className="material-icons">
@@ -164,19 +177,7 @@ const AdminCategoryContainer = () => {
             </button>
           </div>
         </div>
-        {
-          !isLoading && <>
-            <CategoryTable headers={headers} data={pageData}
-              editItem={handleEditTableItem} deleteItem={handleDeleteTableItem}
-              startIndex={offset}
-            />
-            <PaginationContainer pageCount={Math.ceil(categories.length / perPage)}
-              pageRangeDisplayed={5} marginPagesDisplayed={2}
-              handleClickSelectedPage={handleClickSelectedPage}
-              selectedPage={selectedPage}
-            />
-          </>
-        }
+        {tableContent}
       </AdminContainer>
       {
         categoryState.isShowFormModal && <ModalContainer>

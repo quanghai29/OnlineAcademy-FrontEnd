@@ -5,7 +5,8 @@ import {
   SET_IS_SHOW_FORM_MODAL,
   SET_CATEGORY_INPUT_VALUE,
   REQUEST_DELETE_CATEGORY_ITEM,
-  DELETE_CATEGORY_ITEM
+  DELETE_CATEGORY_ITEM,
+  SET_ADMIN_CATEGORY_LOADING
 } from "../constants/actionTypes"
 
 export const setCategory = (data)=>{
@@ -59,6 +60,13 @@ export const requestDeleteCategoryItem = (data)=>{
 export const deleteCategoryItem = (data)=>{
   return{
     type: DELETE_CATEGORY_ITEM,
+    data
+  }
+}
+
+export const setCategoryLoading = (data)=>{
+  return{
+    type: SET_ADMIN_CATEGORY_LOADING,
     data
   }
 }
