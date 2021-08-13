@@ -48,9 +48,16 @@ const CourseCategory = () => {
             &&
             courseCategory.map(item => {
               return (
-                <div className="card">
+                <div className="card" key={item.id} >
                   <div className="card-content">
-                    <RowCourse data={{ ...item, author: item.fullname, avg_vote:+item.avg_vote }} key={item.id} />
+                    <RowCourse 
+                      data={{ 
+                        ...item, 
+                        author: item.fullname, 
+                        avg_vote:+item.avg_vote,
+                        image: {img_source: item.course_img_source}
+                      }} 
+                    />
                   </div>
                 </div>
               )

@@ -68,9 +68,17 @@ const RelatedCourse = (props) => {
               return (
                 item.id === props.course_id
                   ? <div></div>
-                  : <div className="card" key={item.id}>
+                  : 
+                  <div className="card" key={item.id}>
                     <div className="card-content">
-                      <RowCourse data={{ ...item, author: item.fullname, avg_vote: +item.avg_vote }} />
+                      <RowCourse 
+                        data={{ 
+                          ...item, 
+                          author: item.fullname, 
+                          avg_vote:+item.avg_vote,
+                          image: {img_source: item.course_img_source}
+                        }} 
+                    />
                     </div>
                   </div>
               )
