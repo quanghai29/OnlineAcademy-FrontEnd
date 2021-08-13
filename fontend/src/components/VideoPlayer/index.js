@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 import { DOMAIN_API } from "../../redux/constants/common";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionType from '../../redux/constants/actionTypes';
+import WithAuthenticate from "../../components/HOCs/withAuthenticate";
+import {ROLE_STUDENT} from "../../redux/constants/common";
 
-export default function VideoPlayer(props) {
+const VideoPlayer = (props) => {
   const player = useRef();
   const [loadedVideo, setLoadedVideo ] = useState(false);
   const [source, setSource] = useState(null);
@@ -101,4 +103,5 @@ export default function VideoPlayer(props) {
   )
 };
 
+export default WithAuthenticate(VideoPlayer, [ROLE_STUDENT]);
 

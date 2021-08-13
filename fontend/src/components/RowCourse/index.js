@@ -1,8 +1,8 @@
 import styles from "./RowCourse.module.scss";
-import courseImg from "../../assets/images/image.jpg";
 import NumberFormat from 'react-number-format';
 import { Link } from "react-router-dom";
 import StarRatings from 'react-star-ratings';
+import {DOMAIN_API} from "../../redux/constants/common"
 
 export default function RowCourse(props) {
 
@@ -10,7 +10,7 @@ export default function RowCourse(props) {
     <div className={styles['row-course-container']}>
       <div className={styles['row-course__right-content']}>
         <div className={styles['row-course__img']}>
-          <img src={courseImg} alt="course-avatar" />
+          <img src={`${DOMAIN_API}/common/media/image/${props.data.image.img_source}`} alt="course-avatar" />
         </div>
         <div className={styles['row-course__info']}>
           <div className={styles['text-info']}>

@@ -20,6 +20,7 @@ export default function Video(props) {
           video_id: props.video_id
         }
       })
+      window.scrollTo(0, 0); 
     }
   }
   

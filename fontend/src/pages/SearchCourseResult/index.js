@@ -6,31 +6,31 @@ import {
   useLocation
 } from "react-router-dom";
 import {
-  FETCH_SEARCH_COURSE
-} from "../../redux/constants/actionTypes"
+  setIsLoading,
+  fetchSearchingCourse
+} from "../../redux/actions/searchCourse"
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 const SearchCourseResult = () => {
-  const data = useSelector(state => state.searchCourseReducer.courses);
+  const searchingCourseState = useSelector(state => state.searchCourseReducer);
+  const {courses, isLoading} = searchingCourseState;
   const dispatch = useDispatch();
 
   let query = useQuery();
   const text_search = query.get("text_search");
   
   useEffect(()=>{
-    dispatch({
-      type: FETCH_SEARCH_COURSE,
-      payload: text_search
-    });
+    dispatch(fetchSearchingCourse(text_search));
+    dispatch(setIsLoading(true));
   }, [text_search, dispatch]);
 
   return (
     <Layout>
-      <SearchCourseResultContainer data={data}
-      text_search = {text_search}
+      <SearchCourseResultContainer data={courses} 
+      text_search = {text_search} isLoading={isLoading}
       />
     </Layout>
   )

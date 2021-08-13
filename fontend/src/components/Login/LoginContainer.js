@@ -14,6 +14,8 @@ import {
 import { useEffect } from "react"
 import Swal from "sweetalert2"
 import { useHistory } from "react-router-dom"
+import styles from "./Login.module.scss"
+
 
 
 export default function LoginContainer() {
@@ -44,14 +46,14 @@ export default function LoginContainer() {
     }
   }, [
     loginState.responseData.shouldConfirmEmail,
-    history, 
+    history,
     dispatch,
     loginState.responseData.email
   ])
 
-  useEffect(()=>{
-    if(loginState.responseData.isAuth){
-      
+  useEffect(() => {
+    if (loginState.responseData.isAuth) {
+
       history.push('/');
     }
   }, [loginState.responseData.isAuth, history]);
@@ -94,7 +96,7 @@ export default function LoginContainer() {
                     actionType={item.actionType}
                     warningMess={item.warningMess}
                     reducer="loginReducer"
-                    style={{ marginBottom: index === 0 ? '15px' : '' }}
+                    // style={{ marginBottom: index === 0 ? '15px' : '' }}
                     key={index} />
                 )
               })
@@ -108,6 +110,17 @@ export default function LoginContainer() {
             <div className="small-text" style={{ marginTop: "10px" }}>
               <span>Bạn chưa có tài khoản?</span>
               <Link to='/signup'> Đăng kí</Link>
+            </div>
+            <div className={styles['login-with-other-container']}>
+              <span>Hoặc đăng nhập bằng</span>
+              <div>
+                <i class={`fab fa-google ${styles['google-icon']}`}></i>
+                <i class={`fab fa-facebook ${styles['facebook-icon']}`}></i>
+              </div>
+              {/* <button>
+                <img src={googleLogo} alt="google logo"></img>
+                Đăng nhập với Google
+              </button> */}
             </div>
           </form>
         </div>

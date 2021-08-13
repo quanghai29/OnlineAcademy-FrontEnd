@@ -1,6 +1,5 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects';
 import * as actionType from '../constants/actionTypes';
-import Swal from 'sweetalert2';
 import {studentCourse} from '../../api/course';
 
 function* fetchCouseLearning(action) {
@@ -16,23 +15,41 @@ function* fetchCouseLearning(action) {
         });
         break;
       case 400 || 401:
-        Swal.fire({
-          icon: 'error',
-          title: response.data.message,
+        yield put({
+          type: actionType.ERROR_COURSE_LEARNING,
+          payload:{
+            error_message: response.data.message
+          }
         })
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: response.data.message,
+        // })
         break;
       default:
-        Swal.fire({
-          icon: 'error',
-          title: 'Server has something error',
+        yield put({
+          type: actionType.ERROR_COURSE_LEARNING,
+          payload:{
+            error_message: 'Server has something error'
+          }
         })
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: 'Server has something error',
+        // })
         break;
     }
   } catch (error) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Something went wrong',
+    yield put({
+      type: actionType.ERROR_COURSE_LEARNING,
+      payload:{
+        error_message: 'Something went wrong',
+      }
     })
+    // Swal.fire({
+    //   icon: 'error',
+    //   title: 'Something went wrong',
+    // })
     console.log(error)
   }
 }
