@@ -10,6 +10,12 @@
   color: #000000;
   font-weight: bold;
   font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  .has-discount{
+    text-decoration: line-through;
+    color: #979797;
+  }
 }
 
 .row-course__right-content{
