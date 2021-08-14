@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLatestCourses, fetchMostViewCourses } from '../../redux/actions/course';
+import { fetchHotCourse } from '../../redux/actions/hotCourses';
 import { fetchHotCategories } from '../../redux/actions/categories';
 import Layout from '../../layout/Layout';
 import classes from './Home.module.scss';
@@ -10,13 +11,14 @@ import HotCategories from '../../components/HotCategories';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { latestCourses, mostViewCourses, hotCategories } = useSelector((state) => state);
+  const { latestCourses, mostViewCourses, hotCourses ,hotCategories } = useSelector((state) => state);
   const videoReducer = useSelector((state) => state.videoReducer);
 
   console.log('video state', videoReducer);
   useEffect(() => {
     dispatch(fetchLatestCourses());
     dispatch(fetchMostViewCourses());
+    dispatch(fetchHotCourse());
     dispatch(fetchHotCategories());
   }, [dispatch]);
 
@@ -35,7 +37,10 @@ const Home = () => {
             <Courses courses={latestCourses.data} title='Những khóa học mới nhất' />
           </section>
           <section>
-            <Courses courses={mostViewCourses.data} title='Lượt xem nhiều nhất' />
+            <Courses courses={mostViewCourses.data} title='Những khóa học được xem nhiều nhất' />
+          </section>
+          <section>
+            <Courses courses={hotCourses.data} title='Những khóa học nổi bật nhất' />
           </section>
           <section>
             <HotCategories categories={hotCategories.data} title='Danh mục nổi bật' />
