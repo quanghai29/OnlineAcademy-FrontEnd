@@ -72,7 +72,7 @@ export const getCourses = {
   getHotCourses: async () => {
     try {
       const { data } = await appAPI.get('/course/outstanding');
-      return data;
+      return data.data;
     } catch (err) {
       throw new Error(err.message);
     }
