@@ -61,6 +61,8 @@ const AddVideoModal = () => {
       if (!isLoading) {
         if (!error) {
           e.target.reset();
+          setPreviewVideoUrl('');
+          setSelectedFile(null);
           const elem = document.getElementById('add-video-modal');
           const instance = M.Modal.getInstance(elem);
           instance.close();
