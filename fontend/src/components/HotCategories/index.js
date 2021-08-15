@@ -19,7 +19,11 @@ const HotCategories = ({title, categories}) => {
             <h3 className={classes.title}>{title}</h3>
             <section className={classes.catList}>
                 {categories.map(category => (
-                    <div className={`card ${classes.categoriCard}`} onClick={() => getcourseByCategory(category.id, category.category_name)}>
+                    <div 
+                        className={`card ${classes.categoriCard}`} 
+                        onClick={() => getcourseByCategory(category.id, category.category_name)}
+                        key={category.id}
+                    >
                         <div className="card-content">
                             <h6 className={classes.content}>{category.category_name}</h6>
                         </div>

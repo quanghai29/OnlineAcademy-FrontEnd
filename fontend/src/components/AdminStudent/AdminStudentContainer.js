@@ -5,15 +5,18 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchStudentData,
-  requestDeleteStudentItem
+  requestDeleteStudentItem,
+  setStudentLoading
 } from "../../redux/actions/admin_student";
 import Swal from 'sweetalert2';
 import { useHistory } from "react-router";
+import PreLoading from "../PreLoading/index";
+import styles from "./AdminStudent.module.scss";
 
 
 const AdminStudentContainer = () => {
   const studentState = useSelector(state => state.adminStudentReducer);
-  const { students,indexOfDeletedItem } = studentState;
+  const { students, indexOfDeletedItem, isLoading } = studentState;
   const dispatch = useDispatch();
   const perPage = 5;
   const history = useHistory();
@@ -26,7 +29,6 @@ const AdminStudentContainer = () => {
     "Ngày tạo"
   ];
 
-  const [isLoading, setIsLoading] = useState(true);
   const [pageData, setPageData] = useState([]);
   const [offset, setOffset] = useState(0);
   const [selectedPage, setSelectedPage] = useState(0);
@@ -40,16 +42,9 @@ const AdminStudentContainer = () => {
   }, [students, indexOfDeletedItem, studentState]);
 
   useEffect(() => {
+    dispatch(setStudentLoading(true));
     dispatch(fetchStudentData());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (students) {
-      setIsLoading(false);
-    } else {
-      setIsLoading(true);
-    }
-  }, [students])
 
   useEffect(() => {
     let offset = Math.ceil(selectedPage * perPage);
@@ -86,13 +81,30 @@ const AdminStudentContainer = () => {
     setSelectedPage(data.selected);
   }
 
-  function handleOpenItem(index){
+  function handleOpenItem(index) {
     history.push({
       pathname: '/profile',
-      state:{
+      state: {
         user_id: students[index + offset].id
       }
     })
+  }
+
+  let tableContent = null;
+  if (isLoading) {
+    tableContent = <div className={styles['loading--position']}>
+      <PreLoading />
+    </div>
+  } else {
+    tableContent = <>
+      <StudentTable headers={headers} data={pageData}
+        startIndex={offset} deleteItem={handleDeleteTableItem}
+        openItem={handleOpenItem} />
+      <PaginationContainer pageCount={Math.ceil(students?.length / perPage)}
+        pageRangeDisplayed={5} marginPagesDisplayed={2}
+        handleClickSelectedPage={handleClickSelectedPage}
+        selectedPage={selectedPage} />
+    </>
   }
 
   return (
@@ -100,17 +112,7 @@ const AdminStudentContainer = () => {
       listIcon={<span className="material-icons">
         school
       </span>}>
-      {
-        !isLoading && <>
-          <StudentTable headers={headers} data={pageData}
-            startIndex={offset} deleteItem={handleDeleteTableItem} 
-            openItem={handleOpenItem}/>
-          <PaginationContainer pageCount={Math.ceil(students.length / perPage)}
-            pageRangeDisplayed={5} marginPagesDisplayed={2}
-            handleClickSelectedPage={handleClickSelectedPage}
-            selectedPage={selectedPage} />
-        </>
-      }
+      {tableContent}
     </AdminContainer>
   )
 }

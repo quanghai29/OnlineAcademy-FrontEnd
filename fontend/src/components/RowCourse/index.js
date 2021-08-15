@@ -2,17 +2,16 @@ import styles from "./RowCourse.module.scss";
 import NumberFormat from 'react-number-format';
 import { Link } from "react-router-dom";
 import StarRatings from 'react-star-ratings';
-import {DOMAIN_API} from "../../redux/constants/common"
+import { DOMAIN_API } from "../../redux/constants/common"
 
 export default function RowCourse(props) {
-
   return (
     <div className={styles['row-course-container']}>
       <div className={styles['row-course__right-content']}>
         <div className={styles['row-course__img']}>
-          <img 
-            src={`${DOMAIN_API}/common/media/image/${props.data.image.img_source}`} 
-            alt="course-avatar" 
+          <img
+            src={`${DOMAIN_API}/common/media/image/${props.data.image.img_source}`}
+            alt="course-avatar"
           />
         </div>
         <div className={styles['row-course__info']}>
@@ -49,9 +48,15 @@ export default function RowCourse(props) {
         </div>
       </div>
       <div className={styles['row-course__price']}>
-        <NumberFormat value={props.data.discount === 0 ? props.data.price :
-          props.data.price * props.data.discount} displayType={'text'}
-          thousandSeparator={true} thousandsGroupStyle='thousand' suffix="VND" />
+        <NumberFormat value={props.data.price} displayType={'text'}
+          thousandSeparator={true} thousandsGroupStyle='thousand' suffix="VND"
+          className={props.data.discount === 0 ? '' : styles['has-discount']} />
+        {
+          props.data.discount > 0 && <NumberFormat
+            value={props.data.price - props.data.price * props.data.discount}
+            displayType={'text'} thousandSeparator={true} thousandsGroupStyle='thousand'
+            suffix="VND" />
+        }
       </div>
     </div>
   )
