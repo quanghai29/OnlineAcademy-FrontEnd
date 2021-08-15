@@ -150,6 +150,7 @@ export const SET_LOGOUT = 'SET_LOGOUT';
 // =================== Type Action Course of Category ==================
 export const FETCH_COURSE_OF_CATEGORY = 'FETCH_COURSE_OF_CATEGORY';
 export const SET_COURSE_OF_CATEGORY = 'SET_COURSE_OF_CATEGORY';
+export const ERROR_COURSE_OF_CATEGORY = 'ERROR_COURSE_OF_CATEGORY';
 //===================================================================
 
 // =================== Type Action Course of Student Register ==================

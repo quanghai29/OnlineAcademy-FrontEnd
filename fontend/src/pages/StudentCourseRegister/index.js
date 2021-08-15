@@ -4,6 +4,8 @@ import Layout from '../../layout/Layout';
 import * as actionType from '../../redux/constants/actionTypes';
 import RowCourse from '../../components/RowCourse';
 import classes from './style.module.scss';
+import WithAuthenticate from "../../components/HOCs/withAuthenticate";
+import {ROLE_STUDENT} from "../../redux/constants/common";
 
 const CourseRegister = () => {
   const stCoureRegister = useSelector(state => state.studentCourseRegister.data);
@@ -57,7 +59,9 @@ const CourseRegister = () => {
             && 
             stCoureRegister.length === 0
             &&
-            <div className={classes.noneData}>Danh sách rỗng</div>
+            <div className={classes.noneData}>
+               <h6 className="center">Danh sách rỗng...</h6>
+            </div>
           }
         </div>
       </div>
@@ -65,4 +69,4 @@ const CourseRegister = () => {
   );
 };
 
-export default CourseRegister;
+export default WithAuthenticate(CourseRegister, [ROLE_STUDENT]);

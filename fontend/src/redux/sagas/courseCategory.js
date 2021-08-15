@@ -2,7 +2,6 @@ import axios from 'axios';
 import { takeEvery, put, all, call } from 'redux-saga/effects';
 import * as actionType from '../constants/actionTypes';
 import {DOMAIN_API} from '../constants/common';
-import Swal from 'sweetalert2';
 
 function* fetchCourseOfCategory(action) {
   try {
@@ -17,9 +16,8 @@ function* fetchCourseOfCategory(action) {
       })
     }
   } catch (error) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Something went wrong',
+    yield put({
+      type: actionType.ERROR_COURSE_OF_CATEGORY
     })
     console.log(error);
   }
