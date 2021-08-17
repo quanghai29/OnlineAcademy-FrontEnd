@@ -108,7 +108,7 @@ export default function OverviewInfo(props) {
                 favoriteCourse.course_id === props.id
                   &&
                   favoriteCourse.isFavorite
-                  ? <i className="material-icons right">favorite </i>
+                  ? <i className="material-icons right" style={{color: "red"}}>favorite </i>
                   : <i className="material-icons right">favorite_border</i>
               }
               Yêu thích

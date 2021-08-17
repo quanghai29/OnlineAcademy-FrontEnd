@@ -39,7 +39,29 @@ const CourseRegister = () => {
             stCoureRegister.map(item => {
               return (
                 <div className="card" key={item.id}>
-                  <div className="card-content">
+                  <div class={`card-image waves-effect waves-block waves-light ${classes.cardImage}`}>
+                      {/* eslint-disable-next-line */}
+
+                      {
+                        !item.course_status
+                        ?
+                        <>
+                          <p style={{color: "grey"}}>Đang cập nhật</p>
+                          <div className={`progress ${classes.progress}`}>
+                            <div className="determinate" style={{width: '0'}} />
+                          </div>
+                        </>
+                        :
+                        <>
+                          <p style={{fontWeight: "bold"}}>Đã cập nhật đầy đủ</p>
+                          <div className={`progress ${classes.progress}`}>
+                            <div className="determinate" style={{width: '100%'}} />
+                          </div>
+                        </>
+                      }
+                      
+                  </div>
+                  <div className={`card-content ${classes.cardContent}`}>
                     <RowCourse 
                       data={{ 
                         ...item, 
