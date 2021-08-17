@@ -224,7 +224,7 @@ const CommonDescription = () => {
             {errors.discount && (
               <span style={requiredStyle}>This field is required</span>
             )}
-            <label htmlFor="discount">Khuyến mãi</label>
+            <label htmlFor="discount">Khuyến mãi %</label>
           </div>
         </div>
         <button

@@ -77,3 +77,7 @@ export const updateUserPasswordFail = (message) => ({
 export const setErrorInitial = _ => ({
   type: type.SET_ERROR_INITIAL
 })
+
+export const setIsChangePassSuccessInitial = _ => ({
+  type: type.SET_ISCHANGEPASSSUCCESS_INITIAL
+})
