@@ -62,6 +62,12 @@
         }
       }
     }
+
+    .salePrice {
+      text-decoration: line-through;
+      margin-left: 10px;
+      color: rgb(212, 219, 150);
+    }
   }
 }
 
