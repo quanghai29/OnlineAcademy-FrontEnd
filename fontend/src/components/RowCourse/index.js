@@ -53,7 +53,7 @@ export default function RowCourse(props) {
           className={props.data.discount === 0 ? '' : styles['has-discount']} />
         {
           props.data.discount > 0 && <NumberFormat
-            value={props.data.price - props.data.price * props.data.discount}
+            value={props.data.price - props.data.price * (props.data.discount/100)}
             displayType={'text'} thousandSeparator={true} thousandsGroupStyle='thousand'
             suffix="VND" />
         }
