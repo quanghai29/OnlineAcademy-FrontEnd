@@ -2,7 +2,7 @@ import { call, put, takeLatest, all } from 'redux-saga/effects';
 import * as lecturerActions from "../actions/admin_lecturer"
 import {
   FETCH_LECTURER_DATA,
-  REQUEST_DELETE_LECTURER_ITEM,
+  REQUEST_BLOCK_LECTURER_ITEM,
   REQUEST_CREATE_LECTURER_ITEM
 } from "../constants/actionTypes"
 import * as adminApi from "../../api/admin";
@@ -17,14 +17,15 @@ function* watchFetchLecturerData() {
   yield takeLatest(FETCH_LECTURER_DATA, requestFetchLecturerData);
 }
 
-function* requestDeleteLecturerItem(action) {
-  const { id, index } = action.data;
-  yield put(lecturerActions.deleteLecturerItem(index));
-  yield call(adminApi.deleteLecturerItem, id);
+function* requestBlockLecturerItem(action) {
+  const { id } = action.data;
+  yield call(adminApi.blockLecturerItem, id);
+  yield put(lecturerActions.setLecturerLoading(true));
+  yield requestFetchLecturerData();
 }
 
-function* watchDeleteLecturerItem() {
-  yield takeLatest(REQUEST_DELETE_LECTURER_ITEM, requestDeleteLecturerItem);
+function* watchBlockLecturerItem() {
+  yield takeLatest(REQUEST_BLOCK_LECTURER_ITEM, requestBlockLecturerItem);
 }
 
 function* requestCreateLecturerItem(action) {
@@ -61,7 +62,7 @@ function* watchCreateLecturerItem() {
 export default function* adminLecturerSaga() {
   yield all([
     watchFetchLecturerData(),
-    watchDeleteLecturerItem(),
+    watchBlockLecturerItem(),
     watchCreateLecturerItem(),
   ])
 }

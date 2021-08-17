@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchStudentData,
-  requestDeleteStudentItem,
+  requestBlockStudentItem,
   setStudentLoading
 } from "../../redux/actions/admin_student";
 import Swal from 'sweetalert2';
@@ -60,19 +60,17 @@ const AdminStudentContainer = () => {
 
   function handleDeleteTableItem(index) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: `You won't be able to revert this!`,
+      title: 'Bạn có chắc muốn khóa tài khoản này?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, block it!'
     }).then((result) => {
       if (result.isConfirmed) {
         const data = {};
         data.id = students[index + offset].id;
-        data.index = index + offset;
-        dispatch(requestDeleteStudentItem(data));
+        dispatch(requestBlockStudentItem(data));
       }
     })
   }

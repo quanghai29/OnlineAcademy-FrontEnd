@@ -1,8 +1,7 @@
 import {
   FETCH_STUDENT_DATA,
   SET_STUDENT_DATA,
-  REQUEST_DELETE_STUDENT_ITEM,
-  DELETE_STUDENT_ITEM,
+  REQUEST_BLOCK_STUDENT_ITEM,
   SET_ADMIN_STUDENT_LOADING
 } from "../constants/actionTypes"
 
@@ -19,16 +18,9 @@ export const setStudentData = (data)=>{
   }
 }
 
-export const requestDeleteStudentItem = (data)=>{
+export const requestBlockStudentItem = (data)=>{
   return{
-    type: REQUEST_DELETE_STUDENT_ITEM,
-    data
-  }
-}
-
-export const deleteStudentItem = (data)=>{
-  return{
-    type: DELETE_STUDENT_ITEM,
+    type: REQUEST_BLOCK_STUDENT_ITEM,
     data
   }
 }

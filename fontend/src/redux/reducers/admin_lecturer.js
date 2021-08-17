@@ -1,6 +1,5 @@
 import {
   SET_LECTURER_DATA,
-  DELETE_LECTURER_ITEM,
   SET_IS_SHOW_LECTURE_FORM_MODAL,
   SET_LECTURER_USERNAME,
   SET_LECTURER_PASSWORD,
@@ -36,13 +35,6 @@ const adminLecturerReducer = (state = initialState, action)=>{
       newState.form.username= newState.form.password=
       newState.form.usernameWarning= newState.form.passwordWarning = '';
 
-      return newState;
-    }
-    case DELETE_LECTURER_ITEM:{
-      let newState = {...state};
-      newState.lecturers.splice(action.data, 1);
-      newState.indexOfDeletedItem = action.data;
-      
       return newState;
     }
     case SET_IS_SHOW_LECTURE_FORM_MODAL:{

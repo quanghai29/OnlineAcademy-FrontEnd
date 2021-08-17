@@ -1,8 +1,7 @@
 import {
   FETCH_LECTURER_DATA,
   SET_LECTURER_DATA,
-  REQUEST_DELETE_LECTURER_ITEM,
-  DELETE_LECTURER_ITEM,
+  REQUEST_BLOCK_LECTURER_ITEM,
   REQUEST_CREATE_LECTURER_ITEM,
   SET_IS_SHOW_LECTURE_FORM_MODAL,
   SET_LECTURER_USERNAME,
@@ -25,16 +24,9 @@ export const setLecturerData = (data)=>{
   }
 }
 
-export const requestDeleteLecturerItem = (data)=>{
+export const requestBlockLecturerItem = (data)=>{
   return{
-    type: REQUEST_DELETE_LECTURER_ITEM,
-    data
-  }
-}
-
-export const deleteLecturerItem = (data)=>{
-  return{
-    type: DELETE_LECTURER_ITEM,
+    type: REQUEST_BLOCK_LECTURER_ITEM,
     data
   }
 }

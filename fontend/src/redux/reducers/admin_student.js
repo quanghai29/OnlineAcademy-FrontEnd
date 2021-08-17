@@ -1,6 +1,5 @@
 import {
   SET_STUDENT_DATA,
-  DELETE_STUDENT_ITEM,
   SET_ADMIN_STUDENT_LOADING
 } from "../constants/actionTypes"
 
@@ -19,12 +18,6 @@ const adminStudentReducer = (state = initialState, action)=>{
         indexOfDeletedItem: -1,
         isLoading: false
       }
-      return newState;
-    }
-    case DELETE_STUDENT_ITEM:{
-      let newState = {...state};
-      newState.students.splice(action.data, 1);
-      newState.indexOfDeletedItem = action.data;
       return newState;
     }
     case SET_ADMIN_STUDENT_LOADING:{

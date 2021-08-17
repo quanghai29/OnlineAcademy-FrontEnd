@@ -53,7 +53,6 @@ export default function LoginContainer() {
 
   useEffect(() => {
     if (loginState.responseData.isAuth) {
-
       history.push('/');
     }
   }, [loginState.responseData.isAuth, history]);

@@ -1,6 +1,6 @@
-import {instance} from "../redux/axios/account"
+import { instance } from "../redux/axios/account"
 import Swal from 'sweetalert2';
-import {parseJwt} from '../utils/helpers';
+import { parseJwt } from '../utils/helpers';
 
 export async function submitSignUpForm(data) {
   return await instance.post('/account/signup', data).then(res => {
@@ -59,25 +59,32 @@ export async function submitLoginForm(data) {
     const response = await instance.post('/auth', data);
     if (!response.data.shouldConfirmEmail) {
       if (response.data.authenticated) {
-        try{
+        try {
           const decoded = parseJwt(response.data.accessToken);
           localStorage.setItem('decodePayload', JSON.stringify(decoded));
-          localStorage.GelApp_userId =  decoded.userId;
-        }catch(err){
-          console.log(err);          
+          localStorage.GelApp_userId = decoded.userId;
+        } catch (err) {
+          console.log(err);
         }
-        
+
         localStorage.setItem('accessToken', response.data.accessToken);
         localStorage.setItem('refreshToken', response.data.refreshToken);
-        
-      } else {
+
+      } else if (response.data.isDisable) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Tài khoản này đã bị khóa!',
+        })
+      }else {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Username or password is not correct!',
         })
       }
-    }
+    } 
+
     return {
       isAuth: response.data.authenticated,
       username: response.data.username || '',
@@ -99,11 +106,11 @@ export async function activeAccount(email) {
     'otpToken', responseData.data.otpToken);
 }
 
-export async function submitEmail(data){
-  try{
+export async function submitEmail(data) {
+  try {
     const res = await instance.post('/account/forgot-password', data);
     return res.data;
-  }catch(err){
+  } catch (err) {
     console.log(err);
   }
 }

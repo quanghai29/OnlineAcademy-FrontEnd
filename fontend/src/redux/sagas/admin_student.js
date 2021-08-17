@@ -2,7 +2,7 @@ import { call, put, takeLatest, all } from 'redux-saga/effects';
 import * as studentActions from "../actions/admin_student";
 import {
   FETCH_STUDENT_DATA,
-  REQUEST_DELETE_STUDENT_ITEM
+  REQUEST_BLOCK_STUDENT_ITEM
 } from "../constants/actionTypes";
 import * as adminApi from "../../api/admin"
 
@@ -15,19 +15,19 @@ function* watchFetchStudentData(){
   yield takeLatest(FETCH_STUDENT_DATA, requestFetchStudentData);
 }
 
-function* requestDeleteStudentItem(action){
-  const index = action.data.index;
-  yield put(studentActions.deleteStudentItem(index));
-  yield call(adminApi.deleteStudentItem,action.data.id);
+function* requestBlockStudentItem(action){
+  yield call(adminApi.blockStudentItem,action.data.id);
+  yield put(studentActions.setStudentLoading(true));
+  yield requestFetchStudentData();
 }
 
-function* watchDeleteStudentItem(){
-  yield takeLatest(REQUEST_DELETE_STUDENT_ITEM, requestDeleteStudentItem);
+function* watchBlockStudentItem(){
+  yield takeLatest(REQUEST_BLOCK_STUDENT_ITEM, requestBlockStudentItem);
 }
 
 export default function* adminStudentSaga(){
   yield all([
     watchFetchStudentData(),
-    watchDeleteStudentItem()
+    watchBlockStudentItem()
   ])
 }

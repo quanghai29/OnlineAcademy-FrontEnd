@@ -28,19 +28,23 @@ const LecturerTable = (props) => {
               return (
                 <tr key={index}>
                   <td>{props.startIndex + index + 1}</td>
-                  <td>{item.username}</td>
-                  <td>{item.email}</td>
-                  <td>{item.create_date}</td>
-                  <td>{item.creator}</td>
+                  <td className={item.enable === 1 ? '' : styles['disable-account']}>{item.username}</td>
+                  <td className={item.enable === 1 ? '' : styles['disable-account']}>{item.email}</td>
+                  <td className={item.enable === 1 ? '' : styles['disable-account']}>{item.create_date}</td>
+                  <td className={item.enable === 1 ? '' : styles['disable-account']}>{item.creator}</td>
                   <td>
-                    <span id={index} onClick={handleOpenItem}
-                      className={`material-icons ${styles['open-in-new-icon']}`}>
-                      open_in_new
-                    </span>
-                    <span id={index} onClick={handleDeleteItem}
-                      className={`material-icons ${styles['delete-icon']}`}>
-                      delete
-                    </span>
+                    {
+                      item.enable === 1 && <>
+                        <span id={index} onClick={handleOpenItem}
+                          className={`material-icons ${styles['open-in-new-icon']}`}>
+                          open_in_new
+                        </span>
+                        <span id={index} onClick={handleDeleteItem}
+                          className={`material-icons ${styles['delete-icon']}`}>
+                          person_off
+                        </span>
+                      </>
+                    }
                   </td>
                 </tr>
               )
