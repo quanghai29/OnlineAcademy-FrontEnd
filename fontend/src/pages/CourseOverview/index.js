@@ -40,6 +40,17 @@ const CourseOverview = () => {
     }
   },[isLoading, courseOverview.isLoading])
 
+  useEffect(function(){
+    if(!isLoading){
+      dispatch({
+        type: actionType.UPDATE_VIEWS_COURSE,
+        payload:{
+          course_id: stateLocation.course_id
+        }
+      })
+    }
+  },[isLoading, dispatch, stateLocation.course_id])
+
   return (
     isLoading
     ? 

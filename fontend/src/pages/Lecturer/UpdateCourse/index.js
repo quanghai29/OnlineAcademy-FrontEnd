@@ -6,6 +6,8 @@ import CourseImage from '../../../components/Lecturer/CourseImage';
 import AddTitleChapterModal from '../../../components/Lecturer/Modals/AddTitleChapterModal';
 import ChapterTable from '../../../components/Lecturer/ChapterTable';
 import classes from './styles.module.scss';
+import WithAuthenticate from '../../../components/HOCs/withAuthenticate';
+import { ROLE_LECTURER } from '../../../redux/constants/common';
 
 const UpdateCourse = () => {
   useEffect(function () {
@@ -71,4 +73,4 @@ const UpdateCourse = () => {
   );
 };
 
-export default UpdateCourse;
+export default WithAuthenticate(UpdateCourse, [ROLE_LECTURER]);

@@ -1,8 +1,15 @@
-.noneData{
-  height: 174px !important;
-}
-
 .cateHeader{
   font-weight: bold;
   color:#FF8A00 !important;
+}
+
+.noneData{
+  height: 286px;
+}
+.loading{
+  margin: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

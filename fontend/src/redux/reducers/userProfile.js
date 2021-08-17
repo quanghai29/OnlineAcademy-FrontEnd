@@ -4,6 +4,7 @@ const initialState = {
   data: {},
   isLoading: false,
   error: null,
+  isChangePassSuccess: false
 };
 
 const userProfile = (state = initialState, action) => {
@@ -75,7 +76,8 @@ const userProfile = (state = initialState, action) => {
     case type.UPDATE_MEMBER_PASSWORD_DONE:
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
+        isChangePassSuccess: true
       }
     case type.UPDATE_MEMBER_PASSWORD_FAIL:
       return {
@@ -87,6 +89,11 @@ const userProfile = (state = initialState, action) => {
       return {
         ...state,
         error: initialState.error
+      }
+    case type.SET_ISCHANGEPASSSUCCESS_INITIAL:
+      return {
+        ...state,
+        isChangePassSuccess: false
       }
     default:
       return state;

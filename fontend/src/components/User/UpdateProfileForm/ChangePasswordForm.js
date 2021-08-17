@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as actionTypes from '../../../redux/constants/actionTypes'
-import { updateUserPassword, setErrorInitial } from '../../../redux/actions/userProfile';
+import { updateUserPassword, setErrorInitial, setIsChangePassSuccessInitial } from '../../../redux/actions/userProfile';
 import Swal from 'sweetalert2';
 
 const ChangePasswordForm = () => {
@@ -17,38 +17,37 @@ const ChangePasswordForm = () => {
   } = useForm();
   let val_new_pass = watch('new_password', '');
 
-  const { data, isLoading, error } = useSelector((state) => state.userProfile);
+  const { data, error, isChangePassSuccess } = useSelector((state) => state.userProfile);
 
   const onSubmitHandler = async (formData, e) => {
     formData.account_id = data.account_id;
     dispatch(updateUserPassword(formData));
-    setTimeout(() => {
-      if (!isLoading) {
-        if (error) {
-          Swal.fire({
-            title: 'Update Pasword Failure',
-            text: error,
-            icon: 'error',
-            confirmButtonText: 'EXIT',
-          }).then(() => {
-            dispatch(setErrorInitial());
-          });
-        } else {
-          Swal.fire({
-            title: 'Update Pasword Success',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          }).then(() => {
-            e.target.reset();
-            dispatch({
-              type: actionTypes.FETCH_LOGOUT
-            });
-            history.push("/login");
-          });
-        }
-      }
-    }, 1000);
   };
+
+  useEffect(() => {
+    if(isChangePassSuccess) {
+      Swal.fire({
+        title: 'Update Pasword Success',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      }).then(() => {
+        dispatch({
+          type: actionTypes.FETCH_LOGOUT
+        });
+        history.push("/login");
+        dispatch(setIsChangePassSuccessInitial());
+      });
+    } else if(error) {
+      Swal.fire({
+        title: 'Update Pasword Failure',
+        text: error,
+        icon: 'error',
+        confirmButtonText: 'EXIT',
+      }).then(() => {
+        dispatch(setErrorInitial());
+      });
+    }
+  })
 
   return (
     <div className="row">

@@ -132,7 +132,7 @@ const PersonalInfoForm = () => {
               id="email"
               type="email"
               className="validate"
-              defaultValue={data.email}
+              value={data.email}
               disabled
             />
             <label className="active" htmlFor="email">

@@ -137,6 +137,10 @@ export const courseOverview = {
     const respone = await guestAPI.get(`/course/bestseller-category/${category_id}` ,{ validateStatus: false })
     return respone;
   },
+  updateViewsCourse : async(course_id)=>{
+    const respone = await guestAPI.post(`/course/watch-course` ,{course_id},{ validateStatus: false })
+    return respone;
+  },
 }
 
 // #endregion

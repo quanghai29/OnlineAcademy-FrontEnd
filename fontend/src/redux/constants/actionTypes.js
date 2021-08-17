@@ -110,11 +110,13 @@ export const UPDATE_MEMBER_PASSWORD = 'UPDATE_MEMBER_PASSWORD';
 export const UPDATE_MEMBER_PASSWORD_DONE = 'UPDATE_MEMBER_PASSWORD_DONE';
 export const UPDATE_MEMBER_PASSWORD_FAIL = 'UPDATE_MEMBER_PASSWORD_FAIL';
 export const SET_ERROR_INITIAL = 'SET_ERROR_INITIAL';
+export const SET_ISCHANGEPASSSUCCESS_INITIAL = 'SET_ISCHANGEPASSSUCCESS_INITIAL';
 
 // =================== Type Action Course Overview ==========================
 export const GET_INFO_VIDEOS ='GET_INFO_VIDEOS';
 export const LOAD_VIDEO ='LOAD_VIDEO';
 export const FETCH_LOAD_VIDEO = 'FETCH_LOAD_VIDEO';
+export const UPDATE_VIEWS_COURSE = 'UPDATE_VIEWS_COURSE';
 export const FETCH_COURSE_OVERVIEW = 'FETCH_COURSE_OVERVIEW';
 export const SET_COURSE_OVERVIEW = 'SET_COURSE_OVERVIEW';
 export const ERROR_COURSE_OVERVIEW = 'ERROR_COURSE_OVERVIEW';
@@ -150,6 +152,7 @@ export const SET_LOGOUT = 'SET_LOGOUT';
 // =================== Type Action Course of Category ==================
 export const FETCH_COURSE_OF_CATEGORY = 'FETCH_COURSE_OF_CATEGORY';
 export const SET_COURSE_OF_CATEGORY = 'SET_COURSE_OF_CATEGORY';
+export const ERROR_COURSE_OF_CATEGORY = 'ERROR_COURSE_OF_CATEGORY';
 //===================================================================
 
 // =================== Type Action Course of Student Register ==================
