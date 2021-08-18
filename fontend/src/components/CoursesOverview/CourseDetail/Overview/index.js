@@ -34,7 +34,7 @@ export default function Overview(props) {
             </div>
             <div className="section center-align">
               <div className={`center-align ${classes.darkfontheader}`} style={{display:"block"}}>{props.lecturer_headline}</div>
-              <p className={`${classes.darkfonttext}`} style={{textAlign: "left"}}>{lecDescription}</p>
+              <p className={`${classes.darkfonttext}`} style={{textAlign: "left", display: "block"}}>{lecDescription}</p>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@ export default function Overview(props) {
           <div className="card-content dark-text">
             <span className={`card-title center-align ${classes.headText}`}>Mô tả chi tiết</span>
             <div className= "section">
-              <p className={`${classes.darkfonttext}`}>{description}</p>
+              <p style={{display: "block"}} className={`${classes.darkfonttext} ${classes.overwriteMT}`}>{description}</p>
             </div>
           </div>
         </div>

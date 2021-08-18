@@ -14,7 +14,7 @@ const ProfileContainer = ({ userId }) => {
       setUserInfo(data);
     }
     getUserProfile(userId);
-  }, [])
+  }, [userId])
 
   return (
     <div className="row">

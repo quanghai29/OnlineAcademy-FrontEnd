@@ -4,14 +4,19 @@ import Avartar from '../../../components/Common/Avartar';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useDispatch } from 'react-redux';
 import * as actionType from '../../../redux/constants/actionTypes'
+import { useEffect } from 'react';
 
 
 export default function LecturerNavbar(props) {
-  const elems = document.querySelectorAll('.dropdown-trigger');
-  // eslint-disable-next-line
-  const instances = M.Dropdown.init(elems, {});
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(function(){
+    const elems = document.querySelectorAll('.dropdown-trigger');
+    // eslint-disable-next-line
+    const instances = M.Dropdown.init(elems, {});
+  },[props])
+  
   const logout = ()=>{
     dispatch({
       type: actionType.FETCH_LOGOUT
@@ -25,7 +30,7 @@ export default function LecturerNavbar(props) {
       <li style={{ position: "relative" }}>
 
         {/* eslint-disable-next-line */}
-        <a className={`dropdown-trigger btn ${classes.dropdown}`} href="#" data-target="dropdown1">
+        <a className={`dropdown-trigger btn ${classes.dropdown}`} data-target="dropdown1">
           <Avartar  {...{ nickName: props.fullname }} />
         </a>
 

@@ -7,7 +7,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchLecturerData,
-  requestDeleteLecturerItem,
+  requestLockLecturerItem,
+  requestUnlockLecturerItem,
   setIsShowLecturerFormModal,
   setLecturerUsername,
   setLecturerPassword,
@@ -20,6 +21,7 @@ import PreLoading from "../PreLoading/index"
 
 const AdminLecturerContainer = () => {
   const lecturerState = useSelector(state => state.adminLecturerReducer);
+  const loginInfo = useSelector(state=>state.loginReducer.responseData);
   const { lecturers, indexOfDeletedItem, isShowFormModal, form, isLoading } = lecturerState;
   const dispatch = useDispatch();
   const perPage = 5;
@@ -71,29 +73,32 @@ const AdminLecturerContainer = () => {
     const data = {
       username: form.username,
       password: form.password,
-      creator: 'admin'
+      creator: loginInfo.username || 'admin'
     };
 
     dispatch(requestCreateLecturerItem(data));
   }
 
-  function handleDeleteLecturerItem(index) {
+  function handleLockLecturerItem(index) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: `You won't be able to revert this!`,
+      title: 'Bạn có chắc muốn khóa tài khoản này không?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, block it!'
     }).then((result) => {
       if (result.isConfirmed) {
         const data = {};
         data.id = lecturers[index + offset].id;
-        data.index = index + offset;
-        dispatch(requestDeleteLecturerItem(data));
+        dispatch(requestLockLecturerItem(data));
       }
     })
+  }
+
+  function handleUnlockLecturerItem(index){
+    const {id} = lecturers[index + offset];
+    dispatch(requestUnlockLecturerItem(id))
   }
 
   function handleOpenLecturerItem(index) {
@@ -133,7 +138,8 @@ const AdminLecturerContainer = () => {
   } else {
     tableContent = <>
       <LecturerTable headers={headers} data={pageData} startIndex={offset}
-        deleteItem={handleDeleteLecturerItem} openItem={handleOpenLecturerItem}
+        lockItem={handleLockLecturerItem} openItem={handleOpenLecturerItem}
+        unlockItem = {handleUnlockLecturerItem}
       />
       <PaginationContainer pageCount={Math.ceil(lecturers?.length / perPage)}
         pageRangeDisplayed={5} marginPagesDisplayed={2}
