@@ -124,10 +124,17 @@ export const getCourseData = async()=>{
   }
 }
 
-export const deleteAdminCourseItem = async(course_id)=>{
+export const lockAdminCourseItem = async(course_id)=>{
   try {
-    appAPI.defaults.headers.common['course_id'] = course_id;
-    const result = await appAPI.delete('/admin/course');
+    const result = await appAPI.patch(`/admin/course/lock/${course_id}`);
+    console.log('res delete', result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+export const unlockAdminCourseItem = async(course_id)=>{
+  try {
+    const result = await appAPI.patch(`/admin/course/unlock/${course_id}`);
     console.log('res delete', result);
   } catch (err) {
     console.log(err);

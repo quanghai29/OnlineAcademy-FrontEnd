@@ -1,5 +1,5 @@
 import styles from "./CourseTable.module.scss"
-import {DOMAIN_API} from "../../../redux/constants/common"
+import { DOMAIN_API } from "../../../redux/constants/common"
 
 const CourseTable = (props) => {
 
@@ -7,8 +7,12 @@ const CourseTable = (props) => {
     props.openItem(+e.target.id);
   }
 
-  function handleDeleteItem(e) {
-    props.deleteItem(+e.target.id);
+  function handleLockItem(e) {
+    props.lockItem(+e.target.id);
+  }
+
+  function handleUnlockItem(e) {
+    props.unlockItem(+e.target.id);
   }
 
   return (
@@ -36,24 +40,36 @@ const CourseTable = (props) => {
                         <img src={`${DOMAIN_API}/common/media/image/${item.img_source}`} alt={item.img_title} />
                       </div>
                       <div className={styles['course-column__text']}>
-                        <span className={styles['title']}>{item.title}</span>
-                        <span className={styles['short-description']}>{item.short_description}</span>
+                        <span className={item.enable_status === 1 ? styles['title'] : styles['disable-account']}>
+                          {item.title}
+                        </span>
+                        <span className={item.enable_status === 1 ? styles['short-description'] : styles['disable-account']}>
+                          {item.short_description}
+                        </span>
                       </div>
                     </div>
                   </td>
-                  <td>{item.create_date}</td>
-                  <td>{item.last_update}</td>
-                  <td>{item.course_status?"Đã hoàn thành" : "Chưa hoàn thành"}</td>
-                  <td>{item.creator}</td>
+                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>{item.create_date}</td>
+                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>{item.last_update}</td>
+                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>{item.course_status ? "Đã hoàn thành" : "Chưa hoàn thành"}</td>
+                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>{item.creator}</td>
                   <td>
-                    <span id={index} onClick={handleOpenItem}
-                      className={`material-icons ${styles['open-in-new-icon']}`}>
-                      open_in_new
-                    </span>
-                    <span id={index} onClick={handleDeleteItem}
-                      className={`material-icons ${styles['delete-icon']}`}>
-                      delete
-                    </span>
+                    {
+                      item.enable_status === 1 ? <>
+                        <span id={index} onClick={handleOpenItem}
+                          className={`material-icons ${styles['open-in-new-icon']}`}>
+                          open_in_new
+                        </span>
+                        <span id={index} onClick={handleLockItem}
+                          className={`material-icons ${styles['delete-icon']}`}>
+                          lock
+                        </span>
+                      </>
+                        : <span id={index} onClick={handleUnlockItem}
+                          className={`material-icons ${styles['delete-icon']}`}>
+                          lock_open
+                        </span>
+                    }
                   </td>
                 </tr>
               )

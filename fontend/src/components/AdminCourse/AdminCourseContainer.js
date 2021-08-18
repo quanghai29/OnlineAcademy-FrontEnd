@@ -6,8 +6,9 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAdminCourse,
-  requestDeleteAdminCourseItem,
-  setCourseLoading
+  requestLockCourseItem,
+  setCourseLoading,
+  requestUnlockCourseItem
 } from "../../redux/actions/admin_course"
 import Swal from 'sweetalert2';
 import { useHistory } from "react-router-dom";
@@ -66,23 +67,25 @@ const AdminCourseContainer = () => {
 
   }
 
-  function handleDeleteTableItem(index) {
+  function handleLockItem(index) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: `You won't be able to revert this!`,
+      title: 'Bạn có chắc muốn lock khóa học này không?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, Lock it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        const data = {};
-        data.id = courses[index + offset].course_id;
-        data.index = index + offset;
-        dispatch(requestDeleteAdminCourseItem(data));
+        const id = courses[index + offset].course_id;
+        dispatch(requestLockCourseItem(id));
       }
     })
+  }
+
+  function handleUnlockItem(index){
+    const id = courses[index + offset].course_id;
+    dispatch(requestUnlockCourseItem(id));
   }
 
   function handleOpenItem(index) {
@@ -102,8 +105,8 @@ const AdminCourseContainer = () => {
   } else {
     tableContent = <>
       <CourseTable headers={headers} data={pageData}
-        startIndex={offset} deleteItem={handleDeleteTableItem}
-        openItem={handleOpenItem} />
+        startIndex={offset} lockItem={handleLockItem}
+        openItem={handleOpenItem} unlockItem={handleUnlockItem}/>
       <PaginationContainer pageCount={Math.ceil(courses?.length / perPage)}
         pageRangeDisplayed={5} marginPagesDisplayed={2}
         handleClickSelectedPage={handleClickSelectedPage}
