@@ -130,7 +130,24 @@ export default function OverviewInfo(props) {
               </div>
 
               <div className={`card-content ${classes.price}`}>
-                <h5> {currency(props.price, { separator: ',', symbol: '', precision: 0 }).format()} VND</h5>
+                {
+                  props.discount > 0
+                  ?
+                    <>
+                      <h5 style={{textDecoration:"line-through", color: "grey"}}> 
+                        {currency(props.price, { separator: ',', symbol: '', precision: 0 }).format()} VND
+                      </h5>
+                      <h5> 
+                        {currency(props.price - props.price * props.discount * 0.01, { separator: ',', symbol: '', precision: 0 }).format()} VND
+                      </h5>
+                    </>
+                  :
+                    <>
+                      <h5> 
+                        {currency(props.price, { separator: ',', symbol: '', precision: 0 }).format()} VND
+                      </h5>
+                    </>
+                }
                 {
 
                   registerCourse.course_id === props.id && registerCourse.isRegister
