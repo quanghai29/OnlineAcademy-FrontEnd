@@ -7,7 +7,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchLecturerData,
-  requestBlockLecturerItem,
+  requestLockLecturerItem,
+  requestUnlockLecturerItem,
   setIsShowLecturerFormModal,
   setLecturerUsername,
   setLecturerPassword,
@@ -77,7 +78,7 @@ const AdminLecturerContainer = () => {
     dispatch(requestCreateLecturerItem(data));
   }
 
-  function handleDeleteLecturerItem(index) {
+  function handleLockLecturerItem(index) {
     Swal.fire({
       title: 'Bạn có chắc muốn khóa tài khoản này không?',
       icon: 'warning',
@@ -89,9 +90,14 @@ const AdminLecturerContainer = () => {
       if (result.isConfirmed) {
         const data = {};
         data.id = lecturers[index + offset].id;
-        dispatch(requestBlockLecturerItem(data));
+        dispatch(requestLockLecturerItem(data));
       }
     })
+  }
+
+  function handleUnlockLecturerItem(index){
+    const {id} = lecturers[index + offset];
+    dispatch(requestUnlockLecturerItem(id))
   }
 
   function handleOpenLecturerItem(index) {
@@ -131,7 +137,8 @@ const AdminLecturerContainer = () => {
   } else {
     tableContent = <>
       <LecturerTable headers={headers} data={pageData} startIndex={offset}
-        deleteItem={handleDeleteLecturerItem} openItem={handleOpenLecturerItem}
+        lockItem={handleLockLecturerItem} openItem={handleOpenLecturerItem}
+        unlockItem = {handleUnlockLecturerItem}
       />
       <PaginationContainer pageCount={Math.ceil(lecturers?.length / perPage)}
         pageRangeDisplayed={5} marginPagesDisplayed={2}

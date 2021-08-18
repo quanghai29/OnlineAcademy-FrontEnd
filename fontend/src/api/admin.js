@@ -51,9 +51,18 @@ export const getStudentData = async () => {
   }
 }
 
-export const blockStudentItem = async (student_id) => {
+export const lockStudentItem = async (student_id) => {
   try {
-    const result = await appAPI.patch(`/admin/student/${student_id}`);
+    const result = await appAPI.patch(`/admin/student/lock/${student_id}`);
+    console.log('result', result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const unlockStudentItem = async (student_id)=>{
+  try {
+    const result = await appAPI.patch(`/admin/student/unlock/${student_id}`);
     console.log('result', result);
   } catch (err) {
     console.log(err);
@@ -70,9 +79,18 @@ export const getLecturerData = async () => {
   }
 }
 
-export const blockLecturerItem = async (lecturer_id) => {
+export const lockLecturerItem = async (lecturer_id) => {
   try {
-    const result = await appAPI.patch(`/admin/lecturer/${lecturer_id}`);
+    const result = await appAPI.patch(`/admin/lecturer/lock/${lecturer_id}`);
+    console.log('res block', result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const unlockLecturerItem = async (lecturer_id) => {
+  try {
+    const result = await appAPI.patch(`/admin/lecturer/unlock/${lecturer_id}`);
     console.log('res block', result);
   } catch (err) {
     console.log(err);

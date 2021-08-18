@@ -5,8 +5,12 @@ const LecturerTable = (props) => {
     props.openItem(+e.target.id);
   }
 
-  function handleDeleteItem(e) {
-    props.deleteItem(+e.target.id);
+  function handleLockItem(e) {
+    props.lockItem(+e.target.id);
+  }
+
+  function handleUnlockItem(e){
+    props.unlockItem(+e.target.id);
   }
 
   return (
@@ -34,16 +38,20 @@ const LecturerTable = (props) => {
                   <td className={item.enable === 1 ? '' : styles['disable-account']}>{item.creator}</td>
                   <td>
                     {
-                      item.enable === 1 && <>
+                      item.enable === 1 ? <>
                         <span id={index} onClick={handleOpenItem}
                           className={`material-icons ${styles['open-in-new-icon']}`}>
                           open_in_new
                         </span>
-                        <span id={index} onClick={handleDeleteItem}
+                        <span id={index} onClick={handleLockItem}
                           className={`material-icons ${styles['delete-icon']}`}>
-                          person_off
+                          lock
                         </span>
                       </>
+                        : <span id={index} onClick={handleUnlockItem}
+                          className={`material-icons ${styles['delete-icon']}`}>
+                          lock_open
+                        </span>
                     }
                   </td>
                 </tr>

@@ -1,14 +1,15 @@
 import {
   FETCH_LECTURER_DATA,
   SET_LECTURER_DATA,
-  REQUEST_BLOCK_LECTURER_ITEM,
+  REQUEST_LOCK_LECTURER_ITEM,
   REQUEST_CREATE_LECTURER_ITEM,
   SET_IS_SHOW_LECTURE_FORM_MODAL,
   SET_LECTURER_USERNAME,
   SET_LECTURER_PASSWORD,
   SET_LECTURER_USERNAME_WARNING,
   SET_LECTURER_PASSWORD_WARNING,
-  SET_ADMIN_LECTURER_LOADING
+  SET_ADMIN_LECTURER_LOADING,
+  REQUEST_UNLOCK_LECTURER_ITEM
 } from "../constants/actionTypes"
 
 export const fetchLecturerData = ()=>{
@@ -24,9 +25,16 @@ export const setLecturerData = (data)=>{
   }
 }
 
-export const requestBlockLecturerItem = (data)=>{
+export const requestLockLecturerItem = (data)=>{
   return{
-    type: REQUEST_BLOCK_LECTURER_ITEM,
+    type: REQUEST_LOCK_LECTURER_ITEM,
+    data
+  }
+}
+
+export const requestUnlockLecturerItem = (data)=>{
+  return{
+    type: REQUEST_UNLOCK_LECTURER_ITEM,
     data
   }
 }

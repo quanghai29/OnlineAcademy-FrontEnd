@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchStudentData,
   requestBlockStudentItem,
-  setStudentLoading
+  setStudentLoading,
+  requestUnlockStudentItem
 } from "../../redux/actions/admin_student";
 import Swal from 'sweetalert2';
 import { useHistory } from "react-router";
@@ -58,14 +59,14 @@ const AdminStudentContainer = () => {
     }
   }, [offset, students, studentState])
 
-  function handleDeleteTableItem(index) {
+  function handleLockItem(index) {
     Swal.fire({
       title: 'Bạn có chắc muốn khóa tài khoản này?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, block it!'
+      confirmButtonText: 'Yes, Lock it!'
     }).then((result) => {
       if (result.isConfirmed) {
         const data = {};
@@ -73,6 +74,11 @@ const AdminStudentContainer = () => {
         dispatch(requestBlockStudentItem(data));
       }
     })
+  }
+
+  function handleUnlockItem(index){
+    const {id} = students[index + offset];
+    dispatch(requestUnlockStudentItem(id));
   }
 
   function handleClickSelectedPage(data) {
@@ -96,8 +102,8 @@ const AdminStudentContainer = () => {
   } else {
     tableContent = <>
       <StudentTable headers={headers} data={pageData}
-        startIndex={offset} deleteItem={handleDeleteTableItem}
-        openItem={handleOpenItem} />
+        startIndex={offset} lockItem={handleLockItem}
+        openItem={handleOpenItem} unlockItem={handleUnlockItem}/>
       <PaginationContainer pageCount={Math.ceil(students?.length / perPage)}
         pageRangeDisplayed={5} marginPagesDisplayed={2}
         handleClickSelectedPage={handleClickSelectedPage}
