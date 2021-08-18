@@ -49,24 +49,35 @@ const CourseTable = (props) => {
                       </div>
                     </div>
                   </td>
-                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>{item.create_date}</td>
-                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>{item.last_update}</td>
-                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>{item.course_status ? "Đã hoàn thành" : "Chưa hoàn thành"}</td>
-                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>{item.creator}</td>
+                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>
+                    {item.create_date}
+                  </td>
+                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>
+                    {item.last_update}
+                  </td>
+                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>
+                    {item.course_status ? "Đã hoàn thành" : "Chưa hoàn thành"}
+                  </td>
+                  <td className={item.enable_status === 1 ? '' : styles['disable-account']}>
+                    {item.creator}
+                  </td>
                   <td>
                     {
                       item.enable_status === 1 ? <>
                         <span id={index} onClick={handleOpenItem}
-                          className={`material-icons ${styles['open-in-new-icon']}`}>
+                          className={`material-icons ${styles['action-icon']} 
+                          ${styles['open-in-new-icon']}`}>
                           open_in_new
                         </span>
                         <span id={index} onClick={handleLockItem}
-                          className={`material-icons ${styles['delete-icon']}`}>
+                          className={`material-icons ${styles['action-icon']}
+                          ${styles['delete-icon']}`}>
                           lock
                         </span>
                       </>
                         : <span id={index} onClick={handleUnlockItem}
-                          className={`material-icons ${styles['delete-icon']}`}>
+                          className={`material-icons ${styles['action-icon']}
+                          ${styles['delete-icon']}`}>
                           lock_open
                         </span>
                     }

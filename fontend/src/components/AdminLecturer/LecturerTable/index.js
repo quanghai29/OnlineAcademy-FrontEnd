@@ -40,16 +40,19 @@ const LecturerTable = (props) => {
                     {
                       item.enable === 1 ? <>
                         <span id={index} onClick={handleOpenItem}
-                          className={`material-icons ${styles['open-in-new-icon']}`}>
+                          className={`material-icons ${styles['action-icon']}
+                          ${styles['open-in-new-icon']}`}>
                           open_in_new
                         </span>
                         <span id={index} onClick={handleLockItem}
-                          className={`material-icons ${styles['delete-icon']}`}>
+                          className={`material-icons ${styles['action-icon']}
+                          ${styles['delete-icon']}`}>
                           lock
                         </span>
                       </>
                         : <span id={index} onClick={handleUnlockItem}
-                          className={`material-icons ${styles['delete-icon']}`}>
+                          className={`material-icons ${styles['action-icon']}
+                          ${styles['delete-icon']}`}>
                           lock_open
                         </span>
                     }

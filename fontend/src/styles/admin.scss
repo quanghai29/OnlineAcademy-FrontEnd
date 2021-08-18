@@ -140,3 +140,11 @@
   color: #979797;
   text-decoration: line-through;
 }
+
+.action-icon{
+  padding: 5px;
+  border-radius: 50%;
+  &:hover{
+    background-color: #f0e9e9;
+  }
+}

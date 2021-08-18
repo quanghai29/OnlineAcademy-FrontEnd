@@ -21,6 +21,7 @@ import PreLoading from "../PreLoading/index"
 
 const AdminLecturerContainer = () => {
   const lecturerState = useSelector(state => state.adminLecturerReducer);
+  const loginInfo = useSelector(state=>state.loginReducer.responseData);
   const { lecturers, indexOfDeletedItem, isShowFormModal, form, isLoading } = lecturerState;
   const dispatch = useDispatch();
   const perPage = 5;
@@ -72,7 +73,7 @@ const AdminLecturerContainer = () => {
     const data = {
       username: form.username,
       password: form.password,
-      creator: 'admin'
+      creator: loginInfo.username || 'admin'
     };
 
     dispatch(requestCreateLecturerItem(data));
