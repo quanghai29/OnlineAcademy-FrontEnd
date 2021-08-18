@@ -23,7 +23,7 @@ const Course = ({ title, lecturer, rating, total_student, price, img_source, isB
           <img src="assets/images/course/student.png" alt="student" />
           </div>
         </div>
-        {+discount !== 0 && <span>{currency(+price*(+discount)/100, { separator: ',', symbol: '', precision: 0 }).format()} VND</span> }
+        {+discount !== 0 && <span>{currency(+price - (+price*(+discount)/100), { separator: ',', symbol: '', precision: 0 }).format()} VND</span> }
         <span className={+discount !== 0 && classes.salePrice}>{currency(price, { separator: ',', symbol: '', precision: 0 }).format()} VND</span>
       </div>
     </article>
