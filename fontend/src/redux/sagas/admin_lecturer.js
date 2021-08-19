@@ -2,8 +2,9 @@ import { call, put, takeLatest, all } from 'redux-saga/effects';
 import * as lecturerActions from "../actions/admin_lecturer"
 import {
   FETCH_LECTURER_DATA,
-  REQUEST_DELETE_LECTURER_ITEM,
-  REQUEST_CREATE_LECTURER_ITEM
+  REQUEST_LOCK_LECTURER_ITEM,
+  REQUEST_CREATE_LECTURER_ITEM,
+  REQUEST_UNLOCK_LECTURER_ITEM
 } from "../constants/actionTypes"
 import * as adminApi from "../../api/admin";
 import * as commonFunctions from "../../utils/functions"
@@ -17,14 +18,25 @@ function* watchFetchLecturerData() {
   yield takeLatest(FETCH_LECTURER_DATA, requestFetchLecturerData);
 }
 
-function* requestDeleteLecturerItem(action) {
-  const { id, index } = action.data;
-  yield put(lecturerActions.deleteLecturerItem(index));
-  yield call(adminApi.deleteLecturerItem, id);
+function* requestLockLecturerItem(action) {
+  const { id } = action.data;
+  yield call(adminApi.lockLecturerItem, id);
+  yield put(lecturerActions.setLecturerLoading(true));
+  yield requestFetchLecturerData();
 }
 
-function* watchDeleteLecturerItem() {
-  yield takeLatest(REQUEST_DELETE_LECTURER_ITEM, requestDeleteLecturerItem);
+function* watchLockLecturerItem() {
+  yield takeLatest(REQUEST_LOCK_LECTURER_ITEM, requestLockLecturerItem);
+}
+
+function* requestUnlockLecturerItem(action) {
+  yield call(adminApi.unlockLecturerItem, action.data);
+  yield put(lecturerActions.setLecturerLoading(true));
+  yield requestFetchLecturerData();
+}
+
+function* watchUnlockLecturerItem() {
+  yield takeLatest(REQUEST_UNLOCK_LECTURER_ITEM, requestUnlockLecturerItem);
 }
 
 function* requestCreateLecturerItem(action) {
@@ -32,23 +44,23 @@ function* requestCreateLecturerItem(action) {
     action.data.username);
   if (usernameWarning) {
     yield put(lecturerActions.setUsernameWarning(usernameWarning));
-  }else{
+  } else {
     yield put(lecturerActions.setUsernameWarning(''));
   }
   const isPasswordValid = yield call(commonFunctions.validatePassword,
     action.data.password);
-  if(!isPasswordValid.isValid){
+  if (!isPasswordValid.isValid) {
     yield put(lecturerActions.setPasswordWarning(isPasswordValid.warning));
-  }else{
+  } else {
     yield put(lecturerActions.setPasswordWarning(''));
   }
 
-  if(!usernameWarning && isPasswordValid.isValid){
-    const res = yield call(adminApi.createLecturerItem,action.data);
-    if(res.isUsernameExisted){
+  if (!usernameWarning && isPasswordValid.isValid) {
+    const res = yield call(adminApi.createLecturerItem, action.data);
+    if (res.isUsernameExisted) {
       const warning = 'Tên đăng nhập này đã được dùng, vui lòng chọn tên khác';
       yield put(lecturerActions.setUsernameWarning(warning));
-    }else{
+    } else {
       yield requestFetchLecturerData();
     }
   }
@@ -61,7 +73,8 @@ function* watchCreateLecturerItem() {
 export default function* adminLecturerSaga() {
   yield all([
     watchFetchLecturerData(),
-    watchDeleteLecturerItem(),
+    watchLockLecturerItem(),
     watchCreateLecturerItem(),
+    watchUnlockLecturerItem(),
   ])
 }

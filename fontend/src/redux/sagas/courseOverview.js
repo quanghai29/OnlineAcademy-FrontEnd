@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as actionType from '../constants/actionTypes';
 import { DOMAIN_API } from '../constants/common';
 import Swal from 'sweetalert2';
+import { courseOverview } from '../../api/course';
 
 function* fetchCourseOverview(action) {
   try {
@@ -72,9 +73,22 @@ function* watchCourseComment() {
   yield takeEvery(actionType.FETCH_COURSE_COMMENT, fetchCourseComment);
 }
 
+
+function* UpdateViewsCourse(action) {
+  try {
+    yield call(courseOverview.updateViewsCourse, action.payload.course_id);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function* watchUpdateViewsCourse() {
+  yield takeEvery(actionType.UPDATE_VIEWS_COURSE, UpdateViewsCourse);
+}
 export default function* CourseOverviewSaga() {
   yield all([
     watchFetchCourseOverview(),
     watchCourseComment(),
+    watchUpdateViewsCourse(),
   ])
 }

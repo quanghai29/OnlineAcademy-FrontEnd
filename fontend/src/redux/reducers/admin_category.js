@@ -3,7 +3,8 @@ import {
   SET_ADMIN_CATEGORY_WARNING,
   SET_IS_SHOW_FORM_MODAL,
   SET_CATEGORY_INPUT_VALUE,
-  DELETE_CATEGORY_ITEM
+  DELETE_CATEGORY_ITEM,
+  SET_ADMIN_CATEGORY_LOADING
 } from "../constants/actionTypes"
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
   warningMess: '',
   isShowFormModal: false,
   inputValue: '',
-  indexOfDeletedItem: -1
+  indexOfDeletedItem: -1,
+  isLoading: false
 }
 
 const adminCategoryReducer = (state = initialState, action) => {
@@ -23,7 +25,8 @@ const adminCategoryReducer = (state = initialState, action) => {
         warningMess: '',
         isShowFormModal: false,
         inputValue: '',
-        indexOfDeletedItem: -1
+        indexOfDeletedItem: -1,
+        isLoading: false
       };
 
       return newState;
@@ -54,6 +57,13 @@ const adminCategoryReducer = (state = initialState, action) => {
       let newState = { ...state };
       newState.indexOfDeletedItem = action.data;
       newState.categories.splice(action.data, 1);
+      return newState;
+    }
+    case SET_ADMIN_CATEGORY_LOADING:{
+      let newState = {
+        ...state,
+        isLoading: action.data
+      }
       return newState;
     }
     default: {

@@ -51,10 +51,18 @@ export const getStudentData = async () => {
   }
 }
 
-export const deleteStudentItem = async (student_id) => {
+export const lockStudentItem = async (student_id) => {
   try {
-    appAPI.defaults.headers.common['student_id'] = student_id;
-    const result = await appAPI.delete('/admin/student');
+    const result = await appAPI.patch(`/admin/student/lock/${student_id}`);
+    console.log('result', result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const unlockStudentItem = async (student_id)=>{
+  try {
+    const result = await appAPI.patch(`/admin/student/unlock/${student_id}`);
     console.log('result', result);
   } catch (err) {
     console.log(err);
@@ -71,11 +79,19 @@ export const getLecturerData = async () => {
   }
 }
 
-export const deleteLecturerItem = async (lecturer_id) => {
+export const lockLecturerItem = async (lecturer_id) => {
   try {
-    appAPI.defaults.headers.common['lecturer_id'] = lecturer_id;
-    const result = await appAPI.delete('/admin/lecturer');
-    console.log('res delete', result);
+    const result = await appAPI.patch(`/admin/lecturer/lock/${lecturer_id}`);
+    console.log('res block', result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const unlockLecturerItem = async (lecturer_id) => {
+  try {
+    const result = await appAPI.patch(`/admin/lecturer/unlock/${lecturer_id}`);
+    console.log('res block', result);
   } catch (err) {
     console.log(err);
   }
@@ -108,10 +124,17 @@ export const getCourseData = async()=>{
   }
 }
 
-export const deleteAdminCourseItem = async(course_id)=>{
+export const lockAdminCourseItem = async(course_id)=>{
   try {
-    appAPI.defaults.headers.common['course_id'] = course_id;
-    const result = await appAPI.delete('/admin/course');
+    const result = await appAPI.patch(`/admin/course/lock/${course_id}`);
+    console.log('res delete', result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+export const unlockAdminCourseItem = async(course_id)=>{
+  try {
+    const result = await appAPI.patch(`/admin/course/unlock/${course_id}`);
     console.log('res delete', result);
   } catch (err) {
     console.log(err);

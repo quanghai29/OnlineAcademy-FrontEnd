@@ -20,6 +20,12 @@ const courseOverview = (state = initialState, action) => {
         isLoading: false,
         isError: true
       };
+    case actionType.RESET_COURSE_OVERVIEW:
+        return {
+          isLoading: true,
+          isError: false,
+          data: {}
+        };
     default:
       return state;
   }

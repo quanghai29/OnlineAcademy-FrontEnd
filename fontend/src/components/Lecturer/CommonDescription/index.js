@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import classes from './style.module.scss';
 
 const CommonDescription = () => {
   const [disableSubmit, setDisableSubmit] = useState(true);
@@ -149,7 +150,7 @@ const CommonDescription = () => {
         </div>
         <div className="row">
           <label style={{ marginLeft: 10 }}>Mô tả chi tiết</label>
-          <div className="input-field col s12" onClick={onChangeInputHandler}>
+          <div className={`input-field col s12 ${classes.overwriteMT}`} onClick={onChangeInputHandler}>
             <ReactQuill
               theme="snow"
               value={detailDesc || ''}
@@ -224,7 +225,7 @@ const CommonDescription = () => {
             {errors.discount && (
               <span style={requiredStyle}>This field is required</span>
             )}
-            <label htmlFor="discount">Khuyến mãi</label>
+            <label htmlFor="discount">Khuyến mãi %</label>
           </div>
         </div>
         <button

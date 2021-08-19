@@ -1,8 +1,9 @@
 import {
   FETCH_ADMIN_COURSE,
   SET_ADMIN_COURSE,
-  DELETE_ADMIN_COURSE_ITEM, 
-  REQUEST_DELETE_ADMIN_COURSE_ITEM
+  SET_ADMIN_COURSE_LOADING,
+  REQUEST_LOCK_ADMIN_COURSE_ITEM,
+  REQUEST_UNLOCK_ADMIN_COURSE_ITEM
 } from "../constants/actionTypes"
 
 export const fetchAdminCourse = ()=>{
@@ -18,16 +19,23 @@ export const setAdminCourse = (data)=>{
   }
 }
 
-export const requestDeleteAdminCourseItem = (data)=>{
-  return {
-    type: REQUEST_DELETE_ADMIN_COURSE_ITEM,
+export const setCourseLoading = (data)=>{
+  return{
+    type: SET_ADMIN_COURSE_LOADING,
     data
   }
 }
 
-export const deleteAdminCourseItem = (data)=>{
+export const requestLockCourseItem = (data)=>{
   return{
-    type: DELETE_ADMIN_COURSE_ITEM,
+    type: REQUEST_LOCK_ADMIN_COURSE_ITEM,
+    data
+  }
+}
+
+export const requestUnlockCourseItem = (data)=>{
+  return{
+    type: REQUEST_UNLOCK_ADMIN_COURSE_ITEM,
     data
   }
 }

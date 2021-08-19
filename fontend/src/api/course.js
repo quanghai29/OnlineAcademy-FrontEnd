@@ -69,6 +69,14 @@ export const getCourses = {
       throw new Error(err.message);
     }
   },
+  getHotCourses: async () => {
+    try {
+      const { data } = await appAPI.get('/course/outstanding');
+      return data.data;
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
 };
 
 export const getSearchCourseResult = async (text) => {
@@ -127,6 +135,10 @@ export const studentCourse = {
 export const courseOverview = {
   relatedCourse : async(category_id)=>{
     const respone = await guestAPI.get(`/course/bestseller-category/${category_id}` ,{ validateStatus: false })
+    return respone;
+  },
+  updateViewsCourse : async(course_id)=>{
+    const respone = await guestAPI.post(`/course/watch-course` ,{course_id},{ validateStatus: false })
     return respone;
   },
 }

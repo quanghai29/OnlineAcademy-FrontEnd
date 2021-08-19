@@ -4,8 +4,10 @@ import Layout from '../../layout/Layout';
 import * as actionType from '../../redux/constants/actionTypes';
 import RowCourse from '../../components/RowCourse';
 import classes from './style.module.scss';
+import WithAuthenticate from "../../components/HOCs/withAuthenticate";
+import {ROLE_STUDENT} from "../../redux/constants/common";
 
-const CourseRegister = () => {
+const CourseWatchlist = () => {
   const stCoureWatchlist = useSelector(state => state.studentCourseWatchlist.data);
   const dispatch = useDispatch();
 
@@ -77,5 +79,4 @@ const CourseRegister = () => {
     </Layout>
   );
 };
-
-export default CourseRegister;
+export default WithAuthenticate(CourseWatchlist, [ROLE_STUDENT]);

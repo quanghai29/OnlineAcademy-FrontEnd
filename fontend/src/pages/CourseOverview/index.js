@@ -19,6 +19,13 @@ const CourseOverview = () => {
   
   const [isLoading, setLoading] = useState(true);
 
+  useEffect(function(){
+    dispatch({
+      type: actionType.RESET_COURSE_OVERVIEW,
+    })
+    setLoading(true);
+  },[location, dispatch])
+
   useEffect(function () {
     if(stateLocation && stateLocation.course_id > 0){
       dispatch({
@@ -39,6 +46,18 @@ const CourseOverview = () => {
       setLoading(false);
     }
   },[isLoading, courseOverview.isLoading])
+
+  useEffect(function(){
+    if(!isLoading){
+      dispatch({
+        type: actionType.UPDATE_VIEWS_COURSE,
+        payload:{
+          course_id: stateLocation.course_id
+        }
+      })
+    }
+  },[isLoading, dispatch, stateLocation])
+
 
   return (
     isLoading

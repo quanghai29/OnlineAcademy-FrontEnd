@@ -11,7 +11,6 @@ const AddTitleChapterModal = () => {
 
   const { data } = useSelector((state) => state.selectedCourse);
   const { isLoading, error } = useSelector((state) => state.chaptersOfCourse);
-  console.log(data);
 
   const {
     register,
@@ -30,6 +29,7 @@ const AddTitleChapterModal = () => {
 
       if(!isLoading) {
         if(!error) {
+          formData.title = '';
           const elem = document.getElementById('add-chapter-title-modal');
           const instance = M.Modal.getInstance(elem);
           instance.close();

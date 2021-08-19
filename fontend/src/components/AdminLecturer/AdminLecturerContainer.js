@@ -7,18 +7,22 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchLecturerData,
-  requestDeleteLecturerItem,
+  requestLockLecturerItem,
+  requestUnlockLecturerItem,
   setIsShowLecturerFormModal,
   setLecturerUsername,
   setLecturerPassword,
-  requestCreateLecturerItem
+  requestCreateLecturerItem,
+  setLecturerLoading
 } from "../../redux/actions/admin_lecturer"
 import Swal from 'sweetalert2';
 import { useHistory } from "react-router-dom";
+import PreLoading from "../PreLoading/index"
 
 const AdminLecturerContainer = () => {
   const lecturerState = useSelector(state => state.adminLecturerReducer);
-  const { lecturers, indexOfDeletedItem, isShowFormModal, form } = lecturerState;
+  const loginInfo = useSelector(state=>state.loginReducer.responseData);
+  const { lecturers, indexOfDeletedItem, isShowFormModal, form, isLoading } = lecturerState;
   const dispatch = useDispatch();
   const perPage = 5;
   const history = useHistory();
@@ -30,7 +34,6 @@ const AdminLecturerContainer = () => {
     "Ngày tạo",
     "Người tạo"
   ]
-  const [isLoading, setIsLoading] = useState(true);
   const [pageData, setPageData] = useState([]);
   const [offset, setOffset] = useState(0);
   const [selectedPage, setSelectedPage] = useState(0);
@@ -45,16 +48,9 @@ const AdminLecturerContainer = () => {
   }, [lecturers, indexOfDeletedItem, lecturerState]);
 
   useEffect(() => {
+    dispatch(setLecturerLoading(true));
     dispatch(fetchLecturerData());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (lecturers) {
-      setIsLoading(false);
-    } else {
-      setIsLoading(true);
-    }
-  }, [lecturers])
 
   useEffect(() => {
     let offset = Math.ceil(selectedPage * perPage);
@@ -77,35 +73,38 @@ const AdminLecturerContainer = () => {
     const data = {
       username: form.username,
       password: form.password,
-      creator: 'admin'
+      creator: loginInfo.username || 'admin'
     };
 
     dispatch(requestCreateLecturerItem(data));
   }
 
-  function handleDeleteLecturerItem(index) {
+  function handleLockLecturerItem(index) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: `You won't be able to revert this!`,
+      title: 'Bạn có chắc muốn khóa tài khoản này không?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, block it!'
     }).then((result) => {
       if (result.isConfirmed) {
         const data = {};
         data.id = lecturers[index + offset].id;
-        data.index = index + offset;
-        dispatch(requestDeleteLecturerItem(data));
+        dispatch(requestLockLecturerItem(data));
       }
     })
+  }
+
+  function handleUnlockLecturerItem(index){
+    const {id} = lecturers[index + offset];
+    dispatch(requestUnlockLecturerItem(id))
   }
 
   function handleOpenLecturerItem(index) {
     history.push({
       pathname: '/profile',
-      state:{
+      state: {
         user_id: lecturers[index + offset].id
       }
     })
@@ -129,6 +128,24 @@ const AdminLecturerContainer = () => {
 
   function handleToggleVisibility() {
     setIsVisibility(!isVisibility);
+  }
+
+  let tableContent = null;
+  if (isLoading) {
+    tableContent = <div className={styles['loading--position']}>
+      <PreLoading />
+    </div>
+  } else {
+    tableContent = <>
+      <LecturerTable headers={headers} data={pageData} startIndex={offset}
+        lockItem={handleLockLecturerItem} openItem={handleOpenLecturerItem}
+        unlockItem = {handleUnlockLecturerItem}
+      />
+      <PaginationContainer pageCount={Math.ceil(lecturers?.length / perPage)}
+        pageRangeDisplayed={5} marginPagesDisplayed={2}
+        handleClickSelectedPage={handleClickSelectedPage}
+        selectedPage={selectedPage} />
+    </>
   }
 
   let eyeIcon = null;
@@ -160,17 +177,7 @@ const AdminLecturerContainer = () => {
           </div>
         </div>
 
-        {
-          !isLoading && <>
-            <LecturerTable headers={headers} data={pageData} startIndex={offset}
-              deleteItem={handleDeleteLecturerItem} openItem={handleOpenLecturerItem}
-            />
-            <PaginationContainer pageCount={Math.ceil(lecturers?.length / perPage)}
-              pageRangeDisplayed={5} marginPagesDisplayed={2}
-              handleClickSelectedPage={handleClickSelectedPage}
-              selectedPage={selectedPage} />
-          </>
-        }
+        {tableContent}
 
       </AdminContainer>
       {

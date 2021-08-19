@@ -10,6 +10,8 @@ import Layout from '../../../layout/Layout';
 import CourseTable from '../../../components/Lecturer/CourseTable';
 import Pagination from '../../../components/Pagination';
 import classes from './Home.module.scss';
+import WithAuthenticate from '../../../components/HOCs/withAuthenticate';
+import { ROLE_LECTURER } from '../../../redux/constants/common';
 
 const HomeLecturer = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -73,4 +75,4 @@ const HomeLecturer = () => {
   );
 };
 
-export default HomeLecturer;
+export default WithAuthenticate(HomeLecturer, [ROLE_LECTURER]);

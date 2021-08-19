@@ -127,3 +127,24 @@
 .message--warning{
   @include warningMessage;
 }
+
+.loading--position{
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.disable-account{
+  color: #979797;
+  text-decoration: line-through;
+}
+
+.action-icon{
+  padding: 5px;
+  border-radius: 50%;
+  &:hover{
+    background-color: #f0e9e9;
+  }
+}

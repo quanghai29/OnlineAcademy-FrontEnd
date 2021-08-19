@@ -1,8 +1,9 @@
 import {
   FETCH_STUDENT_DATA,
   SET_STUDENT_DATA,
-  REQUEST_DELETE_STUDENT_ITEM,
-  DELETE_STUDENT_ITEM
+  REQUEST_LOCK_STUDENT_ITEM,
+  SET_ADMIN_STUDENT_LOADING,
+  REQUEST_UNLOCK_STUDENT_ITEM
 } from "../constants/actionTypes"
 
 export const fetchStudentData = ()=>{
@@ -18,16 +19,23 @@ export const setStudentData = (data)=>{
   }
 }
 
-export const requestDeleteStudentItem = (data)=>{
+export const requestBlockStudentItem = (data)=>{
   return{
-    type: REQUEST_DELETE_STUDENT_ITEM,
+    type: REQUEST_LOCK_STUDENT_ITEM,
     data
   }
 }
 
-export const deleteStudentItem = (data)=>{
+export const setStudentLoading = (data)=>{
   return{
-    type: DELETE_STUDENT_ITEM,
+    type: SET_ADMIN_STUDENT_LOADING,
+    data
+  }
+}
+
+export const requestUnlockStudentItem = (data)=>{
+  return{
+    type: REQUEST_UNLOCK_STUDENT_ITEM,
     data
   }
 }

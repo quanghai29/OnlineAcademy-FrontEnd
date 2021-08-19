@@ -1,17 +1,18 @@
 import {
   SET_LECTURER_DATA,
-  DELETE_LECTURER_ITEM,
   SET_IS_SHOW_LECTURE_FORM_MODAL,
   SET_LECTURER_USERNAME,
   SET_LECTURER_PASSWORD,
   SET_LECTURER_USERNAME_WARNING,
-  SET_LECTURER_PASSWORD_WARNING
+  SET_LECTURER_PASSWORD_WARNING,
+  SET_ADMIN_LECTURER_LOADING
 } from "../constants/actionTypes"
 
 const initialState = {
   lecturers:null,
   indexOfDeletedItem: -1,
   isShowFormModal: false,
+  isLoading: false,
   form:{
     username: '',
     password: '',
@@ -27,19 +28,13 @@ const adminLecturerReducer = (state = initialState, action)=>{
         ...state,
         lecturers: action.data,
         isShowFormModal: false,
-        indexOfDeletedItem: -1
+        indexOfDeletedItem: -1,
+        isLoading: false
       }
 
       newState.form.username= newState.form.password=
       newState.form.usernameWarning= newState.form.passwordWarning = '';
 
-      return newState;
-    }
-    case DELETE_LECTURER_ITEM:{
-      let newState = {...state};
-      newState.lecturers.splice(action.data, 1);
-      newState.indexOfDeletedItem = action.data;
-      
       return newState;
     }
     case SET_IS_SHOW_LECTURE_FORM_MODAL:{
@@ -74,6 +69,13 @@ const adminLecturerReducer = (state = initialState, action)=>{
     case SET_LECTURER_PASSWORD_WARNING:{
       let newState = {...state};
       newState.form.passwordWarning= action.data;
+      return newState;
+    }
+    case SET_ADMIN_LECTURER_LOADING:{
+      let newState = {
+        ...state,
+        isLoading: action.data
+      }
       return newState;
     }
     default:{

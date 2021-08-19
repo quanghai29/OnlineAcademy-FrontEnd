@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './styles/main.scss';
 import Home from './pages/Home';
 import Signup from './pages/TempSignup';
@@ -32,14 +32,14 @@ function App() {
         <Route path="/signup" component={Signup}/>
         <Route path="/verify-code" component={VerifyCode}/>
         <Route path="/forgot-password" component={ForgotPassword}/>
-        <PrivateLecturerRoute path="/lecturer">
+        {/* <PrivateLecturerRoute path="/lecturer">
           <HomeLecturer />
         </PrivateLecturerRoute>
         <PrivateLecturerRoute path="/update-course">
           <UpdateCourse />
-        </PrivateLecturerRoute>
-        {/* <Route path="/lecturer" component={HomeLecturer} /> */}
-        {/* <Route path="/update-course" component={UpdateCourse} /> */}
+        </PrivateLecturerRoute> */}
+        <Route path="/lecturer" component={HomeLecturer} />
+        <Route path="/update-course" component={UpdateCourse} />
         <Route path="/update-profile" component={UpdateProfile} />
         <Route path="/search-result" component={SearchCourseResult}/>
         <Route path="/admin-category" component={AdminCategory}/>
@@ -57,25 +57,25 @@ function App() {
   );
 }
 
-function PrivateLecturerRoute({ children, ...rest }) {
-  const {role} = JSON.parse(localStorage.decodePayload);
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        (localStorage.accessToken && +role === 2) ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/",
-              // state: { from: location }
-            }}
-          />
-        )
-      }
-    />
-  );
-}
+// function PrivateLecturerRoute({ children, ...rest }) {
+//   const {role} = JSON.parse(localStorage.decodePayload);
+//   return (
+//     <Route
+//       {...rest}
+//       render={({ location }) =>
+//         (localStorage.accessToken && +role === 2) ? (
+//           children
+//         ) : (
+//           <Redirect
+//             to={{
+//               pathname: "/",
+//               // state: { from: location }
+//             }}
+//           />
+//         )
+//       }
+//     />
+//   );
+// }
 
 export default App;

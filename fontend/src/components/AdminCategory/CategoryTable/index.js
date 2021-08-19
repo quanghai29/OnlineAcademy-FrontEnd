@@ -34,11 +34,13 @@ const CategoryTable = (props) => {
 
                 <td>
                   <span id={index} onClick={handleEditItem}
-                    className={`material-icons ${styles['edit-icon']}`}>
+                    className={`material-icons ${styles['action-icon']}
+                    ${styles['edit-icon']}`}>
                     edit
                   </span>
                   <span id={index} onClick={handleDeleteItem}
-                    className={`material-icons ${styles['delete-icon']}`}>
+                    className={`material-icons ${styles['action-icon']}
+                    ${styles['delete-icon']}`}>
                     delete
                   </span>
                 </td>

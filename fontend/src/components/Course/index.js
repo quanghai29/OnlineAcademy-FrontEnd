@@ -3,7 +3,7 @@ import currency from 'currency.js';
 import StarRatings from 'react-star-ratings';
 import classes from './Course.module.scss';
 
-const Course = ({ title, lecturer, rating, total_student, price, img_source, isBestseller}) => (
+const Course = ({ title, lecturer, rating, total_student, price, img_source, isBestseller, discount}) => (
     <article className={classes.card}>
       <img src={`http://localhost:3001/common/media/image/${img_source}`} onError={e => {e.target.onerror = null; e.target.src = 'assets/images/course/course1.png'}} alt={`Course ${title}`} />
       {isBestseller && <span className="new badge red" data-badge-caption="Bestseller"></span>}
@@ -23,7 +23,8 @@ const Course = ({ title, lecturer, rating, total_student, price, img_source, isB
           <img src="assets/images/course/student.png" alt="student" />
           </div>
         </div>
-        <p>{currency(price, { separator: ',', symbol: '', precision: 0 }).format()} VND</p>
+        {+discount !== 0 && <span>{currency(+price - (+price*(+discount)/100), { separator: ',', symbol: '', precision: 0 }).format()} VND</span> }
+        <span className={+discount !== 0 && classes.salePrice}>{currency(price, { separator: ',', symbol: '', precision: 0 }).format()} VND</span>
       </div>
     </article>
 );

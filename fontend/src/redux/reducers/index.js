@@ -33,6 +33,7 @@ import relatedCourse from './relatedCourse';
 import adminCourseReducer from './admin_course';
 import stateStudentVideoLearning from './stateStudentVideoLearning';
 import forgotPasswordReducer from './forgotPassword';
+import hotCategories from './hotCategories';
 
 export default combineReducers({
   courses,
@@ -68,5 +69,6 @@ export default combineReducers({
   relatedCourse,
   adminCourseReducer,
   stateStudentVideoLearning,
-  forgotPasswordReducer
+  forgotPasswordReducer,
+  hotCategories
 });
