@@ -35,7 +35,6 @@ export default function SearchCourseResultContainer(props) {
   useEffect(() => {
     setSelectedPage(0);
     setOffset(0);
-
   }, [props.text_search])
 
   useEffect(() => {
