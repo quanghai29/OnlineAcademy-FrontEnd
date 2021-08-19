@@ -31,7 +31,7 @@ export default function LecturerNavbar(props) {
 
         {/* eslint-disable-next-line */}
         <a className={`dropdown-trigger btn ${classes.dropdown}`} data-target="dropdown1">
-          <Avartar  {...{ nickName: props.fullname }} />
+          <Avartar  {...{ nickName: props.fullname, imgSrc: props.img_source }} />
         </a>
 
         <ul id="dropdown1" className={`dropdown-content ${classes.dropcontent}`}>
@@ -39,7 +39,7 @@ export default function LecturerNavbar(props) {
           <li>
             <div className="row">
               <div className="col m2" style={{ marginRight: "15px", marginTop: "10px" }}>
-                <Avartar  {...{ nickName: props.fullname }} />
+                <Avartar  {...{ nickName: props.fullname, imgSrc: props.img_source}} />
               </div>
               <div className="col m9" style={{ marginTop: "10px" }}>
                 <h6 style={{ color: "black !important" }}>{props.fullname}</h6>
