@@ -42,3 +42,12 @@ export const uploadUserProfile = {
     }
   },
 };
+
+export const updateEmail = async (email, id)=>{
+  try{
+    const res = await appAPI.post('/lecturer/update-email', {email, id});
+
+  }catch(err){
+    console.log(err);
+  }
+}
