@@ -25,8 +25,8 @@ export default function RowCourse(props) {
               }}>
               {props.data.title}
             </Link>
-            <span className={styles['text-info__short-description']}>{props.data.short_description}</span>
-            <span className={styles['text-info__author']}>{props.data.author.fullname}</span>
+            <span className={styles['text-info__short-description']}>{props.data.short_description || ''}</span>
+            <span className={styles['text-info__author']}>{props.data.author?.fullname || 'Không biết'}</span>
           </div>
           <div className={styles['course-rating']}>
             <span className={styles['amount-rating']}> {props.data.avg_vote}</span>

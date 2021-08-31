@@ -113,8 +113,8 @@ export default function LoginContainer() {
             <div className={styles['login-with-other-container']}>
               <span>Hoặc đăng nhập bằng</span>
               <div>
-                <i class={`fab fa-google ${styles['google-icon']}`}></i>
-                <i class={`fab fa-facebook ${styles['facebook-icon']}`}></i>
+                <i className={`fab fa-google ${styles['google-icon']}`}></i>
+                <i className={`fab fa-facebook ${styles['facebook-icon']}`}></i>
               </div>
               {/* <button>
                 <img src={googleLogo} alt="google logo"></img>

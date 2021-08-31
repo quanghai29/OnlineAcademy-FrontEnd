@@ -57,7 +57,9 @@ const ProfileContainer = ({ userId }) => {
                 <span className={styles['title']}>
                   Mô tả ngắn
                 </span>
-                <p className={styles['description']}>{userInfo.description || ''}
+                <p className={styles['description']} 
+                dangerouslySetInnerHTML={{ __html: userInfo.description || '' }}>
+                {/*{userInfo.description || ''} */}
                 </p>
               </div>
             </div>

@@ -63,6 +63,7 @@ export async function submitLoginForm(data) {
           const decoded = parseJwt(response.data.accessToken);
           localStorage.setItem('decodePayload', JSON.stringify(decoded));
           localStorage.GelApp_userId = decoded.userId;
+          localStorage.GelApp_username = response.data.username;
         } catch (err) {
           console.log(err);
         }

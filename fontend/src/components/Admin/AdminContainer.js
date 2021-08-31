@@ -5,7 +5,7 @@ const AdminContainer = ({ children, title , listIcon }) => {
   return (
     <div className={styles['admin-container']}>
       <div className={styles['link-group']}>
-        <Link to='/'>
+        <Link to='/' style={{width: "75px"}}>
           <span className={`material-icons ${styles['icon']}`}>keyboard_backspace</span>
           <span className={styles['text']}>Home</span>
         </Link>
